@@ -1,0 +1,37 @@
+.navigation-items {
+    ul {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            padding: 0 8px;
+            font-size: 19px;
+            font-family: sans-serif;
+
+            a {
+                color: white;
+                text-decoration: none;
+
+                &:hover {
+                    color: black;
+                }
+                &:active {
+                    color: black;
+                }
+            }
+        }
+    }
+
+    span {
+        color: #491cdd;
+        font-weight: 600;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
