@@ -69,4 +69,28 @@ code {
   font-size: 13px;
 }
 
-/*# sourceMappingURL=index.css.map */
+.social-btn-cont {
+  text-align: center;
+}
+.social-btn-cont .social-btn {
+  font-size: 16px;
+  cursor: pointer;
+  color: #fff;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 50%;
+  outline: 0;
+  padding: 15px;
+  margin: 10px 5px;
+}
+.social-btn-cont .social-btn svg {
+  margin: 0 3px;
+}
+.social-btn-cont .social-btn.social-google-btn {
+  background-color: #e04c40;
+}
+.social-btn-cont .social-btn.social-fb-btn {
+  background-color: #2e4da7;
+}
+
+/*# sourceMappingURL=src/styles/css/index.css.map */

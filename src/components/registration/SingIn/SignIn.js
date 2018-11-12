@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+
+const usernameRegex = /^[a-zA-Z0-9]+$/;
 
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
-
   // validate form errors being empty
   Object.values(formErrors).forEach(val => val.length > 0 && (valid = false));
 
@@ -17,6 +19,7 @@ const formValid = ({ formErrors, ...rest }) => {
 export default class SignIn extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       userName: null,
       password: null,
@@ -48,8 +51,9 @@ export default class SignIn extends Component {
 
     switch (name) {
       case "userName":
-        formErrors.userName =
-          value.length < 3 ? "Minimum 3 characters required" : "";
+        formErrors.userName = usernameRegex.test(value) && value.length >= 3
+          ? ""
+          : "Minimum 3 characters required. Allowed only letters and numbers";
         break;
       case "password":
         formErrors.password =
@@ -102,6 +106,18 @@ export default class SignIn extends Component {
           <p className="singIn__message">
             Not registered? <a href="#">Create an account</a>
           </p>
+          <div className='social-btn-cont'>
+            <a href=''>
+              <button className='social-btn social-google-btn'>
+                <FaGoogle />
+              </button>
+            </a>
+            <a href=''>
+              <button className='social-btn social-fb-btn'>
+                <FaFacebookF />
+              </button>
+            </a>
+          </div>
         </form>
       </div>
     );
