@@ -34,10 +34,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <Route exact path="/" component={this.state.user ? Profile : SignIn} />
-          <Route exact path='/signUp' component={SignUp} />
+          <Route exact path='/signUp' component={this.state.user ? Profile : SignUp} />
         </div>
       </Router>
-
     )
   }
 }

@@ -30,13 +30,15 @@ export default class SignIn extends Component {
       password: '',
       formErrors: {
         email: "",
-        password: ""
+        password: "",
+        loginError: '',
       }
     };
   }
 
   handleSubmit = e => {
     e.preventDefault();
+
     if (formValid(this.state)) {
       console.log(`
         --SUBMITING--
@@ -73,9 +75,16 @@ export default class SignIn extends Component {
 
   login = (e) => {
     e.preventDefault();
+
     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
     }).catch((error) => {
-      console.log(error);
+      this.setState(prevState => ({
+        formErrors: {
+          ...prevState.formErrors,
+          loginError: error.message
+        }
+      }))
+      console.log(this.state.formErrors.loginError);
     });
   }
 
@@ -112,16 +121,19 @@ export default class SignIn extends Component {
               <span className="error__message">{formErrors.password}</span>
             )}
           </div>
-
+          {formErrors.loginError.length > 0 && (
+            <span className="error__message">{formErrors.loginError}</span>
+          )}
           <button
             type="submit"
             onClick={this.login}
             className="singIn__submit"
           >
             Sign In
-                    </button>
+          </button>
           <p className="singIn__message">
             Not registered? <Link to='/signUp'>Create an account</Link>
+
           </p>
           <div className='social-btn-cont'>
             <a href=''>

@@ -34,7 +34,8 @@ export default class SignUp extends Component {
         userName: "",
         email: "",
         password: "",
-        confPassword: ""
+        confPassword: "",
+        loginError: '',
       }
     };
   }
@@ -92,10 +93,18 @@ export default class SignUp extends Component {
 
   signup = (e) => {
     e.preventDefault();
+
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
     }).then((u) => { console.log(u) })
       .catch((error) => {
-        console.log(error);
+
+        this.setState(prevState => ({
+          formErrors: {
+            ...prevState.formErrors,
+            loginError: error.message
+          }
+        }))
+        console.log(this.state.formErrors.loginError);
       })
   }
 
@@ -161,13 +170,16 @@ export default class SignUp extends Component {
               <span className="error__message">{formErrors.confPassword}</span>
             )}
           </div>
+          {formErrors.loginError.length > 0 && (
+            <span className="error__message">{formErrors.loginError}</span>
+          )}
           <button
             type="submit"
             className="singIn__submit"
             onClick={this.signup}
           >
             Sign Up
-                    </button>
+          </button>
           <div className='social-btn-cont'>
             <a href=''>
               <button className='social-btn social-google-btn'>
