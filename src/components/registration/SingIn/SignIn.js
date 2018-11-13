@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+import fire from '../../../config/Fire';
+import { Link } from "react-router-dom";
 
-const usernameRegex = /^[a-zA-Z0-9]+$/;
+// const usernameRegex = /^[a-zA-Z0-9]+$/;
+const emailRegex = RegExp(
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+);
 
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
@@ -21,10 +26,10 @@ export default class SignIn extends Component {
     super(props);
 
     this.state = {
-      userName: null,
-      password: null,
+      email: '',
+      password: '',
       formErrors: {
-        userName: "",
+        email: "",
         password: ""
       }
     };
@@ -50,10 +55,10 @@ export default class SignIn extends Component {
     let formErrors = this.state.formErrors;
 
     switch (name) {
-      case "userName":
-        formErrors.userName = usernameRegex.test(value) && value.length >= 3
+      case "email":
+        formErrors.email = emailRegex.test(value)
           ? ""
-          : "Minimum 3 characters required. Allowed only letters and numbers";
+          : "Invalid email address";
         break;
       case "password":
         formErrors.password =
@@ -66,23 +71,31 @@ export default class SignIn extends Component {
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   };
 
+  login = (e) => {
+    e.preventDefault();
+    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
   render() {
     const { formErrors } = this.state;
     return (
       <div className="singIn">
         <form onSubmit={this.handleSubmit} className="singIn__form" noValidate>
           <div className="singIn__input__wrapper">
-            <label htmlFor="userName">User Name</label>
+            <label htmlFor="email">Email</label>
             <input
-              type="text"
-              name="userName"
-              placeholder="User Name"
+              type="email"
+              name="email"
+              placeholder="Email"
               noValidate
               onChange={this.handleChange}
-              className={formErrors.userName.length > 0 ? "error__input" : null}
+              className={formErrors.email.length > 0 ? "error__input" : null}
             />
-            {formErrors.userName.length > 0 && (
-              <span className="error__message">{formErrors.userName}</span>
+            {formErrors.email.length > 0 && (
+              <span className="error__message">{formErrors.email}</span>
             )}
           </div>
           <div className="singIn__input__wrapper">
@@ -100,11 +113,15 @@ export default class SignIn extends Component {
             )}
           </div>
 
-          <button type="submit" className="singIn__submit">
+          <button
+            type="submit"
+            onClick={this.login}
+            className="singIn__submit"
+          >
             Sign In
-          </button>
+                    </button>
           <p className="singIn__message">
-            Not registered? <a href="#">Create an account</a>
+            Not registered? <Link to='/signUp'>Create an account</Link>
           </p>
           <div className='social-btn-cont'>
             <a href=''>

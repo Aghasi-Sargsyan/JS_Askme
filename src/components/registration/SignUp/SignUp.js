@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+import fire from '../../../config/Fire';
 
 let password,
   confPassword;
@@ -89,6 +90,15 @@ export default class SignUp extends Component {
     this.setState({ formErrors, [name]: value });
   };
 
+  signup = (e) => {
+    e.preventDefault();
+    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+    }).then((u) => { console.log(u) })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   render() {
     const { formErrors } = this.state;
 
@@ -151,9 +161,13 @@ export default class SignUp extends Component {
               <span className="error__message">{formErrors.confPassword}</span>
             )}
           </div>
-          <button type="submit" className="singIn__submit">
+          <button
+            type="submit"
+            className="singIn__submit"
+            onClick={this.signup}
+          >
             Sign Up
-          </button>
+                    </button>
           <div className='social-btn-cont'>
             <a href=''>
               <button className='social-btn social-google-btn'>
