@@ -70,6 +70,12 @@ code {
       text-decoration: none;
     }
   }
+  button[type="submit"]:disabled {
+    background-color: #bebebe;
+  }
+  button[type="submit"]:disabled:hover {
+    cursor: not-allowed;
+  }
 }
 .error__message {
   color: #b82121;

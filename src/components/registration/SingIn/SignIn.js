@@ -3,23 +3,9 @@ import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import fire from '../../../config/Fire';
 import { Link } from "react-router-dom";
 
-// const usernameRegex = /^[a-zA-Z0-9]+$/;
 const emailRegex = RegExp(
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
-
-const formValid = ({ formErrors, ...rest }) => {
-  let valid = true;
-  // validate form errors being empty
-  Object.values(formErrors).forEach(val => val.length > 0 && (valid = false));
-
-  // validate the form was filled out
-  Object.values(rest).forEach(val => {
-    val === null && (valid = false);
-  });
-
-  return valid;
-};
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -28,6 +14,8 @@ export default class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
+      valid: false,
+      disabled: true,
       formErrors: {
         email: "",
         password: "",
@@ -36,25 +24,11 @@ export default class SignIn extends Component {
     };
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-
-    if (formValid(this.state)) {
-      console.log(`
-        --SUBMITING--
-        UserName Nsme: ${this.state.userName}
-        Password Nsme: ${this.state.password}
-        `);
-    } else {
-      console.log("Form INVALID - Display Error Message");
-    }
-  };
-
   handleChange = e => {
     e.preventDefault();
 
     const { name, value } = e.target;
-    let formErrors = this.state.formErrors;
+    let { formErrors } = this.state;
 
     switch (name) {
       case "email":
@@ -70,7 +44,11 @@ export default class SignIn extends Component {
         break;
     }
 
-    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    this.setState({
+      formErrors,
+      [name]: value,
+      disabled: (formErrors.email || !this.state.email) || (formErrors.password || !this.state.password)
+    });
   };
 
   login = (e) => {
@@ -89,7 +67,8 @@ export default class SignIn extends Component {
   }
 
   render() {
-    const { formErrors } = this.state;
+    const { formErrors, disabled } = this.state;
+
     return (
       <div className="singIn">
         <form onSubmit={this.handleSubmit} className="singIn__form" noValidate>
@@ -128,25 +107,25 @@ export default class SignIn extends Component {
             type="submit"
             onClick={this.login}
             className="singIn__submit"
+            disabled={disabled}
           >
             Sign In
           </button>
           <p className="singIn__message">
             Not registered? <Link to='/signUp'>Create an account</Link>
-
           </p>
-          <div className='social-btn-cont'>
+          {/* <div className='social-btn-cont'>
             <a href=''>
-              <button className='social-btn social-google-btn'>
+              <button onClick={this.loginWithGoogle} className='social-btn social-google-btn'>
                 <FaGoogle />
               </button>
             </a>
             <a href=''>
-              <button className='social-btn social-fb-btn'>
+              <button onClick={this.loginWithFb} className='social-btn social-fb-btn'>
                 <FaFacebookF />
               </button>
             </a>
-          </div>
+          </div> */}
         </form>
       </div>
     );

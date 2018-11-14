@@ -63,6 +63,12 @@ code {
   color: #4caf50;
   text-decoration: none;
 }
+.singIn__form button[type=submit]:disabled {
+  background-color: #bebebe;
+}
+.singIn__form button[type=submit]:disabled:hover {
+  cursor: not-allowed;
+}
 
 .error__message {
   color: #b82121;

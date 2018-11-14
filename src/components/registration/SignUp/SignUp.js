@@ -9,18 +9,6 @@ const usernameRegex = /^[a-zA-Z0-9]+$/;
 const emailRegex = RegExp(
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
-const formValid = ({ formErrors, ...rest }) => {
-  let valid = true;
-  // validate form errors being empty
-  Object.values(formErrors).forEach(val => val.length > 0 && (valid = false));
-
-  // validate the form was filled out
-  Object.values(rest).forEach(val => {
-    val === null && (valid = false);
-  });
-
-  return valid;
-};
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -30,6 +18,7 @@ export default class SignUp extends Component {
       email: '',
       password: '',
       confPassword: '',
+      disabled: true,
       formErrors: {
         userName: "",
         email: "",
@@ -39,22 +28,6 @@ export default class SignUp extends Component {
       }
     };
   }
-
-  handleSubmit = e => {
-    e.preventDefault();
-
-    if (formValid(this.state)) {
-      console.log(`
-        --SUBMITING--
-        User Name: ${this.state.userName}
-        Email Nasme: ${this.state.email}
-        Password Name: ${this.state.password}
-        Confirm Password Name: ${this.state.confPassword}
-        `);
-    } else {
-      console.log("Form INVALID - Display Error Message");
-    }
-  };
 
   handleChange = e => {
     e.preventDefault();
@@ -88,7 +61,15 @@ export default class SignUp extends Component {
         break;
     }
 
-    this.setState({ formErrors, [name]: value });
+    this.setState({
+      formErrors,
+      [name]: value,
+      disabled: (formErrors.email || !this.state.email) ||
+        (formErrors.password || !this.state.password) ||
+        (formErrors.userName || !this.state.userName) ||
+        (formErrors.confPassword || !this.state.confPassword)
+
+    });
   };
 
   signup = (e) => {
@@ -109,7 +90,7 @@ export default class SignUp extends Component {
   }
 
   render() {
-    const { formErrors } = this.state;
+    const { formErrors, disabled } = this.state;
 
     return (
       <div className="singIn">
@@ -177,10 +158,11 @@ export default class SignUp extends Component {
             type="submit"
             className="singIn__submit"
             onClick={this.signup}
+            disabled={disabled}
           >
             Sign Up
           </button>
-          <div className='social-btn-cont'>
+          {/* <div className='social-btn-cont'>
             <a href=''>
               <button className='social-btn social-google-btn'>
                 <FaGoogle />
@@ -191,7 +173,7 @@ export default class SignUp extends Component {
                 <FaFacebookF />
               </button>
             </a>
-          </div>
+          </div> */}
         </form>
       </div>
     );
