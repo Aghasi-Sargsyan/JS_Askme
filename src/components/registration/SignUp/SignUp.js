@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { FaFacebookF, FaGoogle } from 'react-icons/fa';
-import fire from '../../../config/Fire';
+import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import fire from "../../../config/Fire";
+import "./SignUp.scss";
 
-let password,
-  confPassword;
+let password, confPassword;
 
 const usernameRegex = /^[a-zA-Z0-9]+$/;
 const emailRegex = RegExp(
@@ -14,17 +14,17 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
-      email: '',
-      password: '',
-      confPassword: '',
+      userName: "",
+      email: "",
+      password: "",
+      confPassword: "",
       disabled: true,
       formErrors: {
         userName: "",
         email: "",
         password: "",
         confPassword: "",
-        loginError: '',
+        loginError: ""
       }
     };
   }
@@ -37,9 +37,10 @@ export default class SignUp extends Component {
 
     switch (name) {
       case "userName":
-        formErrors.userName = usernameRegex.test(value) && value.length >= 3
-          ? ""
-          : "Minimum 3 characters required. Allowed only letters and numbers";
+        formErrors.userName =
+          usernameRegex.test(value) && value.length >= 3
+            ? ""
+            : "Minimum 3 characters required. Allowed only letters and numbers";
         break;
       case "email":
         formErrors.email = emailRegex.test(value)
@@ -54,7 +55,9 @@ export default class SignUp extends Component {
         break;
       case "confPassword":
         formErrors.confPassword =
-          password !== value ? "Your password and confirmation password do not match" : "";
+          password !== value
+            ? "Your password and confirmation password do not match"
+            : "";
         confPassword = value;
         break;
       default:
@@ -64,30 +67,35 @@ export default class SignUp extends Component {
     this.setState({
       formErrors,
       [name]: value,
-      disabled: (formErrors.email || !this.state.email) ||
+      disabled:
+        formErrors.email ||
+        !this.state.email ||
         (formErrors.password || !this.state.password) ||
         (formErrors.userName || !this.state.userName) ||
         (formErrors.confPassword || !this.state.confPassword)
-
     });
   };
 
-  signup = (e) => {
+  signup = e => {
     e.preventDefault();
 
-    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-    }).then((u) => { console.log(u) })
-      .catch((error) => {
-
+    fire
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(u => {})
+      .then(u => {
+        console.log(u);
+      })
+      .catch(error => {
         this.setState(prevState => ({
           formErrors: {
             ...prevState.formErrors,
             loginError: error.message
           }
-        }))
+        }));
         console.log(this.state.formErrors.loginError);
-      })
-  }
+      });
+  };
 
   render() {
     const { formErrors, disabled } = this.state;
@@ -145,7 +153,9 @@ export default class SignUp extends Component {
               placeholder="Confirm Password"
               noValidate
               onChange={this.handleChange}
-              className={formErrors.confPassword.length > 0 ? "error__input" : null}
+              className={
+                formErrors.confPassword.length > 0 ? "error__input" : null
+              }
             />
             {formErrors.confPassword.length > 0 && (
               <span className="error__message">{formErrors.confPassword}</span>
