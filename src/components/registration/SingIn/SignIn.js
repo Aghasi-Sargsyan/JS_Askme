@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { FaFacebookF, FaGoogle } from 'react-icons/fa';
-import fire from '../../../config/Fire';
+import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import fire from "../../../config/Fire";
 import { Link } from "react-router-dom";
+import "./SignIn.scss";
 
 const emailRegex = RegExp(
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -12,14 +13,13 @@ export default class SignIn extends Component {
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
-      valid: false,
+      email: "",
+      password: "",
       disabled: true,
       formErrors: {
         email: "",
         password: "",
-        loginError: '',
+        loginError: ""
       }
     };
   }
@@ -47,24 +47,30 @@ export default class SignIn extends Component {
     this.setState({
       formErrors,
       [name]: value,
-      disabled: (formErrors.email || !this.state.email) || (formErrors.password || !this.state.password)
+      disabled:
+        formErrors.email ||
+        !this.state.email ||
+        (formErrors.password || !this.state.password)
     });
   };
 
-  login = (e) => {
+  login = e => {
     e.preventDefault();
 
-    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-    }).catch((error) => {
-      this.setState(prevState => ({
-        formErrors: {
-          ...prevState.formErrors,
-          loginError: error.message
-        }
-      }))
-      console.log(this.state.formErrors.loginError);
-    });
-  }
+    fire
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(u => {})
+      .catch(error => {
+        this.setState(prevState => ({
+          formErrors: {
+            ...prevState.formErrors,
+            loginError: error.message
+          }
+        }));
+        console.log(this.state.formErrors.loginError);
+      });
+  };
 
   render() {
     const { formErrors, disabled } = this.state;
@@ -112,7 +118,7 @@ export default class SignIn extends Component {
             Sign In
           </button>
           <p className="singIn__message">
-            Not registered? <Link to='/signUp'>Create an account</Link>
+            Not registered? <Link to="/signUp">Create an account</Link>
           </p>
           {/* <div className='social-btn-cont'>
             <a href=''>
