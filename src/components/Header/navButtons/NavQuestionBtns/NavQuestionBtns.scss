@@ -1,7 +1,9 @@
-.navigation-items {
+.navigation-items-q {
     width: 75%;
+    height: 100%;
     ul {
         display: flex;
+        height: 100%;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -11,8 +13,8 @@
             margin-right: 2em;
 
             img {
-                width: 100px;
-                height: 100px;
+                width: 90px;
+                height: 90px;
                 vertical-align: middle;
             }
         }

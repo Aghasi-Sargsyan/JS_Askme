@@ -2,7 +2,7 @@ import React from 'react';
 import "./NavLoginBtns.scss";
 
 const NavLoginBtns = props => ( 
-    <div className="navigation-items">
+    <div className="navigation-items-l">
         <ul>
             <li>
                 <a href="/">Sign In</a>

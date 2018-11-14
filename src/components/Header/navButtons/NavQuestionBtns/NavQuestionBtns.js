@@ -4,7 +4,7 @@ import "./NavQuestionBtns.scss";
 
 const NavQuestionBtns = props => {
   return (
-    <div className="navigation-items">
+    <div className="navigation-items-q">
       <ul>
             <li>
               <a href="/">Question</a>
