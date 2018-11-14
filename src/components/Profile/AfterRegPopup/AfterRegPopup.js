@@ -8,7 +8,7 @@ class AfterRegPopup extends React.Component {
 
         this.state = {
             birthYear: {
-                defaultValue: "1900",
+                value: "1900",
                 maxYear: new Date().getFullYear() - 14,
                 valid: true,
                 errorMessage: "invalid age",
@@ -16,7 +16,7 @@ class AfterRegPopup extends React.Component {
             },
 
             skill: {
-                defaultValue: "",
+                value: "",
                 valid: true,
                 errorMessage: "length should be more then 2 characters",
                 id: "skill"
@@ -29,7 +29,8 @@ class AfterRegPopup extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {birthYear, skillList, gender} = this.state;
-        console.log(` year : ${birthYear.defaultValue} \n skills : ${skillList.toString()}\n gender : ${gender}`);
+        console.log(` year : ${birthYear.value} \n skills : ${skillList.map(skill => skill.name)}\n gender : ${gender}`);
+        console.log([1,2,3,4].values())
     };
 
     changeHandler = e => {
@@ -38,7 +39,7 @@ class AfterRegPopup extends React.Component {
         this.setState({
             [e.target.id]: {
                 ...currentObject,
-                defaultValue: e.target.value,
+                value: e.target.value,
                 valid: isValid
             }
         });
@@ -68,14 +69,14 @@ class AfterRegPopup extends React.Component {
 
         skill.valid &&
         this.setState({
-            skillList: [...skillList, skill.defaultValue],
-            skill: {...skill, defaultValue: ""}
+            skillList: [...skillList, {name :skill.value, rate: 0}],
+            skill: {...skill, value: ""}
         });
     };
 
     skillsRender() {
         return this.state.skillList.map((skill, index) => (
-            <li key={index}>{skill}</li>
+            <li key={index}>{skill.name}</li>
         ));
     }
 
@@ -89,7 +90,7 @@ class AfterRegPopup extends React.Component {
                         type="number"
                         label="Birth Year"
                         id={birthYear.id}
-                        value={birthYear.defaultValue}
+                        value={birthYear.value}
                         valid={birthYear.valid}
                         onChange={this.changeHandler}
                         errorMessage={birthYear.errorMessage}
@@ -123,14 +124,14 @@ class AfterRegPopup extends React.Component {
                                id={skill.id}
                                valid={skill.valid}
                                errorMessage={skill.errorMessage}
-                               value={skill.defaultValue}
+                               value={skill.value}
                                onChange={this.changeHandler}
                         />
                         <button
                             type="button"
                             className="bioForm__add"
                             onClick={this.addSkill}
-                            disabled={!skill.defaultValue || !skill.valid}
+                            disabled={!skill.value || !skill.valid}
                         >
                             add
                         </button>
