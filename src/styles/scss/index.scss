@@ -1,3 +1,12 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
 body {
   margin: 0;
   padding: 0;
@@ -12,6 +21,88 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.App {
-  color: red;
+
+// Sign In form
+.singIn__form {
+  max-width: 360px;
+  background-color: gray;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  padding: 45px;
+  .singIn__input__wrapper {
+    margin: 0 0 15px;
+    input {
+      width: 100%;
+
+      font-size: 14px;
+      background-color: #f2f2f2;
+
+      border: 0;
+      outline: 0;
+      padding: 15px;
+      &.error__input {
+        box-shadow: inset 0 0 1px 1px #b82121;
+      }
+    }
+  }
+  .singIn__submit {
+    width: 100%;
+
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #fff;
+    background-color: #4caf50;
+
+    border: 0;
+    outline: 0;
+    padding: 15px;
+
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+  }
+  .singIn__message {
+    font-size: 12px;
+    color: #b3b3b3;
+
+    margin: 15px 0 0;
+    a {
+      color: #4caf50;
+      text-decoration: none;
+    }
+  }
+  button[type="submit"]:disabled {
+    background-color: #bebebe;
+  }
+  button[type="submit"]:disabled:hover {
+    cursor: not-allowed;
+  }
+}
+.error__message {
+  color: #b82121;
+  font-size: 13px;
+}
+
+.social-btn-cont {
+  text-align: center;
+  .social-btn {  
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;
+    text-transform: uppercase;
+  
+    border: 0;
+    border-radius: 50%;
+    outline: 0;
+    padding: 15px;
+    margin: 10px 5px;
+    svg {
+      margin: 0 3px;
+    }
+    &.social-google-btn {
+      background-color: #e04c40;
+    }
+    &.social-fb-btn{
+      background-color: #2e4da7;
+    }
+  }
 }
