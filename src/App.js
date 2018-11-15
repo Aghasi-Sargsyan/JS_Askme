@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import fire from "./config/Fire";
+import {auth} from "firebase";
 import SignIn from "./components/registration/SingIn/SignIn";
 import SignUp from "./components/registration/SignUp/SignUp";
 import Profile from "./components/Profile/Profile";
 import { HashRouter as Router, Route } from "react-router-dom";
+import initFirebase from "./config/fireConfig";
 
 class App extends Component {
   constructor(props) {
     super(props);
+
+      initFirebase();
 
     this.state = {
       user: {}
@@ -19,7 +22,7 @@ class App extends Component {
   }
 
   authListener() {
-    fire.auth().onAuthStateChanged(user => {
+    auth().onAuthStateChanged(user => {
       // console.log('user', user);
       if (user) {
         this.setState({ user });

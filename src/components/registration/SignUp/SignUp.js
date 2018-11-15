@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
-import fire from "../../../config/Fire";
+import {auth} from "firebase";
 import "./SignUp.scss";
 
 let password, confPassword;
@@ -76,16 +76,12 @@ export default class SignUp extends Component {
     });
   };
 
-  signup = e => {
+  signUp = e => {
     e.preventDefault();
 
-    fire
-      .auth()
+    auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {})
-      .then(u => {
-        console.log(u);
-      })
+      .then(user => console.log(user))
       .catch(error => {
         this.setState(prevState => ({
           formErrors: {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import fire from '../../config/Fire';
+import {auth} from "firebase";
+import FireManager from "../../config/fireManager";
 
 class Profile extends Component {
     constructor(props) {
@@ -9,7 +10,11 @@ class Profile extends Component {
     }
 
     logout() {
-        fire.auth().signOut();
+        auth().signOut();
+    }
+
+    componentDidMount() {
+        console.log(FireManager.getCurrentUser());
     }
 
     render() {

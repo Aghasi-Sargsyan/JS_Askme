@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
-import fire from "../../../config/Fire";
+import {auth} from "firebase";
 import { Link } from "react-router-dom";
 import "./SignIn.scss";
 
@@ -57,8 +57,7 @@ export default class SignIn extends Component {
   login = e => {
     e.preventDefault();
 
-    fire
-      .auth()
+    auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(u => {})
       .catch(error => {
