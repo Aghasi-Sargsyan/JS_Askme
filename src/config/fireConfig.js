@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore'
 
-// Initialize Firebase
+
 const config = {
     apiKey: "AIzaSyC0JHqM6t3RzAulMGbe71UhOw-f4AnSqh8",
     authDomain: "askme-94f3d.firebaseapp.com",
@@ -13,8 +13,9 @@ const config = {
 
 
 export default function initFirebase() {
+    // Initialize Firebase
     firebase.initializeApp(config);
 
-// Initialize Cloud Firestore through Firebase
+    // Initialize Cloud Firestore through Firebase
     firebase.firestore().settings({timestampsInSnapshots: true});
 }

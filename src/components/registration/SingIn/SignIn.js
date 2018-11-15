@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import {auth} from "firebase";
 import { Link } from "react-router-dom";
-import "./SignIn.scss";
+// import "./SignIn.scss";
 
 const emailRegex = RegExp(
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -59,7 +59,7 @@ export default class SignIn extends Component {
 
     auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {})
+      .then(user => console.log(user))
       .catch(error => {
         this.setState(prevState => ({
           formErrors: {

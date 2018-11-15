@@ -14,7 +14,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        console.log(FireManager.getCurrentUser());
+        // console.log(FireManager.getCurrentUser());
     }
 
     render() {

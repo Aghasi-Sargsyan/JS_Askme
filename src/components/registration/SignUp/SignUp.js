@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import {auth} from "firebase";
 import "./SignUp.scss";
+import fireManager from "../../../config/fireManager"
 
 let password, confPassword;
 
@@ -81,7 +82,11 @@ export default class SignUp extends Component {
 
     auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(user => console.log(user))
+      .then(user => {
+          user.user.updateProfile({displayName: this.state.userName});
+          console.log(user);
+          console.log(user.user);
+      })
       .catch(error => {
         this.setState(prevState => ({
           formErrors: {
@@ -163,7 +168,7 @@ export default class SignUp extends Component {
           <button
             type="submit"
             className="singIn__submit"
-            onClick={this.signup}
+            onClick={this.signUp}
             disabled={disabled}
           >
             Sign Up
