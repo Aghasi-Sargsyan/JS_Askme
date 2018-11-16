@@ -1,5 +1,5 @@
 import React from "react";
-import "./AfterRegPopup.css";
+import "./AfterRegPopup.scss";
 import Input from "../../universal/Input/Input";
 
 class AfterRegPopup extends React.Component {
@@ -28,9 +28,9 @@ class AfterRegPopup extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const {birthYear, skillList, gender} = this.state;
+        const { birthYear, skillList, gender } = this.state;
         console.log(` year : ${birthYear.value} \n skills : ${skillList.map(skill => skill.name)}\n gender : ${gender}`);
-        console.log([1,2,3,4].values())
+        console.log([1, 2, 3, 4].values())
     };
 
     changeHandler = e => {
@@ -53,7 +53,7 @@ class AfterRegPopup extends React.Component {
 
 
     validate(target) {
-        const {birthYear, skill} = this.state;
+        const { birthYear, skill } = this.state;
         const value = target.value;
         switch (target.id) {
             case birthYear.id:
@@ -65,13 +65,13 @@ class AfterRegPopup extends React.Component {
     }
 
     addSkill = () => {
-        const {skillList, skill} = this.state;
+        const { skillList, skill } = this.state;
 
         skill.valid &&
-        this.setState({
-            skillList: [...skillList, {name :skill.value, rate: 0}],
-            skill: {...skill, value: ""}
-        });
+            this.setState({
+                skillList: [...skillList, { name: skill.value, rate: 0 }],
+                skill: { ...skill, value: "" }
+            });
     };
 
     skillsRender() {
@@ -81,7 +81,7 @@ class AfterRegPopup extends React.Component {
     }
 
     render() {
-        const {skill, skillList, birthYear} = this.state;
+        const { skill, skillList, birthYear } = this.state;
 
         return (
             <div className="bioForm">
@@ -111,21 +111,21 @@ class AfterRegPopup extends React.Component {
                         <label>
                             Female
                             <input type="radio"
-                                   name="genderGroup"
-                                   value="Female"
-                                   id="radioFemale"
-                                   onChange={this.checkHandler}
+                                name="genderGroup"
+                                value="Female"
+                                id="radioFemale"
+                                onChange={this.checkHandler}
                             />
                         </label>
                     </div>
                     <div className="skills-cont">
                         <Input label="Skill"
-                               placeholder="ex. JavaScript"
-                               id={skill.id}
-                               valid={skill.valid}
-                               errorMessage={skill.errorMessage}
-                               value={skill.value}
-                               onChange={this.changeHandler}
+                            placeholder="ex. JavaScript"
+                            id={skill.id}
+                            valid={skill.valid}
+                            errorMessage={skill.errorMessage}
+                            value={skill.value}
+                            onChange={this.changeHandler}
                         />
                         <button
                             type="button"
