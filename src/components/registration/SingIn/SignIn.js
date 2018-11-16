@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
-import {auth} from "firebase";
-import { Link } from "react-router-dom";
+// import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import { auth } from "firebase";
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 // import "./SignIn.scss";
 
 const emailRegex = RegExp(
@@ -55,11 +55,24 @@ export default class SignIn extends Component {
   };
 
   login = e => {
+    const { email, password, successLogin } = this.state;
+    const { router } = this.props;
     e.preventDefault();
 
     auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(user => console.log(user))
+      .signInWithEmailAndPassword(email, password)
+      .then(user => {
+        console.log('user has signed in or up', user);
+        return <Redirect to='/profile' />;
+        // if (user) {
+        //   console.log('user has signed in or up', user);
+        //   return <Redirect to='/profile' />;
+        // } else {
+        //   console.log('user signed out or still need to sign in', user);
+        //   // browserHistory.replcae('/signin')
+        //   return <Redirect to='/signIn' />;
+        // }
+      })
       .catch(error => {
         this.setState(prevState => ({
           formErrors: {

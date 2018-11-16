@@ -11,6 +11,12 @@
 # production
 /build
 
+# editor cache files
+.idea
+
+.history
+.vscode
+
 # misc
 .DS_Store
 .env.local

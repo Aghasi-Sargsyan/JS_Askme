@@ -1,15 +1,17 @@
 import React from 'react';
+import { BrowserRouter as Router, Link } from "react-router-dom";
+
 import "./NavLoginBtns.scss";
 
-const NavLoginBtns = props => ( 
+const NavLoginBtns = props => (
     <div className="navigation-items-l">
         <ul>
             <li>
-                <a href="/">Sign In</a>
+                <Link to="/signIn">Sign In</Link>
             </li>
             <span>or</span>
             <li>
-                <a href="/">Sign Up</a>
+                <Link to="/signUp">Sign Up</Link>
             </li>
         </ul>
     </div>

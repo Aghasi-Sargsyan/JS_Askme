@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export default class QuestionPage extends Component {
+export default class AskQuestion extends Component {
     render() {
         return (
             <div>
-                QuestionPage
+                Ask a Question
             </div>
         )
     }

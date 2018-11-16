@@ -1,24 +1,26 @@
 import React from 'react';
 import profileImg from "../../../../assets/profileImg.png";
+import { Link } from "react-router-dom";
+
 import "./NavQuestionBtns.scss";
 
 const NavQuestionBtns = props => {
   return (
     <div className="navigation-items-q">
       <ul>
-            <li>
-              <a href="/">Question</a>
-            </li>
+        <li>
+          <Link to="/questions">Questions</Link>
+        </li>
 
-            <li className="img-li">
-              <a href="/">
-                <img src={profileImg} alt="Profile Image" />
-              </a>
-            </li>
+        <li className="img-li">
+          <Link to="/profile">
+            <img src={profileImg} alt="Profile Image" />
+          </Link>
+        </li>
 
-            <li>
-                <a href="/">Ask a Question</a>
-            </li>
+        <li>
+          <Link to="/askQuestion">Ask a Question</Link>
+        </li>
       </ul>
     </div>
   )

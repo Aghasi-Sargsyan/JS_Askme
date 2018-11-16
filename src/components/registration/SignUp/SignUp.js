@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
-import {auth} from "firebase";
+// import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import { auth } from "firebase";
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
+
 import "./SignUp.scss";
-import fireManager from "../../../config/fireManager"
 
 let password, confPassword;
 
@@ -78,14 +79,14 @@ export default class SignUp extends Component {
   };
 
   signUp = e => {
+    const { email, password } = this.state;
     e.preventDefault();
 
     auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .createUserWithEmailAndPassword(email, password)
       .then(user => {
-          user.user.updateProfile({displayName: this.state.userName});
-          console.log(user);
-          console.log(user.user);
+        user.user.updateProfile({ displayName: this.state.userName });
+        return <Redirect to='/profile' />;
       })
       .catch(error => {
         this.setState(prevState => ({

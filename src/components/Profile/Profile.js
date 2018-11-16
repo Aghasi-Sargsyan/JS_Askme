@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {auth} from "firebase";
+import { auth } from "firebase";
 import FireManager from "../../config/fireManager";
 
 class Profile extends Component {
@@ -26,7 +26,6 @@ class Profile extends Component {
         );
 
     }
-
 }
 
 export default Profile;
