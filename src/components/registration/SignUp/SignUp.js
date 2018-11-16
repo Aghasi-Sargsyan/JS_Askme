@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import {auth} from "firebase";
 import "./SignUp.scss";
-import fireManager from "../../../config/fireManager"
+import FireManager from "../../../config/fireManager"
 
 let password, confPassword;
 
@@ -80,12 +80,18 @@ export default class SignUp extends Component {
   signUp = e => {
     e.preventDefault();
 
-    auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+    auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(userCredential => userCredential.user)
       .then(user => {
-          user.user.updateProfile({displayName: this.state.userName});
-          console.log(user);
-          console.log(user.user);
+        FireManager.addUser({
+            id: user.uid,
+            skills:[],
+            photoUrl: user.photoURL,
+            userName: this.state.userName,
+            email: user.email,
+            gender: null,
+            age:null
+        })
       })
       .catch(error => {
         this.setState(prevState => ({

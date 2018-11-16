@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {auth} from "firebase";
 import FireManager from "../../config/fireManager";
+import AfterRegPopup from "./AfterRegPopup/AfterRegPopup";
 
 class Profile extends Component {
     constructor(props) {
         super(props);
 
         this.logout = this.logout.bind(this);
+
+        this.state = {
+            skillList: []
+        }
     }
 
     logout() {
@@ -14,15 +19,33 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        // console.log(FireManager.getCurrentUser());
+        auth().onAuthStateChanged(user => {
+            if (user) {
+                FireManager.getUserSkills(user.uid).then(skills => {
+                    this.setState({
+                        skillList: skills
+                    });
+                })
+            }
+        })
     }
+
+    renderSkills = () => {
+        console.log("map", this.state.skillList);
+        return this.state.skillList.map(skill =>
+            <li>skill: {skill.value} rate: {skill.rate}</li>)
+    };
 
     render() {
         return (
             <div>
+                <ul>
+                    {this.renderSkills()}
+                </ul>
                 <h1>Welcome to Profile Page</h1>
+                <AfterRegPopup/>
                 <button onClick={this.logout}>Logout</button>
-            </div >
+            </div>
         );
 
     }

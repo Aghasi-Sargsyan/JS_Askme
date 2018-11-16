@@ -59,7 +59,7 @@ export default class SignIn extends Component {
 
     auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(user => console.log(user))
+      .then()
       .catch(error => {
         this.setState(prevState => ({
           formErrors: {

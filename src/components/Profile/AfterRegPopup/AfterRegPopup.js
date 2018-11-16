@@ -1,6 +1,7 @@
 import React from "react";
 import "./AfterRegPopup.css";
 import Input from "../../universal/Input/Input";
+import FireManager from "../../../config/fireManager";
 
 class AfterRegPopup extends React.Component {
     constructor(props) {
@@ -29,8 +30,16 @@ class AfterRegPopup extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {birthYear, skillList, gender} = this.state;
-        console.log(` year : ${birthYear.value} \n skills : ${skillList.map(skill => skill.name)}\n gender : ${gender}`);
-        console.log([1,2,3,4].values())
+
+        FireManager.addUser({
+            age: birthYear.value,
+            gender: gender,
+            skills: skillList
+        }, FireManager.getCurrentUser().uid);
+
+
+        const skills = skillList.map(skill => skill.value);
+        FireManager.addSkill(skills);
     };
 
     changeHandler = e => {
@@ -51,15 +60,15 @@ class AfterRegPopup extends React.Component {
         });
     };
 
-
     validate(target) {
-        const {birthYear, skill} = this.state;
+        const {birthYear, skill, skillList} = this.state;
         const value = target.value;
         switch (target.id) {
             case birthYear.id:
                 return value >= 1900 && value <= birthYear.maxYear;
             case skill.id:
-                return !(value && value.length < 2);
+                const duplicate = skillList.find(skill => skill.value === value);
+                return value && value.length >= 2 && !duplicate;
             default:
         }
     }
@@ -69,14 +78,14 @@ class AfterRegPopup extends React.Component {
 
         skill.valid &&
         this.setState({
-            skillList: [...skillList, {name :skill.value, rate: 0}],
+            skillList: [...skillList, {value: skill.value, rate: 0}],
             skill: {...skill, value: ""}
         });
     };
 
     skillsRender() {
         return this.state.skillList.map((skill, index) => (
-            <li key={index}>{skill.name}</li>
+            <li key={index}>{skill.value}</li>
         ));
     }
 

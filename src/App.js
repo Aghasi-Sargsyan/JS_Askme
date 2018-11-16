@@ -4,7 +4,6 @@ import SignIn from "./components/registration/SingIn/SignIn";
 import SignUp from "./components/registration/SignUp/SignUp";
 import Profile from "./components/Profile/Profile";
 import { HashRouter as Router, Route } from "react-router-dom";
-import initFirebase from "./config/fireConfig";
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +22,6 @@ class App extends Component {
 
   authListener() {
     auth().onAuthStateChanged(user => {
-      // console.log('user', user);
       if (user) {
         this.setState({ user });
       } else {
