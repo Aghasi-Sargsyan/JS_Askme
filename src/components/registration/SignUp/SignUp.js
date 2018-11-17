@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
-import {auth} from "firebase";
+import { auth } from "firebase";
 import "./SignUp.scss";
-import fireManager from "../../../config/fireManager"
+import fireManager from "../../../config/fireManager";
+import { Link, withRouter } from "react-router-dom";
 
 let password, confPassword;
 
@@ -11,7 +12,13 @@ const emailRegex = RegExp(
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
 
-export default class SignUp extends Component {
+const SignUpPage = ({ history }) => (
+  <div>
+    <SignUpForm history={history} />
+  </div>
+);
+
+class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,13 +86,12 @@ export default class SignUp extends Component {
 
   signUp = e => {
     e.preventDefault();
-
+    const { history } = this.props;
     auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(user => {
-          user.user.updateProfile({displayName: this.state.userName});
-          console.log(user);
-          console.log(user.user);
+        // user.user.updateProfile({ displayName: this.state.userName });
+        history.push("/questions");
       })
       .catch(error => {
         this.setState(prevState => ({
@@ -190,3 +196,6 @@ export default class SignUp extends Component {
     );
   }
 }
+export default withRouter(SignUpPage);
+
+export { SignUpForm };
