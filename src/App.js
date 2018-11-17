@@ -8,8 +8,7 @@ import SignUp from "./components/registration/SignUp/SignUp";
 import Profile from "./components/Profile/Profile";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
 
-import withAuthentication from "./components/registration/withAuthentication";
-
+import AuthorizedRoute from "./components/registration/AuthorizedRoute";
 import Navigation from "./components/Navigation";
 
 class App extends Component {
@@ -22,12 +21,12 @@ class App extends Component {
 
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/questions" component={QuestionPage} />
+          <AuthorizedRoute exact path="/profile" component={Profile} />
+          <AuthorizedRoute exact path="/questions" component={QuestionPage} />
         </div>
       </Router>
     );
   }
 }
 
-export default withAuthentication(App);
+export default App;
