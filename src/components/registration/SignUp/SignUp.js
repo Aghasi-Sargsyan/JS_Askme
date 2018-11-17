@@ -85,12 +85,12 @@ export default class SignUp extends Component {
       .then(user => {
         FireManager.addUser({
             id: user.uid,
-            skills:[],
-            photoUrl: user.photoURL,
             userName: this.state.userName,
             email: user.email,
             gender: null,
-            age:null
+            age:null,
+            photoUrl: null,
+            skills:[]
         })
       })
       .catch(error => {

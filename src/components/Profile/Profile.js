@@ -31,9 +31,8 @@ class Profile extends Component {
     }
 
     renderSkills = () => {
-        console.log("map", this.state.skillList);
-        return this.state.skillList.map(skill =>
-            <li>skill: {skill.value} rate: {skill.rate}</li>)
+        return this.state.skillList.map((skill,index )=>
+            <li key={index}>skill: {skill.value} rate: {skill.rate}</li>)
     };
 
     render() {

@@ -2,49 +2,66 @@ import {auth, firestore} from "firebase";
 
 export default class FireManager {
 
-    static getCurrentUser() {
-        return auth().currentUser;
-    }
-
     /**
-     * Adding or updating user to database, user must be an object
-     * Pass userId if you want to update user
+     * Adding user to database,
+     * user must be an object with valid id property
      */
-    static addUser(user = {}, userId = "") {
-        const id = userId || user.id;
-        firestore().collection("users").doc(id).set(user, {merge: true})
-            .then(() => {
-                console.log("Document successfully written!");
-            })
-            .catch(error => {
-                console.error("Error writing document: ", error);
-            });
-    }
+    static addUser(user) {
 
-    /**
-     * Adding global skill or skills to database
-     * Pass a string or array of strings
-     */
-    static addSkill(skills = "") {
-        if (skills instanceof Array) {
-            skills.forEach(skill => {
-                firestore().collection("skills").doc(skill).set({value: skill})
-                    .then(() =>
-                        console.log("skill successfully added"
-                        ))
-                    .catch(e =>
-                        console.log("Error writing document: ", e
-                        ));
-            });
+        if (user.id) {
+            firestore().collection("users").doc(user.id).set(user)
+                .then(() => {
+                    console.log("Document successfully written!");
+                })
+                .catch(error => {
+                    console.error("Error writing document: ", error);
+                });
         } else {
-            firestore().collection("skills").doc(skills).set({value: skills})
+            console.error("need to pass an object with existing id property")
+        }
+    }
+
+    /**
+     * Updating user database properties,
+     * pass a valid userId and an object that contains user fields
+     * for example {userName: name
+     *              age: 18
+     *              skills: [{value: driver, rate: 0}]
+     *             }
+     * */
+    static updateUser(data = {}, userId) {
+
+        if (userId) {
+            firestore().collection("users").doc(userId).update(
+                data.skills
+                    ? {...data, skills: firestore.FieldValue.arrayUnion(...data.skills)}
+                    : {...data})
+                .then(() => {
+                    console.log("user successfully updated");
+                })
+                .catch(e => {
+                    console.error("Error updating user: ", e);
+                });
+        } else {
+            console.error("need to pass an object with existing id property")
+        }
+    }
+
+    /**
+     * Adding global skill to database
+     * Pass a string or strings, or ...array
+     */
+    static addSkill(...skills) {
+
+        skills.forEach(skill => {
+            firestore().collection("skills").doc(skill).set({value: skill})
                 .then(() =>
                     console.log("skill successfully added"
                     ))
                 .catch(e =>
                     console.log("Error writing document: ", e
                     ));
-        }
+        });
     }
 
 
@@ -53,6 +70,7 @@ export default class FireManager {
      * calling example... getUserSkills(id).then(skills => {do your staff with skills array});
      * */
     static getUserSkills(userId) {
+
         if (userId) {
             const ref = firestore().collection("users").doc(userId);
 

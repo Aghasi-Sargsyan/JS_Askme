@@ -2,6 +2,7 @@ import React from "react";
 import "./AfterRegPopup.css";
 import Input from "../../universal/Input/Input";
 import FireManager from "../../../config/fireManager";
+import {auth} from "firebase";
 
 class AfterRegPopup extends React.Component {
     constructor(props) {
@@ -31,15 +32,20 @@ class AfterRegPopup extends React.Component {
         e.preventDefault();
         const {birthYear, skillList, gender} = this.state;
 
-        FireManager.addUser({
-            age: birthYear.value,
-            gender: gender,
-            skills: skillList
-        }, FireManager.getCurrentUser().uid);
-
+        auth().onAuthStateChanged(user => {
+            if (user) {
+                FireManager.updateUser({
+                    age: birthYear.value,
+                    gender: gender,
+                    skills: skillList
+                }, user.uid);
+            } else {
+                console.log("user not found")
+            }
+        });
 
         const skills = skillList.map(skill => skill.value);
-        FireManager.addSkill(skills);
+        FireManager.addSkill(...skills);
     };
 
     changeHandler = e => {
