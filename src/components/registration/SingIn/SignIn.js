@@ -1,14 +1,21 @@
 import React, { Component } from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
-import {auth} from "firebase";
-import { Link } from "react-router-dom";
+import { auth } from "firebase";
+import { Link, withRouter } from "react-router-dom";
 // import "./SignIn.scss";
 
 const emailRegex = RegExp(
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
 
-export default class SignIn extends Component {
+const SignInPage = ({ history }) => (
+  <div>
+    <SignInForm history={history} />
+    <SignUpLink />
+  </div>
+);
+
+class SignInForm extends Component {
   constructor(props) {
     super(props);
 
@@ -57,9 +64,14 @@ export default class SignIn extends Component {
   login = e => {
     e.preventDefault();
 
+    const { history } = this.props;
+    const { email, password } = this.state;
     auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(user => console.log(user))
+      .signInWithEmailAndPassword(email, password)
+      .then(user => {
+        console.log("uesr log");
+        history.push("/questions");
+      })
       .catch(error => {
         this.setState(prevState => ({
           formErrors: {
@@ -116,9 +128,6 @@ export default class SignIn extends Component {
           >
             Sign In
           </button>
-          <p className="singIn__message">
-            Not registered? <Link to="/signUp">Create an account</Link>
-          </p>
           {/* <div className='social-btn-cont'>
             <a href=''>
               <button onClick={this.loginWithGoogle} className='social-btn social-google-btn'>
@@ -136,3 +145,12 @@ export default class SignIn extends Component {
     );
   }
 }
+const SignUpLink = () => (
+  <p className="singIn__message">
+    Don't have an account? <Link to="/signup">Sign Up</Link>
+  </p>
+);
+
+export default withRouter(SignInPage);
+
+export { SignInForm, SignUpLink };
