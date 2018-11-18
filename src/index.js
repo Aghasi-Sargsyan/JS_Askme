@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import initFirebase from "./config/fireConfig";
+import "./index.scss";
 
 initFirebase();
 

@@ -1,7 +1,4 @@
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     background-color: dodgerblue;
     height: 90px;
@@ -13,26 +10,7 @@ header {
         padding: 0 16px;
     }
 
-    .logo {
-        margin-left: 40px;
-
-        img {
-            width: 90px;
-            height: 70px;
-        } 
-    }
-
     .space {
         flex: 1;
     }
-
-    @media (min-width: 769px) {
-        .toggle-btn {
-            display: none;
-        }
-    
-        .logo {
-            margin-left: 0;
-        }
-    }    
 }

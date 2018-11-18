@@ -1,21 +1,15 @@
 import React from 'react';
-import logo from "../../assets/logo.png";
+import Logo from '../universal/Logo/Logo';
+import NavBar from '../NavBar/NavBar';
+
 import "./Header.scss";
-import DrawerToggleBtn from '../SideDrawer/DrawerToggleBtn/DrawerToggleBtn';
 
 const Header = props => (
     <header>
         <nav className="navigation">
-            <div className="toggle-btn">
-                <DrawerToggleBtn click={props.drawerClickHandler} />
-            </div>
-            <div className="logo">
-                <a href="/">
-                    <img src={logo} alt="Logo" />
-                </a>
-            </div>
-            <div className="space"></div>
-            {props.children}
+            <Logo />
+            <div className="space" />
+            <NavBar />
         </nav>
     </header>
 );
