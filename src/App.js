@@ -9,20 +9,19 @@ import Profile from "./components/Profile/Profile";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
 
 import AuthorizedRoute from "./components/registration/AuthorizedRoute";
-import Navigation from "./components/Navigation";
-
+import RegContainer from "./components/registration/RegContainer";
 class App extends Component {
   render() {
     return (
       <Router>
         <div>
-          <Navigation />
+          <RegContainer />
           <hr />
-
+          <Route exact path="/" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
-          <AuthorizedRoute exact path="/profile" component={Profile} />
-          <AuthorizedRoute exact path="/questions" component={QuestionPage} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/questions" component={QuestionPage} />
         </div>
       </Router>
     );

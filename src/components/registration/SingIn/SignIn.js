@@ -63,10 +63,13 @@ class SignInForm extends Component {
 
   login = e => {
     e.preventDefault();
+
     const { history } = this.props;
+    const { email, password } = this.state;
     auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .signInWithEmailAndPassword(email, password)
       .then(user => {
+        console.log("uesr log");
         history.push("/questions");
       })
       .catch(error => {
