@@ -95,7 +95,6 @@ class SignInForm extends Component {
               type="email"
               name="email"
               placeholder="Email"
-              noValidate
               onChange={this.handleChange}
               className={formErrors.email.length > 0 ? "error__input" : null}
             />
@@ -109,7 +108,6 @@ class SignInForm extends Component {
               type="password"
               name="password"
               placeholder="Password"
-              noValidate
               onChange={this.handleChange}
               className={formErrors.password.length > 0 ? "error__input" : null}
             />

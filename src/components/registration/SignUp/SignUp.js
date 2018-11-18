@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { auth } from "firebase";
 import "./SignUp.scss";
-import fireManager from "../../../config/fireManager";
 import { Link, withRouter } from "react-router-dom";
+import FireManager from "../../../config/fireManager"
 
 let password, confPassword;
 
@@ -87,11 +87,22 @@ class SignUpForm extends Component {
   signUp = e => {
     e.preventDefault();
     const { history } = this.props;
-    auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+    const {email, password, userName} = this.state;
+    auth().createUserWithEmailAndPassword(email, password)
+      .then(userCredential => userCredential.user)
       .then(user => {
-        // user.user.updateProfile({ displayName: this.state.userName });
+
         history.push("/questions");
+        FireManager.addUser({
+            id: user.uid,
+            userName: userName,
+            email: user.email,
+            gender: null,
+            age:null,
+            photoUrl: null,
+            skills:[]
+        })
+
       })
       .catch(error => {
         this.setState(prevState => ({
@@ -116,7 +127,6 @@ class SignUpForm extends Component {
               type="text"
               name="userName"
               placeholder="First Name"
-              noValidate
               onChange={this.handleChange}
               className={formErrors.userName.length > 0 ? "error__input" : null}
             />
@@ -130,7 +140,6 @@ class SignUpForm extends Component {
               type="email"
               name="email"
               placeholder="Email"
-              noValidate
               onChange={this.handleChange}
               className={formErrors.email.length > 0 ? "error__input" : null}
             />
@@ -144,7 +153,6 @@ class SignUpForm extends Component {
               type="password"
               name="password"
               placeholder="Password"
-              noValidate
               onChange={this.handleChange}
               className={formErrors.password.length > 0 ? "error__input" : null}
             />
@@ -158,7 +166,6 @@ class SignUpForm extends Component {
               type="password"
               name="confPassword"
               placeholder="Confirm Password"
-              noValidate
               onChange={this.handleChange}
               className={
                 formErrors.confPassword.length > 0 ? "error__input" : null
