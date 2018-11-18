@@ -21,9 +21,9 @@ class Profile extends Component {
     componentDidMount() {
         auth().onAuthStateChanged(user => {
             if (user) {
-                FireManager.getUserSkills(user.uid).then(skills => {
+                FireManager.getUser(user.uid).then(user => {
                     this.setState({
-                        skillList: skills
+                        skillList: user.skills
                     });
                 })
             }

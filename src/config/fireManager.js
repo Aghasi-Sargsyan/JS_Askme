@@ -66,22 +66,23 @@ export default class FireManager {
 
 
     /**
-     * Returns a promise with resolved skills array
-     * calling example... getUserSkills(id).then(skills => {do your staff with skills array});
+     * Returns a promise with resolved user object
+     * calling example... getUserSkills(userId).then(user => {do your staff with user object});
      * */
-    static getUserSkills(userId) {
+    static getUser(userId) {
 
         if (userId) {
             const ref = firestore().collection("users").doc(userId);
 
             return ref.get().then(doc => {
                 if (doc.exists) {
-                    return doc.data().skills;
+                    console.log(doc.data());
+                    return doc.data();
                 } else {
-                    console.log("No such document!");
+                    console.log("No such user!");
                 }
             }).catch(function (error) {
-                console.log("Error getting document:", error);
+                console.log("Error getting user:", error);
             });
         }
     }
