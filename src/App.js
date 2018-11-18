@@ -7,6 +7,9 @@ import SignIn from "./components/registration/SingIn/SignIn";
 import SignUp from "./components/registration/SignUp/SignUp";
 import Profile from "./components/Profile/Profile";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
+import { BrowserRouter as Router } from "react-router-dom";
+import initFirebase from "./config/fireConfig";
+import Main from "./components/Main/Main";
 
 import AuthorizedRoute from "./components/registration/AuthorizedRoute";
 import RegContainer from "./components/registration/RegContainer";
@@ -15,6 +18,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <Main />
           <RegContainer />
           <hr />
           <Route exact path="/" component={SignIn} />
