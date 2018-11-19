@@ -66,10 +66,13 @@ class SignInForm extends Component {
     const { email, password } = this.state;
     auth()
       .signInWithEmailAndPassword(email, password)
-      .then(user => {
-        console.log("user log");
-        history.push("/questions");
-      })
+      .then(userCredential => userCredential.user)
+        .then(user => {
+            if (user) {
+                console.log(user);
+                history.push("/questions");
+            }
+        })
       .catch(error => {
         this.setState(prevState => ({
           formErrors: {

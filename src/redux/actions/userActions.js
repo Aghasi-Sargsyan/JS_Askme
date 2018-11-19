@@ -4,14 +4,14 @@ import actionTypes from "./actionTypes";
 
 function actionGetUser(userData) {
     return {
-        type: actionTypes.GET_USER,
+        type: actionTypes.GET_USER_FROM_DB,
         userData: userData,
     };
 }
 
-export function getUserFromDb(id) {
+export function getUserFromDb(userId) {
     return function (dispatch) {
-        FireManager.getUser(id)
+        FireManager.getUser(userId)
             .then(user => {
                 dispatch(actionGetUser(user));
             })
@@ -20,4 +20,8 @@ export function getUserFromDb(id) {
             })
     }
 }
+
+export const actionRemoveUser = {
+    type: actionTypes.REMOVE_USER_FROM_STORE
+};
 

@@ -5,10 +5,28 @@ import SignUp from "./components/registration/SignUp/SignUp";
 import Profile from "./components/Profile/Profile";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
 import Main from "./components/Main/Main";
-import ProtectedRoute from "./components/registration/ProtectedRoute";
+// import ProtectedRoute from "./components/registration/ProtectedRoute";
 import RegContainer from "./components/registration/RegContainer";
+import {auth} from "firebase";
+import {getUserFromDb} from "./redux/actions/userActions";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+
 
 class App extends Component {
+    constructor(props) {
+      super(props);
+
+        auth().onAuthStateChanged(user => {
+                if (user) {
+                    this.props.getUserFromDB(user.uid);
+                } else {
+                    console.log("index user logged out", user);
+                }
+            }
+        );
+    }
+
   render() {
     return (
       <Router>
@@ -20,7 +38,7 @@ class App extends Component {
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/profile" component={Profile} />
           <Switch>
-            <ProtectedRoute exact path="/questions" component={QuestionPage} />
+            <Route exact path="/questions" component={QuestionPage} />
           </Switch>
         </div>
       </Router>
@@ -28,4 +46,9 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+    return {
+        getUserFromDB: bindActionCreators(getUserFromDb, dispatch)
+    }
+}
+export default connect(null, mapDispatchToProps)(App);

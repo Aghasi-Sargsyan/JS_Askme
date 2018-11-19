@@ -87,8 +87,7 @@ class SignUpForm extends Component {
     auth().createUserWithEmailAndPassword(email, password)
       .then(userCredential => userCredential.user)
       .then(user => {
-
-        history.push("/questions");
+        //adding user to DB
         FireManager.addUser({
             id: user.uid,
             userName: userName,
@@ -97,8 +96,9 @@ class SignUpForm extends Component {
             age:null,
             photoUrl: null,
             skills:[]
-        })
+        });
 
+        history.push("/questions");
       })
       .catch(error => {
         this.setState(prevState => ({

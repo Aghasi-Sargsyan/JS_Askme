@@ -1,20 +1,13 @@
 import React, {Component} from 'react';
-import {auth} from "firebase";
 import AfterRegPopup from "./AfterRegPopup/AfterRegPopup";
 
 class Profile extends Component {
     constructor(props) {
         super(props);
 
-        this.logout = this.logout.bind(this);
-
         this.state = {
             skillList: []
         }
-    }
-
-    logout() {
-        auth().signOut();
     }
 
     renderSkills = () => {
@@ -30,7 +23,6 @@ class Profile extends Component {
                 </ul>
                 <h1>Welcome to Profile Page</h1>
                 <AfterRegPopup/>
-                <button onClick={this.logout}>Logout</button>
             </div>
         );
 
