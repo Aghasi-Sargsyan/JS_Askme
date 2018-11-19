@@ -87,20 +87,20 @@ class SignUpForm extends Component {
   signUp = e => {
     e.preventDefault();
     const { history } = this.props;
-    const {email, password, userName} = this.state;
+    const { email, password, userName } = this.state;
     auth().createUserWithEmailAndPassword(email, password)
       .then(userCredential => userCredential.user)
       .then(user => {
 
         history.push("/questions");
         FireManager.addUser({
-            id: user.uid,
-            userName: userName,
-            email: user.email,
-            gender: null,
-            age:null,
-            photoUrl: null,
-            skills:[]
+          id: user.uid,
+          userName: userName,
+          email: user.email,
+          gender: null,
+          age: null,
+          photoUrl: null,
+          skills: []
         })
 
       })
