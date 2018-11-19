@@ -59,7 +59,7 @@ export default class FireManager {
                     console.log("skill successfully added"
                     ))
                 .catch(e =>
-                    console.log("Error writing document: ", e
+                    console.error("Error writing document: ", e
                     ));
         });
     }
@@ -76,13 +76,12 @@ export default class FireManager {
 
             return ref.get().then(doc => {
                 if (doc.exists) {
-                    console.log(doc.data());
                     return doc.data();
                 } else {
-                    console.log("No such user!");
+                    console.error("No such user!");
                 }
             }).catch(function (error) {
-                console.log("Error getting user:", error);
+                console.error("Error getting user:", error);
             });
         }
     }

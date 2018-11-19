@@ -3,7 +3,7 @@ import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { auth } from "firebase";
 import "./SignUp.scss";
 import { Link, withRouter } from "react-router-dom";
-import FireManager from "../../../config/fireManager"
+import FireManager from "../../../firebase/FireManager"
 
 let password, confPassword;
 
@@ -111,7 +111,7 @@ class SignUpForm extends Component {
             loginError: error.message
           }
         }));
-        console.log(this.state.formErrors.loginError);
+        console.error(this.state.formErrors.loginError);
       });
   };
 
