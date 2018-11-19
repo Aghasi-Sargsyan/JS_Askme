@@ -1,24 +1,20 @@
-import React, {Component} from "react";
+import React, {Component} from 'react';
 import {auth} from "firebase";
-import FireManager from "../../config/fireManager";
 import AfterRegPopup from "./AfterRegPopup/AfterRegPopup";
 
 class Profile extends Component {
-
     constructor(props) {
         super(props);
+
+        this.logout = this.logout.bind(this);
+
+        this.state = {
+            skillList: []
+        }
     }
 
-    componentDidMount() {
-        auth().onAuthStateChanged(user => {
-            if (user) {
-                FireManager.getUser(user.uid).then(user => {
-                    this.setState({
-                        skillList: user.skills
-                    });
-                })
-            }
-        })
+    logout() {
+        auth().signOut();
     }
 
     renderSkills = () => {
@@ -34,6 +30,7 @@ class Profile extends Component {
                 </ul>
                 <h1>Welcome to Profile Page</h1>
                 <AfterRegPopup/>
+                <button onClick={this.logout}>Logout</button>
             </div>
         );
 
