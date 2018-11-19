@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
+// import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { auth } from "firebase";
 import { Link, withRouter } from "react-router-dom";
 // import "./SignIn.scss";
+import isEmail from 'validator/lib/isEmail';
 
-const emailRegex = RegExp(
-  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-);
 
 const SignInPage = ({ history }) => (
   <div>
@@ -39,7 +37,7 @@ class SignInForm extends Component {
 
     switch (name) {
       case "email":
-        formErrors.email = emailRegex.test(value)
+        formErrors.email = isEmail(value)
           ? ""
           : "Invalid email address";
         break;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { auth } from "firebase";
 import { Route, Redirect } from "react-router-dom";
 
-export default class AuthorizedRoute extends Component {
+export default class ProtectedRoute extends Component {
   constructor(props) {
     super(props);
 

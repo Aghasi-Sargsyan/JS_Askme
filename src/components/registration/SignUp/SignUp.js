@@ -1,16 +1,13 @@
 import React, { Component } from "react";
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
+// import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { auth } from "firebase";
 import "./SignUp.scss";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import FireManager from "../../../firebase/FireManager"
-
-let password, confPassword;
+import isEmail from 'validator/lib/isEmail';
+let password;
 
 const usernameRegex = /^[a-zA-Z0-9]+$/;
-const emailRegex = RegExp(
-  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-);
 
 const SignUpPage = ({ history }) => (
   <div>
@@ -51,7 +48,7 @@ class SignUpForm extends Component {
             : "Minimum 3 characters required. Allowed only letters and numbers";
         break;
       case "email":
-        formErrors.email = emailRegex.test(value)
+        formErrors.email = isEmail(value)
           ? ""
           : "Invalid email address";
         break;
@@ -66,7 +63,6 @@ class SignUpForm extends Component {
           password !== value
             ? "Your password and confirmation password do not match"
             : "";
-        confPassword = value;
         break;
       default:
         break;

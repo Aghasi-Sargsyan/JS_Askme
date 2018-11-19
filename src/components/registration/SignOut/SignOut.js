@@ -3,9 +3,6 @@ import { auth } from "firebase";
 import { Link } from "react-router-dom";
 
 class SignOutButton extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   logout = () => {
     auth().signOut();
