@@ -20,6 +20,13 @@ body {
     display: flex;
 }
 
+.am--flex-column {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
 .am--flex-reverse {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;
