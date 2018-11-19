@@ -69,7 +69,7 @@ class SignInForm extends Component {
     auth()
       .signInWithEmailAndPassword(email, password)
       .then(user => {
-        console.log("uesr log");
+        console.log("user log");
         history.push("/questions");
       })
       .catch(error => {
@@ -79,7 +79,7 @@ class SignInForm extends Component {
             loginError: error.message
           }
         }));
-        console.log(this.state.formErrors.loginError);
+        console.error(this.state.formErrors.loginError);
       });
   };
 
