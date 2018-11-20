@@ -14,6 +14,8 @@ ul {
             width: 90px;
             height: 90px;
             vertical-align: middle;
+            cursor: pointer;
+
         }
     }
 
@@ -23,14 +25,17 @@ ul {
         font-family: sans-serif;
         display: flex;
         align-items: center;
+        position: relative;
+        transition: 0.5s;
 
         a {
             color: white;
             text-decoration: none;
-    
+
             &:hover {
-                    color: black;
+                color: black;
             }
+
             &:active {
                 color: black;
             }

@@ -1,35 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import Avatar from '../../universal/Avatar/Avatar';
 import SearchBox from "../../SearchBox/SearchBox";
 
 import "./NavBarItems.scss";
+import InfoDrop from '../../InfoDrop/InfoDrop';
 
 
-const NavBarItems = props => {
-  return (
-      <ul>
-          <li>
-            <NavLink to="/questionsForYou">
-                QuestionsForYou
-            </NavLink>
-          </li>
+class NavBarItems extends Component {
+    state = {
+        infoOpen: false
+    }
 
-          <li>
-              <SearchBox />
-          </li>
+    handleInfoDrop = () => {
+        this.setState(prevState => ({
+            infoOpen: !prevState.infoOpen
+        }))
+    }
 
-          <li className="img-li">
-              <Avatar />
-          </li>
+    render() {
+        return (
+            <ul>
+                <li>
+                    <NavLink to="/questionsForYou">
+                        QuestionsForYou
+                    </NavLink>
+                </li>
 
-          <li>
-              <NavLink to="/askQuestion">
-                Ask a Question
-              </NavLink>
-          </li>
-      </ul>
-  )
+                <li>
+                    <SearchBox />
+                </li>
+
+                <li className="img-li">
+                    <Avatar clicked={this.handleInfoDrop} />
+                    { this.state.infoOpen && <InfoDrop />  }                  
+                </li>
+
+                <li>
+                    <NavLink to="/askQuestion">
+                        Ask a Question
+                    </NavLink>
+                </li>
+            </ul>
+        )
+    }
 }
 
 export default NavBarItems;
