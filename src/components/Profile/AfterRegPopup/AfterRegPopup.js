@@ -40,7 +40,7 @@ class AfterRegPopup extends React.Component {
                     skills: skillList
                 }, user.uid);
             } else {
-                console.error("user not found")
+                console.error("dbUser not found")
             }
         });
 

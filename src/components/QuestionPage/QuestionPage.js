@@ -16,7 +16,7 @@ class QuestionPage extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.userReducer.user,
+        dbUser: state.userReducer.dbUser,
     };
 }
 

@@ -3,8 +3,8 @@ import { firestore } from "firebase";
 export default class FireManager {
 
     /**
-     * Adding user to database,
-     * user must be an object with valid id property
+     * Adding dbUser to database,
+     * dbUser must be an object with valid id property
      */
     static addUser(user) {
 
@@ -22,8 +22,8 @@ export default class FireManager {
     }
 
     /**
-     * Updating user database properties,
-     * pass a valid userId and an object that contains user fields
+     * Updating dbUser database properties,
+     * pass a valid userId and an object that contains dbUser fields
      * for example {userName: name
      *              age: 18
      *              skills: [{value: driver, rate: 0}]
@@ -37,10 +37,10 @@ export default class FireManager {
                     ? {...data, skills: firestore.FieldValue.arrayUnion(...data.skills)}
                     : {...data})
                 .then(() => {
-                    console.log("user successfully updated");
+                    console.log("dbUser successfully updated");
                 })
                 .catch(e => {
-                    console.error("Error updating user: ", e);
+                    console.error("Error updating dbUser: ", e);
                 });
         } else {
             console.error("need to pass an object with existing id property")
@@ -66,8 +66,8 @@ export default class FireManager {
 
 
     /**
-     * Returns a promise with resolved user object
-     * calling example... getUserSkills(userId).then(user => {do your staff with user object});
+     * Returns a promise with resolved dbUser object
+     * calling example... getUserSkills(userId).then(dbUser => {do your staff with dbUser object});
      * */
     static getUser(userId) {
 
@@ -78,10 +78,10 @@ export default class FireManager {
                 if (doc.exists) {
                     return doc.data();
                 } else {
-                    console.error("No such user!");
+                    console.error("No such dbUser!");
                 }
             }).catch(function (error) {
-                console.error("Error getting user:", error);
+                console.error("Error getting dbUser:", error);
             });
         }
     }

@@ -5,11 +5,22 @@ import actionTypes from "./actionTypes";
 function actionGetUser(userData) {
     return {
         type: actionTypes.GET_USER_FROM_DB,
-        userData: userData,
+        payload: userData,
     };
 }
 
-export function getUserFromDb(userId) {
+export function actionGetUserFromAuth(user) {
+    return {
+        type: actionTypes.GET_AUTH_USER,
+        user
+    };
+}
+
+export const actionRemoveUser = {
+    type: actionTypes.REMOVE_USER_FROM_STORE
+};
+
+export function dispatchUserFromDb(userId) {
     return function (dispatch) {
         FireManager.getUser(userId)
             .then(user => {
@@ -21,7 +32,6 @@ export function getUserFromDb(userId) {
     }
 }
 
-export const actionRemoveUser = {
-    type: actionTypes.REMOVE_USER_FROM_STORE
-};
+
+
 
