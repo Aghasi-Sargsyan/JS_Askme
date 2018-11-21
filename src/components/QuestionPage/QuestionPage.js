@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SignOutButton from "../registration/SignOut/SignOut";
+import SignOutButton from "../RegistrationPage/SignOut/SignOut";
 import {connect} from "react-redux";
 
 class QuestionPage extends Component {

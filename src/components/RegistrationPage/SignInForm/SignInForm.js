@@ -62,9 +62,10 @@ class SignInForm extends Component {
             .then(user => {
                 this.props.dispatchUserFromDB(user.uid);
                 this.props.dispatchUserFromAuth(user);
+                return user;
             })
-            .then(() => history.push("/questions"))
-            .catch(error => {
+            .then((user) => history.push(`/main/user/${user.uid}/questions`))
+            /*.catch(error => {
                 this.setState(prevState => ({
                     formErrors: {
                         ...prevState.formErrors,
@@ -72,7 +73,7 @@ class SignInForm extends Component {
                     }
                 }));
                 console.error(this.state.formErrors.loginError);
-            });
+            });*/
     };
 
     render() {
