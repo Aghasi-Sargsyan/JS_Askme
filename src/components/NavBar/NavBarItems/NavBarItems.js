@@ -4,6 +4,7 @@ import Avatar from '../../universal/Avatar/Avatar';
 import SearchBox from "../../SearchBox/SearchBox";
 
 import "./NavBarItems.scss";
+import SignOutButton from "../../RegistrationPage/SignOut/SignOut";
 
 
 const NavBarItems = props => {
@@ -28,8 +29,11 @@ const NavBarItems = props => {
                 Ask a Question
               </NavLink>
           </li>
+          <li>
+                  <SignOutButton/>
+          </li>
       </ul>
   )
-}
+};
 
 export default NavBarItems;

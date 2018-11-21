@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 // import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { auth } from "firebase";
-import "./SignUp.scss";
-import { withRouter } from "react-router-dom";
+import "./SignUpForm.scss";
 import FireManager from "../../../firebase/FireManager"
 import isEmail from 'validator/lib/isEmail';
 let password;
 
 const usernameRegex = /^[a-zA-Z0-9]+$/;
-
-const SignUpPage = ({ history }) => (
-  <div>
-    <SignUpForm history={history} />
-  </div>
-);
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -199,6 +192,5 @@ class SignUpForm extends Component {
     );
   }
 }
-export default withRouter(SignUpPage);
 
-export { SignUpForm };
+export default  SignUpForm ;

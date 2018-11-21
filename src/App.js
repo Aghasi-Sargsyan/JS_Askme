@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, withRouter} from "react-router-dom";
-import Main from "./components/Main/Main";
-import RegContainer from "./components/registration/RegContainer";
-import {actionGetUserFromAuth, dispatchUserFromDb} from "./redux/actions/userActions";
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import MainPage from "./components/MainPage/MainPage";
 import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
+import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
+import paths from "./roteConfig/paths";
 
 
 class App extends Component {
@@ -13,7 +12,10 @@ class App extends Component {
         return (
             <Router>
                 <div>
-                    {this.props.authUser ? <Main/> :  <RegContainer/>}
+                    <Route path="/" exact component={RegistrationPage}/>
+                    <Route path={paths.signIn} component={RegistrationPage}/>
+                    <Route path={paths.signUp} component={RegistrationPage}/>
+                    <Route path={paths.questionPage} component={MainPage}/>
                 </div>
             </Router>
         );
@@ -26,7 +28,5 @@ function mapStateToProps(state) {
         authUser: state.userReducer.authUser
     }
 }
-
-
 
 export default connect(mapStateToProps)(App);
