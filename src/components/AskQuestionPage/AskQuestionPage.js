@@ -14,6 +14,11 @@ class AskQuestionPage extends Component {
                 <div className='am--flex'>
                     <Wysiwyg />
                 </div>
+                <div>
+                    <p>Tags</p>
+                    <input type='text' />
+                </div>
+                <button>Post Your Question</button>
             </div>
         );
     }
