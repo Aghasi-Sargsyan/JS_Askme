@@ -2,31 +2,36 @@ import React, {Component} from 'react';
 import Header from "../Header/Header";
 import QuestionPage from "../QuestionPage/QuestionPage";
 import {auth} from "firebase";
-import paths from "../RegistrationPage/config/paths";
+import paths from "../../roteConfig/paths";
 import {bindActionCreators} from "redux";
 import {actionGetUserFromAuth, dispatchUserFromDb} from "../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
 
 class MainPage extends Component {
 
+    constructor(props) {
+        super(props);
+
+        if (localStorage.getItem("login") === "false") {
+            props.history.push(paths.signIn);
+        }
+    }
+
 
     componentDidMount() {
-        console.log("MainPage");
 
-        const {history} = this.props;
         auth().onAuthStateChanged(user => {
             if (user) {
                 this.props.dispatchUserFromDB(user.uid);
                 this.props.dispatchUserFromAuth(user);
             }
-           else {
-                history.push(`/`);
-            }
         });
     }
 
     rend(){
-        switch (this.props.match.path) {
+        const {match} = this.props;
+
+        switch (match.path) {
             case paths.questionPage:
                 return <QuestionPage/>;
             default:

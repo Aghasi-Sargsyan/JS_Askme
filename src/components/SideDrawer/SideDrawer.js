@@ -8,7 +8,7 @@ const SideDrawer = props => {
     let classes = "side-drawer";
     (props.show)
         ? classes = "side-drawer open"
-        : classes = "side-drawer"
+        : classes = "side-drawer";
 
     return (
         <nav className={classes}>
@@ -16,7 +16,7 @@ const SideDrawer = props => {
                 <div>
                     <li className="img-li">
                         <a href="/">
-                            <img src={profileImg} alt="Profile Image" />
+                            <img src={profileImg} alt="Profile" />
                         </a>
                     </li>
 

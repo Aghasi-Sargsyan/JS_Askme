@@ -2,7 +2,6 @@ import React, { Component } from "react";
 // import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { auth } from "firebase";
 import "./SignUpForm.scss";
-import { withRouter } from "react-router-dom";
 import FireManager from "../../../firebase/FireManager"
 import isEmail from 'validator/lib/isEmail';
 let password;
@@ -194,4 +193,4 @@ class SignUpForm extends Component {
   }
 }
 
-export { SignUpForm };
+export default  SignUpForm ;

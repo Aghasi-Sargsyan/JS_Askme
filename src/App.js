@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
 import {connect} from "react-redux";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
-import paths from "./components/RegistrationPage/config/paths";
+import paths from "./roteConfig/paths";
 
 
 class App extends Component {

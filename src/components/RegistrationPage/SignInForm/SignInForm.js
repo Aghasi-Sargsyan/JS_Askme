@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import isEmail from "validator/lib/isEmail";
 import {auth} from "firebase";
-import paths from "../config/paths";
-import {Link} from "react-router-dom";
+import paths from "../../../roteConfig/paths";
+import {Link, withRouter} from "react-router-dom";
 
 
 class SignInForm extends Component {
@@ -138,4 +138,4 @@ class SignInForm extends Component {
     }
 }
 
-export default SignInForm
+export default withRouter(SignInForm)

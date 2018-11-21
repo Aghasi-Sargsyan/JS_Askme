@@ -1,19 +1,19 @@
 import React from "react";
 import SignInForm from "../SignInForm/SignInForm";
-import {SignUpForm} from "../SignUpForm/SignUpForm";
-import SignUpLink from "./SignUpLink";
-import paths from "../config/paths";
+import SignUpForm from "../SignUpForm/SignUpForm";
+import {withRouter} from "react-router-dom";
+import paths from "../../../roteConfig/paths";
 
 function RegistrationContainer(props) {
 
     function rend() {
-        const {match, history} = props;
+        const {match} = props;
 
         switch (match.path) {
             case "/":
-                return <SignInForm history={history}/>;
+                return <SignInForm/>;
             case paths.signIn:
-                return <SignInForm history={history}/>;
+                return <SignInForm/>;
             case paths.signUp:
                 return <SignUpForm/>;
             default:
@@ -23,11 +23,9 @@ function RegistrationContainer(props) {
     return (
         <div>
             {rend()}
-            {(props.match.path === paths.signIn || props.match.path === "/")
-            && <SignUpLink/>}
         </div>
     );
 
 }
 
-export default RegistrationContainer;
+export default withRouter(RegistrationContainer);
