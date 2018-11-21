@@ -1,8 +1,8 @@
-import React, {Component} from "react";
-import {auth} from "firebase";
-import {Link} from "react-router-dom";
-import {connect} from "react-redux";
-import {actionRemoveUser} from "../../../redux/actions/userActions";
+import React, { Component } from "react";
+import { auth } from "firebase";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { actionRemoveUser } from "../../../../redux/actions/userActions";
 
 class SignOutButton extends Component {
 

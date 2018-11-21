@@ -2,34 +2,39 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import Avatar from '../../universal/Avatar/Avatar';
 import SearchBox from "../../SearchBox/SearchBox";
+import SignOutButton from '../../RegistrationPage/RegistrationContainer/SignOut/SignOut';
 
 import "./NavBarItems.scss";
 
+const NavBarItems = () => {
+    return (
+        <ul>
+            <li>
+                <NavLink to="/questions">
+                    QuestionsForYou
+                </NavLink>
+            </li>
 
-const NavBarItems = props => {
-  return (
-      <ul>
-          <li>
-            <NavLink to="/questionsForYou">
-                QuestionsForYou
-            </NavLink>
-          </li>
+            <li>
+                <SearchBox />
+            </li>
 
-          <li>
-              <SearchBox />
-          </li>
+            <li className="img-li">
+                <NavLink to="/profile">
+                    <Avatar />
+                </NavLink>
+            </li>
 
-          <li className="img-li">
-              <Avatar />
-          </li>
-
-          <li>
-              <NavLink to="/askQuestion">
-                Ask a Question
+            <li>
+                <NavLink to="/ask-question">
+                    Ask a Question
               </NavLink>
-          </li>
-      </ul>
-  )
+            </li>
+            <li>
+                <SignOutButton />
+            </li>
+        </ul>
+    )
 }
 
 export default NavBarItems;

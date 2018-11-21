@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import AfterRegPopup from "./AfterRegPopup/AfterRegPopup";
+import React, { Component } from 'react';
+// import AfterRegPopup from "./AfterRegPopup/AfterRegPopup";
 
 class Profile extends Component {
     constructor(props) {
@@ -10,19 +10,19 @@ class Profile extends Component {
         }
     }
 
-    renderSkills = () => {
-        return this.state.skillList.map((skill, index) =>
-            <li key={index}>skill: {skill.value} rate: {skill.rate}</li>)
-    };
+    // renderSkills = () => {
+    //     return this.state.skillList.map((skill, index) =>
+    //         <li key={index}>skill: {skill.value} rate: {skill.rate}</li>)
+    // };
 
     render() {
         return (
             <div>
-                <ul>
+                {/* <ul>
                     {this.renderSkills()}
-                </ul>
+                </ul> */}
                 <h1>Welcome to Profile Page</h1>
-                <AfterRegPopup/>
+                {/* <AfterRegPopup/> */}
             </div>
         );
 

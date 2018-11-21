@@ -1,21 +1,26 @@
-import React, {Component} from "react";
+import { Component } from "react";
 import isEmail from "validator/lib/isEmail";
-import {auth} from "firebase";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import {actionGetUserFromAuth, dispatchUserFromDb} from "../../../redux/actions/userActions";
+import { auth } from "firebase";
+import FireManager from "../../../../firebase/FireManager";
+import React from "react";
 
-class SignInForm extends Component {
+let password;
+const usernameRegex = /^[a-zA-Z0-9]+$/;
+
+class SignUpForm extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
+            userName: "",
             email: "",
             password: "",
+            confPassword: "",
             disabled: true,
             formErrors: {
+                userName: "",
                 email: "",
                 password: "",
+                confPassword: "",
                 loginError: ""
             }
         };
@@ -24,10 +29,16 @@ class SignInForm extends Component {
     handleChange = e => {
         e.preventDefault();
 
+        let formErrors = this.state.formErrors;
         const { name, value } = e.target;
-        let { formErrors } = this.state;
 
         switch (name) {
+            case "userName":
+                formErrors.userName =
+                    usernameRegex.test(value) && value.length >= 3
+                        ? ""
+                        : "Minimum 3 characters required. Allowed only letters and numbers";
+                break;
             case "email":
                 formErrors.email = isEmail(value)
                     ? ""
@@ -36,6 +47,14 @@ class SignInForm extends Component {
             case "password":
                 formErrors.password =
                     value.length < 6 ? "Minimum 6 characters required" : "";
+                password = value;
+
+                break;
+            case "confPassword":
+                formErrors.confPassword =
+                    password !== value
+                        ? "Your password and confirmation password do not match"
+                        : "";
                 break;
             default:
                 break;
@@ -47,23 +66,32 @@ class SignInForm extends Component {
             disabled:
                 formErrors.email ||
                 !this.state.email ||
-                (formErrors.password || !this.state.password)
+                (formErrors.password || !this.state.password) ||
+                (formErrors.userName || !this.state.userName) ||
+                (formErrors.confPassword || !this.state.confPassword)
         });
     };
 
-    login = e => {
+    signUp = e => {
         e.preventDefault();
-
         const { history } = this.props;
-        const { email, password } = this.state;
-        auth()
-            .signInWithEmailAndPassword(email, password)
+        const { email, password, userName } = this.state;
+        auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => userCredential.user)
             .then(user => {
-                this.props.dispatchUserFromDB(user.uid);
-                this.props.dispatchUserFromAuth(user);
+                //adding dbUser to DB
+                FireManager.addUser({
+                    id: user.uid,
+                    userName: userName,
+                    email: user.email,
+                    gender: null,
+                    age: null,
+                    photoUrl: null,
+                    skills: []
+                });
+
+                history.push("/signin");
             })
-            .then(() => history.push("/questions"))
             .catch(error => {
                 this.setState(prevState => ({
                     formErrors: {
@@ -81,6 +109,19 @@ class SignInForm extends Component {
         return (
             <div className="singIn">
                 <form onSubmit={this.handleSubmit} className="singIn__form" noValidate>
+                    <div className="singIn__input__wrapper">
+                        <label htmlFor="userName">User Name</label>
+                        <input
+                            type="text"
+                            name="userName"
+                            placeholder="First Name"
+                            onChange={this.handleChange}
+                            className={formErrors.userName.length > 0 ? "error__input" : null}
+                        />
+                        {formErrors.userName.length > 0 && (
+                            <span className="error__message">{formErrors.userName}</span>
+                        )}
+                    </div>
                     <div className="singIn__input__wrapper">
                         <label htmlFor="email">Email</label>
                         <input
@@ -107,25 +148,40 @@ class SignInForm extends Component {
                             <span className="error__message">{formErrors.password}</span>
                         )}
                     </div>
+                    <div className="singIn__input__wrapper">
+                        <label htmlFor="confPassword">Confirm Password</label>
+                        <input
+                            type="password"
+                            name="confPassword"
+                            placeholder="Confirm Password"
+                            onChange={this.handleChange}
+                            className={
+                                formErrors.confPassword.length > 0 ? "error__input" : null
+                            }
+                        />
+                        {formErrors.confPassword.length > 0 && (
+                            <span className="error__message">{formErrors.confPassword}</span>
+                        )}
+                    </div>
                     {formErrors.loginError.length > 0 && (
                         <span className="error__message">{formErrors.loginError}</span>
                     )}
                     <button
                         type="submit"
-                        onClick={this.login}
                         className="singIn__submit"
+                        onClick={this.signUp}
                         disabled={disabled}
                     >
-                        Sign In
+                        Sign Up
                     </button>
                     {/* <div className='social-btn-cont'>
             <a href=''>
-              <button onClick={this.loginWithGoogle} className='social-btn social-google-btn'>
+              <button className='social-btn social-google-btn'>
                 <FaGoogle />
               </button>
             </a>
             <a href=''>
-              <button onClick={this.loginWithFb} className='social-btn social-fb-btn'>
+              <button className='social-btn social-fb-btn'>
                 <FaFacebookF />
               </button>
             </a>
@@ -136,10 +192,4 @@ class SignInForm extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        dispatchUserFromDB: bindActionCreators(dispatchUserFromDb, dispatch),
-        dispatchUserFromAuth: bindActionCreators(actionGetUserFromAuth, dispatch)
-    }
-}
-export default connect(null, mapDispatchToProps)(SignInForm);
+export default SignUpForm;
