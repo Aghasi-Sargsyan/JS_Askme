@@ -1,16 +1,8 @@
 import React, { Component } from "react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import renderHTML from 'react-render-html';
-import App from "../../../App";
 import PropTypes from 'prop-types';
-// Mixin : Provides the bridge between React and Quill. 
-// Toolbar : The component that renders the custom ReactQuill toolbar. 
-// Quill : The Quill namespace on which you can call registerModule and such.
-// import ReactQuill, { Quill, Mixin, Toolbar } from 'react-quill';
-
-// const { Quill, Mixin, Toolbar } = ReactQuill;
-
+import './Wysiwyg.scss';
 
 class Wysiwyg extends React.Component {
     constructor(props) {
@@ -27,13 +19,16 @@ class Wysiwyg extends React.Component {
     }
 
     handleThemeChange = (newTheme) => {
-        if (newTheme === "core") newTheme = null;
+        if (newTheme === "core") {
+            newTheme = null;
+        }
         this.setState({ theme: newTheme })
     }
 
     render() {
+        console.log(this.state.editorHtml)
         return (
-            <div>
+            <div className='app'>
                 <ReactQuill
                     theme={this.state.theme}
                     onChange={this.handleChange}
@@ -59,6 +54,7 @@ class Wysiwyg extends React.Component {
 
 
 // Quill modules to attach to editor
+
 Wysiwyg.modules = {
     toolbar: [
         [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
