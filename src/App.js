@@ -11,6 +11,7 @@ import { Switch } from "react-router-dom";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
 import Profile from './components/Profile/Profile';
 import RegistrationPage from './components/RegistrationPage/RegistrationPage';
+import AskQuestionPage from './components/AskQuestionPage/AskQuestionPage';
 
 class App extends Component {
     render() {
@@ -18,7 +19,7 @@ class App extends Component {
             <Router>
                 <div>
                     {this.props.authUser ? <Main /> : <RegistrationPage />}
-                    <QuestionPage />
+                    <AskQuestionPage />
 
                     {/* <Switch>
                         <ProtectedRoute exact path="/questions" component={QuestionPage} />
