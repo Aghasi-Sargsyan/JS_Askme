@@ -9,12 +9,6 @@ let password;
 
 const usernameRegex = /^[a-zA-Z0-9]+$/;
 
-const SignUpPage = ({ history }) => (
-  <div>
-    <SignUpForm history={history} />
-  </div>
-);
-
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
@@ -199,6 +193,5 @@ class SignUpForm extends Component {
     );
   }
 }
-export default withRouter(SignUpPage);
 
 export { SignUpForm };

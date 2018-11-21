@@ -3,15 +3,24 @@ import Header from "../Header/Header";
 import QuestionPage from "../QuestionPage/QuestionPage";
 import {auth} from "firebase";
 import paths from "../RegistrationPage/config/paths";
+import {bindActionCreators} from "redux";
+import {actionGetUserFromAuth, dispatchUserFromDb} from "../../redux/actions/userActions";
+import connect from "react-redux/es/connect/connect";
 
-export default class MainPage extends Component {
+class MainPage extends Component {
 
 
     componentDidMount() {
+        console.log("MainPage");
+
         const {history} = this.props;
-        auth().onAuthStateChanged(function (user) {
-            if (!user) {
-                history.push(`/`)
+        auth().onAuthStateChanged(user => {
+            if (user) {
+                this.props.dispatchUserFromDB(user.uid);
+                this.props.dispatchUserFromAuth(user);
+            }
+           else {
+                history.push(`/`);
             }
         });
     }
@@ -37,3 +46,11 @@ export default class MainPage extends Component {
         )
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        dispatchUserFromDB: bindActionCreators(dispatchUserFromDb, dispatch),
+        dispatchUserFromAuth: bindActionCreators(actionGetUserFromAuth, dispatch)
+    }
+}
+export default connect(null, mapDispatchToProps)(MainPage);

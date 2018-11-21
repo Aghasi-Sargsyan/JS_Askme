@@ -1,7 +1,7 @@
 const paths = {
     signIn: "/signIn",
     signUp: "/signUp",
-    questionPage: "/main/user/:id/questions"
+    questionPage: "/main/questions"
 };
 
 export default paths;

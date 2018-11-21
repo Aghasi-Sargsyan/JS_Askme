@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import isEmail from "validator/lib/isEmail";
 import {auth} from "firebase";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import {actionGetUserFromAuth, dispatchUserFromDb} from "../../../redux/actions/userActions";
+import paths from "../config/paths";
+import {Link} from "react-router-dom";
+
 
 class SignInForm extends Component {
     constructor(props) {
@@ -24,8 +24,8 @@ class SignInForm extends Component {
     handleChange = e => {
         e.preventDefault();
 
-        const { name, value } = e.target;
-        let { formErrors } = this.state;
+        const {name, value} = e.target;
+        let {formErrors} = this.state;
 
         switch (name) {
             case "email":
@@ -54,18 +54,16 @@ class SignInForm extends Component {
     login = e => {
         e.preventDefault();
 
-        const { history } = this.props;
-        const { email, password } = this.state;
+        const {history} = this.props;
+        const {email, password} = this.state;
         auth()
             .signInWithEmailAndPassword(email, password)
             .then(userCredential => userCredential.user)
             .then(user => {
-                this.props.dispatchUserFromDB(user.uid);
-                this.props.dispatchUserFromAuth(user);
-                return user;
+                localStorage.setItem("login", "true");
+                history.push(paths.questionPage)
             })
-            .then((user) => history.push(`/main/user/${user.uid}/questions`))
-            /*.catch(error => {
+            .catch(error => {
                 this.setState(prevState => ({
                     formErrors: {
                         ...prevState.formErrors,
@@ -73,11 +71,11 @@ class SignInForm extends Component {
                     }
                 }));
                 console.error(this.state.formErrors.loginError);
-            });*/
+            });
     };
 
     render() {
-        const { formErrors, disabled } = this.state;
+        const {formErrors, disabled} = this.state;
 
         return (
             <div className="singIn">
@@ -132,15 +130,12 @@ class SignInForm extends Component {
             </a>
           </div> */}
                 </form>
+                <p className="singIn__message">
+                    Don't have an account? <Link to={paths.signUp}>Sign Up</Link>
+                </p>
             </div>
         );
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        dispatchUserFromDB: bindActionCreators(dispatchUserFromDb, dispatch),
-        dispatchUserFromAuth: bindActionCreators(actionGetUserFromAuth, dispatch)
-    }
-}
-export default connect(null, mapDispatchToProps)(SignInForm);
+export default SignInForm
