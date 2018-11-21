@@ -1,17 +1,45 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import './QuestionsFilter.scss';
 
-export default class QuestionsFilter extends Component {
+class QuestionsFilter extends Component {
+    constructor() {
+        super();
+
+        // this.state = {
+        //     showMenu: false,
+        // }
+    }
+
+    // showMenu = () => {
+    //     this.setState({
+    //         showMenu: !this.state.showMenu,
+    //     });
+    // }
+
     render() {
+        const skills = this.props.dbUser && this.props.dbUser.skills.map((skill, index) => {
+            return <li key={index}>{skill.value}</li>
+        });
+        console.log('dbuser', this.props.dbUser)
+
         return (
             <div className='am--questions-filter-container '>
                 <ul className='am--flex am--flex-column am--align-start'>
                     <li>All</li>
-                    <li className='am-flex am--flex-column am--align-start'>
+                    <li className='am-flex am--flex-column am--align-start' onClick={this.showMenu}>
                         Skill
-                        <ul className='am-flex am--flex-column am--align-start'>
-                            <li>Doctor</li>
-                            <li>Programmer</li>
+                        {/* {
+                            this.state.showMenu ? (
+                                <ul className='am-flex am--flex-column am--align-start am--questions-skills-menu'>
+                                    {skills}
+                                </ul>
+                            ) : (null)
+                        } */}
+
+                        <ul className='am-flex am--flex-column am--align-start am--questions-skills-menu'>
+                            {skills}
                         </ul>
                     </li>
                     <li>Age</li>
@@ -22,3 +50,11 @@ export default class QuestionsFilter extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        dbUser: state.userReducer.dbUser,
+    };
+}
+
+export default connect(mapStateToProps)(QuestionsFilter);
