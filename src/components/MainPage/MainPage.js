@@ -2,18 +2,20 @@ import React, {Component} from 'react';
 import Header from "../Header/Header";
 import QuestionPage from "../QuestionPage/QuestionPage";
 import {auth} from "firebase";
-import paths from "../../roteConfig/paths";
+import rotePaths from "../../constKeys/rotePaths";
 import {bindActionCreators} from "redux";
 import {actionGetUserFromAuth, dispatchUserFromDb} from "../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
+import localKeys from "../../constKeys/localKeys";
+import AfterRegPopup from "../Profile/AfterRegPopup/AfterRegPopup";
 
 class MainPage extends Component {
 
     constructor(props) {
         super(props);
 
-        if (localStorage.getItem("login") === "false") {
-            props.history.push(paths.signIn);
+        if (localStorage.getItem(localKeys.isUserLoggedIn) === "false") {
+            props.history.push(rotePaths.signIn);
         }
     }
 
@@ -24,6 +26,7 @@ class MainPage extends Component {
             if (user) {
                 this.props.dispatchUserFromDB(user.uid);
                 this.props.dispatchUserFromAuth(user);
+                localStorage.setItem(localKeys.isUserLoggedIn, "true")
             }
         });
     }
@@ -32,7 +35,7 @@ class MainPage extends Component {
         const {match} = this.props;
 
         switch (match.path) {
-            case paths.questionPage:
+            case rotePaths.questionPage:
                 return <QuestionPage/>;
             default:
 
@@ -40,15 +43,16 @@ class MainPage extends Component {
     }
 
     render() {
+
            return (
             <div className="Main">
                 <Header/>
                 <div>
                     {this.rend()}
+                    {(localStorage.getItem(localKeys.isNewUser) === "true") && <AfterRegPopup/>}
                 </div>
             </div>
-
-        )
+        );
     }
 }
 

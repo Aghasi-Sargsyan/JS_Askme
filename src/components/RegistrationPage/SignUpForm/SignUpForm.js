@@ -5,7 +5,8 @@ import "./SignUpForm.scss";
 import FireManager from "../../../firebase/FireManager"
 import isEmail from 'validator/lib/isEmail';
 import {withRouter} from "react-router-dom";
-import path from "../../../roteConfig/paths";
+import path from "../../../constKeys/rotePaths";
+import localKeys from "../../../constKeys/localKeys";
 let password;
 
 const usernameRegex = /^[a-zA-Z0-9]+$/;
@@ -80,9 +81,11 @@ class SignUpForm extends Component {
     const { history } = this.props;
     const {email, password, userName} = this.state;
     auth().createUserWithEmailAndPassword(email, password)
-      .then(userCredential => userCredential.user)
+      .then(userCredential => {
+          localStorage.setItem(localKeys.isNewUser, "true");
+          return userCredential.user})
       .then(user => {
-        //adding dbUser to DB
+        //adding user to DB
         FireManager.addUser({
           id: user.uid,
           userName: userName,
@@ -92,7 +95,7 @@ class SignUpForm extends Component {
           photoUrl: null,
           skills:[]
         });
-          localStorage.setItem("login", "true");
+          localStorage.setItem(localKeys.isUserLoggedIn, "true");
           history.push(path.questionPage);
       })
       .catch(error => {

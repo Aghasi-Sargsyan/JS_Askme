@@ -2,7 +2,10 @@ import React from "react";
 import "./AfterRegPopup.css";
 import Input from "../../universal/Input/Input";
 import FireManager from "../../../firebase/FireManager";
-import {auth} from "firebase";
+import localKeys from "../../../constKeys/localKeys";
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import rotePaths from "../../../constKeys/rotePaths";
 
 class AfterRegPopup extends React.Component {
     constructor(props) {
@@ -31,21 +34,18 @@ class AfterRegPopup extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {birthYear, skillList, gender} = this.state;
+        const {authUser, history} = this.props;
 
-        auth().onAuthStateChanged(user => {
-            if (user) {
-                FireManager.updateUser({
-                    age: birthYear.value,
-                    gender: gender,
-                    skills: skillList
-                }, user.uid);
-            } else {
-                console.error("dbUser not found")
-            }
-        });
+        FireManager.updateUser({
+            age: birthYear.value,
+            gender: gender,
+            skills: skillList
+        }, authUser.uid);
+        localStorage.setItem(localKeys.isNewUser, "false");
+        history.push(rotePaths.questionPage);
 
         const skills = skillList.map(skill => skill.value);
-        FireManager.addSkill(...skills);
+        FireManager.addGlobalSkill(...skills);
     };
 
     changeHandler = e => {
@@ -167,4 +167,8 @@ class AfterRegPopup extends React.Component {
     }
 }
 
-export default AfterRegPopup;
+function mapStateToProps(state) {
+    return {authUser: state.userReducer.authUser}
+}
+
+export default withRouter(connect(mapStateToProps)(AfterRegPopup));

@@ -3,7 +3,8 @@ import {auth} from "firebase";
 import {connect} from "react-redux";
 import {actionRemoveUser} from "../../../redux/actions/userActions";
 import {withRouter} from "react-router-dom";
-import paths from "../../../roteConfig/paths";
+import rotePaths from "../../../constKeys/rotePaths";
+import localKeys from "../../../constKeys/localKeys";
 
 
 function SignOutButton(props) {
@@ -11,9 +12,9 @@ function SignOutButton(props) {
     function logout() {
         auth().signOut()
             .then(() => {
-                    localStorage.setItem("login", "false");
+                    localStorage.setItem(localKeys.isUserLoggedIn, "false");
                     props.dispatch(actionRemoveUser);
-                    props.history.push(paths.signIn)
+                    props.history.push(rotePaths.signIn)
                 }
             );
     }

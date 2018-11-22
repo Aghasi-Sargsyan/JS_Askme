@@ -2,7 +2,7 @@ import React from "react";
 import SignInForm from "../SignInForm/SignInForm";
 import SignUpForm from "../SignUpForm/SignUpForm";
 import {withRouter} from "react-router-dom";
-import paths from "../../../roteConfig/paths";
+import rotePaths from "../../../constKeys/rotePaths";
 
 function RegistrationContainer(props) {
 
@@ -12,9 +12,9 @@ function RegistrationContainer(props) {
         switch (match.path) {
             case "/":
                 return <SignInForm/>;
-            case paths.signIn:
+            case rotePaths.signIn:
                 return <SignInForm/>;
-            case paths.signUp:
+            case rotePaths.signUp:
                 return <SignUpForm/>;
             default:
         }
