@@ -17,8 +17,8 @@ class App extends Component {
         return (
             <Router>
                 <div>
-                    {this.props.authUser ? <Main /> : <RegistrationPage />}
-                    <QuestionPage />
+                    <RegistrationPage />
+                    <Profile />
 
                     {/* <Switch>
                         <ProtectedRoute exact path="/questions" component={QuestionPage} />
