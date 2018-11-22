@@ -4,6 +4,8 @@ import { auth } from "firebase";
 import "./SignUpForm.scss";
 import FireManager from "../../../firebase/FireManager"
 import isEmail from 'validator/lib/isEmail';
+import {withRouter} from "react-router-dom";
+import path from "../../../roteConfig/paths";
 let password;
 
 const usernameRegex = /^[a-zA-Z0-9]+$/;
@@ -82,16 +84,16 @@ class SignUpForm extends Component {
       .then(user => {
         //adding dbUser to DB
         FireManager.addUser({
-            id: user.uid,
-            userName: userName,
-            email: user.email,
-            gender: null,
-            age:null,
-            photoUrl: null,
-            skills:[]
+          id: user.uid,
+          userName: userName,
+          email: user.email,
+          gender: null,
+          age:null,
+          photoUrl: null,
+          skills:[]
         });
-
-        history.push("/signin");
+          localStorage.setItem("login", "true");
+          history.push(path.questionPage);
       })
       .catch(error => {
         this.setState(prevState => ({
@@ -193,4 +195,4 @@ class SignUpForm extends Component {
   }
 }
 
-export default  SignUpForm ;
+export default  withRouter(SignUpForm );
