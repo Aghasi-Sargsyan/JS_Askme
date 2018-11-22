@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import isEmail from "validator/lib/isEmail";
 import {auth} from "firebase";
-import paths from "../../../roteConfig/paths";
+import rotePaths from "../../../constKeys/rotePaths";
 import {Link, withRouter} from "react-router-dom";
+import localKeys from "../../../constKeys/localKeys";
 
 
 class SignInForm extends Component {
@@ -60,8 +61,8 @@ class SignInForm extends Component {
             .signInWithEmailAndPassword(email, password)
             .then(userCredential => userCredential.user)
             .then(user => {
-                localStorage.setItem("login", "true");
-                history.push(paths.questionPage)
+                localStorage.setItem(localKeys.isUserLoggedIn, "true");
+                history.push(rotePaths.questionPage)
             })
             .catch(error => {
                 this.setState(prevState => ({
@@ -131,7 +132,7 @@ class SignInForm extends Component {
           </div> */}
                 </form>
                 <p className="singIn__message">
-                    Don't have an account? <Link to={paths.signUp}>Sign Up</Link>
+                    Don't have an account? <Link to={rotePaths.signUp}>Sign Up</Link>
                 </p>
             </div>
         );

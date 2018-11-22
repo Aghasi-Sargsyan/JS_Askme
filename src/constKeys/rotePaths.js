@@ -1,7 +1,7 @@
-const paths = {
+const rotePaths = {
     signIn: "/signIn",
     signUp: "/signUp",
     questionPage: "/main/questions"
 };
 
-export default paths;
+export default rotePaths;

@@ -51,7 +51,7 @@ export default class FireManager {
      * Adding global skill to database
      * Pass a string or strings, or ...array
      */
-    static addSkill(...skills) {
+    static addGlobalSkill(...skills) {
 
         skills.forEach(skill => {
             firestore().collection("skills").doc(skill).set({value: skill})

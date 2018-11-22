@@ -1,15 +1,16 @@
 import React, {Component} from "react";
 import RegistrationContainer from "./RegistrationContainer/RegistrationContainer";
 import connect from "react-redux/es/connect/connect";
-import paths from "../../roteConfig/paths";
+import rotePaths from "../../constKeys/rotePaths";
+import localKeys from "../../constKeys/localKeys";
 
 
 class RegistrationPage extends Component {
     constructor(props) {
         super(props);
 
-        if (localStorage.getItem("login") === "true") {
-            props.history.push(paths.questionPage);
+        if (localStorage.getItem(localKeys.isUserLoggedIn) === "true") {
+            props.history.push(rotePaths.questionPage);
         }
     }
 
