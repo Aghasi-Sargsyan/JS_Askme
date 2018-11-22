@@ -10,19 +10,11 @@ class Wysiwyg extends React.Component {
 
         this.state = {
             editorHtml: '',
-            theme: 'snow'
         }
     }
 
     handleChange = (html) => {
         this.setState({ editorHtml: html });
-    }
-
-    handleThemeChange = (newTheme) => {
-        if (newTheme === "core") {
-            newTheme = null;
-        }
-        this.setState({ theme: newTheme })
     }
 
     render() {
@@ -35,26 +27,13 @@ class Wysiwyg extends React.Component {
                     value={this.state.editorHtml}
                     modules={Wysiwyg.modules}
                     formats={Wysiwyg.formats}
-                    bounds={'.app'}
-                    placeholder={this.props.placeholder}
                 />
-                <div className="themeSwitcher">
-                    <label>Theme </label>
-                    <select onChange={(e) =>
-                        this.handleThemeChange(e.target.value)}>
-                        <option value="snow">Snow</option>
-                        <option value="bubble">Bubble</option>
-                        <option value="core">Core</option>
-                    </select>
-                </div>
             </div>
         )
     }
 }
 
-
 // Quill modules to attach to editor
-
 Wysiwyg.modules = {
     toolbar: [
         [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
@@ -82,7 +61,6 @@ Wysiwyg.formats = [
 
 
 // PropType validation
-
 Wysiwyg.propTypes = {
     placeholder: PropTypes.string,
 }
