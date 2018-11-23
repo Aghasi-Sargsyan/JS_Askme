@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import {connect} from "react-redux";
+import QuestionsFilter from './QuestionsFilter/QuestionsFilter';
+import QuestionsCont from './QuestionsCont/QuestionsCont';
 
 class QuestionPage extends Component {
 
@@ -7,15 +8,14 @@ class QuestionPage extends Component {
         return (
             <div>
                 <h1>Welcome to Questions Page</h1>
+                <div className='am--flex'>
+                    <QuestionsFilter />
+                    <QuestionsCont />
+                </div>
+
             </div>
         );
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        dbUser: state.userReducer.dbUser,
-    };
-}
-
-export default connect(mapStateToProps)(QuestionPage);
+export default QuestionPage;
