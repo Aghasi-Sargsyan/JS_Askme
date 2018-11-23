@@ -12,9 +12,9 @@ const NavBarItems = props => {
     return (
         <ul>
             <li>
-                <NavLink to="/questionsForYou">
-                    QuestionsForYou
-              </NavLink>
+                <NavLink to={rotePaths.questionPage}>
+                    Questions For You
+                </NavLink>
             </li>
 
             <li>
@@ -26,12 +26,6 @@ const NavBarItems = props => {
                     <Avatar />
                 </NavLink>
             </li>
-
-            <li>
-                <NavLink to="/askQuestion">
-                <Avatar />
-            </li>
-
             <li>
                 <NavLink to={rotePaths.askQuestionPage}>
                     Ask a Question
