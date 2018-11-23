@@ -4,7 +4,7 @@ import avatar from "../../../assets/profileImg.png";
 
 import "./Avatar.scss";
 
-const Avatar = () => <img src={avatar} alt="avatar" />;
+const Avatar = (props) => <img src={avatar} onClick={props.clicked} alt="avatar" />;
 
 // class ProfilePic extends React.Component {
 

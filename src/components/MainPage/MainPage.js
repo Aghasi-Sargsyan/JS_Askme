@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Header from "../Header/Header";
-import QuestionPage from "../QuestionPage/QuestionPage";
 import { auth } from "firebase";
-import rotePaths from "../../constKeys/rotePaths";
+import routePaths from "../../constKeys/routePaths";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators } from "redux";
 import { actionGetUserFromAuth, dispatchUserFromDb } from "../../redux/actions/userActions";
@@ -19,7 +17,7 @@ class MainPage extends Component {
         super(props);
 
         if (localStorage.getItem(localKeys.isUserLoggedIn) === "false") {
-            props.history.push(rotePaths.signIn);
+            props.history.push(routePaths.signIn);
         }
     }
 
@@ -39,11 +37,11 @@ class MainPage extends Component {
         const { match } = this.props;
 
         switch (match.path) {
-            case rotePaths.questionPage:
+            case routePaths.questionPage:
                 return <QuestionPage />;
-            case rotePaths.profilePage:
+            case routePaths.profilePage:
                 return <Profile />;
-            case rotePaths.askQuestionPage:
+            case routePaths.askQuestionPage:
                 return <AskQuestionPage />;
             default:
         }

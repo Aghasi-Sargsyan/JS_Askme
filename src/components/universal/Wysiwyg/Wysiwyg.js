@@ -4,9 +4,9 @@ import 'react-quill/dist/quill.snow.css';
 import PropTypes from 'prop-types';
 import './Wysiwyg.scss';
 
-class Wysiwyg extends React.Component {
+class Wysiwyg extends Component{
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             editorHtml: '',
@@ -14,11 +14,11 @@ class Wysiwyg extends React.Component {
     }
 
     handleChange = (html) => {
-        this.setState({ editorHtml: html });
-    }
+        this.setState({editorHtml: html});
+    };
 
     render() {
-        console.log(this.state.editorHtml)
+        // console.log(this.state.editorHtml);
         return (
             <div className='app'>
                 <ReactQuill

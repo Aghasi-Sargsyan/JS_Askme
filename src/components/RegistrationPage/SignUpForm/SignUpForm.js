@@ -5,7 +5,7 @@ import "./SignUpForm.scss";
 import FireManager from "../../../firebase/FireManager"
 import isEmail from 'validator/lib/isEmail';
 import {withRouter} from "react-router-dom";
-import path from "../../../constKeys/rotePaths";
+import path from "../../../constKeys/routePaths";
 import localKeys from "../../../constKeys/localKeys";
 let password;
 

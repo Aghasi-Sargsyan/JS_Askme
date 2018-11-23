@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
 import { connect } from "react-redux";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
-import rotePaths from "./constKeys/rotePaths";
+import routePaths from "./constKeys/routePaths";
 
 
 class App extends Component {
@@ -13,11 +13,11 @@ class App extends Component {
             <Router>
                 <div>
                     <Route path="/" exact component={RegistrationPage} />
-                    <Route path={rotePaths.signIn} component={RegistrationPage} />
-                    <Route path={rotePaths.signUp} component={RegistrationPage} />
-                    <Route path={rotePaths.questionPage} component={MainPage} />
-                    <Route path={rotePaths.profilePage} component={MainPage} />
-                    <Route path={rotePaths.askQuestionPage} component={MainPage} />
+                    <Route path={routePaths.signIn} component={RegistrationPage} />
+                    <Route path={routePaths.signUp} component={RegistrationPage} />
+                    <Route path={routePaths.questionPage} component={MainPage} />
+                    <Route path={routePaths.profilePage} component={MainPage} />
+                    <Route path={routePaths.askQuestionPage} component={MainPage} />
                 </div>
             </Router>
         );

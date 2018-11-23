@@ -5,7 +5,7 @@ import FireManager from "../../../firebase/FireManager";
 import localKeys from "../../../constKeys/localKeys";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import rotePaths from "../../../constKeys/rotePaths";
+import routePaths from "../../../constKeys/routePaths";
 
 class AfterRegPopup extends React.Component {
     constructor(props) {
@@ -42,7 +42,7 @@ class AfterRegPopup extends React.Component {
             skills: skillList
         }, authUser.uid);
         localStorage.setItem(localKeys.isNewUser, "false");
-        history.push(rotePaths.questionPage);
+        history.push(routePaths.questionPage);
 
         const skills = skillList.map(skill => skill.value);
         FireManager.addGlobalSkill(...skills);
