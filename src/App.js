@@ -17,6 +17,7 @@ class App extends Component {
                     <Route path={rotePaths.signUp} component={RegistrationPage} />
                     <Route path={rotePaths.questionPage} component={MainPage} />
                     <Route path={rotePaths.profilePage} component={MainPage} />
+                    <Route path={rotePaths.askQuestionPage} component={MainPage} />
                 </div>
             </Router>
         );

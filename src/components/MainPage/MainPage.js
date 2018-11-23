@@ -3,10 +3,13 @@ import Header from "../Header/Header";
 import QuestionPage from "../QuestionPage/QuestionPage";
 import { auth } from "firebase";
 import rotePaths from "../../constKeys/rotePaths";
+import connect from "react-redux/es/connect/connect";
 import { bindActionCreators } from "redux";
 import { actionGetUserFromAuth, dispatchUserFromDb } from "../../redux/actions/userActions";
-import connect from "react-redux/es/connect/connect";
 import localKeys from "../../constKeys/localKeys";
+import Header from "../Header/Header";
+import QuestionPage from "../QuestionPage/QuestionPage";
+import AskQuestionPage from '../AskQuestionPage/AskQuestionPage';
 import AfterRegPopup from "../Profile/AfterRegPopup/AfterRegPopup";
 import Profile from '../Profile/Profile';
 
@@ -40,8 +43,9 @@ class MainPage extends Component {
                 return <QuestionPage />;
             case rotePaths.profilePage:
                 return <Profile />;
+            case rotePaths.askQuestionPage:
+                return <AskQuestionPage />;
             default:
-
         }
     }
 
