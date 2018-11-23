@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Header from "../Header/Header";
 import QuestionPage from "../QuestionPage/QuestionPage";
-import {auth} from "firebase";
+import { auth } from "firebase";
 import rotePaths from "../../constKeys/rotePaths";
-import {bindActionCreators} from "redux";
-import {actionGetUserFromAuth, dispatchUserFromDb} from "../../redux/actions/userActions";
+import { bindActionCreators } from "redux";
+import { actionGetUserFromAuth, dispatchUserFromDb } from "../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
 import localKeys from "../../constKeys/localKeys";
 import AfterRegPopup from "../Profile/AfterRegPopup/AfterRegPopup";
+import Profile from '../Profile/Profile';
 
 class MainPage extends Component {
 
@@ -31,12 +32,14 @@ class MainPage extends Component {
         });
     }
 
-    rend(){
-        const {match} = this.props;
+    rend() {
+        const { match } = this.props;
 
         switch (match.path) {
             case rotePaths.questionPage:
-                return <QuestionPage/>;
+                return <QuestionPage />;
+            case rotePaths.profilePage:
+                return <Profile />;
             default:
 
         }
@@ -44,12 +47,12 @@ class MainPage extends Component {
 
     render() {
 
-           return (
+        return (
             <div className="Main">
-                <Header/>
+                <Header />
                 <div>
                     {this.rend()}
-                    {(localStorage.getItem(localKeys.isNewUser) === "true") && <AfterRegPopup/>}
+                    {(localStorage.getItem(localKeys.isNewUser) === "true") && <AfterRegPopup />}
                 </div>
             </div>
         );

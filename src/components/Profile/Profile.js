@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import AfterRegPopup from "./AfterRegPopup/AfterRegPopup";
+import Avatar from '../universal/Avatar/Avatar';
+import UserInfo from './UserInfo/UserInfo';
 
 class Profile extends Component {
     constructor(props) {
@@ -22,7 +24,8 @@ class Profile extends Component {
                     {this.renderSkills()}
                 </ul>
                 <h1>Welcome to Profile Page</h1>
-                <AfterRegPopup/>
+                <UserInfo />
+                <AfterRegPopup />
             </div>
         );
 
