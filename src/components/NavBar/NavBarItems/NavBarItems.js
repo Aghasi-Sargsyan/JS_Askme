@@ -2,11 +2,11 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import Avatar from '../../universal/Avatar/Avatar';
 import SearchBox from "../../SearchBox/SearchBox";
-import SignOutButton from "../../RegistrationPage/SignOut/SignOut";
-import rotePaths from "../../../constKeys/rotePaths";
-
+import rotePaths from '../../../constKeys/rotePaths';
 import "./NavBarItems.scss";
-
+import SignOutButton from "../../RegistrationPage/SignOut/SignOut";
+import SignOutButton from "../../RegistrationPage/SignOut/SignOut";
+import "./NavBarItems.scss";
 
 const NavBarItems = props => {
     return (
@@ -14,7 +14,7 @@ const NavBarItems = props => {
             <li>
                 <NavLink to="/questionsForYou">
                     QuestionsForYou
-            </NavLink>
+              </NavLink>
             </li>
 
             <li>
@@ -22,13 +22,20 @@ const NavBarItems = props => {
             </li>
 
             <li className="img-li">
+                <NavLink to={rotePaths.profilePage}>
+                    <Avatar />
+                </NavLink>
+            </li>
+
+            <li>
+                <NavLink to="/askQuestion">
                 <Avatar />
             </li>
 
             <li>
                 <NavLink to={rotePaths.askQuestionPage}>
                     Ask a Question
-              </NavLink>
+                </NavLink>
             </li>
             <li>
                 <SignOutButton />
