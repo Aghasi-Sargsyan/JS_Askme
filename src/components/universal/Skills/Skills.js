@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import "./Skills.scss";
 
 const Skills = props => {
