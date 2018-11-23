@@ -6,32 +6,43 @@ class AskQuestionPage extends Component {
 
     state = {
         title: "",
-        description: ""
+        description: "",
+        skills: ""
     };
 
 
-    handleInput = (e) => {
-        console.log(e.target);
-
-        this.setState({
-
-        })
+    handleChange = (e) => {
+        if (typeof e === "string") {
+            this.setState({
+                description: e
+            });
+        } else {
+            this.setState({
+                [e.target.id]: e.target.value
+            });
+        }
     };
+
+    onSubmit(e) {
+        e.preventDefault();
+
+
+    }
 
     render() {
         return (
             <div>
                 <h1>Ask a question</h1>
                 <div>
-                    <Input label="Title" onChange={this.handleInput} id="title" value={this.state.title}/>
+                    <Input label="Title" changeHandler={this.handleChange} id="title" value={this.state.title}/>
                 </div>
                 <div className='am--flex'>
-                    <Wysiwyg/>
+                    <Wysiwyg changeHandler={this.handleChange}/>
                 </div>
                 <div>
-                    <Input label="Tags" onChange={this.handleInput} id="tags" />
+                    <Input label="Skills" value={this.state.skills} changeHandler={this.handleChange} id="skills"/>
                 </div>
-                <button>Post Your Question</button>
+                <button onChange={this.onSubmit}>Post Your Question</button>
             </div>
         );
     }
