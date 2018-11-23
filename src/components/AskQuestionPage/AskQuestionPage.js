@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Wysiwyg from '../universal/Wysiwyg/Wysiwyg';
 import Input from "../universal/Input/Input";
 

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import Avatar from '../../universal/Avatar/Avatar';
 import SearchBox from "../../SearchBox/SearchBox";

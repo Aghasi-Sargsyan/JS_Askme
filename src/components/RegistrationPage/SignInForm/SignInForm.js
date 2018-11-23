@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import isEmail from "validator/lib/isEmail";
-import {auth} from "firebase";
+import { auth } from "firebase";
 import routePaths from "../../../constKeys/routePaths";
-import {Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import localKeys from "../../../constKeys/localKeys";
 
 
