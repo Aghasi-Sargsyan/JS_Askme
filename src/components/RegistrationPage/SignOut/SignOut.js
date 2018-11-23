@@ -5,6 +5,7 @@ import {actionRemoveUser} from "../../../redux/actions/userActions";
 import {withRouter} from "react-router-dom";
 import routePaths from "../../../constKeys/routePaths";
 import localKeys from "../../../constKeys/localKeys";
+import "./SignOut.scss";
 
 
 function SignOutButton(props) {
