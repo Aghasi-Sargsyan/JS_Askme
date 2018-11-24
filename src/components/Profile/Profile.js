@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
+import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
 
 class Profile extends Component {
     constructor(props) {
@@ -29,6 +30,7 @@ class Profile extends Component {
                 <h1>Welcome to Profile Page</h1>
                 <UserInfo />
                 <SkillContainer skills={this.state.skillList} hue={257} saturation={100}  />
+                <ProfileQuestionsCont />
             </div>
         );
 

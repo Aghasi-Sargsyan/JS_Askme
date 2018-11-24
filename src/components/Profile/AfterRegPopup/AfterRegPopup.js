@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-import "./AfterRegPopup.css";
+import "./AfterRegPopup.scss";
 import Input from "../../universal/Input/Input";
 import FireManager from "../../../firebase/FireManager";
 import localKeys from "../../../constKeys/localKeys";
@@ -33,14 +33,15 @@ class AfterRegPopup extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const {birthYear, skillList, gender} = this.state;
-        const {authUser, history} = this.props;
+        const { birthYear, skillList, gender } = this.state;
+        const { authUser, history } = this.props;
 
         FireManager.updateUser({
             age: birthYear.value,
             gender: gender,
             skills: skillList
         }, authUser.uid);
+
         localStorage.setItem(localKeys.isNewUser, "false");
         history.push(routePaths.questionPage);
 
@@ -67,7 +68,7 @@ class AfterRegPopup extends Component {
     };
 
     validate(target) {
-        const {birthYear, skill, skillList} = this.state;
+        const { birthYear, skill, skillList } = this.state;
         const value = target.value;
         switch (target.id) {
             case birthYear.id:
@@ -80,13 +81,13 @@ class AfterRegPopup extends Component {
     }
 
     addSkill = () => {
-        const {skillList, skill} = this.state;
+        const { skillList, skill } = this.state;
 
         skill.valid &&
-        this.setState({
-            skillList: [...skillList, {value: skill.value, rate: 0}],
-            skill: {...skill, value: ""}
-        });
+            this.setState({
+                skillList: [...skillList, { value: skill.value, rate: 0 }],
+                skill: { ...skill, value: "" }
+            });
     };
 
     skillsRender() {
@@ -96,7 +97,7 @@ class AfterRegPopup extends Component {
     }
 
     render() {
-        const {skill, skillList, birthYear} = this.state;
+        const { skill, skillList, birthYear } = this.state;
 
         return (
             <div className="bioForm">
@@ -126,21 +127,21 @@ class AfterRegPopup extends Component {
                         <label>
                             Female
                             <input type="radio"
-                                   name="genderGroup"
-                                   value="Female"
-                                   id="radioFemale"
-                                   onChange={this.checkHandler}
+                                name="genderGroup"
+                                value="Female"
+                                id="radioFemale"
+                                onChange={this.checkHandler}
                             />
                         </label>
                     </div>
                     <div className="skills-cont">
                         <Input label="Skill"
-                               placeholder="ex. JavaScript"
-                               id={skill.id}
-                               valid={skill.valid}
-                               errorMessage={skill.errorMessage}
-                               value={skill.value}
-                               onChange={this.changeHandler}
+                            placeholder="ex. JavaScript"
+                            id={skill.id}
+                            valid={skill.valid}
+                            errorMessage={skill.errorMessage}
+                            value={skill.value}
+                            onChange={this.changeHandler}
                         />
                         <button
                             type="button"
@@ -167,8 +168,8 @@ class AfterRegPopup extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {authUser: state.userReducer.authUser}
+const mapStateToProps = (state) => {
+    return { authUser: state.userReducer.authUser }
 }
 
 export default withRouter(connect(mapStateToProps)(AfterRegPopup));

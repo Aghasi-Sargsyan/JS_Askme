@@ -19,7 +19,7 @@ const Input = props => {
                     value={props.value}
                     placeholder={props.placeholder}
                     id={props.id}
-                    onChange={props.onChange}
+                    onChange={props.changeHandler}
                 />
             </div>
             {!props.valid && <span>{errorMessage}</span>}
