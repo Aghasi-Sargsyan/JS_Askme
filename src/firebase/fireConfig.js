@@ -17,5 +17,5 @@ export default function initFirebase() {
     firebase.initializeApp(config);
 
     // Initialize Cloud Firestore through Firebase
-    firebase.firestore().settings({timestampsInSnapshots: true});
+    firebase.firestore().settings({ timestampsInSnapshots: true });
 }
