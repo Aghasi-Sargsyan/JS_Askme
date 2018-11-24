@@ -36,6 +36,21 @@ export default class FireManager {
     }
   }
 
+  static getQuestions(userId) {
+    if (userId) {
+      firestore().collection("questions").where("userId", "==", userId)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+          });
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+        });
+    }
+  }
   /**
    * Updating dbUser database properties,
    * pass a valid userId and an object that contains dbUser fields

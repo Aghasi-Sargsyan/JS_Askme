@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserInfo from './UserInfo/UserInfo';
+import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
 
 class Profile extends Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class Profile extends Component {
                 </ul>
                 <h1>Welcome to Profile Page</h1>
                 <UserInfo />
+                <ProfileQuestionsCont />
             </div>
         );
 
