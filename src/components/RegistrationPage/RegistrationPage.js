@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import RegistrationContainer from "./RegistrationContainer/RegistrationContainer";
 import connect from "react-redux/es/connect/connect";
 import routePaths from "../../constKeys/routePaths";

@@ -4,7 +4,7 @@ import { auth } from "firebase";
 import "./SignUpForm.scss";
 import FireManager from "../../../firebase/FireManager"
 import isEmail from 'validator/lib/isEmail';
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import path from "../../../constKeys/routePaths";
 import localKeys from "../../../constKeys/localKeys";
 let password;

@@ -1,10 +1,10 @@
 import React from "react";
 import SignInForm from "../SignInForm/SignInForm";
 import SignUpForm from "../SignUpForm/SignUpForm";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import routePaths from "../../../constKeys/routePaths";
 
-function RegistrationContainer(props) {
+const RegistrationContainer = props => {
 
     function rend() {
         const {match} = props;

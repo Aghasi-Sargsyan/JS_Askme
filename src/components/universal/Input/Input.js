@@ -1,7 +1,7 @@
 import React from "react";
 import "./Input.css";
 
-function Input(props) {
+const Input = props => {
 
     const type = props.type || "text";
     const errorMessage = props.errorMessage || "error";

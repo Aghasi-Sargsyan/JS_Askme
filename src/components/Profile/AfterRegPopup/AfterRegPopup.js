@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ Component } from "react";
 import "./AfterRegPopup.scss";
 import Input from "../../universal/Input/Input";
 import FireManager from "../../../firebase/FireManager";
@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import routePaths from "../../../constKeys/routePaths";
 
-class AfterRegPopup extends React.Component {
+class AfterRegPopup extends Component {
     constructor(props) {
         super(props);
 

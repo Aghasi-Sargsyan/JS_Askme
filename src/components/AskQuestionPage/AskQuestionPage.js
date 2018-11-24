@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Wysiwyg from "../universal/Wysiwyg/Wysiwyg";
+import Wysiwyg from '../universal/Wysiwyg/Wysiwyg';
 import Input from "../universal/Input/Input";
 import FireManager from "../../firebase/FireManager";
 import { connect } from "react-redux";
