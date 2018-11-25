@@ -1,0 +1,34 @@
+.user_info {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  .user_info_img {
+    margin-right: 15px;
+  }
+  .user_info_name {
+    width: 176px;
+    display: flex;
+    justify-content: space-between;
+    span {
+      font-weight: bold;
+      margin-left: 15px;
+    }
+  }
+
+  .user_info_gender {
+    display: flex;
+    justify-content: space-around;
+    span {
+      font-weight: bold;
+      margin-right: 7px;
+    };
+  }
+
+  .user_info_age {
+    display: flex;
+    justify-content: space-evenly;
+    span {
+      font-weight: bold;
+    }
+  }
+}
