@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
-import { connect } from "react-redux";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import routePaths from "./constKeys/routePaths";
 
@@ -24,11 +23,4 @@ class App extends Component {
     }
 }
 
-
-function mapStateToProps(state) {
-    return {
-        authUser: state.userReducer.authUser
-    }
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

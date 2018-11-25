@@ -59,11 +59,9 @@ class SignInForm extends Component {
         const {email, password} = this.state;
         auth()
             .signInWithEmailAndPassword(email, password)
-            .then(userCredential => userCredential.user)
-            .then(user => {
+            .then(userCredential => userCredential.user);
                 localStorage.setItem(localKeys.isUserLoggedIn, "true");
                 history.push(routePaths.questionPage)
-            })
             .catch(error => {
                 this.setState(prevState => ({
                     formErrors: {

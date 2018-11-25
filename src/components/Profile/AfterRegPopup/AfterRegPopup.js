@@ -34,13 +34,13 @@ class AfterRegPopup extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const { birthYear, skillList, gender } = this.state;
-        const { authUser, history } = this.props;
+        const { dbUser, history } = this.props;
 
         FireManager.updateUser({
             age: birthYear.value,
             gender: gender,
             skills: skillList
-        }, authUser.uid);
+        }, dbUser.id);
 
         localStorage.setItem(localKeys.isNewUser, "false");
         history.push(routePaths.questionPage);
@@ -169,7 +169,7 @@ class AfterRegPopup extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { authUser: state.userReducer.authUser }
-}
+    return { dbUser: state.userReducer.dbUser }
+};
 
 export default withRouter(connect(mapStateToProps)(AfterRegPopup));
