@@ -49,7 +49,7 @@ class AfterRegPopup extends Component {
         FireManager.addGlobalSkill(...skills);
     };
 
-    changeHandler = e => {
+    handleChange = e => {
         const currentObject = this.state[e.target.id];
         const isValid = this.validate(e.target);
         this.setState({
@@ -61,7 +61,7 @@ class AfterRegPopup extends Component {
         });
     };
 
-    checkHandler = (e) => {
+    handleCheck = (e) => {
         this.setState({
             gender: e.target.value
         });
@@ -108,7 +108,7 @@ class AfterRegPopup extends Component {
                         id={birthYear.id}
                         value={birthYear.value}
                         valid={birthYear.valid}
-                        onChange={this.changeHandler}
+                        changeHandler={this.handleChange}
                         errorMessage={birthYear.errorMessage}
                     />
                     <div>
@@ -121,7 +121,7 @@ class AfterRegPopup extends Component {
                                 id="radioMale"
                                 defaultChecked="true"
                                 value="Male"
-                                onChange={this.checkHandler}
+                                onChange={this.handleCheck}
                             />
                         </label>
                         <label>
@@ -130,7 +130,7 @@ class AfterRegPopup extends Component {
                                 name="genderGroup"
                                 value="Female"
                                 id="radioFemale"
-                                onChange={this.checkHandler}
+                                onChange={this.handleCheck}
                             />
                         </label>
                     </div>
@@ -141,7 +141,7 @@ class AfterRegPopup extends Component {
                             valid={skill.valid}
                             errorMessage={skill.errorMessage}
                             value={skill.value}
-                            onChange={this.changeHandler}
+                            changeHandler={this.handleChange}
                         />
                         <button
                             type="button"

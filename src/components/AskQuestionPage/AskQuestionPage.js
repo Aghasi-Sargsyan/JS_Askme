@@ -13,11 +13,11 @@ class AskQuestionPage extends Component {
 
   handleChange = e => {
     if (typeof e === "string") {
-      this.setState({
+        this.setState({
         description: e
       });
     } else {
-      this.setState({
+        this.setState({
         [e.target.id]: e.target.value
       });
     }
@@ -79,6 +79,6 @@ const mapStateToProps = (state) => {
   return {
     dbUser: state.userReducer.dbUser
   };
-}
+};
 
 export default connect(mapStateToProps)(AskQuestionPage);

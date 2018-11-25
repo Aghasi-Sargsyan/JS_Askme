@@ -25,6 +25,6 @@ const Input = props => {
             {!props.valid && <span>{errorMessage}</span>}
         </div>
     );
-}
+};
 
 export default Input;
