@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import RegistrationContainer from "./RegistrationContainer/RegistrationContainer";
-import connect from "react-redux/es/connect/connect";
 import routePaths from "../../constKeys/routePaths";
 import localKeys from "../../constKeys/localKeys";
-
 
 class RegistrationPage extends Component {
     constructor(props) {
@@ -21,10 +19,4 @@ class RegistrationPage extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        authUser: state.userReducer.authUser
-    }
-}
-
-export default connect(mapStateToProps)(RegistrationPage);
+export default RegistrationPage;

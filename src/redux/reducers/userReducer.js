@@ -2,25 +2,18 @@ import actionTypes from "../actions/actionTypes";
 
 export const initialState = {
     dbUser: null,
-    authUser: null
 };
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case actionTypes.GET_USER_FROM_DB:
+        case actionTypes.ADD_DB_USER:
             return {
                 ...state,
-                dbUser: action.payload,
+                dbUser: action.userData,
             };
-        case actionTypes.REMOVE_USER_FROM_STORE:
+        case actionTypes.CLEAR_ALL_USERS:
             return {
-                authUser: null,
                 dbUser: null
-            };
-        case actionTypes.GET_AUTH_USER:
-            return {
-                ...state,
-                authUser: action.user
             };
 
         default:

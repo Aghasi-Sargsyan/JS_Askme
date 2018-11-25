@@ -1,29 +1,22 @@
 import FireManager from "../../firebase/FireManager";
 import actionTypes from "./actionTypes";
 
-function actionGetUser(userData) {
+function actionAddDbUser(userData) {
   return {
-    type: actionTypes.GET_USER_FROM_DB,
-    payload: userData
-  };
-}
-
-export function actionGetUserFromAuth(user) {
-  return {
-    type: actionTypes.GET_AUTH_USER,
-    user
+    type: actionTypes.ADD_DB_USER,
+    userData
   };
 }
 
 export const actionRemoveUser = {
-  type: actionTypes.REMOVE_USER_FROM_STORE
+  type: actionTypes.CLEAR_ALL_USERS
 };
 
-export function dispatchUserFromDb(userId) {
+export function getAndDispatchDbUser(userId) {
   return function(dispatch) {
     FireManager.getUser(userId)
       .then(user => {
-        dispatch(actionGetUser(user));
+        dispatch(actionAddDbUser(user));
       })
       .catch(error => {
         console.error(error);
