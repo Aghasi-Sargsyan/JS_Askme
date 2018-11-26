@@ -1,14 +1,19 @@
-import React, {Component} from "react";
-import {auth} from "firebase";
+import React, { Component } from "react";
+import { auth } from "firebase";
 import "./SignUpForm.scss";
 import FireManager from "../../../firebase/FireManager"
 import isEmail from 'validator/lib/isEmail';
-import {withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import path from "../../../constKeys/routePaths";
 import localKeys from "../../../constKeys/localKeys";
-import {bindActionCreators} from "redux";
+import routePaths from "../../../constKeys/routePaths";
+import { bindActionCreators } from "redux";
 import { getAndDispatchDbUser } from "../../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
+import fb from "../../../assets/icons/fb.png";
+import google from "../../../assets/icons/google.png";
+import twitter from "../../../assets/icons/twitter.png";
+
 
 let password;
 
@@ -37,7 +42,7 @@ class SignUpForm extends Component {
         e.preventDefault();
 
         let formErrors = this.state.formErrors;
-        const {name, value} = e.target;
+        const { name, value } = e.target;
 
         switch (name) {
             case "userName":
@@ -81,8 +86,8 @@ class SignUpForm extends Component {
 
     signUp = e => {
         e.preventDefault();
-        const {history} = this.props;
-        const {email, password, userName} = this.state;
+        const { history } = this.props;
+        const { email, password, userName } = this.state;
         auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
                 localStorage.setItem(localKeys.isNewUser, "true");
@@ -117,89 +122,98 @@ class SignUpForm extends Component {
     };
 
     render() {
-        const {formErrors, disabled} = this.state;
+        const { formErrors, disabled } = this.state;
 
         return (
-            <div className="singIn">
-                <form onSubmit={this.handleSubmit} className="singIn__form" noValidate>
-                    <div className="singIn__input__wrapper">
-                        <label htmlFor="userName">User Name</label>
-                        <input
-                            type="text"
-                            name="userName"
-                            placeholder="First Name"
-                            onChange={this.handleChange}
-                            className={formErrors.userName.length > 0 ? "error__input" : null}
-                        />
-                        {formErrors.userName.length > 0 && (
-                            <span className="error__message">{formErrors.userName}</span>
-                        )}
+            <div className="singInUp am__flex">
+                <div className='signUp__left'>
+                    <div className='signUp__logo'>
+                        <p className='am_font_m'>AskMe</p>
                     </div>
-                    <div className="singIn__input__wrapper">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Email"
-                            onChange={this.handleChange}
-                            className={formErrors.email.length > 0 ? "error__input" : null}
-                        />
-                        {formErrors.email.length > 0 && (
-                            <span className="error__message">{formErrors.email}</span>
-                        )}
+                    <p className='signUp__quotes am_font_l'>Find out the answers to your questions</p>
+                    <Link to={routePaths.signIn}>Sign In</Link>
+                </div>
+                <div className='signUp__right'>
+                    <div className='sign__with am__tac'>
+                        <p className='am_font_m'>Sign In With</p>
+                        <div className='social_btns'>
+                            <button onClick={this.loginWithGoogle} className='social_btn'>
+                                <img src={google} alt="google" />
+                            </button>
+                            <button onClick={this.loginWithFb} className='social_btn social_btn_fb'>
+                                <img src={fb} alt="fb" />
+                            </button>
+                            <button onClick={this.loginWithFb} className='social_btn'>
+                                <img src={twitter} alt="twitter" />
+                            </button>
+                        </div>
+
                     </div>
-                    <div className="singIn__input__wrapper">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            onChange={this.handleChange}
-                            className={formErrors.password.length > 0 ? "error__input" : null}
-                        />
-                        {formErrors.password.length > 0 && (
-                            <span className="error__message">{formErrors.password}</span>
+                    <form onSubmit={this.handleSubmit} className="singIn__form" noValidate>
+                        <div className="singInUp__input__wrapper">
+                            <input
+                                type="text"
+                                name="userName"
+                                placeholder="First Name"
+                                onChange={this.handleChange}
+                                className={formErrors.userName.length > 0 ? "error__input" : null}
+                            />
+                            {formErrors.userName.length > 0 && (
+                                <span className="error__message">{formErrors.userName}</span>
+                            )}
+                        </div>
+                        <div className="singInUp__input__wrapper">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                onChange={this.handleChange}
+                                className={formErrors.email.length > 0 ? "error__input" : null}
+                            />
+                            {formErrors.email.length > 0 && (
+                                <span className="error__message">{formErrors.email}</span>
+                            )}
+                        </div>
+                        <div className="singInUp__input__wrapper">
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                onChange={this.handleChange}
+                                className={formErrors.password.length > 0 ? "error__input" : null}
+                            />
+                            {formErrors.password.length > 0 && (
+                                <span className="error__message">{formErrors.password}</span>
+                            )}
+                        </div>
+                        <div className="singInUp__input__wrapper">
+                            <input
+                                type="password"
+                                name="confPassword"
+                                placeholder="Confirm Password"
+                                onChange={this.handleChange}
+                                className={
+                                    formErrors.confPassword.length > 0 ? "error__input" : null
+                                }
+                            />
+                            {formErrors.confPassword.length > 0 && (
+                                <span className="error__message">{formErrors.confPassword}</span>
+                            )}
+                        </div>
+                        {formErrors.loginError.length > 0 && (
+                            <span className="error__message">{formErrors.loginError}</span>
                         )}
-                    </div>
-                    <div className="singIn__input__wrapper">
-                        <label htmlFor="confPassword">Confirm Password</label>
-                        <input
-                            type="password"
-                            name="confPassword"
-                            placeholder="Confirm Password"
-                            onChange={this.handleChange}
-                            className={
-                                formErrors.confPassword.length > 0 ? "error__input" : null
-                            }
-                        />
-                        {formErrors.confPassword.length > 0 && (
-                            <span className="error__message">{formErrors.confPassword}</span>
-                        )}
-                    </div>
-                    {formErrors.loginError.length > 0 && (
-                        <span className="error__message">{formErrors.loginError}</span>
-                    )}
-                    <button
-                        type="submit"
-                        className="singIn__submit"
-                        onClick={this.signUp}
-                        disabled={disabled}
-                    >
-                        Sign Up
+                        <button
+                            type="submit"
+                            className="singInUp__submit"
+                            onClick={this.signUp}
+                            disabled={disabled}
+                        >
+                            Sign Up
                     </button>
-                    {/* <div className='social-btn-cont'>
-            <a href=''>
-              <button className='social-btn social-google-btn'>
-                <FaGoogle />
-              </button>
-            </a>
-            <a href=''>
-              <button className='social-btn social-fb-btn'>
-                <FaFacebookF />
-              </button>
-            </a>
-          </div> */}
-                </form>
+                    </form>
+                </div>
+
             </div>
         );
     }
