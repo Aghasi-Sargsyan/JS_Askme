@@ -27,9 +27,9 @@ class NavBarItems extends Component {
                     </NavLink>
                 </li>
 
-                <li>
+                {/* <li>
                     <SearchBox />
-                </li>
+                </li> */}
 
                 <li className="img-li">
                     <Avatar clicked={this.handleInfoDrop} />
@@ -41,11 +41,11 @@ class NavBarItems extends Component {
                         Ask a Question
                     </NavLink>
                 </li>
-                <li>
+                {/* <li>
                     <NavLink to={routePaths.profilePage}>
                         Profile
                     </NavLink>
-                </li>
+                </li> */}
             </ul>
         )
     }
