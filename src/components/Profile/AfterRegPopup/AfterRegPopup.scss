@@ -1,71 +1,149 @@
-.bioForm {
-  padding: 100px;
-  background: #93E5F9;
-  width: fit-content;
-  margin: 100px auto 0;
-  border-radius: 10px;
+.bioform {
+    height: 650px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
 
-  .bioForm__form {
-    display: flex;
-    flex-direction: column;
+.bioForm__left {
+    width: 380px;
+    background-color: #ffd400;
+    position: relative;
+    .bioForm__logo {
+        p {
+            padding: 20px 0 0 20px;
+            color: #fff;
+        }
+    }
+    img {
+        width: 250px;
+        height: 250px;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, -40%);
+    }
+    .bioform__submit {
+        width: 200px;
+        height: 50px;
+        position: absolute;
+        bottom: 90px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        cursor: pointer;
+        color: #fff;
+        background-color: transparent;
+        font-size: 20px;
+        outline: none;
+        border: 1px solid #fff;
+    }
+}
 
-    .skills-cont {
-      display: flex;
-      align-items: baseline;
+.bioForm__right {
+    width: 600px;
+    padding: 100px;
+    background-color: #fff;
+    position: relative;
+    .bioForm__form {
+        display: flex;
+        flex-direction: column;
+        #birthYear {
+            width: 100px;
+            font-size: 24px;
+            border: none;
+        }
+        img {
+            width: 40px;
+            height: 40px;
+        }
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        /* IMAGE STYLES */
+        [type=radio]+img {
+            cursor: pointer;
+        }
+        /* CHECKED STYLES */
+        [type=radio]:checked+img {
+            outline: 2px dotted #999;
+        }
+        .gender {
+            margin-top: 70px;
+            &>label {
+                margin: 0 20px;
+            }
+        }
+        .skills-cont {
+            display: flex;
+            align-items: baseline;
+            margin-top: 100px;
+            input {
+                width: 300px;
+                outline: none;
+                border: 0;
+                border-radius: 0;
+                border-bottom: 1px solid #999;
+            }
+        }
+        .skillsList {
+            padding: 10px 0;
+        }
+        .bioForm__save {
+            width: 200px;
+            height: 50px;
+            position: absolute;
+            bottom: 90px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            cursor: pointer;
+            color: #fff;
+            background-color: #00d091;
+            font-size: 20px;
+            border: none;
+        }
+        span {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .bioForm__add {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid #999;
+            background-color: #ffd400;
+            color: #fff;
+            font-size: 20px;
+        }
+        .bioForm__add:hover {
+            cursor: pointer;
+        }
+        .bioForm__save:hover {
+            cursor: pointer;
+        }
+        button[type="submit"]:disabled {
+            @extend .bioForm__save;
+            background-color: #bebebe;
+        }
+        button[type="button"]:disabled {
+            @extend .bioForm__add;
+            background-color: #fff;
+            color: #999;
+        }
+        button[type="submit"]:disabled:hover {
+            cursor: default;
+        }
+        button[type="button"]:disabled:hover {
+            cursor: default;
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            opacity: 1;
+        }
     }
-
-    label {
-      margin-bottom: 3px;
-      padding: 0;
-    }
-    .bioForm__save {
-      padding: 9px;
-      width: 100px;
-      border-radius: 5px;
-      border: none;
-      background-color: #f50057;
-      font-weight: 700;
-      color: white;
-      font-size: 17px;
-      align-self: center;
-    }
-    span {
-      margin-right: 10px;
-      font-weight: bold;
-    }
-    div {
-      margin: 10px 0 10px 0;
-    }
-    .bioForm__add {
-      padding: 7px;
-      width: 54px;
-      border-radius: 5px;
-      border: none;
-      background-color: white;
-      font-weight: 700;
-      color: black;
-    }
-    .bioForm__add:hover {
-      cursor: pointer;
-    }
-    .bioForm__save:hover {
-      cursor: pointer;
-    }
-
-    button[type="submit"]:disabled {
-      @extend .bioForm__save;
-      background-color: #bebebe;
-    }
-    button[type="button"]:disabled {
-      @extend .bioForm__add;
-      background-color: #bebebe;
-      color: white;
-    }
-    button[type="submit"]:disabled:hover {
-      cursor: default;
-    }
-    button[type="button"]:disabled:hover {
-      cursor: default;
-    }
-  }
 }

@@ -1,4 +1,4 @@
-import React,{ Component } from "react";
+import React, { Component } from "react";
 import "./AfterRegPopup.scss";
 import Input from "../../universal/Input/Input";
 import FireManager from "../../../firebase/FireManager";
@@ -6,6 +6,9 @@ import localKeys from "../../../constKeys/localKeys";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import routePaths from "../../../constKeys/routePaths";
+import userImg from "../../../assets/icons/user.png";
+import male from "../../../assets/icons/male.png";
+import female from "../../../assets/icons/female.png";
 
 class AfterRegPopup extends Component {
     constructor(props) {
@@ -100,69 +103,89 @@ class AfterRegPopup extends Component {
         const { skill, skillList, birthYear } = this.state;
 
         return (
-            <div className="bioForm">
-                <form className="bioForm__form" onSubmit={this.handleSubmit}>
-                    <Input
-                        type="number"
-                        label="Birth Year"
-                        id={birthYear.id}
-                        value={birthYear.value}
-                        valid={birthYear.valid}
-                        changeHandler={this.handleChange}
-                        errorMessage={birthYear.errorMessage}
-                    />
-                    <div>
-                        <span>Gender</span>
-                        <label>
-                            Male
-                            <input
-                                type="radio"
-                                name="genderGroup"
-                                id="radioMale"
-                                defaultChecked="true"
-                                value="Male"
-                                onChange={this.handleCheck}
-                            />
-                        </label>
-                        <label>
-                            Female
-                            <input type="radio"
-                                name="genderGroup"
-                                value="Female"
-                                id="radioFemale"
-                                onChange={this.handleCheck}
-                            />
-                        </label>
+            <div className='modal_wrapper'>
+                <div className='bioform am__flex'>
+                    <div className='bioForm__left'>
+                        <div className='bioForm__logo'>
+                            <p className='am_font_m'>AskMe</p>
+                            <div className='am__tac'>
+                                <img src={userImg} alt="user" />
+                                <button
+                                    type="submit"
+                                    className="bioform__submit"
+                                >
+                                    Add a photo
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div className="skills-cont">
-                        <Input label="Skill"
-                            placeholder="ex. JavaScript"
-                            id={skill.id}
-                            valid={skill.valid}
-                            errorMessage={skill.errorMessage}
-                            value={skill.value}
-                            changeHandler={this.handleChange}
-                        />
-                        <button
-                            type="button"
-                            className="bioForm__add"
-                            onClick={this.addSkill}
-                            disabled={!skill.value || !skill.valid}
-                        >
-                            add
-                        </button>
+                    <div className="bioForm__right">
+                        <form className="bioForm__form am__tac" onSubmit={this.handleSubmit}>
+                            <Input
+                                type="number"
+                                // label="Birth Year"
+                                id={birthYear.id}
+                                value={birthYear.value}
+                                valid={birthYear.valid}
+                                changeHandler={this.handleChange}
+                                errorMessage={birthYear.errorMessage}
+                            />
+                            <div className='am__tac gender'>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="genderGroup"
+                                        id="radioMale"
+                                        defaultChecked="true"
+                                        value="Male"
+                                        onChange={this.handleCheck}
+                                    />
+                                    <img src={male} alt="male" />
+
+                                </label>
+                                <label>
+                                    <input type="radio"
+                                        name="genderGroup"
+                                        value="Female"
+                                        id="radioFemale"
+                                        onChange={this.handleCheck}
+                                    />
+                                    <img src={female} alt="female" />
+
+                                </label>
+                            </div>
+                            <div className="skills-cont">
+                                <Input
+                                    placeholder="Your skills"
+                                    id={skill.id}
+                                    valid={skill.valid}
+                                    errorMessage={skill.errorMessage}
+                                    value={skill.value}
+                                    changeHandler={this.handleChange}
+                                />
+                                <button
+                                    type="button"
+                                    className="bioForm__add"
+                                    onClick={this.addSkill}
+                                    disabled={!skill.value || !skill.valid}
+                                >
+                                    +
+                                </button>
+                            </div>
+                            <ul className="skillsList">
+                                {this.skillsRender()}
+                            </ul>
+                            <button
+                                className="bioForm__save"
+                                type="submit"
+                                disabled={!skillList.length || !birthYear.valid}
+                            >
+                                Save
+                            </button>
+                        </form>
                     </div>
-                    <ul className="skillsList">
-                        {this.skillsRender()}
-                    </ul>
-                    <button
-                        className="bioForm__save"
-                        type="submit"
-                        disabled={!skillList.length || !birthYear.valid}
-                    >
-                        Save
-                    </button>
-                </form>
+                </div>
+
             </div>
         );
     }
