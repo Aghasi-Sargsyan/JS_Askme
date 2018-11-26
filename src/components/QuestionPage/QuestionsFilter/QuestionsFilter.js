@@ -4,7 +4,6 @@ import './QuestionsFilter.scss';
 
 class QuestionsFilter extends Component {
     render() {
-        console.log(this.props.dbUser);
         const skills = this.props.dbUser && this.props.dbUser.skills.map((skill, index) => {
             return <li key={index}>{skill.value}</li>
         });
