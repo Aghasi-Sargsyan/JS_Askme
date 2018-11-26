@@ -1,0 +1,102 @@
+.singInUp {
+    height: 650px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.signIn__left {
+    width: 580px;
+    background-color: #fff;
+    position: relative;
+    .signIn__logo {
+        color: #fdb455;
+        p {
+            padding: 0 0 0 20px;
+        }
+    }
+}
+
+.signIn__right {
+    width: 400px;
+    background-color: #ffd400;
+    position: relative;
+    p {
+        color: #fff;
+    }
+    a {
+        width: 200px;
+        height: 50px;
+        line-height: 45px;
+        position: absolute;
+        bottom: 70px;
+        left: 50%;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+        cursor: pointer;
+        color: #fff;
+        background-color: #ffd400;
+        font-size: 20px;
+        border: 1px solid #fff;
+        text-decoration: none;
+        text-align: center;
+    }
+}
+
+.singInUp {
+    .social_btns {
+        margin: 40px 0 100px 0;
+        .social_btn {
+            cursor: pointer;
+            background-color: #fff;
+            border: 0;
+            outline: 0;
+            img {
+                width: auto;
+                height: auto;
+            }
+            &.social_btn_fb {
+                margin: 0 60px;
+            }
+        }
+    }
+    .singInUp__input__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        input {
+            width: 400px;
+            height: 40px;
+            border: 0;
+            outline: none;
+            border-bottom: 1px solid #999;
+            padding: 0 10px;
+            margin: 0 0 20px 0;
+        }
+        .error__message {
+            color: #b82121;
+            font-size: 13px;
+        }
+    }
+    .singInUp__submit {
+        width: 200px;
+        height: 50px;
+        position: absolute;
+        bottom: 70px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        cursor: pointer;
+        color: #fff;
+        background-color: #0ec17f;
+        font-size: 20px;
+        border: none;
+    }
+    button[type="submit"]:disabled {
+        background-color: #bebebe;
+    }
+    button[type="submit"]:disabled:hover {
+        cursor: not-allowed;
+    }
+}
