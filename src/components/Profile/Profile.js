@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
 import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
+import  "./Profile.scss";
 
 class Profile extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class Profile extends Component {
 
     render() {
         return (
-            <div>
+            <div className="profile_page">
                 {/* <ul>
                     {this.renderSkills()}
                 </ul> */}
