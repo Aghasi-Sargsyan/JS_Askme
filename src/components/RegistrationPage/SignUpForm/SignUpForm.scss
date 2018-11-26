@@ -4,7 +4,7 @@
     position: relative;
     .signUp__logo {
         p {
-            padding: 0 0 0 20px;
+            padding: 20px 0 0 20px;
             color: #fff;
         }
     }
@@ -40,4 +40,10 @@
     width: 580px;
     background-color: #fff;
     position: relative;
+    p {
+        margin-top: 100px;
+    }
+    .social_btns {
+        margin: 40px 0;
+    }
 }

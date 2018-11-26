@@ -134,7 +134,7 @@ class SignUpForm extends Component {
                     <Link to={routePaths.signIn}>Sign In</Link>
                 </div>
                 <div className='signUp__right'>
-                    <div className='sign__with am__tac'>
+                    <div className='signUp__with am__tac'>
                         <p className='am_font_m'>Sign In With</p>
                         <div className='social_btns'>
                             <button onClick={this.loginWithGoogle} className='social_btn'>

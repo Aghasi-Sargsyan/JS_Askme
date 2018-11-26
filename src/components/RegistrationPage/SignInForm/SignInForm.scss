@@ -11,10 +11,15 @@
     width: 580px;
     background-color: #fff;
     position: relative;
+    .signIn__with {
+        p {
+            margin-top: 50px;
+        }
+    }
     .signIn__logo {
         color: #fdb455;
         p {
-            padding: 0 0 0 20px;
+            padding: 20px 0 0 20px;
         }
     }
 }
@@ -47,7 +52,7 @@
 
 .singInUp {
     .social_btns {
-        margin: 40px 0 100px 0;
+        margin: 40px 0 70px 0;
         .social_btn {
             cursor: pointer;
             background-color: #fff;
