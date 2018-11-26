@@ -90,7 +90,6 @@ class SignUpForm extends Component {
         const { email, password, userName } = this.state;
         auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
-                localStorage.setItem(localKeys.isNewUser, "true");
                 return userCredential.user
             })
             .then(user => {
@@ -101,7 +100,8 @@ class SignUpForm extends Component {
                     gender: null,
                     age: null,
                     photoUrl: null,
-                    skills: []
+                    skills: [],
+                    isNewUser: true
                 };
                 //adding user to DB
                 FireManager.addUser(newUser)

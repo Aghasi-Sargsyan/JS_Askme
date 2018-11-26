@@ -12,11 +12,18 @@ export const actionRemoveUser = {
   type: actionTypes.CLEAR_ALL_USERS
 };
 
-export function getAndDispatchDbUser(userId) {
-  return function(dispatch) {
+export function getAndDispatchDbUser(userId, callback) {
+  return function (dispatch) {
     FireManager.getUser(userId)
       .then(user => {
         dispatch(actionAddDbUser(user));
+      })
+      .then(() => {
+        try {
+          callback();
+        } catch (e) {
+          console.error(e);
+        }
       })
       .catch(error => {
         console.error(error);
