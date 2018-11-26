@@ -9,11 +9,11 @@ class QuestionsFilter extends Component {
         });
         return (
             <div className='am--questions-filter-container '>
-                <ul className='am--flex am--flex-column am--align-start'>
+                <ul className='am__flex am__flex_column am__align_start'>
                     <li>All</li>
-                    <li className='am-flex am--flex-column am--align-start'>
+                    <li className='am__flex am__flex_column am__align_start'>
                         Skill
-                        <ul className='am-flex am--flex-column am--align-start am--questions-skills-menu'>
+                        <ul className='am__flex am__flex_column am__align_start am--questions-skills-menu'>
                             {skills}
                         </ul>
                     </li>

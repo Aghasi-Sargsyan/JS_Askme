@@ -4,6 +4,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import initFirebase from "./firebase/fireConfig";
 import './styles/index.scss';
+import './styles/reset.scss';
 import initStore from "./redux/store"
 import { Provider } from "react-redux"
 
