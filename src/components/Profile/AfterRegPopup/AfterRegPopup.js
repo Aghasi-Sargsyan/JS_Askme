@@ -120,18 +120,20 @@ class AfterRegPopup extends Component {
                         </div>
                     </div>
                     <div className="bioForm__right">
-                        <form className="bioForm__form am__tac" onSubmit={this.handleSubmit}>
+                        <form className="bioForm__form" onSubmit={this.handleSubmit}>
                             <Input
                                 type="number"
-                                // label="Birth Year"
+                                label="Birth Year"
                                 id={birthYear.id}
                                 value={birthYear.value}
                                 valid={birthYear.valid}
                                 changeHandler={this.handleChange}
                                 errorMessage={birthYear.errorMessage}
                             />
-                            <div className='am__tac gender'>
+                            <div className='gender'>
+                                <span>Gender</span>
                                 <label>
+                                    {/* Male */}
                                     <input
                                         type="radio"
                                         name="genderGroup"
@@ -144,6 +146,7 @@ class AfterRegPopup extends Component {
 
                                 </label>
                                 <label>
+                                    {/* Female */}
                                     <input type="radio"
                                         name="genderGroup"
                                         value="Female"
@@ -156,6 +159,7 @@ class AfterRegPopup extends Component {
                             </div>
                             <div className="skills-cont">
                                 <Input
+                                    label="Skills"
                                     placeholder="Your skills"
                                     id={skill.id}
                                     valid={skill.valid}

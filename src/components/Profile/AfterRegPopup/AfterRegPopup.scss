@@ -50,14 +50,18 @@
     .bioForm__form {
         display: flex;
         flex-direction: column;
+        label {
+            margin-right: 15px;
+        }
         #birthYear {
-            width: 100px;
-            font-size: 24px;
+            width: 300px;
+            font-size: 18px;
             border: none;
+            background: #7f7f7f21;
         }
         img {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
         }
         [type=radio] {
             position: absolute;
@@ -74,7 +78,7 @@
             outline: 2px dotted #999;
         }
         .gender {
-            margin-top: 70px;
+            margin-top: 30px;
             &>label {
                 margin: 0 20px;
             }
@@ -92,7 +96,18 @@
             }
         }
         .skillsList {
+            width: 300px;
+            height: 130px;
             padding: 10px 0;
+            margin: auto;
+            display: block;
+            overflow-y: auto;
+            li {
+                display: inline-block;
+                background: #eee;
+                border: 1px solid #999;
+                margin: 3px 9px;
+            }
         }
         .bioForm__save {
             width: 200px;
