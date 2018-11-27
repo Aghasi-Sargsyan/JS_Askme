@@ -13,11 +13,11 @@ class AskQuestionPage extends Component {
 
   handleChange = e => {
     if (typeof e === "string") {
-        this.setState({
+      this.setState({
         description: e
       });
     } else {
-        this.setState({
+      this.setState({
         [e.target.id]: e.target.value
       });
     }
@@ -58,7 +58,7 @@ class AskQuestionPage extends Component {
             value={this.state.title}
           />
         </div>
-        <div className="am--flex">
+        <div className="flex">
           <Wysiwyg changeHandler={this.handleChange} />
         </div>
         <div>

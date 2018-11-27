@@ -1,0 +1,39 @@
+.question__item_container {
+    background-color: #fdfffe;
+    margin: 10px;
+    padding: 10px; // .question__item_left {
+    //     img {
+    //         width: 90px;
+    //         height: 90px;
+    //     }
+    // }
+    .question__item_header {
+        padding: 10px 0;
+        .question__title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        button {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            font-size: 22px;
+            cursor: pointer;
+            border-radius: 2px;
+            text-align: center;
+            flex-shrink: 0;
+            padding: 0;
+            margin: 0 2px;
+            background-color: transparent;
+            border: 1px solid #999;
+            outline: none;
+        }
+    }
+    .question__item_center {
+        padding: 0 15px;
+    }
+    .question__votes,
+    .question__answers {
+        padding: 5px 0;
+    }
+}

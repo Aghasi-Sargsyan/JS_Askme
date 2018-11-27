@@ -101,11 +101,11 @@ class AfterRegPopup extends Component {
 
         return (
             <div className='modal_wrapper'>
-                <div className='bioform am__flex'>
+                <div className='bioform flex'>
                     <div className='bioForm__left'>
                         <div className='bioForm__logo'>
-                            <p className='am_font_m'>AskMe</p>
-                            <div className='am__tac'>
+                            <p className='font_m'>AskMe</p>
+                            <div className='tac'>
                                 <img src={userImg} alt="user" />
                                 <button
                                     type="submit"

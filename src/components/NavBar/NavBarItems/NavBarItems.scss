@@ -5,41 +5,37 @@ ul {
     margin: 0;
     padding: 0;
     list-style: none;
-
     .img-li {
         margin-left: auto;
         margin-right: 2em;
-
         img {
-            width: 90px;
-            height: 90px;
+            width: 65px;
+            height: 65px;
             vertical-align: middle;
             cursor: pointer;
-
+            background-color: #fff;
+            z-index: 99;
+            position: relative;
         }
     }
-
-    li {
-        padding: 0 8px;
+    li.nav__item {
         font-size: 19px;
         font-family: sans-serif;
         display: flex;
         align-items: center;
         position: relative;
         transition: 0.5s;
-
         a {
-            color: white;
+            color: #000;
+            background-color: #fff;
             text-decoration: none;
-
+            padding: 0 20px;
             &:hover {
                 color: black;
             }
-
             &:active {
                 color: black;
             }
-
             &.active {
                 color: #3f05c5;
             }

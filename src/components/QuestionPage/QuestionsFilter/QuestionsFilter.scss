@@ -1,9 +1,14 @@
-.am--questions-filter-container {
+.questions-filter-container {
     height: 100vh;
     width: 20%;
-    background-color: antiquewhite;
-    
-    li {
-        cursor: pointer;
+    background-color: #fffcdf;
+    ul.questions-filter {
+        padding: 15px;
+        ul {
+            padding: 0 15px;
+        }
+        li {
+            cursor: pointer;
+        }
     }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Avatar from '../../universal/Avatar/Avatar';
-import SearchBox from "../../SearchBox/SearchBox";
 import routePaths from '../../../constKeys/routePaths';
 import "./NavBarItems.scss";
 import InfoDrop from "../InfoDrop/InfoDrop";
@@ -21,31 +20,22 @@ class NavBarItems extends Component {
     render() {
         return (
             <ul>
-                <li>
-                    <NavLink to={routePaths.questionPage}>
-                        Questions For You
-                    </NavLink>
+                <li className='nav__item'>
+                    <Link to={routePaths.questionPage}>
+                        Answers
+                    </Link>
                 </li>
-
-                {/* <li>
-                    <SearchBox />
-                </li> */}
 
                 <li className="img-li">
                     <Avatar clicked={this.handleInfoDrop} />
                     {this.state.infoOpen && <InfoDrop />}
                 </li>
 
-                <li>
-                    <NavLink to={routePaths.askQuestionPage}>
+                <li className='nav__item'>
+                    <Link to={routePaths.askQuestionPage}>
                         Ask a Question
-                    </NavLink>
+                    </Link>
                 </li>
-                {/* <li>
-                    <NavLink to={routePaths.profilePage}>
-                        Profile
-                    </NavLink>
-                </li> */}
             </ul>
         )
     }

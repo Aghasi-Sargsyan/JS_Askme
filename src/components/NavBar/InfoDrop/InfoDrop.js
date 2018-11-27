@@ -7,7 +7,7 @@ import routePaths from "../../../constKeys/routePaths";
 
 const InfoDrop = () => {
   return (
-    <div className="info-drop">
+    <div className="info-drop flex flex_column tar justify_around">
       <Link to={routePaths.profilePage}>
         <button>Profile</button>
       </Link>

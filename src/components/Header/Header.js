@@ -6,7 +6,8 @@ import "./Header.scss";
 
 const Header = props => (
     <header>
-        <nav className="navigation">
+        <nav className="navigation flex">
+            <hr className='horizontal__line' />
             <Logo />
             <div className="space" />
             <NavBar />

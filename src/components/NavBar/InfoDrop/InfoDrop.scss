@@ -1,23 +1,29 @@
 .info-drop {
-  display: flex;
-  justify-content: space-around;
-  position: absolute;
-  top: 100px;
-  margin-left: -45px;
-  width: 180px;
-  min-height: 100px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  border-top: 4px solid #7272d6;
-  &:before {
-    content: "";
+    width: 110px;
+    min-height: 100px;
     position: absolute;
-    top: -32px;
-    border: 12px solid transparent;
-    border-top-width: 16px;
-    border-bottom-color: #7272d6;
-  }
-  button {
-    margin: 0;
-    padding: 0;
-  }
+    top: 90px;
+    margin-left: -45px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-top: 4px solid #ffd400;
+    padding: 0 10px;
+    background-color: #fff;
+    z-index: 99;
+    &:before {
+        content: "";
+        position: absolute;
+        top: -35px;
+        right: 0;
+        border: 12px solid transparent;
+        border-top-width: 16px;
+        border-bottom-color: #ffd400;
+    }
+    button {
+        text-align-last: right;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        background-color: #fff;
+    }
 }
