@@ -7,7 +7,8 @@ import localKeys from "../../../constKeys/localKeys";
 import fb from "../../../assets/icons/fb.png";
 import google from "../../../assets/icons/google.png";
 import twitter from "../../../assets/icons/twitter.png";
-
+import FireManager from "../../../firebase/FireManager"
+import path from "../../../constKeys/routePaths";
 
 import './SignInForm.scss'
 
@@ -65,8 +66,8 @@ class SignInForm extends Component {
         auth()
             .signInWithEmailAndPassword(email, password)
             .then(userCredential => {
-              localStorage.setItem(localKeys.isUserLoggedIn, "true");
-              history.push(routePaths.questionPage)
+                localStorage.setItem(localKeys.isUserLoggedIn, "true");
+                history.push(routePaths.questionPage)
             })
             .catch(error => {
                 this.setState(prevState => ({
@@ -79,6 +80,43 @@ class SignInForm extends Component {
             });
     };
 
+    loginWithGoogle = () => {
+        const googleProvider = new auth.GoogleAuthProvider();
+        const { history } = this.props;
+
+        auth().signInWithPopup(googleProvider).then((result) => {
+            localStorage.setItem(localKeys.isUserLoggedIn, "true");
+            history.push(routePaths.questionPage)
+
+        }).catch(function (error) {
+            console.error(error.message)
+        });
+    }
+
+
+    loginWithFb = () => {
+        const fbProvider = new auth.FacebookAuthProvider();
+        const { history } = this.props;
+
+        auth().signInWithPopup(fbProvider).then((result) => {
+            localStorage.setItem(localKeys.isUserLoggedIn, "true");
+            history.push(routePaths.questionPage)
+        }).catch(function (error) {
+            console.error(error.message)
+        });
+    }
+
+    loginWithTwitter = () => {
+        const twitterProvider = new auth.TwitterAuthProvider();
+        const { history } = this.props;
+
+        auth().signInWithPopup(twitterProvider).then((result) => {
+            localStorage.setItem(localKeys.isUserLoggedIn, "true");
+            history.push(routePaths.questionPage)
+        }).catch(function (error) {
+            console.error(error.message)
+        });
+    }
     render() {
         const { formErrors, disabled } = this.state;
 
@@ -97,7 +135,7 @@ class SignInForm extends Component {
                             <button onClick={this.loginWithFb} className='social_btn social_btn_fb'>
                                 <img src={fb} alt="fb" />
                             </button>
-                            <button onClick={this.loginWithFb} className='social_btn'>
+                            <button onClick={this.loginWithTwitter} className='social_btn'>
                                 <img src={twitter} alt="twitter" />
                             </button>
                         </div>

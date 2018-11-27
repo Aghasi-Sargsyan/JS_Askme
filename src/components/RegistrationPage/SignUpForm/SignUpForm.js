@@ -84,12 +84,14 @@ class SignUpForm extends Component {
         });
     };
 
+
     signUp = e => {
         e.preventDefault();
         const { history } = this.props;
         const { email, password, userName } = this.state;
         auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
+                localStorage.setItem(localKeys.isNewUser, "true");
                 return userCredential.user
             })
             .then(user => {
@@ -100,8 +102,7 @@ class SignUpForm extends Component {
                     gender: null,
                     age: null,
                     photoUrl: null,
-                    skills: [],
-                    isNewUser: true
+                    skills: []
                 };
                 //adding user to DB
                 FireManager.addUser(newUser)
@@ -120,6 +121,82 @@ class SignUpForm extends Component {
                 console.error(this.state.formErrors.loginError);
             });
     };
+
+    loginWithGoogle = () => {
+        const googleProvider = new auth.GoogleAuthProvider();
+        const { history } = this.props;
+
+        auth().signInWithPopup(googleProvider).then((result) => {
+            var user = result.user;
+            const newUser = {
+                id: user.uid,
+                userName: this.state.userName,
+                email: user.email,
+                gender: null,
+                age: null,
+                photoUrl: null,
+                skills: []
+            };
+            //adding user to DB
+            FireManager.addUser(newUser)
+                .then(() => this.props.dispatchDbUser(newUser.id))
+                .then(() => history.push(path.questionPage));
+            localStorage.setItem(localKeys.isUserLoggedIn, "true");
+        }).catch(function (error) {
+            console.error(error.message)
+        });
+    }
+
+
+    loginWithFb = () => {
+        const fbProvider = new auth.FacebookAuthProvider();
+        const { history } = this.props;
+
+        auth().signInWithPopup(fbProvider).then((result) => {
+            var user = result.user;
+            const newUser = {
+                id: user.uid,
+                userName: this.state.userName,
+                email: user.email,
+                gender: null,
+                age: null,
+                photoUrl: null,
+                skills: []
+            };
+            //adding user to DB
+            FireManager.addUser(newUser)
+                .then(() => this.props.dispatchDbUser(newUser.id))
+                .then(() => history.push(path.questionPage));
+            localStorage.setItem(localKeys.isUserLoggedIn, "true");
+        }).catch(function (error) {
+            console.error(error.message)
+        });
+    }
+
+    loginWithTwitter = () => {
+        const twitterProvider = new auth.TwitterAuthProvider();
+        const { history } = this.props;
+
+        auth().signInWithPopup(twitterProvider).then((result) => {
+            var user = result.user;
+            const newUser = {
+                id: user.uid,
+                userName: this.state.userName,
+                email: user.email,
+                gender: null,
+                age: null,
+                photoUrl: null,
+                skills: []
+            };
+            //adding user to DB
+            FireManager.addUser(newUser)
+                .then(() => this.props.dispatchDbUser(newUser.id))
+                .then(() => history.push(path.questionPage));
+            localStorage.setItem(localKeys.isUserLoggedIn, "true");
+        }).catch(function (error) {
+            console.error(error.message)
+        });
+    }
 
     render() {
         const { formErrors, disabled } = this.state;
@@ -143,7 +220,7 @@ class SignUpForm extends Component {
                             <button onClick={this.loginWithFb} className='social_btn social_btn_fb'>
                                 <img src={fb} alt="fb" />
                             </button>
-                            <button onClick={this.loginWithFb} className='social_btn'>
+                            <button onClick={this.loginWithTwitter} className='social_btn'>
                                 <img src={twitter} alt="twitter" />
                             </button>
                         </div>
