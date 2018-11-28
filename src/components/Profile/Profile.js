@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
 import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
@@ -23,19 +24,26 @@ class Profile extends Component {
     // };
 
     render() {
+        const { dbUser } = this.props;
         return (
             <div className="profile_page">
-                {/* <ul>
-                    {this.renderSkills()}
-                </ul> */}
-                <h1>Welcome to Profile Page</h1>
-                <UserInfo />
-                <SkillContainer skills={this.state.skillList} hue={257} saturation={100}  />
-                <ProfileQuestionsCont />
+                <aside className="left__side">
+                    <UserInfo userName={dbUser.userName} age={dbUser.age} gender={dbUser.gender} />
+                    <SkillContainer skills={dbUser.skills} hue={257} saturation={100}  />
+                </aside>
+                <aside className="right__side">
+                    <ProfileQuestionsCont />
+                </aside>
             </div>
         );
 
     }
 }
 
-export default Profile;
+function mapStateToProps(state) {
+    return {
+        dbUser: state.userReducer.dbUser,
+    };
+}
+
+export default connect(mapStateToProps)(Profile);

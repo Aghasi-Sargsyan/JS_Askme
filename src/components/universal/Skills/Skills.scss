@@ -4,7 +4,8 @@
     padding: 0;
     width: calc(100% - 50px);
     li {
-      display: block;
+      display: flex;
+      height: 30px;
       position: relative;
       background-color: #888;
       color: #fff;

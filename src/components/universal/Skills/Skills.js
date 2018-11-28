@@ -7,10 +7,10 @@ const Skills = props => {
     <ul className="skills">
       {skills.map((skill, index) =>
         <li
-          key={skill.type}
+          key={skill.value}
           style={{width: `${skill.rate + 150}px`, backgroundColor: `hsl(${h}, ${s}%, ${100 / (index + 3.5)}%)`}}
         >
-          <p>{skill.type}<span>{skill.rate}</span></p>
+          <p>{skill.value}<span>{skill.rate}</span></p>
         </li>
       )}
     </ul>

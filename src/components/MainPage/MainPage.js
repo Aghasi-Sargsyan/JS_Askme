@@ -4,6 +4,7 @@ import routePaths from "../../constKeys/routePaths";
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {getAndDispatchDbUser} from "../../redux/actions/userActions";
+import { getQuestionsFromDb } from "../../redux/actions/questionActions";
 import localKeys from "../../constKeys/localKeys";
 import Header from "../Header/Header";
 import QuestionPage from "../QuestionPage/QuestionPage";
@@ -29,6 +30,7 @@ class MainPage extends Component {
       auth().onAuthStateChanged(user => {
         if (user) {
           this.props.getAndDispatchDbUser(user.uid, this.setStore);
+          this.props.getQuestionsFromDb(user.uid);
           localStorage.setItem(localKeys.isUserLoggedIn, "true");
         }
       })
@@ -65,7 +67,7 @@ class MainPage extends Component {
   }
 
   render() {
-    return (
+      return (
       <div className="Main">
         <Header/>
         <div>
@@ -79,13 +81,15 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    dbUser: state.userReducer.dbUser
+    dbUser: state.userReducer.dbUser,
+    questions: state.questionReducer.question,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch)
+    getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
+    getQuestionsFromDb: bindActionCreators(getQuestionsFromDb, dispatch)
   };
 }
 
