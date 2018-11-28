@@ -12,7 +12,7 @@ class AskQuestionPage extends Component {
     skills: [],
     skillDesc: '',
     age: '',
-    gender: 'All',
+    gender: '',
     isTyping: false,
   };
 
@@ -25,14 +25,13 @@ class AskQuestionPage extends Component {
       this.setState({
         [e.target.id]: e.target.value
       });
-    }
 
-    if (e.target.id === 'skillDesc') {
-      this.setState({
-        isTyping: !!e.target.value
-      })
+      if (e.target.id === 'skillDesc') {
+        this.setState({
+          isTyping: !!e.target.value
+        })
+      }
     }
-
   };
 
   handleRadioButton = (e) => {
@@ -83,13 +82,12 @@ class AskQuestionPage extends Component {
       skills: [],
       skillDesc: '',
       age: '',
-      gender: 'All'
+      gender: ''
     })
   };
 
   render() {
     const { isTyping } = this.state;
-    console.log(isTyping);
     return (
       <div className='ask_question'>
         <h1>Ask a question</h1>
@@ -111,15 +109,10 @@ class AskQuestionPage extends Component {
             changeHandler={this.handleChange}
             id="skillDesc"
           />
-          <button
-            type='button'
-            onClick={this.addSkill}
-          >
+          <button type='button' onClick={this.addSkill}>
             Add Skill
           </button>
-          <ul>
-            {this.skillsRender()}
-          </ul>
+          <ul> {this.skillsRender()} </ul>
         </div>
         <div>
           <label>
@@ -134,7 +127,6 @@ class AskQuestionPage extends Component {
             />
           </label>
         </div>
-
         <div>
           <label>
             All
@@ -147,7 +139,6 @@ class AskQuestionPage extends Component {
               onChange={this.handleRadioButton}
             />
           </label>
-
           <label>
             Male
             <input
