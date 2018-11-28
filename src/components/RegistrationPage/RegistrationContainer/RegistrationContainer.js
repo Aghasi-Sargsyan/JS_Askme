@@ -26,6 +26,6 @@ const RegistrationContainer = props => {
         </div>
     );
 
-}
+};
 
 export default withRouter(RegistrationContainer);

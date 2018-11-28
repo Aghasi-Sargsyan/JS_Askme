@@ -9,13 +9,37 @@ import InfoDrop from "../InfoDrop/InfoDrop";
 class NavBarItems extends Component {
     state = {
         infoOpen: false
-
     };
 
-    handleInfoDrop = () => {
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentWillMount() {
+        console.log(this.props)
+        // browserHistory.listen( () =>  {
+        //     this.setState({
+        //         infoOpen: false
+        //     });
+        // });
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    handleInfoDrop = e => {
         this.setState(prevState => ({
             infoOpen: !prevState.infoOpen
-        }))
+        }));
+    };
+
+    handleClickOutside = event => {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.setState({
+                infoOpen: false
+            });
+        }
     };
 
     render() {
@@ -31,7 +55,7 @@ class NavBarItems extends Component {
                     <SearchBox />
                 </li> */}
 
-                <li className="img-li">
+                <li className="img-li" ref={ (node) => this.wrapperRef = node }>
                     <Avatar clicked={this.handleInfoDrop} />
                     {this.state.infoOpen && <InfoDrop />}
                 </li>
