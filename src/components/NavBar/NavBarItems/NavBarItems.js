@@ -5,7 +5,6 @@ import SearchBox from "../../SearchBox/SearchBox";
 import routePaths from '../../../constKeys/routePaths';
 import "./NavBarItems.scss";
 import InfoDrop from "../InfoDrop/InfoDrop";
-import { withRouter } from "react-router-dom";
 
 class NavBarItems extends Component {
     state = {
@@ -13,18 +12,18 @@ class NavBarItems extends Component {
     };
 
     componentDidMount() {
+        this.isMount = true;
         document.addEventListener('mousedown', this.handleClickOutside);
     }
 
     componentWillMount() {
-        this.props.history.listen( () => {
-                this.setState({
-                    infoOpen: false
-                });
-        });
+        if (this.isMount) {
+            this.props.history.listen(this.handleInfoDrop);
+        }
     }
 
     componentWillUnmount() {
+        this.isMount = false;
         document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
@@ -57,7 +56,7 @@ class NavBarItems extends Component {
 
                 <li className="img-li" ref={ (node) => this.wrapperRef = node }>
                     <Avatar clicked={this.handleInfoDrop} />
-                    {this.state.infoOpen && <InfoDrop />}
+                    {this.state.infoOpen && <InfoDrop close={this.handleInfoDrop} />}
                 </li>
 
                 <li>
@@ -75,4 +74,4 @@ class NavBarItems extends Component {
     }
 }
 
-export default withRouter(NavBarItems);
+export default NavBarItems;

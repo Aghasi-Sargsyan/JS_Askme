@@ -5,11 +5,11 @@ import "./InfoDrop.scss";
 import routePaths from "../../../constKeys/routePaths";
 
 
-const InfoDrop = () => {
+const InfoDrop = ({ close }) => {
   return (
     <div className="info-drop">
       <Link to={routePaths.profilePage}>
-        <button>Profile</button>
+        <button onClick={close}>Profile</button>
       </Link>
       <SignOutButton />
     </div>
