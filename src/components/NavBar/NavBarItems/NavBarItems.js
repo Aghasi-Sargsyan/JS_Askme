@@ -5,6 +5,7 @@ import SearchBox from "../../SearchBox/SearchBox";
 import routePaths from '../../../constKeys/routePaths';
 import "./NavBarItems.scss";
 import InfoDrop from "../InfoDrop/InfoDrop";
+import { withRouter } from "react-router-dom";
 
 class NavBarItems extends Component {
     state = {
@@ -16,12 +17,11 @@ class NavBarItems extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props)
-        // browserHistory.listen( () =>  {
-        //     this.setState({
-        //         infoOpen: false
-        //     });
-        // });
+        this.props.history.listen( () => {
+                this.setState({
+                    infoOpen: false
+                });
+        });
     }
 
     componentWillUnmount() {
@@ -75,4 +75,4 @@ class NavBarItems extends Component {
     }
 }
 
-export default NavBarItems;
+export default withRouter(NavBarItems);
