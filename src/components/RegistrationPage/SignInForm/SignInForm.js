@@ -65,7 +65,6 @@ class SignInForm extends Component {
         auth()
             .signInWithEmailAndPassword(email, password)
             .then(userCredential => {
-              localStorage.setItem(localKeys.isUserLoggedIn, "true");
               history.push(routePaths.questionPage)
             })
             .catch(error => {

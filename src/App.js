@@ -1,30 +1,59 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
+import React, {Component} from "react";
 import MainPage from "./components/MainPage/MainPage";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
-import routePaths from "./constKeys/routePaths";
-import Page404 from "./components/Page404/Page404";
+import {bindActionCreators} from "redux";
+import {actionLogin, actionLogout, getAndDispatchDbUser} from "./redux/actions/userActions";
+import {withRouter} from "react-router-dom";
+import connect from "react-redux/es/connect/connect";
+import {auth} from "firebase";
 
 
 class App extends Component {
 
-    render() {
-        return (
-            <Router>
-                <div>
-                    <Switch>
-                        <Route path="/" exact component={RegistrationPage} />
-                        <Route path={routePaths.signIn} component={RegistrationPage} />
-                        <Route path={routePaths.signUp} component={RegistrationPage} />
-                        <Route path={routePaths.questionPage} component={MainPage} />
-                        <Route path={routePaths.profilePage} component={MainPage} />
-                        <Route path={routePaths.askQuestionPage} component={MainPage} />
-                        <Route component={Page404} />
-                    </Switch>
-                </div>
-            </Router>
-        );
+  componentDidMount() {
+    auth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.getAndDispatchDbUser(user.uid);
+        this.props.dispatchLogin();
+      } else {
+        this.props.dispatchLogout();
+      }
+    })
+  }
+
+  rend() {
+    if (this.props.isLoggedIn && this.props.user) {
+      return <MainPage/>;
     }
+    if (this.props.isLoggedIn === false){
+      return <RegistrationPage/>
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        {this.rend()}
+      </div>
+    );
+  }
 }
 
-export default App;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
+    dispatchLogin: () => dispatch(actionLogin),
+    dispatchLogout: () => dispatch(actionLogout),
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    user: state.userReducer.user,
+    isLoggedIn: state.userReducer.isLoggedIn
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+

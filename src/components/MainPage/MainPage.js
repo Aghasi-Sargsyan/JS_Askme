@@ -1,66 +1,42 @@
 import React, {Component} from "react";
-import {auth} from "firebase";
 import routePaths from "../../constKeys/routePaths";
 import connect from "react-redux/es/connect/connect";
-import {bindActionCreators} from "redux";
-import {getAndDispatchDbUser} from "../../redux/actions/userActions";
-import localKeys from "../../constKeys/localKeys";
 import Header from "../Header/Header";
 import QuestionPage from "../QuestionPage/QuestionPage";
 import AskQuestionPage from "../AskQuestionPage/AskQuestionPage";
 import AfterRegPopup from "../Profile/AfterRegPopup/AfterRegPopup";
 import Profile from "../Profile/Profile";
+import {Route, withRouter} from "react-router-dom";
+import Page404 from "../Page404/Page404";
 
 class MainPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isStoreFull: !!props.dbUser
-    };
-
-    if (localStorage.getItem(localKeys.isUserLoggedIn) === "false") {
-      props.history.push(routePaths.signIn);
-    }
+    console.log("main created")
   }
 
   componentDidMount() {
-    if (!this.state.isStoreFull) {
-      auth().onAuthStateChanged(user => {
-        if (user) {
-          this.props.getAndDispatchDbUser(user.uid, this.setStore);
-          localStorage.setItem(localKeys.isUserLoggedIn, "true");
-        }
-      })
-    }
+    this.redirect();
   }
 
-  setStore = () => {
-    this.setState({isStoreFull: true})
+  redirect = () => {
+    const {history} = this.props;
+    switch (history.location.pathname) {
+      case "/":
+      case routePaths.signUp:
+      case routePaths.signIn:
+        history.push(routePaths.questionPage);
+        break;
+      default:
+    }
+    console.log(this.props.history.location);
   };
 
-  rend() {
-    const {match} = this.props;
-
-    if (this.state.isStoreFull) {
-      switch (match.path) {
-        case routePaths.questionPage:
-          return <QuestionPage/>;
-        case routePaths.profilePage:
-          return <Profile/>;
-        case routePaths.askQuestionPage:
-          return <AskQuestionPage/>;
-        default:
-      }
-    }
-  }
-
   popUp() {
-    if (this.state.isStoreFull) {
-      const {isNewUser} = this.props.dbUser;
-      if (isNewUser) {
-        return <AfterRegPopup/>
-      }
+    const user = this.props.user;
+    if (user) {
+      return user.isNewUser && <AfterRegPopup/>
     }
   }
 
@@ -69,7 +45,9 @@ class MainPage extends Component {
       <div className="Main">
         <Header/>
         <div>
-          {this.rend()}
+          <Route path={routePaths.questionPage} component={QuestionPage}/>
+          <Route path={routePaths.profilePage} component={Profile}/>
+          <Route path={routePaths.askQuestionPage} component={AskQuestionPage}/>
           {this.popUp()}
         </div>
       </div>
@@ -79,14 +57,8 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    dbUser: state.userReducer.dbUser
+    user: state.userReducer.user
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default withRouter(connect(mapStateToProps)(MainPage));

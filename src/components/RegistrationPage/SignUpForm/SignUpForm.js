@@ -8,7 +8,7 @@ import path from "../../../constKeys/routePaths";
 import localKeys from "../../../constKeys/localKeys";
 import routePaths from "../../../constKeys/routePaths";
 import { bindActionCreators } from "redux";
-import { getAndDispatchDbUser } from "../../../redux/actions/userActions";
+import {actionAddUser, getAndDispatchDbUser} from "../../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
 import fb from "../../../assets/icons/fb.png";
 import google from "../../../assets/icons/google.png";
@@ -86,7 +86,6 @@ class SignUpForm extends Component {
 
     signUp = e => {
         e.preventDefault();
-        const { history } = this.props;
         const { email, password, userName } = this.state;
         auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
@@ -104,11 +103,8 @@ class SignUpForm extends Component {
                     isNewUser: true
                 };
                 //adding user to DB
-                FireManager.addUser(newUser)
-                    .then(() => this.props.dispatchDbUser(newUser.id))
-                    .then(() => history.push(path.questionPage));
-                localStorage.setItem(localKeys.isUserLoggedIn, "true");
-
+              FireManager.addUser(newUser);
+              this.props.dispatchUser(newUser)
             })
             .catch(error => {
                 this.setState(prevState => ({
@@ -221,7 +217,7 @@ class SignUpForm extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        dispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
+        dispatchUser: bindActionCreators(actionAddUser, dispatch),
     }
 }
 

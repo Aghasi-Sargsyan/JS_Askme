@@ -6,10 +6,6 @@ import localKeys from "../../constKeys/localKeys";
 class RegistrationPage extends Component {
     constructor(props) {
         super(props);
-
-        if (localStorage.getItem(localKeys.isUserLoggedIn) === "true") {
-            props.history.push(routePaths.questionPage);
-        }
     }
 
     render() {

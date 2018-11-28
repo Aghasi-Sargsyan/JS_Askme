@@ -13,8 +13,7 @@ class SignOutButton extends Component {
   logout = () => {
     auth().signOut()
       .then(() => {
-          localStorage.setItem(localKeys.isUserLoggedIn, "false");
-          this.props.history.push(routePaths.signIn)
+          // this.props.history.push(routePaths.signIn);
           this.props.dispatch(actionRemoveUser);
         }
       );
