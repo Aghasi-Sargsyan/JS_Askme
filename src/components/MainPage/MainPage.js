@@ -1,15 +1,16 @@
-import React, {Component} from "react";
-import {auth} from "firebase";
+import React, { Component } from "react";
+import { auth } from "firebase";
 import routePaths from "../../constKeys/routePaths";
 import connect from "react-redux/es/connect/connect";
-import {bindActionCreators} from "redux";
-import {getAndDispatchDbUser} from "../../redux/actions/userActions";
+import { bindActionCreators } from "redux";
+import { getAndDispatchDbUser } from "../../redux/actions/userActions";
 import localKeys from "../../constKeys/localKeys";
 import Header from "../Header/Header";
 import QuestionPage from "../QuestionPage/QuestionPage";
 import AskQuestionPage from "../AskQuestionPage/AskQuestionPage";
 import AfterRegPopup from "../Profile/AfterRegPopup/AfterRegPopup";
 import Profile from "../Profile/Profile";
+import ItemPage from '../ItemPage/ItemPage';
 
 class MainPage extends Component {
   constructor(props) {
@@ -36,20 +37,22 @@ class MainPage extends Component {
   }
 
   setStore = () => {
-    this.setState({isStoreFull: true})
+    this.setState({ isStoreFull: true })
   };
 
   rend() {
-    const {match} = this.props;
+    const { match } = this.props;
 
     if (this.state.isStoreFull) {
       switch (match.path) {
         case routePaths.questionPage:
-          return <QuestionPage/>;
+          return <QuestionPage />;
         case routePaths.profilePage:
-          return <Profile/>;
+          return <Profile />;
         case routePaths.askQuestionPage:
-          return <AskQuestionPage/>;
+          return <AskQuestionPage />;
+        case routePaths.itemPage:
+          return <ItemPage />;
         default:
       }
     }
@@ -57,9 +60,9 @@ class MainPage extends Component {
 
   popUp() {
     if (this.state.isStoreFull) {
-      const {isNewUser} = this.props.dbUser;
+      const { isNewUser } = this.props.dbUser;
       if (isNewUser) {
-        return <AfterRegPopup/>
+        return <AfterRegPopup />
       }
     }
   }
@@ -67,7 +70,7 @@ class MainPage extends Component {
   render() {
     return (
       <div className="Main">
-        <Header/>
+        <Header />
         <div>
           {this.rend()}
           {this.popUp()}

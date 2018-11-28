@@ -3,7 +3,8 @@ const routePaths = {
     signUp: "/signUp",
     questionPage: "/main/questions",
     profilePage: "/main/profile",
-    askQuestionPage: "/main/ask-question"
+    askQuestionPage: "/main/ask-question",
+    itemPage: "/main/item"
 };
 
 export default routePaths;
