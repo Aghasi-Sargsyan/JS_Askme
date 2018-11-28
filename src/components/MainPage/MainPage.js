@@ -11,6 +11,7 @@ import AskQuestionPage from "../AskQuestionPage/AskQuestionPage";
 import AfterRegPopup from "../Profile/AfterRegPopup/AfterRegPopup";
 import Profile from "../Profile/Profile";
 import ItemPage from '../ItemPage/ItemPage';
+import { getQuestionsFromDb } from "../../redux/actions/questionActions";
 
 class MainPage extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class MainPage extends Component {
       auth().onAuthStateChanged(user => {
         if (user) {
           this.props.getAndDispatchDbUser(user.uid, this.setStore);
+          this.props.getQuestionsFromDb(user.uid);
           localStorage.setItem(localKeys.isUserLoggedIn, "true");
         }
       })
@@ -68,6 +70,7 @@ class MainPage extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="Main">
         <Header />
@@ -82,13 +85,15 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    dbUser: state.userReducer.dbUser
+    dbUser: state.userReducer.dbUser,
+    question: state.questionReducer.question,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch)
+    getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
+    getQuestionsFromDb: bindActionCreators(getQuestionsFromDb, dispatch)
   };
 }
 

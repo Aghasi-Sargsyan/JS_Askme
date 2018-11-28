@@ -3,6 +3,7 @@ import Wysiwyg from '../universal/Wysiwyg/Wysiwyg';
 import Input from "../universal/Input/Input";
 import FireManager from "../../firebase/FireManager";
 import { connect } from "react-redux";
+import './AskQuestionPage.scss';
 
 class AskQuestionPage extends Component {
   state = {
@@ -11,7 +12,8 @@ class AskQuestionPage extends Component {
     skills: [],
     skillDesc: '',
     age: '',
-    gender: ''
+    gender: '',
+    isTyping: false,
   };
 
   handleChange = e => {
@@ -23,8 +25,20 @@ class AskQuestionPage extends Component {
       this.setState({
         [e.target.id]: e.target.value
       });
+
+      if (e.target.id === 'skillDesc') {
+        this.setState({
+          isTyping: !!e.target.value
+        })
+      }
     }
   };
+
+  handleRadioButton = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
 
   addSkill = () => {
     const { skills, skillDesc } = this.state
@@ -73,8 +87,9 @@ class AskQuestionPage extends Component {
   };
 
   render() {
+    const { isTyping } = this.state;
     return (
-      <div>
+      <div className='ask_question'>
         <h1>Ask a question</h1>
         <div>
           <Input
@@ -94,32 +109,56 @@ class AskQuestionPage extends Component {
             changeHandler={this.handleChange}
             id="skillDesc"
           />
-          <button
-            type='button'
-            onClick={this.addSkill}
-          >
+          <button type='button' onClick={this.addSkill}>
             Add Skill
           </button>
-          <ul>
-            {this.skillsRender()}
-          </ul>
+          <ul> {this.skillsRender()} </ul>
         </div>
         <div>
-          <Input
-            type='number'
-            label="Age"
-            value={this.state.age}
-            changeHandler={this.handleChange}
-            id="age"
-          />
+          <label>
+            Age
+            <input
+              type='number'
+              label="Age"
+              value={this.state.age}
+              disabled={isTyping}
+              onChange={this.handleChange}
+              id="age"
+            />
+          </label>
         </div>
         <div>
-          <Input
-            label="Gender"
-            value={this.state.gender}
-            changeHandler={this.handleChange}
-            id="gender"
-          />
+          <label>
+            All
+            <input
+              type="radio"
+              name="gender"
+              value="All"
+              defaultChecked="true"
+              disabled={isTyping}
+              onChange={this.handleRadioButton}
+            />
+          </label>
+          <label>
+            Male
+            <input
+              type="radio"
+              name="gender"
+              value="Male"
+              disabled={isTyping}
+              onChange={this.handleRadioButton}
+            />
+          </label>
+          <label>
+            Female
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              disabled={isTyping}
+              onChange={this.handleRadioButton}
+            />
+          </label>
         </div>
         <button onClick={this.onSubmit}>Post Your Question</button>
       </div>
@@ -129,7 +168,7 @@ class AskQuestionPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    dbUser: state.userReducer.dbUser
+    dbUser: state.userReducer.dbUser,
   };
 };
 
