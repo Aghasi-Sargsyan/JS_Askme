@@ -1,4 +1,4 @@
-import {firestore} from "firebase";
+import { firestore } from "firebase";
 
 export default class FireManager {
     /**
@@ -7,7 +7,7 @@ export default class FireManager {
      */
     static addUser(user) {
         if (user.id) {
-          return firestore().collection("users").doc(user.id).set(user)
+            return firestore().collection("users").doc(user.id).set(user)
                 .then(() => {
                     console.log("Document successfully written!");
                 })
@@ -56,7 +56,7 @@ export default class FireManager {
                         ...data,
                         skills: firestore.FieldValue.arrayUnion(...data.skills)
                     }
-                    : {...data}
+                    : { ...data }
             )
                 .then(() => {
                     console.log("dbUser successfully updated");
@@ -72,8 +72,8 @@ export default class FireManager {
     static addQuestion(question, userId) {
         if (userId) {
             const ref = firestore().collection("questions").doc();
-            const newQuestion = {...question, id: ref.id};
-
+            const newQuestion = { ...question, id: ref.id };
+            console.log('new', newQuestion)
             ref.set(newQuestion)
                 .then(() => {
                     console.log("Question successfully added");
@@ -89,7 +89,7 @@ export default class FireManager {
     static getQuestions(userId) {
         if (userId) {
             return firestore().collection("questions").where("userId", "==", userId).get()
-                .then(querySnapshot=>{
+                .then(querySnapshot => {
                     const questionsArray = [];
                     querySnapshot.forEach((doc) => {
                         questionsArray.push(doc.data());
@@ -109,7 +109,7 @@ export default class FireManager {
      */
     static addGlobalSkill(...skills) {
         skills.forEach(skill => {
-            firestore().collection("skills").doc(skill).set({value: skill})
+            firestore().collection("skills").doc(skill).set({ value: skill })
                 .then(() => console.log("skill successfully added"))
                 .catch(e => console.error("Error writing document: ", e));
         });

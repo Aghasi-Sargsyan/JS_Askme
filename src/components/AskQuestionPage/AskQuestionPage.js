@@ -8,26 +8,43 @@ class AskQuestionPage extends Component {
   state = {
     title: "",
     description: "",
-    skills: "",
+    skills: [],
+    skillDesc: '',
+    age: '',
+    gender: ''
   };
 
   handleChange = e => {
     if (typeof e === "string") {
-        this.setState({
+      this.setState({
         description: e
       });
     } else {
-        this.setState({
+      this.setState({
         [e.target.id]: e.target.value
       });
     }
   };
 
+  addSkill = () => {
+    const { skills, skillDesc } = this.state
+    const skilList = skills.concat(skillDesc);
+    this.setState({
+      skills: skilList,
+      skillDesc: '',
+
+    })
+  }
+
+  skillsRender = () => {
+    return this.state.skills.map((skill, index) => (
+      <li key={index}>{skill}</li>
+    ));
+  }
+
   onSubmit = e => {
     e.preventDefault();
-
-    const { title, description } = this.state;
-    console.log(this.props.dbUser.id);
+    const { title, description, skills, age, gender } = this.state;
     FireManager.addQuestion(
       {
         id: null,
@@ -38,12 +55,21 @@ class AskQuestionPage extends Component {
         answerCount: 0,
         date: Date.now(),
         update: null,
-        skill: [],
-        age: null,
-        gender: null
+        skill: skills,
+        age: age,
+        gender: gender
       },
       this.props.dbUser.id
     );
+
+    this.setState({
+      title: "",
+      description: "",
+      skills: [],
+      skillDesc: '',
+      age: '',
+      gender: ''
+    })
   };
 
   render() {
@@ -58,15 +84,41 @@ class AskQuestionPage extends Component {
             value={this.state.title}
           />
         </div>
-        <div className="am--flex">
+        <div className="am__flex">
           <Wysiwyg changeHandler={this.handleChange} />
+        </div>
+        <div className='am__flex'>
+          <Input
+            label="Skills"
+            value={this.state.skillDesc}
+            changeHandler={this.handleChange}
+            id="skillDesc"
+          />
+          <button
+            type='button'
+            onClick={this.addSkill}
+          >
+            Add Skill
+          </button>
+          <ul>
+            {this.skillsRender()}
+          </ul>
         </div>
         <div>
           <Input
-            label="Skills"
-            value={this.state.skills}
+            type='number'
+            label="Age"
+            value={this.state.age}
             changeHandler={this.handleChange}
-            id="skills"
+            id="age"
+          />
+        </div>
+        <div>
+          <Input
+            label="Gender"
+            value={this.state.gender}
+            changeHandler={this.handleChange}
+            id="gender"
           />
         </div>
         <button onClick={this.onSubmit}>Post Your Question</button>
