@@ -49,7 +49,7 @@ class NavBarItems extends Component {
                     </NavLink>
                 </li>
 
-                <li className="img-li">
+                <li className="img-li" ref={(node) => this.wrapperRef = node}>
                     <Avatar clicked={this.handleInfoDrop} />
                     {this.state.infoOpen && <InfoDrop close={this.handleInfoDrop} />}
                 </li>

@@ -18,17 +18,12 @@ class Profile extends Component {
         }
     }
 
-    // renderSkills = () => {
-    //     return this.state.skillList.map((skill, index) =>
-    //         <li key={index}>skill: {skill.value} rate: {skill.rate}</li>)
-    // };
-
     render() {
         const { user } = this.props;
         return (
             <div className="profile_page">
                 <aside className="left__side">
-                    <UserInfo userName={user.userName} age={dbUser.age} gender={dbUser.gender} />
+                    <UserInfo userName={user.userName} age={user.age} gender={user.gender} />
                     <SkillContainer skills={user.skills} hue={257} saturation={100}  />
                 </aside>
                 <aside className="right__side">
