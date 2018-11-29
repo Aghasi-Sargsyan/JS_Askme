@@ -6,7 +6,7 @@ export const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case actionTypes.ADD_QUESTIONS:
+        case actionTypes.ADD_QUESTION:
             return {
                 ...state,
                 question: action.questionData,

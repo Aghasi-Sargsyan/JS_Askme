@@ -4,6 +4,9 @@ import Input from "../universal/Input/Input";
 import FireManager from "../../firebase/FireManager";
 import { connect } from "react-redux";
 import './AskQuestionPage.scss';
+import {bindActionCreators} from "redux";
+import {getAndDispatchDbUser} from "../../redux/actions/userActions";
+import {actionAddQuestion} from "../../redux/actions/questionActions";
 
 class AskQuestionPage extends Component {
   state = {
@@ -59,8 +62,7 @@ class AskQuestionPage extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { title, description, skills, age, gender } = this.state;
-    FireManager.addQuestion(
-      {
+    const question = {
         id: null,
         userId: this.props.user.id,
         title: title,
@@ -72,9 +74,9 @@ class AskQuestionPage extends Component {
         skill: skills,
         age: age,
         gender: gender
-      },
-      this.props.user.id
-    );
+    };
+      FireManager.addQuestion(question, this.props.user.id);
+      this.props.dispatchQuestion(question)
   };
 
   render() {
@@ -162,4 +164,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(AskQuestionPage);
+function mapDispatchToProps(dispatch) {
+    return {
+        getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
+        dispatchQuestion: bindActionCreators(actionAddQuestion, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AskQuestionPage);
