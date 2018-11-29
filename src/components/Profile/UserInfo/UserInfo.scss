@@ -1,7 +1,10 @@
 .user_info {
   margin-left: 20px;
   .user_info_img {
-    margin-right: 15px;
+    img {
+      width: 172px;
+      height: 172px;
+    }
   }
 
   div {
@@ -15,14 +18,32 @@
   }
 
   .user_info_name {
-
+    width: 162px;
+    height: 20px;
   }
 
   .user_info_gender {
-
+    .gender__label {
+      width: 79px;
+      height: 14px;
+    }
+    img {
+      width: 24px;
+      height: 24px;
+      vertical-align: sub;
+    }
   }
 
   .user_info_age {
-
+    width: 162px;
+    height: 20px;
+    .age__label {
+      width: 45px;
+      height: 18px;
+    }
+    span {
+      width: 27px;
+      height: 15px;
+    }
   }
 }

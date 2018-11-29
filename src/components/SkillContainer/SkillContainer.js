@@ -18,6 +18,7 @@ export default class SkillContainer extends Component {
         const { skills, hue, saturation } = this.props;
         return (
             <div className={`skill-container ${collapse ? "collapse" : ""}`}>
+                <label className="skill__label">Skills</label>
                 <Skills skills={skills} h={hue} s={saturation} />
             </div>
         );
