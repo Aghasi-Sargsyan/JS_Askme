@@ -34,27 +34,27 @@ class AskQuestionPage extends Component {
     }
   };
 
-  handleRadioButton = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+    handleRadioButton = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    };
 
-  addSkill = () => {
-    const { skills, skillDesc } = this.state
-    const skilList = skills.concat(skillDesc);
-    this.setState({
-      skills: skilList,
-      skillDesc: '',
+    addSkill = () => {
+        const {skills, skillDesc} = this.state;
+        const skillList = skills.concat(skillDesc);
+        this.setState({
+            skills: skillList,
+            skillDesc: '',
 
-    })
-  }
+        })
+    };
 
   skillsRender = () => {
     return this.state.skills.map((skill, index) => (
       <li key={index}>{skill}</li>
     ));
-  }
+  };
 
   onSubmit = e => {
     e.preventDefault();
@@ -62,7 +62,7 @@ class AskQuestionPage extends Component {
     FireManager.addQuestion(
       {
         id: null,
-        userId: this.props.dbUser.id,
+        userId: this.props.user.id,
         title: title,
         description: description,
         rate: 0,
@@ -73,17 +73,8 @@ class AskQuestionPage extends Component {
         age: age,
         gender: gender
       },
-      this.props.dbUser.id
+      this.props.user.id
     );
-
-    this.setState({
-      title: "",
-      description: "",
-      skills: [],
-      skillDesc: '',
-      age: '',
-      gender: ''
-    })
   };
 
   render() {
@@ -119,7 +110,6 @@ class AskQuestionPage extends Component {
             Age
             <input
               type='number'
-              label="Age"
               value={this.state.age}
               disabled={isTyping}
               onChange={this.handleChange}
@@ -168,7 +158,7 @@ class AskQuestionPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    dbUser: state.userReducer.dbUser,
+    user: state.userReducer.user
   };
 };
 

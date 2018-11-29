@@ -2,8 +2,8 @@ import { firestore } from "firebase";
 
 export default class FireManager {
     /**
-     * Adding dbUser to database,
-     * dbUser must be an object with valid id property
+     * Adding user to database,
+     * user must be an object with valid id property
      */
     static addUser(user) {
         if (user.id) {
@@ -20,8 +20,8 @@ export default class FireManager {
     }
 
     /**
-     * Returns a promise with resolved dbUser object
-     * calling example... getUserSkills(userId).then(dbUser => {do your staff with dbUser object});
+     * Returns a promise with resolved user object
+     * calling example... getUserSkills(userId).then(user => {do your staff with user object});
      * */
     static getUser(userId) {
         if (userId) {
@@ -31,18 +31,18 @@ export default class FireManager {
                 if (doc.exists) {
                     return doc.data();
                 } else {
-                    console.error("No such dbUser!");
+                    console.error("No such user!");
                 }
             })
                 .catch(function (error) {
-                    console.error("Error getting dbUser:", error);
+                    console.error("Error getting user:", error);
                 });
         }
     }
 
     /**
-     * Updating dbUser database properties,
-     * pass a valid userId and an object that contains dbUser fields
+     * Updating user database properties,
+     * pass a valid userId and an object that contains user fields
      * for example {userName: name
      *              age: 18
      *              skills: [{value: driver, rate: 0}]
@@ -59,10 +59,10 @@ export default class FireManager {
                     : { ...data }
             )
                 .then(() => {
-                    console.log("dbUser successfully updated");
+                    console.log("user successfully updated");
                 })
                 .catch(e => {
-                    console.error("Error updating dbUser: ", e);
+                    console.error("Error updating user: ", e);
                 });
         } else {
             console.error("need to pass an object with existing id property");

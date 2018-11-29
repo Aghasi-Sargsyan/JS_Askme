@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
-import Avatar from '../../universal/Avatar/Avatar';
 import routePaths from '../../../constKeys/routePaths';
-import "./NavBarItems.scss";
+import Avatar from '../../universal/Avatar/Avatar';
 import InfoDrop from "../InfoDrop/InfoDrop";
+import "./NavBarItems.scss";
 
 class NavBarItems extends Component {
     state = {
@@ -25,10 +25,6 @@ class NavBarItems extends Component {
                         Questions For You
                     </NavLink>
                 </li>
-
-                {/* <li>
-                    <SearchBox />
-                </li> */}
 
                 <li className="img-li">
                     <Avatar clicked={this.handleInfoDrop} />

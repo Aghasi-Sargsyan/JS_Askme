@@ -1,10 +1,10 @@
 const routePaths = {
-    signIn: "/signIn",
-    signUp: "/signUp",
-    questionPage: "/main/questions",
-    profilePage: "/main/profile",
-    askQuestionPage: "/main/ask-question",
-    itemPage: "/main/item"
+    signIn: "/sign-in",
+    signUp: "/sign-up",
+    questionPage: "/questions",
+    profilePage: "/profile",
+    askQuestionPage: "/ask-question",
+    itemPage: "/item"
 };
 
 export default routePaths;
