@@ -3,30 +3,62 @@ import Wysiwyg from '../universal/Wysiwyg/Wysiwyg';
 import Input from "../universal/Input/Input";
 import FireManager from "../../firebase/FireManager";
 import { connect } from "react-redux";
+import './AskQuestionPage.scss';
 
 class AskQuestionPage extends Component {
   state = {
     title: "",
     description: "",
-    skills: "",
+    skills: [],
+    skillDesc: '',
+    age: '',
+    gender: '',
+    isTyping: false,
   };
 
   handleChange = e => {
     if (typeof e === "string") {
-        this.setState({
+      this.setState({
         description: e
       });
     } else {
-        this.setState({
+      this.setState({
         [e.target.id]: e.target.value
       });
+
+      if (e.target.id === 'skillDesc') {
+        this.setState({
+          isTyping: !!e.target.value
+        })
+      }
     }
   };
 
+  handleRadioButton = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  addSkill = () => {
+    const { skills, skillDesc } = this.state
+    const skilList = skills.concat(skillDesc);
+    this.setState({
+      skills: skilList,
+      skillDesc: '',
+
+    })
+  }
+
+  skillsRender = () => {
+    return this.state.skills.map((skill, index) => (
+      <li key={index}>{skill}</li>
+    ));
+  }
+
   onSubmit = e => {
     e.preventDefault();
-
-    const { title, description } = this.state;
+    const { title, description, skills, age, gender } = this.state;
     FireManager.addQuestion(
       {
         id: null,
@@ -37,17 +69,18 @@ class AskQuestionPage extends Component {
         answerCount: 0,
         date: Date.now(),
         update: null,
-        skill: [],
-        age: null,
-        gender: null
+        skill: skills,
+        age: age,
+        gender: gender
       },
       this.props.user.id
     );
   };
 
   render() {
+    const { isTyping } = this.state;
     return (
-      <div>
+      <div className='ask_question'>
         <h1>Ask a question</h1>
         <div>
           <Input
@@ -57,16 +90,66 @@ class AskQuestionPage extends Component {
             value={this.state.title}
           />
         </div>
-        <div className="am--flex">
+        <div className="am__flex">
           <Wysiwyg changeHandler={this.handleChange} />
         </div>
-        <div>
+        <div className='am__flex'>
           <Input
             label="Skills"
-            value={this.state.skills}
+            value={this.state.skillDesc}
             changeHandler={this.handleChange}
-            id="skills"
+            id="skillDesc"
           />
+          <button type='button' onClick={this.addSkill}>
+            Add Skill
+          </button>
+          <ul> {this.skillsRender()} </ul>
+        </div>
+        <div>
+          <label>
+            Age
+            <input
+              type='number'
+              label="Age"
+              value={this.state.age}
+              disabled={isTyping}
+              onChange={this.handleChange}
+              id="age"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            All
+            <input
+              type="radio"
+              name="gender"
+              value="All"
+              defaultChecked="true"
+              disabled={isTyping}
+              onChange={this.handleRadioButton}
+            />
+          </label>
+          <label>
+            Male
+            <input
+              type="radio"
+              name="gender"
+              value="Male"
+              disabled={isTyping}
+              onChange={this.handleRadioButton}
+            />
+          </label>
+          <label>
+            Female
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              disabled={isTyping}
+              onChange={this.handleRadioButton}
+            />
+          </label>
         </div>
         <button onClick={this.onSubmit}>Post Your Question</button>
       </div>
