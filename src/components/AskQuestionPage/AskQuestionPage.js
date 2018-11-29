@@ -62,7 +62,7 @@ class AskQuestionPage extends Component {
     FireManager.addQuestion(
       {
         id: null,
-        userId: this.props.dbUser.id,
+        userId: this.props.user.id,
         title: title,
         description: description,
         rate: 0,
@@ -73,17 +73,8 @@ class AskQuestionPage extends Component {
         age: age,
         gender: gender
       },
-      this.props.dbUser.id
+      this.props.user.id
     );
-
-    this.setState({
-      title: "",
-      description: "",
-      skills: [],
-      skillDesc: '',
-      age: '',
-      gender: ''
-    })
   };
 
   render() {
@@ -168,7 +159,7 @@ class AskQuestionPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    dbUser: state.userReducer.dbUser
+    user: state.userReducer.user
   };
 };
 
