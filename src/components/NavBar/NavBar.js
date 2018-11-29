@@ -1,12 +1,13 @@
 import NavBarItems from "./NavBarItems/NavBarItems";
 import React from 'react';
+import { withRouter } from "react-router-dom";
 
 import "./NavBar.scss";
 
-const NavBar = () => (
+const NavBar = ({ history }) => (
       <div className="navigation-bar">
-          <NavBarItems />
+          <NavBarItems history={ history } />
       </div>
 );
 
-export default NavBar;
+export default withRouter(NavBar);

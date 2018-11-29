@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
 import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
-import "./Profile.scss";
+import  "./Profile.scss";
 
 class Profile extends Component {
     constructor(props) {
@@ -10,32 +11,34 @@ class Profile extends Component {
 
         this.state = {
             skillList: [
-                { type: "HTML", rate: 89 },
-                { type: "CSS", rate: 48 },
-                { type: "JavaScript", rate: 75 },
+                {type: "HTML", rate: 89},
+                {type: "CSS", rate: 48},
+                {type: "JavaScript", rate: 75},
             ]
         }
     }
 
-    // renderSkills = () => {
-    //     return this.state.skillList.map((skill, index) =>
-    //         <li key={index}>skill: {skill.value} rate: {skill.rate}</li>)
-    // };
-
     render() {
+        const { user } = this.props;
         return (
             <div className="profile_page">
-                {/* <ul>
-                    {this.renderSkills()}
-                </ul> */}
-                <h1>Welcome to Profile Page</h1>
-                <UserInfo />
-                <SkillContainer skills={this.state.skillList} hue={257} saturation={100} />
-                <ProfileQuestionsCont />
+                <aside className="left__side">
+                    <UserInfo userName={user.userName} age={user.age} gender={user.gender} />
+                    <SkillContainer skills={user.skills} hue={257} saturation={100}  />
+                </aside>
+                <aside className="right__side">
+                    <ProfileQuestionsCont />
+                </aside>
             </div>
         );
 
     }
 }
 
-export default Profile;
+function mapStateToProps(state) {
+    return {
+        user: state.userReducer.user,
+    };
+}
+
+export default connect(mapStateToProps)(Profile);
