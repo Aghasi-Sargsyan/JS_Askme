@@ -103,6 +103,24 @@ export default class FireManager {
     }
 
 
+    static addAnswer(answer, userId) {
+        if (userId) {
+            const ref = firestore().collection("questions").doc();
+            const newAnswer = { ...answer, id: ref.id };
+            console.log('new', newAnswer)
+            ref.set(newAnswer)
+                .then(() => {
+                    console.log("Question successfully added");
+                })
+                .catch(error => {
+                    console.error("Error when adding question", error);
+                });
+        } else {
+            console.error("need to pass an existing id property");
+        }
+    }
+
+
     /**
      * Adding global skill to database
      * Pass a string or strings, or ...array
