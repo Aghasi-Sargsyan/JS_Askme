@@ -3,12 +3,10 @@ import { auth } from "firebase";
 import "./SignUpForm.scss";
 import FireManager from "../../../firebase/FireManager"
 import isEmail from 'validator/lib/isEmail';
-import { Link, withRouter } from "react-router-dom";
-import path from "../../../constKeys/routePaths";
-import localKeys from "../../../constKeys/localKeys";
+import { Link } from "react-router-dom";
 import routePaths from "../../../constKeys/routePaths";
 import { bindActionCreators } from "redux";
-import {actionAddUser, getAndDispatchDbUser} from "../../../redux/actions/userActions";
+import {actionAddUser} from "../../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
 import fb from "../../../assets/icons/fb.png";
 import google from "../../../assets/icons/google.png";
@@ -89,8 +87,7 @@ class SignUpForm extends Component {
         const { email, password, userName } = this.state;
         auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
-                return userCredential.user
-            })
+                return userCredential.user})
             .then(user => {
                 const newUser = {
                     id: user.uid,
@@ -104,8 +101,7 @@ class SignUpForm extends Component {
                 };
                 //adding user to DB
               FireManager.addUser(newUser);
-              this.props.dispatchUser(newUser)
-            })
+              this.props.dispatchUser(newUser)})
             .catch(error => {
                 this.setState(prevState => ({
                     formErrors: {
@@ -221,4 +217,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(SignUpForm));
+export default connect(null, mapDispatchToProps)(SignUpForm);

@@ -38,20 +38,15 @@ class AfterRegPopup extends Component {
     e.preventDefault();
     const {birthYear, skillList, gender} = this.state;
     const {user} = this.props;
-
-    FireManager.updateUser({
+    const updatedUser = {
       age: birthYear.value,
       gender: gender,
       skills: skillList,
       isNewUser: false
-    }, user.id);
+    };
 
-    this.props.dispatchUser({
-      age: birthYear.value,
-      gender: gender,
-      skills: skillList,
-      isNewUser: false
-    });
+    FireManager.updateUser(updatedUser, user.id);
+    this.props.dispatchUser(updatedUser);
 
     const skills = skillList.map(skill => skill.value);
     FireManager.addGlobalSkill(...skills);
@@ -194,7 +189,6 @@ class AfterRegPopup extends Component {
             </form>
           </div>
         </div>
-
       </div>
     );
   }

@@ -21,8 +21,8 @@ class MainPage extends Component {
   }
 
   redirect = () => {
-    const {history} = this.props;
-    switch (history.location.pathname) {
+    const {history, location} = this.props;
+    switch (location.pathname) {
       case "/":
       case routePaths.signUp:
       case routePaths.signIn:
