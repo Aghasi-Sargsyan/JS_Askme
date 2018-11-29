@@ -36,6 +36,11 @@ class NavBarItems extends Component {
                         Ask a Question
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink to={routePaths.itemPage}>
+                        Item
+                    </NavLink>
+                </li>
             </ul>
         )
     }

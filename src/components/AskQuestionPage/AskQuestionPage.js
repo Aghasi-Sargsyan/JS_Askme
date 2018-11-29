@@ -34,27 +34,27 @@ class AskQuestionPage extends Component {
     }
   };
 
-  handleRadioButton = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+    handleRadioButton = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    };
 
-  addSkill = () => {
-    const { skills, skillDesc } = this.state
-    const skilList = skills.concat(skillDesc);
-    this.setState({
-      skills: skilList,
-      skillDesc: '',
+    addSkill = () => {
+        const {skills, skillDesc} = this.state;
+        const skillList = skills.concat(skillDesc);
+        this.setState({
+            skills: skillList,
+            skillDesc: '',
 
-    })
-  }
+        })
+    };
 
   skillsRender = () => {
     return this.state.skills.map((skill, index) => (
       <li key={index}>{skill}</li>
     ));
-  }
+  };
 
   onSubmit = e => {
     e.preventDefault();
@@ -110,7 +110,6 @@ class AskQuestionPage extends Component {
             Age
             <input
               type='number'
-              label="Age"
               value={this.state.age}
               disabled={isTyping}
               onChange={this.handleChange}
