@@ -12,16 +12,15 @@ export function getQuestionsFromDb(userId, callback) {
     return function (dispatch) {
         FireManager.getQuestions(userId)
             .then(user => {
-                console.log(user);
                 dispatch(actionAddQuestion(user));
             })
-            // .then(() => {
-            //     try {
-            //         callback();
-            //     } catch (e) {
-            //         console.error(e);
-            //     }
-            // })
+            .then(() => {
+                try {
+                    callback();
+                } catch (e) {
+                    console.error(e);
+                }
+            })
             .catch(error => {
                 console.error(error);
             });

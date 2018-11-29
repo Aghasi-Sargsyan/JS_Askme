@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
 import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
-import  "./Profile.scss";
+import "./Profile.scss";
 
 class Profile extends Component {
     constructor(props) {
@@ -10,9 +10,9 @@ class Profile extends Component {
 
         this.state = {
             skillList: [
-                {type: "HTML", rate: 89},
-                {type: "CSS", rate: 48},
-                {type: "JavaScript", rate: 75},
+                { type: "HTML", rate: 89 },
+                { type: "CSS", rate: 48 },
+                { type: "JavaScript", rate: 75 },
             ]
         }
     }
@@ -30,7 +30,7 @@ class Profile extends Component {
                 </ul> */}
                 <h1>Welcome to Profile Page</h1>
                 <UserInfo />
-                <SkillContainer skills={this.state.skillList} hue={257} saturation={100}  />
+                <SkillContainer skills={this.state.skillList} hue={257} saturation={100} />
                 <ProfileQuestionsCont />
             </div>
         );
