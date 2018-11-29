@@ -27,7 +27,6 @@ class AskQuestionPage extends Component {
     e.preventDefault();
 
     const { title, description } = this.state;
-    console.log(this.props.user.id);
     FireManager.addQuestion(
       {
         id: null,

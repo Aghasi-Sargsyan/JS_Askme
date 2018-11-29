@@ -8,7 +8,6 @@ export const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.ADD_USER:
-      console.log("user: " + action.userData);
       return {
         ...state,
         user: {...state.user, ...action.userData}

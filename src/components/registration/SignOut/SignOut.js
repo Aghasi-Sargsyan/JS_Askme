@@ -2,8 +2,6 @@ import React, {Component} from "react";
 import {auth} from "firebase";
 import {connect} from "react-redux";
 import {actionRemoveUser} from "../../../redux/actions/userActions";
-import routePaths from "../../../constKeys/routePaths";
-import localKeys from "../../../constKeys/localKeys";
 import "./SignOut.scss";
 
 
