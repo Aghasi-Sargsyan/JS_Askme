@@ -35,7 +35,7 @@ class UserInfo extends Component {
 
 function mapStateToProps(state) {
     return {
-        dbUser: state.userReducer.dbUser,
+        user: state.userReducer.user,
     };
 }
 

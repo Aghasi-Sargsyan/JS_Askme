@@ -1,6 +1,6 @@
 const routePaths = {
-    signIn: "/signIn",
-    signUp: "/signUp",
+    signIn: "/sign-in",
+    signUp: "/sign-up",
     questionPage: "/main/questions",
     profilePage: "/main/profile",
     askQuestionPage: "/main/ask-question"
