@@ -1,0 +1,13 @@
+.ask_question {
+    input {
+        border: 1px solid #999;
+    }
+}
+
+input[type="number"]:disabled {
+    background: #dddddd;
+}
+
+input[type="radio"]:disabled {
+    background: #dddddd;
+}

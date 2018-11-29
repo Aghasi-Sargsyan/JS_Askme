@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import isEmail from "validator/lib/isEmail";
+import { Link, withRouter } from "react-router-dom";
 import { auth } from "firebase";
 import routePaths from "../../../constKeys/routePaths";
-import { Link, withRouter } from "react-router-dom";
-import localKeys from "../../../constKeys/localKeys";
+import isEmail from "validator/lib/isEmail";
 import fb from "../../../assets/icons/fb.png";
 import google from "../../../assets/icons/google.png";
 import twitter from "../../../assets/icons/twitter.png";
-
-
 import './SignInForm.scss'
 
 class SignInForm extends Component {
@@ -65,7 +62,6 @@ class SignInForm extends Component {
         auth()
             .signInWithEmailAndPassword(email, password)
             .then(userCredential => {
-              localStorage.setItem(localKeys.isUserLoggedIn, "true");
               history.push(routePaths.questionPage)
             })
             .catch(error => {
@@ -81,7 +77,6 @@ class SignInForm extends Component {
 
     render() {
         const { formErrors, disabled } = this.state;
-
         return (
             <div className="singInUp am__flex">
                 <div className='signIn__left'>

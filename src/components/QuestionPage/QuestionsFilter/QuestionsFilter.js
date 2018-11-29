@@ -4,7 +4,7 @@ import './QuestionsFilter.scss';
 
 class QuestionsFilter extends Component {
     render() {
-        const skills = this.props.dbUser && this.props.dbUser.skills.map((skill, index) => {
+        const skills = this.props.user && this.props.user.skills.map((skill, index) => {
             return <li key={index}>{skill.value}</li>
         });
         return (
@@ -28,7 +28,7 @@ class QuestionsFilter extends Component {
 
 function mapStateToProps(state) {
     return {
-        dbUser: state.userReducer.dbUser,
+        user: state.userReducer.user,
     };
 }
 

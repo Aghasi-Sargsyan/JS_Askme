@@ -24,12 +24,12 @@ class Profile extends Component {
     // };
 
     render() {
-        const { dbUser } = this.props;
+        const { user } = this.props;
         return (
             <div className="profile_page">
                 <aside className="left__side">
-                    <UserInfo userName={dbUser.userName} age={dbUser.age} gender={dbUser.gender} />
-                    <SkillContainer skills={dbUser.skills} hue={257} saturation={100}  />
+                    <UserInfo userName={user.userName} age={dbUser.age} gender={dbUser.gender} />
+                    <SkillContainer skills={user.skills} hue={257} saturation={100}  />
                 </aside>
                 <aside className="right__side">
                     <ProfileQuestionsCont />
@@ -42,7 +42,7 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
     return {
-        dbUser: state.userReducer.dbUser,
+        user: state.userReducer.user,
     };
 }
 

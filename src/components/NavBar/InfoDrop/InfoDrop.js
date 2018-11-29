@@ -1,5 +1,5 @@
 import React from "react";
-import SignOutButton from "../../RegistrationPage/SignOut/SignOut";
+import SignOutButton from "../../registration/SignOut/SignOut";
 import { Link } from "react-router-dom";
 import "./InfoDrop.scss";
 import routePaths from "../../../constKeys/routePaths";

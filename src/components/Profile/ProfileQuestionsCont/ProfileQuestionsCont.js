@@ -15,7 +15,7 @@ class ProfileQuestionContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        dbUser: state.userReducer.dbUser,
+        user: state.userReducer.user,
     }
 };
 export default connect(mapStateToProps)(ProfileQuestionContainer);

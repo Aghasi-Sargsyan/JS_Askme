@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
-import Avatar from '../../universal/Avatar/Avatar';
-import SearchBox from "../../SearchBox/SearchBox";
 import routePaths from '../../../constKeys/routePaths';
-import "./NavBarItems.scss";
+import Avatar from '../../universal/Avatar/Avatar';
 import InfoDrop from "../InfoDrop/InfoDrop";
+import "./NavBarItems.scss";
 
 class NavBarItems extends Component {
     state = {
@@ -50,11 +49,7 @@ class NavBarItems extends Component {
                     </NavLink>
                 </li>
 
-                {/* <li>
-                    <SearchBox />
-                </li> */}
-
-                <li className="img-li" ref={ (node) => this.wrapperRef = node }>
+                <li className="img-li">
                     <Avatar clicked={this.handleInfoDrop} />
                     {this.state.infoOpen && <InfoDrop close={this.handleInfoDrop} />}
                 </li>
@@ -64,11 +59,11 @@ class NavBarItems extends Component {
                         Ask a Question
                     </NavLink>
                 </li>
-                {/* <li>
-                    <NavLink to={routePaths.profilePage}>
-                        Profile
+                <li>
+                    <NavLink to={routePaths.itemPage}>
+                        Item
                     </NavLink>
-                </li> */}
+                </li>
             </ul>
         )
     }

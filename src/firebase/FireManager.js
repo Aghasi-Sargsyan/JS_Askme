@@ -1,13 +1,13 @@
-import {firestore} from "firebase";
+import { firestore } from "firebase";
 
 export default class FireManager {
     /**
-     * Adding dbUser to database,
-     * dbUser must be an object with valid id property
+     * Adding user to database,
+     * user must be an object with valid id property
      */
     static addUser(user) {
         if (user.id) {
-          return firestore().collection("users").doc(user.id).set(user)
+            return firestore().collection("users").doc(user.id).set(user)
                 .then(() => {
                     console.log("Document successfully written!");
                 })
@@ -20,8 +20,8 @@ export default class FireManager {
     }
 
     /**
-     * Returns a promise with resolved dbUser object
-     * calling example... getUserSkills(userId).then(dbUser => {do your staff with dbUser object});
+     * Returns a promise with resolved user object
+     * calling example... getUserSkills(userId).then(user => {do your staff with user object});
      * */
     static getUser(userId) {
         if (userId) {
@@ -31,18 +31,18 @@ export default class FireManager {
                 if (doc.exists) {
                     return doc.data();
                 } else {
-                    console.error("No such dbUser!");
+                    console.error("No such user!");
                 }
             })
                 .catch(function (error) {
-                    console.error("Error getting dbUser:", error);
+                    console.error("Error getting user:", error);
                 });
         }
     }
 
     /**
-     * Updating dbUser database properties,
-     * pass a valid userId and an object that contains dbUser fields
+     * Updating user database properties,
+     * pass a valid userId and an object that contains user fields
      * for example {userName: name
      *              age: 18
      *              skills: [{value: driver, rate: 0}]
@@ -56,13 +56,13 @@ export default class FireManager {
                         ...data,
                         skills: firestore.FieldValue.arrayUnion(...data.skills)
                     }
-                    : {...data}
+                    : { ...data }
             )
                 .then(() => {
-                    console.log("dbUser successfully updated");
+                    console.log("user successfully updated");
                 })
                 .catch(e => {
-                    console.error("Error updating dbUser: ", e);
+                    console.error("Error updating user: ", e);
                 });
         } else {
             console.error("need to pass an object with existing id property");
@@ -72,8 +72,8 @@ export default class FireManager {
     static addQuestion(question, userId) {
         if (userId) {
             const ref = firestore().collection("questions").doc();
-            const newQuestion = {...question, id: ref.id};
-
+            const newQuestion = { ...question, id: ref.id };
+            console.log('new', newQuestion)
             ref.set(newQuestion)
                 .then(() => {
                     console.log("Question successfully added");
@@ -89,7 +89,7 @@ export default class FireManager {
     static getQuestions(userId) {
         if (userId) {
             return firestore().collection("questions").where("userId", "==", userId).get()
-                .then(querySnapshot=>{
+                .then(querySnapshot => {
                     const questionsArray = [];
                     querySnapshot.forEach((doc) => {
                         questionsArray.push(doc.data());
@@ -103,13 +103,31 @@ export default class FireManager {
     }
 
 
+    static addAnswer(answer, userId) {
+        if (userId) {
+            const ref = firestore().collection("questions").doc();
+            const newAnswer = { ...answer, id: ref.id };
+            console.log('new', newAnswer)
+            ref.set(newAnswer)
+                .then(() => {
+                    console.log("Question successfully added");
+                })
+                .catch(error => {
+                    console.error("Error when adding question", error);
+                });
+        } else {
+            console.error("need to pass an existing id property");
+        }
+    }
+
+
     /**
      * Adding global skill to database
      * Pass a string or strings, or ...array
      */
     static addGlobalSkill(...skills) {
         skills.forEach(skill => {
-            firestore().collection("skills").doc(skill).set({value: skill})
+            firestore().collection("skills").doc(skill).set({ value: skill })
                 .then(() => console.log("skill successfully added"))
                 .catch(e => console.error("Error writing document: ", e));
         });
