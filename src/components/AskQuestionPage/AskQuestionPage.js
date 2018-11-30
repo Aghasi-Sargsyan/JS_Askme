@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import Wysiwyg from '../universal/Wysiwyg/Wysiwyg';
-import Input from "../universal/Input/Input";
 import FireManager from "../../firebase/FireManager";
 import { connect } from "react-redux";
 import './AskQuestionPage.scss';
 import { bindActionCreators } from "redux";
 import { getAndDispatchDbUser } from "../../redux/actions/userActions";
 import { actionAddQuestion } from "../../redux/actions/questionActions";
+import male from "../../assets/icons/male.png";
+import female from "../../assets/icons/female.png";
+import gender from '../../assets/icons/gender.png';
 
 class AskQuestionPage extends Component {
   state = {
@@ -83,34 +85,23 @@ class AskQuestionPage extends Component {
     const { isTyping } = this.state;
     return (
       <div className='ask_question'>
-        <h1>Ask a question</h1>
-        <div>
-          <Input
-            label="Title"
-            changeHandler={this.handleChange}
+        <div className='flex'>
+          <input
+            className='ask_question_title'
+            placeholder="What's your question"
+            onChange={this.handleChange}
             id="title"
             value={this.state.title}
           />
         </div>
-        <div className="flex">
+        <div>
           <Wysiwyg changeHandler={this.handleChange} />
-        </div>
-        <div className='flex'>
-          <Input
-            label="Skills"
-            value={this.state.skillDesc}
-            changeHandler={this.handleChange}
-            id="skillDesc"
-          />
-          <button type='button' onClick={this.addSkill}>
-            Add Skill
-          </button>
-          <ul> {this.skillsRender()} </ul>
         </div>
         <div>
           <label>
             Age
             <input
+              className='mar_left_20'
               type='number'
               value={this.state.age}
               disabled={isTyping}
@@ -119,9 +110,9 @@ class AskQuestionPage extends Component {
             />
           </label>
         </div>
-        <div>
+        <div className='ask_question_gender'>
+          <span className='pad_right_20'>Gender</span>
           <label>
-            All
             <input
               type="radio"
               name="gender"
@@ -130,9 +121,9 @@ class AskQuestionPage extends Component {
               disabled={isTyping}
               onChange={this.handleRadioButton}
             />
+            <img src={gender} alt="all" />
           </label>
           <label>
-            Male
             <input
               type="radio"
               name="gender"
@@ -140,9 +131,9 @@ class AskQuestionPage extends Component {
               disabled={isTyping}
               onChange={this.handleRadioButton}
             />
+            <img src={male} alt="male" />
           </label>
           <label>
-            Female
             <input
               type="radio"
               name="gender"
@@ -150,9 +141,25 @@ class AskQuestionPage extends Component {
               disabled={isTyping}
               onChange={this.handleRadioButton}
             />
+            <img src={female} alt="female" />
           </label>
         </div>
-        <button onClick={this.onSubmit}>Post Your Question</button>
+        <div>
+          <label>
+            Skills
+            <input
+              value={this.state.skillDesc}
+              onChange={this.handleChange}
+              id="skillDesc"
+              className='mar_left_20'
+            />
+          </label>
+          <button type='button' onClick={this.addSkill} className='ask_question_skill_add'>
+            +
+          </button>
+          <ul> {this.skillsRender()} </ul>
+        </div>
+        <button className='ask_question_submit' onClick={this.onSubmit}>Post Your Question</button>
       </div>
     );
   }
