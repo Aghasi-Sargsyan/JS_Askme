@@ -79,7 +79,7 @@ export default class FireManager {
                     console.log("Question successfully added");
                 })
                 .catch(error => {
-                    console.error("Error when adding question", error);
+                    console.error("Error when adding questions", error);
                 });
         } else {
             console.error("need to pass an existing id property");
@@ -113,7 +113,7 @@ export default class FireManager {
                     console.log("Question successfully added");
                 })
                 .catch(error => {
-                    console.error("Error when adding question", error);
+                    console.error("Error when adding questions", error);
                 });
         } else {
             console.error("need to pass an existing id property");
