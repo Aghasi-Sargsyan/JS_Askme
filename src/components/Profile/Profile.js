@@ -8,6 +8,7 @@ import Pane from './ProfileQuestionsCont/Pane/Pane';
 import "./Profile.scss";
 
 class Profile extends Component {
+
     constructor(props) {
         super(props);
 
@@ -22,11 +23,11 @@ class Profile extends Component {
             }
         ]
     }
+  
     render() {
         const { user } = this.props;
         console.log(this.props);
         return (
-            user &&
             <div className="profile_page">
                 <aside className="left__side">
                     <UserInfo userName={user.userName} age={user.age} gender={user.gender} />

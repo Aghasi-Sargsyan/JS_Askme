@@ -73,12 +73,12 @@ class AskQuestionPage extends Component {
       answerCount: 0,
       date: Date.now(),
       update: null,
-      skill: skills,
+      skills: skills,
       age: age,
       gender: gender
     };
     FireManager.addQuestion(question, this.props.user.id);
-    this.props.dispatchQuestion(question)
+    this.props.dispatchQuestion([question])
   };
 
   render() {

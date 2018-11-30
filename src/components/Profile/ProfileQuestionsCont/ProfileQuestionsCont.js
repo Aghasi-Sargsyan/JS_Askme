@@ -16,7 +16,14 @@ class ProfileQuestionContainer extends Component {
                         <div className='empty_div'></div>
                     </div>
                 </div>
-                <QuestionItem />
+                {console.log(this.props.questions)}
+                {this.props.questions.map((question, index)=> <QuestionItem 
+                                                                      key={index} title={question.title} 
+                                                                      description={question.description}
+                                                                      answerCount={question.answerCount}
+                                                                      rate={question.rate} userName={this.props.user.userName}
+                                                                      skills={question.skills} date={question.date}/>
+                                         )}
             </div>
         )
     }
@@ -25,6 +32,7 @@ class ProfileQuestionContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         user: state.userReducer.user,
+        questions: state.questionReducer.questions
     }
 };
 export default connect(mapStateToProps)(ProfileQuestionContainer);

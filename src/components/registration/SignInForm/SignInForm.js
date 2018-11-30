@@ -75,6 +75,38 @@ class SignInForm extends Component {
             });
     };
 
+    loginWithGoogle = () => {
+        const googleProvider = new auth.GoogleAuthProvider();
+        const { history } = this.props;
+        auth().signInWithPopup(googleProvider).then((result) => {
+            history.push(routePaths.questionPage)
+        }).catch(function (error) {
+            console.error(error.message)
+        });
+    }
+
+    loginWithFb = () => {
+        const fbProvider = new auth.FacebookAuthProvider();
+        const { history } = this.props;
+
+        auth().signInWithPopup(fbProvider).then((result) => {
+            history.push(routePaths.questionPage)
+        }).catch(function (error) {
+            console.error(error.message)
+        });
+    }
+
+    loginWithTwitter = () => {
+        const twitterProvider = new auth.TwitterAuthProvider();
+        const { history } = this.props;
+
+        auth().signInWithPopup(twitterProvider).then((result) => {
+            history.push(routePaths.questionPage)
+        }).catch(function (error) {
+            console.error(error.message)
+        });
+    }
+
     render() {
         const { formErrors, disabled } = this.state;
         return (
@@ -92,7 +124,7 @@ class SignInForm extends Component {
                             <button onClick={this.loginWithFb} className='social_btn social_btn_fb'>
                                 <img src={fb} alt="fb" />
                             </button>
-                            <button onClick={this.loginWithFb} className='social_btn'>
+                            <button onClick={this.loginWithTwitter} className='social_btn'>
                                 <img src={twitter} alt="twitter" />
                             </button>
                         </div>

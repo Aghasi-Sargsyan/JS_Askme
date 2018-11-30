@@ -3,6 +3,7 @@ import {auth} from "firebase";
 import {connect} from "react-redux";
 import {actionRemoveUser} from "../../../redux/actions/userActions";
 import "./SignOut.scss";
+import {bindActionCreators} from "redux";
 
 
 class SignOutButton extends Component {
@@ -10,7 +11,7 @@ class SignOutButton extends Component {
   logout = () => {
     auth().signOut()
       .then(() => {
-          this.props.dispatch(actionRemoveUser);
+          this.props.dispatchRemoveUser();
         }
       );
   };
@@ -22,4 +23,10 @@ class SignOutButton extends Component {
   }
 }
 
-export default connect()(SignOutButton);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchRemoveUser: ()=> dispatch(actionRemoveUser)
+    }
+};
+
+export default connect(null, mapDispatchToProps)(SignOutButton);
