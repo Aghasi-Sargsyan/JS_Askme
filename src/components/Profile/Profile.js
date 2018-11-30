@@ -3,15 +3,11 @@ import { connect } from 'react-redux';
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
 import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
-import  "./Profile.scss";
 import { NavLink } from "react-router-dom";
+import routePaths from "../../constKeys/routePaths";
+import "./Profile.scss";
 
 class Profile extends Component {
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
         const { user } = this.props;
         console.log(this.props);
@@ -20,11 +16,15 @@ class Profile extends Component {
             <div className="profile_page">
                 <aside className="left__side">
                     <UserInfo userName={user.userName} age={user.age} gender={user.gender} />
-                    <SkillContainer skills={user.skills} hue={257} saturation={100}  />
+                    <SkillContainer skills={user.skills} hue={257} saturation={100} />
                 </aside>
                 <aside className="right__side">
-                    <NavLink>My Questions</NavLink>
-                    <NavLink>Answered Questions</NavLink>
+                    <div className="my__questions__btn">
+                        <NavLink to={routePaths.myQuestions}>My Questions</NavLink>
+                    </div>
+                    <div className="my__answers__btn">
+                        <NavLink to={routePaths.answeredQuestions}>Answered Questions</NavLink>
+                    </div>
 
                     <ProfileQuestionsCont />
                 </aside>
