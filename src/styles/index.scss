@@ -29,6 +29,10 @@ body {
     z-index: 500;
 }
 
+a {
+    text-decoration: none;
+}
+
 .flex {
     display: -webkit-box;
     display: -ms-flexbox;

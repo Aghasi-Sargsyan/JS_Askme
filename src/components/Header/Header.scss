@@ -1,10 +1,8 @@
 header {
     width: 100%;
-    height: 90px;
     .navigation {
         position: relative;
         align-items: center;
-        padding: 10px 16px;
         .horizontal__line {
             width: 100%;
             position: absolute;
@@ -17,6 +15,7 @@ header {
             position: relative;
             z-index: 3;
             background-color: #f8f8f8;
+            line-height: 1;
         }
     }
     .space {
