@@ -4,6 +4,8 @@ const routePaths = {
     questionPage: "/questions",
     profilePage: "/profile",
     askQuestionPage: "/ask-question",
+    myQuestions: "/my-questions",
+    answeredQuestions: "/answered-questions",
     itemPage: "/item"
 };
 
