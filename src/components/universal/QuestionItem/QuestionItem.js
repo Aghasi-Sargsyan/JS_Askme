@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Avatar from '../Avatar/Avatar';
 import './QuestionItem.scss';
+import {Link} from "react-router-dom";
 
 export default class QuestionItem extends Component {
+
+
 
     render() {
         const descriptionArr = [];
@@ -11,7 +14,7 @@ export default class QuestionItem extends Component {
         const formattedDate = new Date(date).toLocaleString();
 
         return (
-            <div className='question_item_container'>
+            <Link to={`/item/${this.props.id}`} className='question_item_container' onClick={this.handleClick}>
                 <div className='question_item_content'>
                     <div className='flex justify_between'>
                         <div className='question_item_title'>
@@ -50,7 +53,7 @@ export default class QuestionItem extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Link>
         )
     }
 }

@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import React, {Component} from 'react'
+import {connect} from 'react-redux';
 import QuestionItem from '../../universal/QuestionItem/QuestionItem';
 
-class ProfileQuestionContainer extends Component {      
+class ProfileQuestionContainer extends Component {
     render() {
         return (
             <div>
@@ -13,17 +13,18 @@ class ProfileQuestionContainer extends Component {
                     <div className='flex question__item_header_txt'>
                         <div>Votes</div>
                         <div>Answers</div>
-                        <div className='empty_div'></div>
+                        <div className='empty_div'/>
                     </div>
                 </div>
                 {console.log(this.props.questions)}
-                {this.props.questions.map((question, index)=> <QuestionItem 
-                                                                      key={index} title={question.title} 
-                                                                      description={question.description}
-                                                                      answerCount={question.answerCount}
-                                                                      rate={question.rate} userName={this.props.user.userName}
-                                                                      skills={question.skills} date={question.date}/>
-                                         )}
+                {this.props.questions.map((question) => <QuestionItem
+                    key={question.id} id={question.id}
+                    title={question.title}
+                    description={question.description}
+                    answerCount={question.answerCount}
+                    rate={question.rate} userName={this.props.user.userName}
+                    skills={question.skills} date={question.date}/>
+                )}
             </div>
         )
     }

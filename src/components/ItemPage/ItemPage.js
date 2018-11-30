@@ -1,21 +1,53 @@
-import React, { Component } from "react";
-import Question from "./Question/Question";
+import React, {Component} from "react";
 import Answer from "./Answer/Answer";
 import Wysiwyg from "../universal/Wysiwyg/Wysiwyg";
+import {connect} from "react-redux";
 
 class ItemPage extends Component {
 
+    state = {
+        question: {
+            id: null,
+            userId: null,
+            title: null,
+            description: null,
+            rate: null,
+            answerCount: null,
+            date: null,
+            update: null,
+            skills: [],
+            age: null,
+            gender: null,
+        },
+        id: this.props.match.params.id
+    };
+
+    componentDidMount() {
+        const question = this.props.questions.filter((question) => this.state.id === question.id);
+        console.log(question);
+        this.setState({
+            question: {...question[0]}
+        });
+    }
+
     render() {
+
         return (
             <div>
-                <Question />
-                <hr />
-                <Answer />
-                <hr />
-                <Wysiwyg />
+                {this.state.question.title}
+                <hr/>
+                <Answer/>
+                <hr/>
+                <Wysiwyg/>
             </div>
         )
     }
 }
 
-export default ItemPage;
+const mapStateToProps = (state) => {
+    return {
+        questions: state.questionReducer.questions
+    }
+};
+
+export default connect(mapStateToProps)(ItemPage);

@@ -14,6 +14,7 @@ import AskQuestionPage from "./components/AskQuestionPage/AskQuestionPage";
 import Page404 from "./components/Page404/Page404";
 import AfterRegPopup from "./components/Profile/AfterRegPopup/AfterRegPopup";
 import {getAndDispatchUserQuestions} from "./redux/actions/questionActions";
+import ItemPage from "./components/ItemPage/ItemPage";
 
 
 class App extends Component {
@@ -55,6 +56,8 @@ class App extends Component {
 
                     <Route exact path={routePaths.askQuestionPage} render={() => (
                         user.isLoggedIn ? (<AskQuestionPage/>) : (signIn))}/>
+
+                    <Route exact path={"/item/:id"} component={ItemPage}/>
 
                     <Route component={Page404}/>
                 </Switch>
