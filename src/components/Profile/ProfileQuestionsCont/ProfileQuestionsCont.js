@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import ProfileQuestionItem from './ProfileQuestionItem/ProfileQuestionItem';
+import QuestionItem from '../../universal/QuestionItem/QuestionItem';
 
-class ProfileQuestionContainer extends Component {
+class ProfileQuestionContainer extends Component {      
     render() {
         return (
             <div>
-                <ProfileQuestionItem />
+                <div className='question_item_header flex align_center'>
+                    <div className='flex_grow'>
+                        <div>Type</div>
+                    </div>
+                    <div className='flex question__item_header_txt'>
+                        <div>Votes</div>
+                        <div>Answers</div>
+                        <div className='empty_div'></div>
+                    </div>
+                </div>
+                <QuestionItem />
             </div>
         )
     }

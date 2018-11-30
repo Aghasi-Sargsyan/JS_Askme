@@ -3,16 +3,25 @@ import { connect } from 'react-redux';
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
 import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
+import Tabs from './ProfileQuestionsCont/Tabs/Tabs';
+import Pane from './ProfileQuestionsCont/Pane/Pane';
 import "./Profile.scss";
-import { NavLink } from "react-router-dom";
-import routePaths from "../../constKeys/routePaths";
 
 class Profile extends Component {
     constructor(props) {
         super(props);
 
+        this.tabs = [
+            {
+                name: 'My Questions',
+                content: <ProfileQuestionsCont />
+            },
+            {
+                name: 'Answered Questions', 
+                content: <ProfileQuestionsCont />
+            }
+        ]
     }
-
     render() {
         const { user } = this.props;
         console.log(this.props);
@@ -25,25 +34,12 @@ class Profile extends Component {
                 </aside>
                 <aside className="right__side flex flex_column">
                     <div className='flex justify_center profile_questions_tab'>
-                        <div className="my__questions__btn">
-                            <NavLink to={routePaths.myQuestions}>My Questions</NavLink>
-                        </div>
-                        <div className="my__answers__btn">
-                            <NavLink to={routePaths.answeredQuestions}>Answered Questions</NavLink>
-                        </div>
-                    </div>
-                    <div>
-                        <div className='question_item_header flex align_center'>
-                            <div className='flex_grow'>
-                                <div>Type</div>
-                            </div>
-                            <div className='flex question__item_header_txt'>
-                                <div>Votes</div>
-                                <div>Answers</div>
-                                <div className='empty_div'></div>
-                            </div>
-                        </div>
-                        <ProfileQuestionsCont />
+                        <Tabs selected={0}>
+                            {
+                                this.tabs.map(tab =>
+                                <Pane key={tab} label={tab.name}>{tab.content}</Pane>)
+                            }
+                        </Tabs>
                     </div>
                 </aside>
             </div>

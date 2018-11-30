@@ -71,7 +71,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                {this.props.isLoggedIn && <Header/>};
+                {this.props.isLoggedIn && <Header/>}
                 {this.rend()}
                 {this.afterRegPopup()}
             </div>
