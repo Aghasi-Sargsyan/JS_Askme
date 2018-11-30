@@ -9,11 +9,11 @@
     padding: 0 10px;
     background-color: #f8f8f8;
     z-index: 99;
-    a {
+    .info__drop__a {
         padding: 10px 0 !important;
         display: block;
         text-align: right;
-        background-color: #fff;
+        font-size: 16px;
     }
     &:before {
         content: "";
@@ -23,13 +23,5 @@
         border: 12px solid transparent;
         border-top-width: 16px;
         border-bottom-color: #ffd400;
-    }
-    button {
-        text-align-last: right;
-        margin: 0;
-        padding: 0;
-        border: 0;
-        outline: 0;
-        background-color: #fff;
     }
 }
