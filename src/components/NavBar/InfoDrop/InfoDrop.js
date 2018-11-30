@@ -7,8 +7,8 @@ import "./InfoDrop.scss";
 const InfoDrop = ({ close }) => {
   return (
     <div className="info-drop tar">
-      <Link to={routePaths.profilePage}>
-        <button onClick={close}>Profile</button>
+      <Link to={routePaths.profilePage} onClick={close} className="info__drop__a">
+        Profile
       </Link>
       <SignOutButton />
     </div>

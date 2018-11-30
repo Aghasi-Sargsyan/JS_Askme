@@ -16,8 +16,6 @@ export default class QuestionsCont extends Component {
                         <div className='empty_div'></div>
                     </div>
                 </div>
-                <QuestionItem />
-                <QuestionItem />
             </div>
         )
     }

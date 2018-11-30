@@ -13,6 +13,7 @@ import Profile from "./components/Profile/Profile";
 import AskQuestionPage from "./components/AskQuestionPage/AskQuestionPage";
 import Page404 from "./components/Page404/Page404";
 import AfterRegPopup from "./components/Profile/AfterRegPopup/AfterRegPopup";
+import {getAndDispatchUserQuestions} from "./redux/actions/questionActions";
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
         auth().onAuthStateChanged(user => {
             if (user) {
                 this.props.getAndDispatchDbUser(user.uid);
+                this.props.getAndDispatchUserQuestions(user.uid);
                 this.props.dispatchLogin();
             } else {
                 this.props.dispatchLogout();
@@ -29,28 +31,30 @@ class App extends Component {
     }
 
     rend() {
-        if (this.props.isLoggedIn !== null) {
+        const {user} = this.props;
+        if (user.isLoggedIn !== null) {
             const signIn = <Redirect to={routePaths.signIn}/>;
             const questionPage = <Redirect to={routePaths.questionPage}/>;
+
             return (
                 <Switch>
                     <Route exact path="/" render={() => (
-                        this.props.isLoggedIn ? (questionPage) : (<SignInForm/>))}/>
+                        user.isLoggedIn ? (questionPage) : (<SignInForm/>))}/>
 
                     <Route exact path={routePaths.signIn} render={() => (
-                        this.props.isLoggedIn ? (questionPage) : (<SignInForm/>))}/>
+                        user.isLoggedIn ? (questionPage) : (<SignInForm/>))}/>
 
                     <Route exact path={routePaths.signUp} render={() => (
-                        this.props.isLoggedIn ? (questionPage) : (<SignUpForm/>))}/>
+                        user.isLoggedIn ? (questionPage) : (<SignUpForm/>))}/>
 
                     <Route exact path={routePaths.questionPage} render={() => (
-                        this.props.isLoggedIn ? (<QuestionPage/>) : (signIn))}/>
+                        user.isLoggedIn ? (<QuestionPage/>) : (signIn))}/>
 
                     <Route exact path={routePaths.profilePage} render={() => (
-                        this.props.isLoggedIn ? (<Profile/>) : (signIn))}/>
+                        user.isLoggedIn ? (<Profile/>) : (signIn))}/>
 
                     <Route exact path={routePaths.askQuestionPage} render={() => (
-                        this.props.isLoggedIn ? (<AskQuestionPage/>) : (signIn))}/>
+                        user.isLoggedIn ? (<AskQuestionPage/>) : (signIn))}/>
 
                     <Route component={Page404}/>
                 </Switch>
@@ -71,7 +75,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                {this.props.isLoggedIn && <Header/>};
+                {this.props.user.isLoggedIn && <Header/>}
                 {this.rend()}
                 {this.afterRegPopup()}
             </div>
@@ -83,6 +87,7 @@ class App extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
+        getAndDispatchUserQuestions:  bindActionCreators(getAndDispatchUserQuestions, dispatch),
         dispatchLogin: () => dispatch(actionLogin),
         dispatchLogout: () => dispatch(actionLogout),
     };
@@ -91,7 +96,6 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
-        isLoggedIn: state.userReducer.isLoggedIn
     }
 }
 
