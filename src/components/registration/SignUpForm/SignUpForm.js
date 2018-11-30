@@ -143,7 +143,7 @@ class SignUpForm extends Component {
                         </div>
 
                     </div>
-                    <form onSubmit={this.handleSubmit} className="singIn__form" noValidate>
+                    <form onSubmit={this.handleSubmit} className="singUn__form tac" noValidate>
                         <div className="singInUp__input__wrapper">
                             <input
                                 type="text"

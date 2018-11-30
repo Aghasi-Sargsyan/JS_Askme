@@ -19,7 +19,7 @@
     .signIn__logo {
         color: #fdb455;
         p {
-            padding: 20px 0 0 20px;
+            padding: 0 0 0 20px;
         }
     }
 }
@@ -111,4 +111,10 @@
     button[type="submit"]:disabled:hover {
         cursor: not-allowed;
     }
+}
+
+.error__message {
+    font-size: 10px;
+    color: red;
+    display: block;
 }
