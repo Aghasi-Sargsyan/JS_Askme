@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import routePaths from '../../../constKeys/routePaths';
+import answerIcon from '../../../assets/icons/answerIcon.png';
+import questionIcon from '../../../assets/icons/questionIcon.png';
 import Avatar from '../../universal/Avatar/Avatar';
 import InfoDrop from "../InfoDrop/InfoDrop";
 import "./NavBarItems.scss";
@@ -44,8 +46,8 @@ class NavBarItems extends Component {
         return (
             <ul>
                 <li>
-                    <NavLink to={routePaths.questionPage}>
-                        Questions For You
+                    <NavLink activeStyle={{ fontWeight: 'bold', color: '#000' }} to={routePaths.questionPage}>
+                        <img className='answer-icon' src={answerIcon} />Answers
                     </NavLink>
                 </li>
 
@@ -55,8 +57,8 @@ class NavBarItems extends Component {
                 </li>
 
                 <li>
-                    <NavLink to={routePaths.askQuestionPage}>
-                        Ask a Question
+                    <NavLink activeStyle={{ fontWeight: 'bold', color: '#000' }} to={routePaths.askQuestionPage}>
+                        <img className='question-icon' src={questionIcon} />Ask a Question
                     </NavLink>
                 </li>
                 <li>

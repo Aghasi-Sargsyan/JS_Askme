@@ -8,12 +8,12 @@ class QuestionsFilter extends Component {
             return <li key={index}>{skill.value}</li>
         });
         return (
-            <div className='am--questions-filter-container '>
-                <ul className='am__flex am__flex_column am__align_start'>
+            <div className='questions-filter-container '>
+                <ul className='flex flex_column align_start'>
                     <li>All</li>
-                    <li className='am__flex am__flex_column am__align_start'>
+                    <li className='flex flex_column align_start'>
                         Skill
-                        <ul className='am__flex am__flex_column am__align_start am--questions-skills-menu'>
+                        <ul className='flex flex_column align_start questions-skills-menu'>
                             {skills}
                         </ul>
                     </li>

@@ -1,5 +1,5 @@
 .bioform {
-    height: 650px;
+    height: 550px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -8,7 +8,7 @@
 }
 
 .bioForm__left {
-    width: 380px;
+    width: 300px;
     background-color: #ffd400;
     position: relative;
     .bioForm__logo {
@@ -18,8 +18,8 @@
         }
     }
     img {
-        width: 250px;
-        height: 250px;
+        width: 220px;
+        height: 220px;
         position: absolute;
         top: 40%;
         left: 50%;
@@ -43,7 +43,7 @@
 }
 
 .bioForm__right {
-    width: 600px;
+    width: 500px;
     padding: 100px;
     background-color: #fff;
     position: relative;
@@ -86,9 +86,9 @@
         .skills-cont {
             display: flex;
             align-items: baseline;
-            margin-top: 100px;
+            margin-top: 60px;
             input {
-                width: 300px;
+                width: 220px;
                 outline: none;
                 border: 0;
                 border-radius: 0;
@@ -97,7 +97,7 @@
         }
         .skillsList {
             width: 300px;
-            height: 130px;
+            height: 70px;
             padding: 10px 0;
             margin: auto;
             display: block;
@@ -105,7 +105,6 @@
             li {
                 display: inline-block;
                 background: #eee;
-                border: 1px solid #999;
                 margin: 3px 9px;
             }
         }
@@ -127,7 +126,7 @@
             font-weight: bold;
         }
         .bioForm__add {
-            width: 35px;
+            min-width: 35px;
             height: 35px;
             border-radius: 50%;
             border: 1px solid #999;

@@ -1,5 +1,5 @@
 .singInUp {
-    height: 650px;
+    height: 550px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -8,7 +8,7 @@
 }
 
 .signIn__left {
-    width: 580px;
+    width: 480px;
     background-color: #fff;
     position: relative;
     .signIn__with {
@@ -25,7 +25,7 @@
 }
 
 .signIn__right {
-    width: 400px;
+    width: 300px;
     background-color: #ffd400;
     position: relative;
     p {
@@ -52,7 +52,7 @@
 
 .singInUp {
     .social_btns {
-        margin: 40px 0 70px 0;
+        margin: 40px 0;
         .social_btn {
             cursor: pointer;
             background-color: #fff;
@@ -72,17 +72,23 @@
         flex-direction: column;
         align-items: center;
         input {
-            width: 400px;
-            height: 40px;
+            width: 300px;
+            height: 35px;
             border: 0;
             outline: none;
             border-bottom: 1px solid #999;
             padding: 0 10px;
             margin: 0 0 20px 0;
-        }
-        .error__message {
-            color: #b82121;
-            font-size: 13px;
+            &.error__input {
+                border-bottom: 1px solid red;
+                font-size: 13px;
+                position: relative;
+                &::after {
+                    content: '*';
+                    display: block;
+                    position: absolute;
+                }
+            }
         }
     }
     .singInUp__submit {

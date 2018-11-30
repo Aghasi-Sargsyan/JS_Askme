@@ -4,9 +4,10 @@ import NavBar from '../NavBar/NavBar';
 
 import "./Header.scss";
 
-const Header = props => (
+const Header = () => (
     <header>
-        <nav className="navigation">
+        <nav className="navigation flex">
+            <hr className='horizontal__line' />
             <Logo />
             <div className="space" />
             <NavBar />

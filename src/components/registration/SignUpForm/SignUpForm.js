@@ -6,7 +6,7 @@ import isEmail from 'validator/lib/isEmail';
 import { Link } from "react-router-dom";
 import routePaths from "../../../constKeys/routePaths";
 import { bindActionCreators } from "redux";
-import {actionAddUser} from "../../../redux/actions/userActions";
+import { actionAddUser } from "../../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
 import fb from "../../../assets/icons/fb.png";
 import google from "../../../assets/icons/google.png";
@@ -87,7 +87,8 @@ class SignUpForm extends Component {
         const { email, password, userName } = this.state;
         auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
-                return userCredential.user})
+                return userCredential.user
+            })
             .then(user => {
                 const newUser = {
                     id: user.uid,
@@ -100,8 +101,9 @@ class SignUpForm extends Component {
                     isNewUser: true
                 };
                 //adding user to DB
-              FireManager.addUser(newUser);
-              this.props.dispatchUser(newUser)})
+                FireManager.addUser(newUser);
+                this.props.dispatchUser(newUser)
+            })
             .catch(error => {
                 this.setState(prevState => ({
                     formErrors: {
@@ -117,17 +119,17 @@ class SignUpForm extends Component {
         const { formErrors, disabled } = this.state;
 
         return (
-            <div className="singInUp am__flex">
+            <div className="singInUp flex">
                 <div className='signUp__left'>
                     <div className='signUp__logo'>
-                        <p className='am_font_m'>AskMe</p>
+                        <p className='font_m'>AskMe</p>
                     </div>
-                    <p className='signUp__quotes am_font_l'>Find out the answers to your questions</p>
+                    <p className='signUp__quotes font_l'>Find out the answers to your questions</p>
                     <Link to={routePaths.signIn}>Sign In</Link>
                 </div>
                 <div className='signUp__right'>
-                    <div className='signUp__with am__tac'>
-                        <p className='am_font_m'>Sign In With</p>
+                    <div className='signUp__with tac'>
+                        <p className='font_m'>Sign In With</p>
                         <div className='social_btns'>
                             <button onClick={this.loginWithGoogle} className='social_btn'>
                                 <img src={google} alt="google" />

@@ -62,7 +62,7 @@ class SignInForm extends Component {
         auth()
             .signInWithEmailAndPassword(email, password)
             .then(userCredential => {
-              history.push(routePaths.questionPage)
+                history.push(routePaths.questionPage)
             })
             .catch(error => {
                 this.setState(prevState => ({
@@ -78,13 +78,13 @@ class SignInForm extends Component {
     render() {
         const { formErrors, disabled } = this.state;
         return (
-            <div className="singInUp am__flex">
+            <div className="singInUp flex">
                 <div className='signIn__left'>
                     <div className='signIn__logo'>
-                        <p className='am_font_m'>AskMe</p>
+                        <p className='font_m'>AskMe</p>
                     </div>
-                    <div className='signIn__with am__tac'>
-                        <p className='am_font_m'>Sign In With</p>
+                    <div className='signIn__with tac'>
+                        <p className='font_m'>Sign In With</p>
                         <div className='social_btns'>
                             <button onClick={this.loginWithGoogle} className='social_btn'>
                                 <img src={google} alt="google" />
@@ -97,7 +97,7 @@ class SignInForm extends Component {
                             </button>
                         </div>
                     </div>
-                    <form onSubmit={this.handleSubmit} className="singIn__form am__tac" noValidate>
+                    <form onSubmit={this.handleSubmit} className="singIn__form tac" noValidate>
                         <div className="singInUp__input__wrapper">
                             <input
                                 type="email"
@@ -135,8 +135,8 @@ class SignInForm extends Component {
                         </button>
                     </form>
                 </div>
-                <div className='signIn__right am__center'>
-                    <p className='am_font_l'>Let's Go!</p>
+                <div className='signIn__right center'>
+                    <p className='font_l'>Let's Go!</p>
                     <Link to={routePaths.signUp}>Sign Up</Link>
                 </div>
             </div>

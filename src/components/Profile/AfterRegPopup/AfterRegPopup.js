@@ -1,14 +1,14 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "./AfterRegPopup.scss";
 import Input from "../../universal/Input/Input";
 import FireManager from "../../../firebase/FireManager";
-import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import userImg from "../../../assets/icons/user.png";
 import male from "../../../assets/icons/male.png";
 import female from "../../../assets/icons/female.png";
-import {bindActionCreators} from "redux";
-import {actionAddUser} from "../../../redux/actions/userActions";
+import { bindActionCreators } from "redux";
+import { actionAddUser } from "../../../redux/actions/userActions";
 
 class AfterRegPopup extends Component {
   constructor(props) {
@@ -36,8 +36,8 @@ class AfterRegPopup extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {birthYear, skillList, gender} = this.state;
-    const {user} = this.props;
+    const { birthYear, skillList, gender } = this.state;
+    const { user } = this.props;
     const updatedUser = {
       age: birthYear.value,
       gender: gender,
@@ -71,7 +71,7 @@ class AfterRegPopup extends Component {
   };
 
   validate(target) {
-    const {birthYear, skill, skillList} = this.state;
+    const { birthYear, skill, skillList } = this.state;
     const value = target.value;
     switch (target.id) {
       case birthYear.id:
@@ -84,13 +84,13 @@ class AfterRegPopup extends Component {
   }
 
   addSkill = () => {
-    const {skillList, skill} = this.state;
+    const { skillList, skill } = this.state;
 
     skill.valid &&
-    this.setState({
-      skillList: [...skillList, {value: skill.value, rate: 0}],
-      skill: {...skill, value: ""}
-    });
+      this.setState({
+        skillList: [...skillList, { value: skill.value, rate: 0 }],
+        skill: { ...skill, value: "" }
+      });
   };
 
   skillsRender() {
@@ -100,16 +100,16 @@ class AfterRegPopup extends Component {
   }
 
   render() {
-    const {skill, skillList, birthYear} = this.state;
+    const { skill, skillList, birthYear } = this.state;
 
     return (
       <div className='modal_wrapper'>
-        <div className='bioform am__flex'>
+        <div className='bioform flex'>
           <div className='bioForm__left'>
             <div className='bioForm__logo'>
-              <p className='am_font_m'>AskMe</p>
-              <div className='am__tac'>
-                <img src={userImg} alt="user"/>
+              <p className='font_m'>AskMe</p>
+              <div className='tac'>
+                <img src={userImg} alt="user" />
                 <button
                   type="submit"
                   className="bioform__submit"
@@ -142,18 +142,18 @@ class AfterRegPopup extends Component {
                     value="Male"
                     onChange={this.handleCheck}
                   />
-                  <img src={male} alt="male"/>
+                  <img src={male} alt="male" />
 
                 </label>
                 <label>
                   {/* Female */}
                   <input type="radio"
-                         name="genderGroup"
-                         value="Female"
-                         id="radioFemale"
-                         onChange={this.handleCheck}
+                    name="genderGroup"
+                    value="Female"
+                    id="radioFemale"
+                    onChange={this.handleCheck}
                   />
-                  <img src={female} alt="female"/>
+                  <img src={female} alt="female" />
 
                 </label>
               </div>
@@ -195,7 +195,7 @@ class AfterRegPopup extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {user: state.userReducer.user}
+  return { user: state.userReducer.user }
 };
 
 const mapDispatchToProps = (dispatch) => {

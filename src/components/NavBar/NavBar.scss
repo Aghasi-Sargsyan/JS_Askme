@@ -1,8 +1,14 @@
 .navigation {
-    background-color: #a7a7a7;
+    background-color: #fff;
 }
 
 .navigation-bar {
     width: 75%;
     height: 100%;
+    li a {
+        font-size: 22px; // padding: 0 20px;
+        color: #000;
+        background-color: #fff;
+        padding: 0 20px;
+    }
 }

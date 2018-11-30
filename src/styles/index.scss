@@ -29,53 +29,53 @@ body {
     z-index: 500;
 }
 
-.am__flex {
+.flex {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
 }
 
-.am__flex_column {
+.flex_column {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
 }
 
-.am__flex_reverse {
+.flex_reverse {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;
     -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
 }
 
-.am__flex_1 {
+.flex_1 {
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
 }
 
-.am_flex_grow {
+.flex_grow {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
     min-width: 1px;
 }
 
-.am__flex_col {
+.flex_col {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column
 }
 
-.am__flex_end {
+.flex_end {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
 }
 
-.am__center {
+.center {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -87,64 +87,64 @@ body {
     justify-content: center;
 }
 
-.am__align_center {
+.align_center {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
 }
 
-.am__align_end {
+.align_end {
     -webkit-box-align: end;
     -ms-flex-align: end;
     align-items: flex-end;
 }
 
-.am__align_start {
+.align_start {
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
 }
 
-.am__justify_center {
+.justify_center {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
 }
 
-.am__justify_between {
+.justify_between {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
 }
 
-.am-ns {
+.ns {
     flex-shrink: 0;
 }
 
 /*fonts*/
 
-.am__ellipsis {
+.ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.am_font_s {
+.font_s {
     font-size: 12px;
     line-height: 14px;
 }
 
-.am_font_m {
+.font_m {
     font-size: 24px;
 }
 
-.am_font_l {
+.font_l {
     font-size: 36px;
 }
 
 /*inputs*/
 
-.tg_input {
+.input {
     -webkit-appearance: none;
     height: 36px;
     line-height: 36px;
@@ -155,14 +155,14 @@ body {
 }
 
 // Text alignment
-.am__tal {
+.tal {
     text-align: left;
 }
 
-.am__tar {
+.tar {
     text-align: right;
 }
 
-.am__tac {
+.tac {
     text-align: center;
 }
