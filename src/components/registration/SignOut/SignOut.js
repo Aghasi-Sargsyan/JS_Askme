@@ -25,7 +25,7 @@ class SignOutButton extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchRemoveUser: bindActionCreators(actionRemoveUser, dispatch)
+        dispatchRemoveUser: ()=> dispatch(actionRemoveUser)
     }
 };
 

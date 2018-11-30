@@ -13,6 +13,7 @@ import Profile from "./components/Profile/Profile";
 import AskQuestionPage from "./components/AskQuestionPage/AskQuestionPage";
 import Page404 from "./components/Page404/Page404";
 import AfterRegPopup from "./components/Profile/AfterRegPopup/AfterRegPopup";
+import {getAndDispatchUserQuestions} from "./redux/actions/questionActions";
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
         auth().onAuthStateChanged(user => {
             if (user) {
                 this.props.getAndDispatchDbUser(user.uid);
+                this.props.getAndDispatchUserQuestions(user.uid);
                 this.props.dispatchLogin();
             } else {
                 this.props.dispatchLogout();
@@ -85,6 +87,7 @@ class App extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
+        getAndDispatchUserQuestions:  bindActionCreators(getAndDispatchUserQuestions, dispatch),
         dispatchLogin: () => dispatch(actionLogin),
         dispatchLogout: () => dispatch(actionLogout),
     };
