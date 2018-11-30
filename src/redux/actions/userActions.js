@@ -17,7 +17,7 @@ export const actionLogout = {
 };
 
 export const actionRemoveUser = {
-  type: actionTypes.CLEAR_ALL_USERS
+  type: actionTypes.REMOVE_USER
 };
 
 export function getAndDispatchDbUser(userId) {
