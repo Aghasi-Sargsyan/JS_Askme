@@ -8,11 +8,6 @@ import { NavLink } from "react-router-dom";
 import routePaths from "../../constKeys/routePaths";
 
 class Profile extends Component {
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
         const { user } = this.props;
         console.log(this.props);
