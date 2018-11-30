@@ -24,7 +24,7 @@ class Profile extends Component {
                     <SkillContainer skills={user.skills} saturation={100} />
                 </aside>
                 <aside className="right__side flex flex_column">
-                    <div className='flex justify_center'>
+                    <div className='flex justify_center profile_questions_tab'>
                         <div className="my__questions__btn">
                             <NavLink to={routePaths.myQuestions}>My Questions</NavLink>
                         </div>

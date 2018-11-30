@@ -5,7 +5,7 @@
     }
     .right__side {
         margin-top: 3%;
-        width: 50%;
+        width: 70%;
         div {
             a {
                 color: grey;
@@ -15,6 +15,10 @@
                     font-weight: bold;
                 }
             }
+        }
+        .profile_questions_tab {
+            margin-bottom: 20px;
+            font-size: 20px;
         }
         .my__questions__btn {
             width: 163px;
