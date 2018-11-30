@@ -1,21 +1,15 @@
 .profile_page {
     display: flex;
-    justify-content: space-between;
     aside {
-        width: fit-content;
         margin-left: 5%;
     }
     .right__side {
-        display: flex;
-        justify-content: space-between;
         margin-top: 3%;
         width: 50%;
         div {
-            height: fit-content;
             a {
                 color: grey;
                 font-family: sans-serif;
-                font-size: larger;
                 &.active {
                     color: black;
                     font-weight: bold;
@@ -29,6 +23,21 @@
         .my__answers__btn {
             width: 248px;
             height: 21px;
+        }
+    }
+}
+
+.question_item_header {
+    height: 40px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    padding: 0 10px;
+    .question__item_header_txt {
+        div {
+            width: 70px;
+        }
+        .empty_div {
+            width: 150px;
         }
     }
 }

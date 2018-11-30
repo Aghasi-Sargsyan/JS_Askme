@@ -143,7 +143,6 @@ class AfterRegPopup extends Component {
                     onChange={this.handleCheck}
                   />
                   <img src={male} alt="male" />
-
                 </label>
                 <label>
                   {/* Female */}
