@@ -9,6 +9,11 @@
     padding: 0 10px;
     background-color: #fff;
     z-index: 99;
+    a {
+        padding: 10px 0 !important;
+        display: block;
+        text-align: right;
+    }
     &:before {
         content: "";
         position: absolute;

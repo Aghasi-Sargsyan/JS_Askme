@@ -14,7 +14,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #d9d9d9;
+    background-color: #f8f8f8;
 }
 
 .modal_wrapper {
@@ -73,6 +73,10 @@ body {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
+}
+
+.wrap {
+    flex-wrap: wrap;
 }
 
 .center {

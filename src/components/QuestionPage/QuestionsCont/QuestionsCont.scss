@@ -1,5 +1,9 @@
-.am--questions-container {
+.questions_container {
     height: 100vh;
-    width: 80%;
+    width: 60%;
     background-color: burlywood;
+    .question_header {
+        height: 40px;
+        background-color: #fff;
+    }
 }

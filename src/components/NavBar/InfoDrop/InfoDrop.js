@@ -6,7 +6,7 @@ import "./InfoDrop.scss";
 
 const InfoDrop = ({ close }) => {
   return (
-    <div className="info-drop flex flex_column tar justify_around">
+    <div className="info-drop tar">
       <Link to={routePaths.profilePage}>
         <button onClick={close}>Profile</button>
       </Link>

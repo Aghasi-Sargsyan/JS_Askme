@@ -4,9 +4,9 @@ import Input from "../universal/Input/Input";
 import FireManager from "../../firebase/FireManager";
 import { connect } from "react-redux";
 import './AskQuestionPage.scss';
-import {bindActionCreators} from "redux";
-import {getAndDispatchDbUser} from "../../redux/actions/userActions";
-import {actionAddQuestion} from "../../redux/actions/questionActions";
+import { bindActionCreators } from "redux";
+import { getAndDispatchDbUser } from "../../redux/actions/userActions";
+import { actionAddQuestion } from "../../redux/actions/questionActions";
 
 class AskQuestionPage extends Component {
   state = {
@@ -37,21 +37,21 @@ class AskQuestionPage extends Component {
     }
   };
 
-    handleRadioButton = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    };
+  handleRadioButton = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  };
 
-    addSkill = () => {
-        const {skills, skillDesc} = this.state;
-        const skillList = skills.concat(skillDesc);
-        this.setState({
-            skills: skillList,
-            skillDesc: '',
+  addSkill = () => {
+    const { skills, skillDesc } = this.state;
+    const skillList = skills.concat(skillDesc);
+    this.setState({
+      skills: skillList,
+      skillDesc: '',
 
-        })
-    };
+    })
+  };
 
   skillsRender = () => {
     return this.state.skills.map((skill, index) => (
@@ -63,20 +63,20 @@ class AskQuestionPage extends Component {
     e.preventDefault();
     const { title, description, skills, age, gender } = this.state;
     const question = {
-        id: null,
-        userId: this.props.user.id,
-        title: title,
-        description: description,
-        rate: 0,
-        answerCount: 0,
-        date: Date.now(),
-        update: null,
-        skill: skills,
-        age: age,
-        gender: gender
+      id: null,
+      userId: this.props.user.id,
+      title: title,
+      description: description,
+      rate: 0,
+      answerCount: 0,
+      date: Date.now(),
+      update: null,
+      skill: skills,
+      age: age,
+      gender: gender
     };
-      FireManager.addQuestion(question, this.props.user.id);
-      this.props.dispatchQuestion(question)
+    FireManager.addQuestion(question, this.props.user.id);
+    this.props.dispatchQuestion(question)
   };
 
   render() {
@@ -92,10 +92,10 @@ class AskQuestionPage extends Component {
             value={this.state.title}
           />
         </div>
-        <div className="am__flex">
+        <div className="flex">
           <Wysiwyg changeHandler={this.handleChange} />
         </div>
-        <div className='am__flex'>
+        <div className='flex'>
           <Input
             label="Skills"
             value={this.state.skillDesc}
@@ -165,10 +165,10 @@ const mapStateToProps = (state) => {
 };
 
 function mapDispatchToProps(dispatch) {
-    return {
-        getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
-        dispatchQuestion: bindActionCreators(actionAddQuestion, dispatch)
-    };
+  return {
+    getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
+    dispatchQuestion: bindActionCreators(actionAddQuestion, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AskQuestionPage);

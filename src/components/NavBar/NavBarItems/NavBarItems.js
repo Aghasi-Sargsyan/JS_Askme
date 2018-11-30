@@ -51,24 +51,28 @@ class NavBarItems extends Component {
                     </NavLink>
                 </li>
 
-                <li className="img-li" ref={(node) => this.wrapperRef = node}>
-                    <Avatar clicked={this.handleInfoDrop} />
-                    {this.state.infoOpen && <InfoDrop close={this.handleInfoDrop} />}
-                </li>
-
                 <li>
                     <NavLink activeStyle={{ fontWeight: 'bold', color: '#000' }} to={routePaths.askQuestionPage}>
                         <img className='question-icon' src={questionIcon} />Ask a Question
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink to={routePaths.itemPage}>
-                        Item
-                    </NavLink>
+
+                <li className="img-li" ref={(node) => this.wrapperRef = node}>
+                    <Avatar clicked={this.handleInfoDrop} />
+                    {this.state.infoOpen && <InfoDrop close={this.handleInfoDrop} />}
                 </li>
+
             </ul>
         )
     }
 }
 
 export default NavBarItems;
+
+
+
+// <li>
+// <NavLink to={routePaths.itemPage}>
+//     Item
+// </NavLink>
+// </li>

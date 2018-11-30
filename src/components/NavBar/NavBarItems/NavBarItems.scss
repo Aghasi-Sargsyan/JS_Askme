@@ -6,13 +6,13 @@ ul {
     padding: 0;
     list-style: none;
     .img-li {
-        margin-left: auto;
-        margin-right: 2em;
+        padding: 0 150px 0 30px;
         img {
             width: 70px;
             height: 70px;
             vertical-align: middle;
             cursor: pointer;
+            background-color: #f8f8f8;
         }
     }
     .answer-icon {
