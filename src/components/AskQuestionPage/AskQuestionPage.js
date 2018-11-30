@@ -157,7 +157,7 @@ class AskQuestionPage extends Component {
           <button type='button' onClick={this.addSkill} className='ask_question_skill_add'>
             +
           </button>
-          <ul> {this.skillsRender()} </ul>
+          <ul className='skill_list'> {this.skillsRender()} </ul>
         </div>
         <button className='ask_question_submit' onClick={this.onSubmit}>Post Your Question</button>
       </div>
