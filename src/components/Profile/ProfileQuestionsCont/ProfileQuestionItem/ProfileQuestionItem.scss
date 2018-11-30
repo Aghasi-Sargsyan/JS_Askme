@@ -1,27 +1,9 @@
 .question_item_container {
     .question_item_content {
         padding: 0 10px;
-        margin: 10px 0;
         background-color: #fff;
         .question_item_title {
             font-weight: bold;
-        }
-        .question_item_buttons {
-            button {
-                width: 20px;
-                height: 20px;
-                line-height: 20px;
-                font-size: 22px;
-                cursor: pointer;
-                border-radius: 2px;
-                text-align: center;
-                flex-shrink: 0;
-                padding: 0;
-                margin: 0 2px;
-                background-color: transparent;
-                outline: none;
-                border: none;
-            }
         }
         .question_item_desc {
             padding: 10px 0;

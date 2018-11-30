@@ -9,17 +9,17 @@ export default class SkillContainer extends Component {
 
     componentDidMount() {
         setTimeout(() => {
-            this.setState({collapse: false})
+            this.setState({ collapse: false })
         }, 500);
     }
 
     render() {
         const { collapse } = this.state;
-        const { skills, hue, saturation } = this.props;
+        const { skills, saturation } = this.props;
         return (
             <div className={`skill-container ${collapse ? "collapse" : ""}`}>
                 <label className="skill__label">Skills</label>
-                <Skills skills={skills} h={hue} s={saturation} />
+                <Skills skills={skills} s={saturation} />
             </div>
         );
     }
