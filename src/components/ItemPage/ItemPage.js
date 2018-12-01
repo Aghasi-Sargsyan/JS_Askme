@@ -45,6 +45,8 @@ class ItemPage extends Component {
                 <Answer />
                 <hr />
                 <Wysiwyg />
+                <button className='answer_submit' onClick={this.onSubmit}>Answer</button>
+
             </div>
         )
     }
