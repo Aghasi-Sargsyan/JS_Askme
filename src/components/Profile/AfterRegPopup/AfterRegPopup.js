@@ -194,7 +194,7 @@ class AfterRegPopup extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.userReducer.user }
+  return { user: state.userReducer }
 };
 
 const mapDispatchToProps = (dispatch) => {

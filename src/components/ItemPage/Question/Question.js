@@ -14,7 +14,7 @@ class Question extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        questions: state.questionReducer.questions
+        questions: state.questionReducer
     }
-}
+};
 export default connect(mapStateToProps)(Question)

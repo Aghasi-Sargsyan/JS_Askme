@@ -41,8 +41,8 @@ class ProfileQuestionContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.userReducer.user,
-        questions: state.questionReducer.questions
+        user: state.userReducer,
+        questions: state.questionReducer
     }
 };
 

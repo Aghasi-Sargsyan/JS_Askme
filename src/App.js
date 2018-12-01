@@ -20,7 +20,7 @@ import ItemPage from "./components/ItemPage/ItemPage";
 class App extends Component {
 
     componentDidMount() {
-        auth().onAuthStateChanged(user => {
+      auth().onAuthStateChanged(user => {
             if (user) {
                 this.props.getAndDispatchDbUser(user.uid);
                 this.props.dispatchLogin();
@@ -75,9 +75,9 @@ class App extends Component {
     }
 
     render() {
-        return (
+      console.log(this.props.user);
+      return (
             <div>
-                {this.props.isLoggedIn && <Header/>}
                 {this.props.user.isLoggedIn && <Header/>}
                 {this.rend()}
                 {this.afterRegPopup()}
@@ -98,7 +98,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return {
-        user: state.userReducer.user,
+        user: state.userReducer,
     }
 }
 
