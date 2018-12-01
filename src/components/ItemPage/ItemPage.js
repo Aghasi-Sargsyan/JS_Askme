@@ -1,7 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Answer from "./Answer/Answer";
 import Wysiwyg from "../universal/Wysiwyg/Wysiwyg";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+import './ItemPage.scss';
 
 class ItemPage extends Component {
 
@@ -26,19 +27,25 @@ class ItemPage extends Component {
         const question = this.props.questions.filter((question) => this.state.id === question.id);
         console.log(question);
         this.setState({
-            question: {...question[0]}
+            question: { ...question[0] }
         });
     }
 
     render() {
 
         return (
-            <div>
-                {this.state.question.title}
-                <hr/>
-                <Answer/>
-                <hr/>
-                <Wysiwyg/>
+            <div className='question__page'>
+                <div className='question__title'>
+                    {this.state.question.title}
+                </div>
+                <hr />
+                <div className='question__desc'>
+                    {this.state.question.description}
+                </div>
+                <hr />
+                <Answer />
+                <hr />
+                <Wysiwyg />
             </div>
         )
     }

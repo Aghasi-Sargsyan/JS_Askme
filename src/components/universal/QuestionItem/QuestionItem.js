@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Avatar from '../Avatar/Avatar';
 import './QuestionItem.scss';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class QuestionItem extends Component {
 
@@ -10,7 +10,7 @@ export default class QuestionItem extends Component {
     render() {
         const descriptionArr = [];
         descriptionArr.push(this.props.description);
-        const {date} = this.props;
+        const { date } = this.props;
         const formattedDate = new Date(date).toLocaleString();
 
         return (
@@ -19,7 +19,7 @@ export default class QuestionItem extends Component {
                     <div className='flex justify_between'>
                         <div className='question_item_title'>
                             {this.props.title}
-                    </div>
+                        </div>
                         <div className='question_item_buttons'>
                             <button>-</button>
                             <button>x</button>
@@ -27,7 +27,10 @@ export default class QuestionItem extends Component {
                     </div>
 
                     <div className='question_item_desc flex align_center'>
-                        <div className='flex_grow' dangerouslySetInnerHTML={{__html:descriptionArr.join('')}}>
+                        <div className='flex_grow'>
+                            <div dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}>
+
+                            </div>
                         </div>
                         <div className='flex align_center'>
                             <div className='flex question_item_scores'>

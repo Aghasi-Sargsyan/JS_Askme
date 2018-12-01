@@ -1,10 +1,14 @@
 .question_item_container {
     .question_item_content {
-        padding: 0 10px;
-        margin: 10px 0;
+        padding: 10px;
+        margin: 6px 0;
         background-color: #fff;
         .question_item_title {
+            max-width: 500px;
             font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         .question_item_buttons {
             button {
@@ -24,7 +28,15 @@
             }
         }
         .question_item_desc {
-            padding: 10px 0;
+            padding: 4px 0;
+            div {
+                &>* {
+                    max-width: 500px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
             .question_item_scores {
                 div {
                     width: 70px;
@@ -49,6 +61,9 @@
                 padding: 4px 6px;
                 display: inline-block;
             }
+        }
+        .question_item_date {
+            font-size: 12px;
         }
     }
 }

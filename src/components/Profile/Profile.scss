@@ -1,7 +1,7 @@
 .profile_page {
     display: flex;
-    aside {
-        margin-left: 5%;
+    .left__side {
+        margin-left: 80px;
     }
     .right__side {
         margin-top: 3%;
@@ -18,7 +18,7 @@
         }
         .profile_questions_tab {
             margin-bottom: 20px;
-            font-size: 20px;
+            font-size: 16px;
         }
         .my__questions__btn {
             width: 163px;
