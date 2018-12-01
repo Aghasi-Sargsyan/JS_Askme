@@ -7,11 +7,15 @@ class RateCounter extends Component {
     }
 
     incrementVote = () => {
-        this.setState({ vote: this.state.vote + 1 });
+        this.setState(prevState => ({
+            vote: prevState.vote + 1
+        }));
     }
 
     decrementVote = () => {
-        this.setState({ vote: this.state.vote - 1 });
+        this.setState(prevState => ({
+            vote: prevState.vote - 1
+        }));
     }
 
     render() {
