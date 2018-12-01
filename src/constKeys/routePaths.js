@@ -6,7 +6,8 @@ const routePaths = {
     askQuestionPage: "/ask-questions",
     myQuestions: "/my-questions",
     answeredQuestions: "/answered-questions",
-    itemPage: "/item"
+    itemPage: "/item",
+    settingPage: "/settings/"
 };
 
 export default routePaths;

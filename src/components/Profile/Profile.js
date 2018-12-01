@@ -16,7 +16,7 @@ class Profile extends Component {
         this.tabs = [
             {
                 name: 'My Questions',
-                content: <ProfileQuestionsCont myQuestions />
+                content: <ProfileQuestionsCont myQuestions/>
             },
             {
                 name: 'Answered Questions',
