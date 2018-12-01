@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import './AskQuestionPage.scss';
 import { bindActionCreators } from "redux";
 import { getAndDispatchDbUser } from "../../redux/actions/userActions";
-import { actionAddQuestion } from "../../redux/actions/questionActions";
 import male from "../../assets/icons/male.png";
 import female from "../../assets/icons/female.png";
 import gender from '../../assets/icons/gender.png';
@@ -78,7 +77,6 @@ class AskQuestionPage extends Component {
       gender: gender
     };
     FireManager.addQuestion(question, this.props.user.id);
-    this.props.dispatchQuestion([question])
   };
 
   render() {
@@ -174,7 +172,6 @@ const mapStateToProps = (state) => {
 function mapDispatchToProps(dispatch) {
   return {
     getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
-    dispatchQuestion: bindActionCreators(actionAddQuestion, dispatch)
   };
 }
 

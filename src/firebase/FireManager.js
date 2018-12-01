@@ -73,7 +73,6 @@ export default class FireManager {
         if (userId) {
             const ref = firestore().collection("questions").doc();
             const newQuestion = { ...question, id: ref.id };
-            console.log('new', newQuestion)
             ref.set(newQuestion)
                 .then(() => {
                     console.log("Question successfully added");

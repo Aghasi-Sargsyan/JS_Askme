@@ -14,7 +14,7 @@ export default class QuestionItem extends Component {
         const formattedDate = new Date(date).toLocaleString();
 
         return (
-            <Link to={`/item/${this.props.id}`} className='question_item_container' onClick={this.handleClick}>
+            <Link to={`/item/${this.props.id}`} className='question_item_container'>
                 <div className='question_item_content'>
                     <div className='flex justify_between'>
                         <div className='question_item_title'>

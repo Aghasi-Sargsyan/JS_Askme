@@ -25,7 +25,6 @@ class ItemPage extends Component {
 
     componentDidMount() {
         const question = this.props.questions.filter((question) => this.state.id === question.id);
-        console.log(question);
         this.setState({
             question: { ...question[0] }
         });

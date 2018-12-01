@@ -1,8 +1,18 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import QuestionItem from '../../universal/QuestionItem/QuestionItem';
+import {bindActionCreators} from "redux";
+import {getAndDispatchUserQuestions} from "../../../redux/actions/questionActions";
 
 class ProfileQuestionContainer extends Component {
+
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.user.id !== this.props.user.id){
+            this.props.getAndDispatchUserQuestions(this.props.user.id);
+        }
+    }
+
     render() {
         return (
             <div>
@@ -16,7 +26,6 @@ class ProfileQuestionContainer extends Component {
                         <div className='empty_div'/>
                     </div>
                 </div>
-                {console.log(this.props.questions)}
                 {this.props.questions.map((question) => <QuestionItem
                     key={question.id} id={question.id}
                     title={question.title}
@@ -36,4 +45,11 @@ const mapStateToProps = (state) => {
         questions: state.questionReducer.questions
     }
 };
-export default connect(mapStateToProps)(ProfileQuestionContainer);
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getAndDispatchUserQuestions:  bindActionCreators(getAndDispatchUserQuestions, dispatch),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileQuestionContainer);

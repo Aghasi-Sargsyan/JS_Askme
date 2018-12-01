@@ -23,7 +23,6 @@ class App extends Component {
         auth().onAuthStateChanged(user => {
             if (user) {
                 this.props.getAndDispatchDbUser(user.uid);
-                this.props.getAndDispatchUserQuestions(user.uid);
                 this.props.dispatchLogin();
             } else {
                 this.props.dispatchLogout();

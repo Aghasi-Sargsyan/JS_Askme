@@ -26,7 +26,6 @@ class Profile extends Component {
   
     render() {
         const { user } = this.props;
-        console.log(this.props);
         return (
             <div className="profile_page">
                 <aside className="left__side">
