@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Answer from "./Answer/Answer";
 import Wysiwyg from "../universal/Wysiwyg/Wysiwyg";
 import { connect } from "react-redux";
+import Question from "./Question/Question";
 import './ItemPage.scss';
 
 class ItemPage extends Component {
@@ -34,18 +35,14 @@ class ItemPage extends Component {
 
         return (
             <div className='question__page'>
-                <div className='question__title'>
-                    {this.state.question.title}
-                </div>
+                <Question question={this.state.question} />
                 <hr />
-                <div className='question__desc'>
-                    {this.state.question.description}
-                </div>
-                <hr />
+                <h4>Answers</h4>
                 <Answer />
                 <hr />
+                <h4>Your Answer</h4>
                 <Wysiwyg />
-                <button className='answer_submit' onClick={this.onSubmit}>Answer</button>
+                <button className='answer_submit' onClick={this.onSubmit}>Post your answer</button>
 
             </div>
         )
