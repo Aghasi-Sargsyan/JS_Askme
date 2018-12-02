@@ -114,7 +114,7 @@ class AskQuestionPage extends Component {
             <input
               type="radio"
               name="gender"
-              value="All"
+              value="all"
               defaultChecked="true"
               disabled={isTyping}
               onChange={this.handleRadioButton}
@@ -125,7 +125,7 @@ class AskQuestionPage extends Component {
             <input
               type="radio"
               name="gender"
-              value="Male"
+              value="male"
               disabled={isTyping}
               onChange={this.handleRadioButton}
             />
@@ -135,7 +135,7 @@ class AskQuestionPage extends Component {
             <input
               type="radio"
               name="gender"
-              value="Female"
+              value="female"
               disabled={isTyping}
               onChange={this.handleRadioButton}
             />
