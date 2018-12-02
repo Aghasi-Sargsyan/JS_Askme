@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
 import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
@@ -16,11 +16,11 @@ class Profile extends Component {
         this.tabs = [
             {
                 name: 'My Questions',
-                content: <ProfileQuestionsCont myQuestions/>
+                content: <ProfileQuestionsCont myQuestions />
             },
             {
                 name: 'Answered Questions',
-                content: <ProfileQuestionsCont/>
+                content: <ProfileQuestionsCont />
             }
         ];
 
@@ -29,10 +29,10 @@ class Profile extends Component {
             age: 34,
             gender: "male",
             skills: [
-                {value: "JS", rate: 20},
-                {value: "HTML", rate: 10},
-                {value: "CSS", rate: 30},
-                {value: "PHP", rate: 25},
+                { value: "JS", rate: 20 },
+                { value: "HTML", rate: 10 },
+                { value: "CSS", rate: 30 },
+                { value: "PHP", rate: 25 },
             ],
             isShowAdd: false,
             inputValue: ""
@@ -40,7 +40,7 @@ class Profile extends Component {
     }
 
     changeHandler = (e) => {
-        this.setState({inputValue: e.target.value});
+        this.setState({ inputValue: e.target.value });
     };
 
     addSkillHandler = () => {
@@ -49,7 +49,7 @@ class Profile extends Component {
         }));
 
         this.state.inputValue.length && this.setState({
-            skills: [{value: this.state.inputValue, rate: 0}, ...this.state.skills],
+            skills: [{ value: this.state.inputValue, rate: 0 }, ...this.state.skills],
             inputValue: ""
         });
     };
@@ -59,23 +59,23 @@ class Profile extends Component {
         const index = e.target.id;
         if (index !== -1) {
             array.splice(index, 1);
-            this.setState({skills: array});
+            this.setState({ skills: array });
         }
     };
 
     render() {
-        const {userName, age, gender, skills, isShowAdd, inputValue} = this.state;
+        const { userName, age, gender, skills, isShowAdd, inputValue } = this.state;
         return (
             <div className="profile_page">
                 <aside className="left__side">
-                    <UserInfo userName={userName} age={age} gender={gender}/>
+                    <UserInfo userName={userName} age={age} gender={gender} />
                     <div className="user__skills">
-                        <SkillContainer deleteSkill={this.deleteSkill} skills={skills} saturation={100}/>
+                        <SkillContainer isShowingMessage deleteSkill={this.deleteSkill} skills={skills} saturation={100} />
                         {isShowAdd && <Input
                             className="input__skill"
                             valid
                             changeHandler={this.changeHandler}
-                            value={inputValue}/>
+                            value={inputValue} />
                         }
                         <button className="add__user__skill__btn" onClick={this.addSkillHandler}>Add Skill</button>
                     </div>

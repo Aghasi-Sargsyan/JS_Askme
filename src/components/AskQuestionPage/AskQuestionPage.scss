@@ -16,6 +16,12 @@
         margin: 10px 0;
         label {
             margin: 0 10px;
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            &[aria-disabled="true"] {
+                background-color: #949292;
+            }
         }
         [type=radio] {
             position: absolute;
@@ -33,12 +39,24 @@
         }
     }
     .skill_list {
-        height: 70px;
-        padding: 10px 0;
-        li {
-            display: inline-block;
-            background: #eee;
-            margin: 3px 9px;
+        .skill-container {
+            padding: 0;
+            li {
+                display: flex;
+                color: #000;
+                p {
+                    background-color: #eee;
+                    padding: 0px 8px;
+                    height: 20px;
+                    font-size: 15px;
+                    line-height: 20px;
+                }
+                button {
+                    height: 20px;
+                    background: transparent;
+                    outline: none;
+                }
+            }
         }
     }
     .ask_question_submit {

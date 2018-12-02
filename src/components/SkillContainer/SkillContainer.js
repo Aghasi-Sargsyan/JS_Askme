@@ -15,10 +15,10 @@ export default class SkillContainer extends Component {
 
     render() {
         const { collapse } = this.state;
-        const { skills, saturation, deleteSkill } = this.props;
+        const { skills, saturation, deleteSkill, isShowingMessage } = this.props;
         return (
             <div className={`skill-container ${collapse ? "collapse" : ""}`}>
-                <Skills deleteSkill={deleteSkill} skills={skills} s={saturation} />
+                <Skills isShowingMessage={isShowingMessage} deleteSkill={deleteSkill} skills={skills} s={saturation} />
             </div>
         );
     }
