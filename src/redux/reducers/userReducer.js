@@ -17,7 +17,8 @@ export default function (state = initialState, action) {
     case actionTypes.ADD_USER:
       return {
         ...state,
-        ...action.userData
+        ...action.userData,
+        age: new Date().getFullYear() - action.userData.age
       };
 
     case actionTypes.REMOVE_USER:

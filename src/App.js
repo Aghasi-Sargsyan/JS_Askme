@@ -75,7 +75,6 @@ class App extends Component {
     }
 
     render() {
-      console.log(this.props.user);
       return (
             <div>
                 {this.props.user.isLoggedIn && <Header/>}
