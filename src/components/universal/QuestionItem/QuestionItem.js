@@ -28,9 +28,7 @@ export default class QuestionItem extends Component {
 
                     <div className='question_item_desc flex align_center'>
                         <div className='flex_grow'>
-                            <div dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}>
-
-                            </div>
+                            <div dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}></div>
                         </div>
                         <div className='flex align_center'>
                             <div className='flex question_item_scores'>
