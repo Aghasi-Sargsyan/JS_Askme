@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import Avatar from '../../universal/Avatar/Avatar';
 import RateCounter from '../../universal/RateCounter/RateCounter';
 import './Question.scss';

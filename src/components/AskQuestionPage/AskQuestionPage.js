@@ -8,6 +8,8 @@ import { getAndDispatchDbUser } from "../../redux/actions/userActions";
 import male from "../../assets/icons/male.png";
 import female from "../../assets/icons/female.png";
 import gender from '../../assets/icons/gender.png';
+import InputRange from 'react-input-range';
+import 'react-input-range/lib/css/index.css'
 
 class AskQuestionPage extends Component {
   state = {
@@ -15,7 +17,7 @@ class AskQuestionPage extends Component {
     description: "",
     skills: [],
     skillDesc: '',
-    age: '',
+    age: { min: 15, max: 30 },
     gender: '',
     isTyping: false,
   };
@@ -95,18 +97,15 @@ class AskQuestionPage extends Component {
         <div>
           <Wysiwyg changeHandler={this.handleChange} />
         </div>
-        <div>
-          <label>
-            Age
-            <input
-              className='mar_left_20'
-              type='number'
-              value={this.state.age}
-              disabled={isTyping}
-              onChange={this.handleChange}
-              id="age"
-            />
-          </label>
+        <div className='age__slider flex'>
+          <div className='age__slider_age'>Age</div>
+          <InputRange
+            draggableTrack
+            maxValue={70}
+            minValue={10}
+            onChange={value => this.setState({ age: value })}
+            onChangeComplete={value => console.log(value)}
+            value={this.state.age} />
         </div>
         <div className='ask_question_gender'>
           <span className='pad_right_20'>Gender</span>
