@@ -30,7 +30,7 @@ class Tabs extends Component {
     }
 
     return (
-      <ul className="tabs__labels">
+      <ul className="tabs__labels flex">
         {this.props.children.map(labels)}
       </ul>
     );

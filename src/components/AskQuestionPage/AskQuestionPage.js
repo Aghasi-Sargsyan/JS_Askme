@@ -153,7 +153,7 @@ class AskQuestionPage extends Component {
               disabled={isTyping}
               onChange={this.handleRadioButton}
             />
-            <img src={female} alt="female" />
+            <img className='female' src={female} alt="female" />
           </label>
         </div>
         <div>

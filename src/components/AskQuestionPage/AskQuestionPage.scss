@@ -64,7 +64,7 @@
         height: 50px;
         color: #fff;
         cursor: pointer;
-        background-color: #FF9800;
+        background-color: #00be73;
         border: none;
         outline: none;
         margin: auto;
@@ -73,9 +73,10 @@
     .ask_question_skill_add {
         min-width: 35px;
         height: 35px;
+        line-height: 1.5;
         border-radius: 50%;
         border: 1px solid #999;
-        background-color: #FF9800;
+        background-color: #00be73;
         color: #fff;
         font-size: 20px;
         margin: 0 10px;
@@ -101,4 +102,8 @@ input[type="radio"]:disabled {
     .age__slider_age {
         margin-right: 20px;
     }
+}
+
+.female {
+    height: 30px;
 }

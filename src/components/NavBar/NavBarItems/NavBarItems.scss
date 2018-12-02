@@ -1,22 +1,22 @@
-ul {
+.navbar__items {
     display: flex;
     align-items: center;
     margin: 0;
     padding: 0;
     list-style: none;
+    font-size: 22px;
+    .answer-icon {
+        width: 30px;
+    }
     .img-li {
-        padding: 0 150px 0 30px;
+        padding: 0 150px 0 130px;
         img {
-            width: 70px;
-            height: 70px;
+            width: 55px;
+            height: 55px;
             vertical-align: middle;
             cursor: pointer;
             background-color: #f8f8f8;
         }
-    }
-    .answer-icon {
-        width: 42px;
-        height: 34px;
     }
     .question-icon {
         width: 30px;
@@ -26,7 +26,6 @@ ul {
     li {
         padding: 0 8px;
         font-size: 19px;
-        font-family: sans-serif;
         display: flex;
         align-items: center;
         position: relative;

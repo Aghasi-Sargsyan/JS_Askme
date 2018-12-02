@@ -66,7 +66,7 @@ class Profile extends Component {
     render() {
         const { userName, age, gender, skills, isShowAdd, inputValue } = this.state;
         return (
-            <div className="profile_page">
+            <div className="profile_page flex">
                 <aside className="left__side">
                     <UserInfo userName={userName} age={age} gender={gender} />
                     <div className="user__skills">

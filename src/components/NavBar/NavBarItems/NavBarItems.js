@@ -44,7 +44,7 @@ class NavBarItems extends Component {
 
     render() {
         return (
-            <ul>
+            <ul className='navbar__items'>
                 <li>
                     <NavLink activeStyle={{ fontWeight: 'bold', color: '#000' }} to={routePaths.questionPage}>
                         <img className='answer-icon' src={answerIcon} alt='answer' />Answers

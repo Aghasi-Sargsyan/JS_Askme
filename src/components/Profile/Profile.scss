@@ -1,7 +1,8 @@
 .profile_page {
-    display: flex;
+    background-color: #f8f8f8;
     .left__side {
-        margin-left: 80px;
+        height: 100vh;
+        padding-left: 80px;
         .user__skills {
             position: relative;
             .skills {
@@ -69,11 +70,11 @@
             .add__user__skill__btn {
                 width: 150px;
                 height: 50px;
-                background-color: #61ee30;
+                background-color: #00be73;
                 position: absolute;
                 left: 66px;
                 margin-top: 20px;
-                border: 1px solid #61ee30;
+                border: 1px solid #00be73;
                 -webkit-border-radius: 3px;
                 -moz-border-radius: 3px;
                 border-radius: 3px;
@@ -81,8 +82,8 @@
                 outline: none;
                 cursor: pointer;
                 &:hover {
-                    background-color: green;
-                    border: 1px solid green;
+                    background-color: #1dae75;
+                    border: 1px solid #1dae75;
                 }
             }
             .input-cont {
@@ -125,10 +126,9 @@
 }
 
 .question_item_header {
-    height: 40px;
     background-color: #fff;
     margin-bottom: 15px;
-    padding: 0 10px;
+    padding: 10px;
     .question__item_header_txt {
         div {
             width: 70px;

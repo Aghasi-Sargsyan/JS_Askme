@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Avatar from '../Avatar/Avatar';
 import './QuestionItem.scss';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class QuestionItem extends Component {
     render() {
         const descriptionArr = [];
         descriptionArr.push(this.props.description);
-        const {date} = this.props;
+        const { date } = this.props;
         const formattedDate = new Date(date).toLocaleString();
 
         return (
@@ -19,17 +19,17 @@ export default class QuestionItem extends Component {
                         </div>
                         <div className='question_item_buttons'>
                             {!this.props.profileQuestion &&
-                            <>
-                                <button>-</button>
-                                <button>x</button>
-                            </>
+                                <>
+                                    <button>-</button>
+                                    <button>x</button>
+                                </>
                             }
                         </div>
                     </div>
 
+
                     <div className='question_item_desc flex align_center'>
-                        <div className='flex_grow'>
-                            <div dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}></div>
+                        <div className='flex_grow question_item_question' dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}>
                         </div>
                         <div className='flex align_center'>
                             <div className='flex question_item_scores'>
@@ -38,7 +38,7 @@ export default class QuestionItem extends Component {
                             </div>
                             <div className='flex question_item_user align_center'>
                                 <div className='question_item_avatar'>
-                                    <Avatar/>
+                                    <Avatar />
                                 </div>
                                 <div className='question_item_writer'>
                                     <div>{this.props.userName}</div>
