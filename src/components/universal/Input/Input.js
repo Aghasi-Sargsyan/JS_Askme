@@ -15,6 +15,7 @@ const Input = props => {
             <div>
                 {props.label && <label htmlFor={props.id}>{props.label}</label>}
                 <input
+                    className={props.className}
                     type={type}
                     value={props.value}
                     placeholder={props.placeholder}

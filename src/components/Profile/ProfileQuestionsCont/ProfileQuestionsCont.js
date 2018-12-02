@@ -6,9 +6,8 @@ import {getAndDispatchUserQuestions} from "../../../redux/actions/questionAction
 
 class ProfileQuestionContainer extends Component {
 
-
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.user.id !== this.props.user.id){
+        if (prevProps.user.id !== this.props.user.id) {
             this.props.getAndDispatchUserQuestions(this.props.user.id);
         }
     }
@@ -26,14 +25,17 @@ class ProfileQuestionContainer extends Component {
                         <div className='empty_div'/>
                     </div>
                 </div>
-                {this.props.questions.map((question) => <QuestionItem
-                    key={question.id} id={question.id}
-                    title={question.title}
-                    description={question.description}
-                    answerCount={question.answerCount}
-                    rate={question.rate} userName={this.props.user.userName}
-                    skills={question.skills} date={question.date}/>
-                )}
+                {
+                    this.props.myQuestions && this.props.questions.map((question) => <QuestionItem
+                        profileQuestion={true}
+                        key={question.id} id={question.id}
+                        title={question.title}
+                        description={question.description}
+                        answerCount={question.answerCount}
+                        rate={question.rate} userName={this.props.user.userName}
+                        skills={question.skills} date={question.date}/>
+                    )
+                }
             </div>
         )
     }
@@ -48,7 +50,7 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getAndDispatchUserQuestions:  bindActionCreators(getAndDispatchUserQuestions, dispatch),
+        getAndDispatchUserQuestions: bindActionCreators(getAndDispatchUserQuestions, dispatch),
     };
 }
 

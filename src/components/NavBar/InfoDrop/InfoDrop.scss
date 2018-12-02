@@ -2,8 +2,8 @@
     width: 110px;
     min-height: 100px;
     position: absolute;
-    top: 90px;
-    margin-left: -45px;
+    top: 82px;
+    margin-left: -20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-top: 4px solid #ffd400;
     padding: 0 10px;
@@ -13,13 +13,16 @@
         padding: 10px 0 !important;
         display: block;
         text-align: right;
-        font-size: 16px;
+        font-size: 14px;
+    }
+    button {
+        cursor: pointer;
     }
     &:before {
         content: "";
         position: absolute;
-        top: -35px;
-        right: 0;
+        top: -32px;
+        right: 40px;
         border: 12px solid transparent;
         border-top-width: 16px;
         border-bottom-color: #ffd400;
