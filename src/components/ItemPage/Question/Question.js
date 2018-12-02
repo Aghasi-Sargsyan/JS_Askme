@@ -20,10 +20,12 @@ class Question extends Component {
                 </h2>
                 <hr />
                 <div className='flex align_center'>
-                    <div className='item__question__avatar'>
+                    <div className='item__question__avatar flex align_center flex_col'>
                         <Avatar />
+                        <span className='font_s'>Name</span>
+                        {/* {this.props.user.userName} */}
                     </div>
-                    <div>
+                    <div className='pad_right_20 pad_left_20'>
                         <div className='item__question__desc'>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                         </div>

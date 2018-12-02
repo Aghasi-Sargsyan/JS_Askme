@@ -20,7 +20,7 @@ class RateCounter extends Component {
 
     render() {
         return (
-            <div className='answer__page flex align_center flex_col'>
+            <div className='rate__container flex align_center flex_col'>
                 <button onClick={this.incrementVote}>+</button>
                 <span>{this.state.vote}</span>
                 <button onClick={this.decrementVote}>-</button>
