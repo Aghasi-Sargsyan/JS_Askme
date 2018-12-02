@@ -74,3 +74,13 @@ input[type="number"]:disabled {
 input[type="radio"]:disabled {
     background: #dddddd;
 }
+
+.age__slider {
+    margin: 30px 0;
+    .input-range {
+        width: 30%;
+    }
+    .age__slider_age {
+        margin-right: 20px;
+    }
+}
