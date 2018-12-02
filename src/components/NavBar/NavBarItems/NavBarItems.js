@@ -47,13 +47,13 @@ class NavBarItems extends Component {
             <ul>
                 <li>
                     <NavLink activeStyle={{ fontWeight: 'bold', color: '#000' }} to={routePaths.questionPage}>
-                        <img className='answer-icon' src={answerIcon} />Answers
+                        <img className='answer-icon' src={answerIcon} alt='answer' />Answers
                     </NavLink>
                 </li>
 
                 <li>
                     <NavLink activeStyle={{ fontWeight: 'bold', color: '#000' }} to={routePaths.askQuestionPage}>
-                        <img className='question-icon' src={questionIcon} />Ask a Question
+                        <img className='question-icon' src={questionIcon} alt='question' />Ask a Question
                     </NavLink>
                 </li>
 

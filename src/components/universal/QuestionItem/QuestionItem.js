@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 
 export default class QuestionItem extends Component {
 
-
-
     render() {
         const descriptionArr = [];
         descriptionArr.push(this.props.description);
