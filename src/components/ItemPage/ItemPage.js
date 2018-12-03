@@ -51,7 +51,7 @@ class ItemPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        questions: state.questionReducer.questions
+        questions: state.questionReducer
     }
 };
 

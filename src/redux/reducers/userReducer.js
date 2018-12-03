@@ -1,17 +1,15 @@
 import actionTypes from "../actions/actionTypes";
 
 export const initialState = {
-  user: {
-      id: null,
-      userName: null,
-      email: null,
-      gender: null,
-      age: null,
-      photoUrl: null,
-      skills: [],
-      isNewUser: null,
-      isLoggedIn: null
-  }
+  id: null,
+  userName: null,
+  email: null,
+  gender: null,
+  age: null,
+  photoUrl: null,
+  skills: [],
+  isNewUser: null,
+  isLoggedIn: null
 };
 
 export default function (state = initialState, action) {
@@ -19,38 +17,33 @@ export default function (state = initialState, action) {
     case actionTypes.ADD_USER:
       return {
         ...state,
-        user: {...state.user, ...action.userData}
+        ...action.userData,
+        age: new Date().getFullYear() - action.userData.age
       };
+
     case actionTypes.REMOVE_USER:
       return {
-        ...state,
-        user: {
-            id: null,
-            userName: null,
-            email: null,
-            gender: null,
-            age: null,
-            photoUrl: null,
-            skills: [],
-            isNewUser: null,
-            isLoggedIn: null
-        }
+        id: null,
+        userName: null,
+        email: null,
+        gender: null,
+        age: null,
+        photoUrl: null,
+        skills: [],
+        isNewUser: null,
+        isLoggedIn: null
       };
-      case actionTypes.LOG_IN:
+
+    case actionTypes.LOG_IN:
       return {
         ...state,
-          user:{
-              ...state.user,
-              isLoggedIn: true
-          }
+        isLoggedIn: true
       };
+
     case actionTypes.LOG_OUT:
       return {
-          ...state,
-          user:{
-              ...state.user,
-              isLoggedIn: false
-          }
+        ...state,
+        isLoggedIn: false
       };
 
     default:

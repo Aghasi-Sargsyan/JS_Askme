@@ -18,9 +18,9 @@ class AskQuestionPage extends Component {
     description: "",
     skills: [],
     skillDesc: '',
+    gender: 'all',
     ageRange: { min: 15, max: 30 },
     age: [],
-    gender: '',
     isTyping: false,
   };
 
@@ -62,8 +62,8 @@ class AskQuestionPage extends Component {
     const skillList = skills.concat(skillObj);
     this.setState({
       skills: skillList,
-      skillDesc: '',
-
+      skillDesc: "",
+      gender: ""
     })
   };
 
@@ -128,7 +128,7 @@ class AskQuestionPage extends Component {
             <input
               type="radio"
               name="gender"
-              value="All"
+              value="all"
               defaultChecked="true"
               disabled={isTyping}
               onChange={this.handleRadioButton}
@@ -139,7 +139,7 @@ class AskQuestionPage extends Component {
             <input
               type="radio"
               name="gender"
-              value="Male"
+              value="male"
               disabled={isTyping}
               onChange={this.handleRadioButton}
             />
@@ -149,7 +149,7 @@ class AskQuestionPage extends Component {
             <input
               type="radio"
               name="gender"
-              value="Female"
+              value="female"
               disabled={isTyping}
               onChange={this.handleRadioButton}
             />
@@ -181,7 +181,7 @@ class AskQuestionPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.userReducer.user
+    user: state.userReducer
   };
 };
 

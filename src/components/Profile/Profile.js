@@ -98,7 +98,7 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.userReducer.user,
+        user: state.userReducer,
     };
 }
 

@@ -44,4 +44,9 @@ class Question extends Component {
     }
 }
 
-export default Question;
+const mapStateToProps = (state) => {
+    return {
+        questions: state.questionReducer
+    }
+};
+export default connect(mapStateToProps)(Question)
