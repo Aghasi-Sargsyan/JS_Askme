@@ -1,11 +1,17 @@
 .signUp__left {
     width: 400px;
     background-color: #ffd400;
+    background-image: url(../../../assets//registration_bg.png);
+    background-size: contain;
     position: relative;
     .signUp__logo {
         p {
+            font-size: 18px;
             padding: 20px 0 0 20px;
-            color: #fff;
+            color: #ff9b00;
+            .logo_letter {
+                font-size: 30px;
+            }
         }
     }
     .signUp__quotes {
@@ -28,7 +34,7 @@
         transform: translate(-50%, 0);
         cursor: pointer;
         color: #fff;
-        background-color: #ffd400;
+        background-color: transparent;
         font-size: 20px;
         border: 1px solid #fff;
         text-decoration: none;

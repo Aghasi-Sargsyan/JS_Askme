@@ -122,7 +122,7 @@ class SignUpForm extends Component {
             <div className="singInUp flex">
                 <div className='signUp__left'>
                     <div className='signUp__logo'>
-                        <p className='font_m'>AskMe</p>
+                        <p className='font_m'><span className='logo_letter'>A</span>sk<span className='logo_letter'>M</span>e</p>
                     </div>
                     <p className='signUp__quotes font_l'>Find out the answers to your questions</p>
                     <Link to={routePaths.signIn}>Sign In</Link>
