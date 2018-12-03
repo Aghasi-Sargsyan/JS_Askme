@@ -9,12 +9,16 @@
 
 .bioForm__left {
     width: 300px;
-    background-color: #ffd400;
+    background-color: #ffb000;
     position: relative;
     .bioForm__logo {
         p {
-            padding: 0 0 0 20px;
+            font-size: 18px;
+            padding: 20px 0 0 20px;
             color: #fff;
+            .logo_letter {
+                font-size: 30px;
+            }
         }
     }
     img {
@@ -106,6 +110,7 @@
                 display: inline-block;
                 background: #eee;
                 margin: 3px 9px;
+                padding: 4px 6px;
             }
         }
         .bioForm__save {

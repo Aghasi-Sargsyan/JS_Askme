@@ -107,7 +107,7 @@ class AfterRegPopup extends Component {
         <div className='bioform flex'>
           <div className='bioForm__left'>
             <div className='bioForm__logo'>
-              <p className='font_m'>AskMe</p>
+              <p className='font_m'><span className='logo_letter'>A</span>sk<span className='logo_letter'>M</span>e</p>
               <div className='tac'>
                 <img src={userImg} alt="user" />
                 <button

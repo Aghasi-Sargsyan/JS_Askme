@@ -113,7 +113,7 @@ class SignInForm extends Component {
             <div className="singInUp flex">
                 <div className='signIn__left'>
                     <div className='signIn__logo'>
-                        <p className='font_m'>AskMe</p>
+                        <p className='font_m'><span className='logo_letter'>A</span>sk<span className='logo_letter'>M</span>e</p>
                     </div>
                     <div className='signIn__with tac'>
                         <p className='font_m'>Sign In With</p>

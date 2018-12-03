@@ -1,18 +1,18 @@
 .navigation {
     background-color: #f8f8f8;
-}
-
-.navigation-bar {
-    width: 100%;
-    ul {
-        li:nth-of-type(1) {
-            margin-right: auto;
-        }
-        li a {
-            font-size: 22px;
-            color: #000;
-            background-color: #f8f8f8;
-            padding: 0 20px;
+    padding: 10px 0;
+    .navigation-bar {
+        width: 100%;
+        ul {
+            li:nth-of-type(1) {
+                margin-right: auto;
+            }
+            li a {
+                font-size: 18px;
+                color: #000;
+                background-color: #f8f8f8;
+                padding: 0 20px;
+            }
         }
     }
 }

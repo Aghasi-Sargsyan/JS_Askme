@@ -6,7 +6,6 @@ import {getAndDispatchUserQuestions} from "../../../redux/actions/questionAction
 
 class ProfileQuestionContainer extends Component {
 
-
   componentDidMount() {
     this.props.getAndDispatchUserQuestions(this.props.user.id);
   }
@@ -14,6 +13,7 @@ class ProfileQuestionContainer extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.user.id !== this.props.user.id) {
       this.props.getAndDispatchUserQuestions(this.props.user.id);
+
     }
   }
 

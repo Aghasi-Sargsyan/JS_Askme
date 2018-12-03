@@ -8,6 +8,9 @@ import { getAndDispatchDbUser } from "../../redux/actions/userActions";
 import male from "../../assets/icons/male.png";
 import female from "../../assets/icons/female.png";
 import gender from '../../assets/icons/gender.png';
+import InputRange from 'react-input-range';
+import 'react-input-range/lib/css/index.css'
+import SkillContainer from '../SkillContainer/SkillContainer';
 
 class AskQuestionPage extends Component {
   state = {
@@ -15,8 +18,9 @@ class AskQuestionPage extends Component {
     description: "",
     skills: [],
     skillDesc: '',
-    age: '',
     gender: 'all',
+    ageRange: { min: 15, max: 30 },
+    age: [],
     isTyping: false,
   };
 
@@ -38,6 +42,14 @@ class AskQuestionPage extends Component {
     }
   };
 
+  handleAgeRange = (min, max) => {
+    const ageArray = [];
+    for (let i = min; i <= max; i++) {
+      ageArray.push(i);
+    }
+    this.setState({ age: ageArray });
+  }
+
   handleRadioButton = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -46,7 +58,8 @@ class AskQuestionPage extends Component {
 
   addSkill = () => {
     const { skills, skillDesc } = this.state;
-    const skillList = skills.concat(skillDesc);
+    const skillObj = { value: skillDesc }
+    const skillList = skills.concat(skillObj);
     this.setState({
       skills: skillList,
       skillDesc: "",
@@ -54,10 +67,13 @@ class AskQuestionPage extends Component {
     })
   };
 
-  skillsRender = () => {
-    return this.state.skills.map((skill, index) => (
-      <li key={index}>{skill}</li>
-    ));
+  deleteSkill = (e) => {
+    const array = [...this.state.skills];
+    const index = e.target.id;
+    if (index !== -1) {
+      array.splice(index, 1);
+      this.setState({ skills: array });
+    }
   };
 
   onSubmit = e => {
@@ -95,22 +111,20 @@ class AskQuestionPage extends Component {
         <div>
           <Wysiwyg changeHandler={this.handleChange} />
         </div>
-        <div>
-          <label>
-            Age
-            <input
-              className='mar_left_20'
-              type='number'
-              value={this.state.age}
-              disabled={isTyping}
-              onChange={this.handleChange}
-              id="age"
-            />
-          </label>
+        <div className='age__slider flex'>
+          <div className='age__slider_age'>Age</div>
+          <InputRange
+            disabled={isTyping}
+            draggableTrack
+            maxValue={70}
+            minValue={10}
+            onChange={value => this.setState({ ageRange: value })}
+            onChangeComplete={value => this.handleAgeRange(value.min, value.max)}
+            value={this.state.ageRange} />
         </div>
         <div className='ask_question_gender'>
           <span className='pad_right_20'>Gender</span>
-          <label>
+          <label aria-disabled={isTyping}>
             <input
               type="radio"
               name="gender"
@@ -121,7 +135,7 @@ class AskQuestionPage extends Component {
             />
             <img src={gender} alt="all" />
           </label>
-          <label>
+          <label aria-disabled={isTyping}>
             <input
               type="radio"
               name="gender"
@@ -131,7 +145,7 @@ class AskQuestionPage extends Component {
             />
             <img src={male} alt="male" />
           </label>
-          <label>
+          <label aria-disabled={isTyping}>
             <input
               type="radio"
               name="gender"
@@ -139,7 +153,7 @@ class AskQuestionPage extends Component {
               disabled={isTyping}
               onChange={this.handleRadioButton}
             />
-            <img src={female} alt="female" />
+            <img className='female' src={female} alt="female" />
           </label>
         </div>
         <div>
@@ -155,7 +169,9 @@ class AskQuestionPage extends Component {
           <button type='button' onClick={this.addSkill} className='ask_question_skill_add'>
             +
           </button>
-          <ul className='skill_list'> {this.skillsRender()} </ul>
+          <ul className='skill_list'>
+            <SkillContainer isShowingMessage={false} deleteSkill={this.deleteSkill} skills={this.state.skills} />
+          </ul>
         </div>
         <button className='ask_question_submit' onClick={this.onSubmit}>Post Your Question</button>
       </div>
