@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import QuestionsFilter from './QuestionsFilter/QuestionsFilter';
 import QuestionsCont from './QuestionsCont/QuestionsCont';
-import FireManager from "../../firebase/FireManager";
+import FireManager, {questionsFieldPaths} from "../../firebase/FireManager";
 import connect from "react-redux/es/connect/connect";
 
 class QuestionPage extends Component {
@@ -15,46 +15,63 @@ class QuestionPage extends Component {
     const promiseArray = [];
     this.props.user.skills.forEach(skill => {
       promiseArray.push(
-        FireManager.getQuestions(null, skill.value));
+        FireManager.getQuestions({
+          fieldPath: questionsFieldPaths.SKILLS,
+          operator: "array-contains",
+          value: skill.value
+        }));
     });
 
-    const p2 = FireManager.getQuestions(null, null, this.props.user.age);
+    const p2 = FireManager.getQuestions({
+      fieldPath: questionsFieldPaths.AGE,
+      operator: "array-contains",
+      value: this.props.user.age
+    });
 
-    const p3 = FireManager.getQuestions(null, null, null, this.props.user.gender);
-    const p4 = FireManager.getQuestions(null, null, null, "all");
+    const p3 = FireManager.getQuestions({
+      fieldPath: questionsFieldPaths.GENDER,
+      operator: "==",
+      value: this.props.user.gender
+    });
+
+    const p4 = FireManager.getQuestions({
+      fieldPath: questionsFieldPaths.GENDER,
+      operator: "==",
+      value: "all"
+    });
 
     promiseArray.push(p2, p3, p4);
 
     return Promise.all(promiseArray).then(questionMatrix => {
       const allQuestions = [].concat.apply([], questionMatrix);
-      return Object.values(allQuestions.reduce((acc, question) => Object.assign(acc, {[question.id]: question}),{}))
+      return Object.values(allQuestions.reduce((acc, question) => Object.assign(acc, {[question.id]: question}), {}))
     })
     //TODO delete own questions from array
     //TODO gender and age together
   };
 
   componentDidMount() {
-    if (this.props.user.id) {
-      this.getQuestions().then(formattedQuestions => {
+
+    this.getQuestions().then(formattedQuestions => {
+      this.setState({
+        allQuestions: formattedQuestions,
+        filteredQuestions: formattedQuestions
+      });
+    });
+
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+
+    this.getQuestions().then(formattedQuestions => {
+      if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(formattedQuestions)) {
         this.setState({
           allQuestions: formattedQuestions,
           filteredQuestions: formattedQuestions
         });
-      });
-    }
-  }
+      }
+    });
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.user.id) {
-      this.getQuestions().then(formattedQuestions => {
-        if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(formattedQuestions)) {
-          this.setState({
-            allQuestions: formattedQuestions,
-            filteredQuestions: formattedQuestions
-          });
-        }
-      });
-    }
   }
 
   questionFilter = (type) => {

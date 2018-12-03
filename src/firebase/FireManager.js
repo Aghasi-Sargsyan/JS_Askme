@@ -87,38 +87,21 @@ export default class FireManager {
 
   /**
    *  Returns a promise with resolved question array
-   *  if you want to get exact user questions, pass a valid userId
-   *  if not, you will get all questions from DB
    * */
-  static getQuestions(userId = null, skill = null, age = null, gender = null) {
-    if (userId || skill || age || gender) {
-      let ref = firestore().collection("questions");
-      if (userId) {
-        ref = ref.where("userId", "==", userId);
-      }
-      if (skill) {
-        ref = ref.where("skills", "array-contains", skill);
-      }
-      if (age) {
-        ref = ref.where("age", "array-contains", age);
-      }
-      if (gender) {
-        ref = ref.where("gender", "==", gender);
-      }
-
-      return ref.get().then(querySnapshot => {
+  static getQuestions(obj) {
+    return firestore().collection("questions")
+      .where(obj.fieldPath, obj.operator, obj.value || "")
+      .get().then(querySnapshot => {
         const questionsArray = [];
         querySnapshot.forEach((doc) => {
           questionsArray.push(doc.data());
         });
         return questionsArray;
       })
-        .catch(function (error) {
-          console.log("Error getting documents: ", error);
-        });
-    }
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
   }
-
 
   /**
    * Adding global skill to database
@@ -132,3 +115,11 @@ export default class FireManager {
     });
   }
 }
+
+export const questionsFieldPaths = {
+  SKILLS: "skills",
+  AGE: "age",
+  GENDER: "gender",
+  USER_ID: "userId"
+};
+

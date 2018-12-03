@@ -9,8 +9,12 @@ class ProfileQuestionContainer extends Component {
 
   componentDidMount() {
     this.props.getAndDispatchUserQuestions(this.props.user.id);
+  }
 
-    //TODO crashes after refresh
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.user.id !== this.props.user.id) {
+      this.props.getAndDispatchUserQuestions(this.props.user.id);
+    }
   }
 
   render() {
