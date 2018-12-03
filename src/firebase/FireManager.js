@@ -50,14 +50,7 @@ export default class FireManager {
    * */
   static updateUser(data = {}, userId) {
     if (userId) {
-      firestore().collection("users").doc(userId).update(
-        data.skills
-          ? {
-            ...data,
-            skills: firestore.FieldValue.arrayUnion(...data.skills)
-          }
-          : {...data}
-      )
+      firestore().collection("users").doc(userId).update({...data})
         .then(() => {
           console.log("user successfully updated");
         })

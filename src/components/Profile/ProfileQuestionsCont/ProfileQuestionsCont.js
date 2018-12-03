@@ -13,7 +13,6 @@ class ProfileQuestionContainer extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.user.id !== this.props.user.id) {
       this.props.getAndDispatchUserQuestions(this.props.user.id);
-
     }
   }
 

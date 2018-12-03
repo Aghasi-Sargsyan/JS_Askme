@@ -15,7 +15,7 @@ class Tabs extends Component {
     this.setState({
       selected: index
     });
-  }
+  };
 
   rendTabLabels() {
     const labels = (child, index) => {

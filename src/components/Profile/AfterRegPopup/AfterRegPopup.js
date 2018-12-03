@@ -8,7 +8,7 @@ import userImg from "../../../assets/icons/user.png";
 import male from "../../../assets/icons/male.png";
 import female from "../../../assets/icons/female.png";
 import { bindActionCreators } from "redux";
-import { actionAddUser } from "../../../redux/actions/userActions";
+import { actionAddUserData } from "../../../redux/actions/userActions";
 
 class AfterRegPopup extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class AfterRegPopup extends Component {
       skills: skillList,
       isNewUser: false
     };
-
+    console.log("after: "+updatedUser);
     FireManager.updateUser(updatedUser, user.id);
     this.props.dispatchUser(updatedUser);
 
@@ -199,7 +199,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchUser: bindActionCreators(actionAddUser, dispatch)
+    dispatchUser: bindActionCreators(actionAddUserData, dispatch)
   }
 };
 

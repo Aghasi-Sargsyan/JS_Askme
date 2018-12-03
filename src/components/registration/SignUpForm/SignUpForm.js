@@ -6,7 +6,7 @@ import isEmail from 'validator/lib/isEmail';
 import { Link } from "react-router-dom";
 import routePaths from "../../../constKeys/routePaths";
 import { bindActionCreators } from "redux";
-import { actionAddUser } from "../../../redux/actions/userActions";
+import { actionAddUserData } from "../../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
 import fb from "../../../assets/icons/fb.png";
 import google from "../../../assets/icons/google.png";
@@ -215,7 +215,7 @@ class SignUpForm extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        dispatchUser: bindActionCreators(actionAddUser, dispatch),
+        dispatchUser: bindActionCreators(actionAddUserData, dispatch),
     }
 }
 

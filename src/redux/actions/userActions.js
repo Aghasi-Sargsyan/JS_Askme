@@ -1,9 +1,9 @@
 import FireManager from "../../firebase/FireManager";
 import actionTypes from "./actionTypes";
 
-export function actionAddUser(userData) {
+export function actionAddUserData(userData) {
   return {
-    type: actionTypes.ADD_USER,
+    type: actionTypes.ADD_USER_DATA,
     userData
   };
 }
@@ -24,7 +24,7 @@ export function getAndDispatchDbUser(userId) {
   return function (dispatch) {
     FireManager.getUser(userId)
       .then(user => {
-        dispatch(actionAddUser(user));
+        dispatch(actionAddUserData(user));
       })
       .catch(error => {
         console.error(error);

@@ -21,8 +21,7 @@ const InfoDrop = ({ user, close }) => {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.userReducer.user
+        user: state.userReducer
     }
 };
-
 export default connect(mapStateToProps)(InfoDrop);

@@ -5,7 +5,6 @@ import FireManager, {questionsFieldPaths} from "../../firebase/FireManager";
 import connect from "react-redux/es/connect/connect";
 
 class QuestionPage extends Component {
-
   state = {
     allQuestions: [],
     filteredQuestions: []

@@ -14,11 +14,10 @@ export const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case actionTypes.ADD_USER:
+    case actionTypes.ADD_USER_DATA:
       return {
         ...state,
         ...action.userData,
-        age: new Date().getFullYear() - action.userData.age
       };
 
     case actionTypes.REMOVE_USER:

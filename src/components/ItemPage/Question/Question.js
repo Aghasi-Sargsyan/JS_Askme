@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Avatar from '../../universal/Avatar/Avatar';
 import RateCounter from '../../universal/RateCounter/RateCounter';
 import './Question.scss';
+import {connect} from "react-redux";
 
 class Question extends Component {
     render() {
