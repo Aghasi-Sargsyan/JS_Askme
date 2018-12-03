@@ -91,33 +91,32 @@ export default class FireManager {
    *  if not, you will get all questions from DB
    * */
   static getQuestions(userId = null, skill = null, age = null, gender = null) {
-
-    let ref = firestore().collection("questions");
-    switch (arguments) {
-      case userId:
+    if (userId || skill || age || gender) {
+      let ref = firestore().collection("questions");
+      if (userId) {
         ref = ref.where("userId", "==", userId);
-        break;
-      case skill:
+      }
+      if (skill) {
         ref = ref.where("skills", "array-contains", skill);
-        break;
-      case age:
+      }
+      if (age) {
         ref = ref.where("age", "array-contains", age);
-        break;
-      case gender:
+      }
+      if (gender) {
         ref = ref.where("gender", "==", gender);
-        break;
-    }
+      }
 
-    return ref.get().then(querySnapshot => {
-      const questionsArray = [];
-      querySnapshot.forEach((doc) => {
-        questionsArray.push(doc.data());
-      });
-      return questionsArray;
-    })
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
+      return ref.get().then(querySnapshot => {
+        const questionsArray = [];
+        querySnapshot.forEach((doc) => {
+          questionsArray.push(doc.data());
+        });
+        return questionsArray;
+      })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+        });
+    }
   }
 
 

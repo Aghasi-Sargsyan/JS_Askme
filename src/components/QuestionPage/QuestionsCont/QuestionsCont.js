@@ -17,8 +17,7 @@ export default class QuestionsCont extends Component {
             <div className='empty_div'></div>
           </div>
         </div>
-        {this.props.filteredQuestions.map(question => <QuestionItem key={question.id} title={question.title} description={question.description}
-                                                               date={question.date} rate={question.rate}/>)}
+        {this.props.filteredQuestions.map(question => <QuestionItem key={question.id} question={question}/>)}
       </div>
     )
   }

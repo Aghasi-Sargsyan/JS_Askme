@@ -15,13 +15,10 @@ class QuestionPage extends Component {
     const promiseArray = [];
     this.props.user.skills.forEach(skill => {
       promiseArray.push(
-        FireManager.getQuestions(null, skill.value,)
-          .then(skillQuestions => skillQuestions)
-      )
+        FireManager.getQuestions(null, skill.value));
     });
 
-    const p2 = FireManager.getQuestions(null, null, this.props.user.age)
-      .then(ageQuestions => ageQuestions);
+    const p2 = FireManager.getQuestions(null, null, this.props.user.age);
 
     const p3 = FireManager.getQuestions(null, null, null, this.props.user.gender);
     const p4 = FireManager.getQuestions(null, null, null, "all");
@@ -30,29 +27,34 @@ class QuestionPage extends Component {
 
     return Promise.all(promiseArray).then(questionMatrix => {
       const allQuestions = [].concat.apply([], questionMatrix);
-      return Object.values(allQuestions.reduce((acc, question) => Object.assign(acc, {[question.id]: question}), {}))
+      return Object.values(allQuestions.reduce((acc, question) => Object.assign(acc, {[question.id]: question}),{}))
     })
     //TODO delete own questions from array
+    //TODO gender and age together
   };
 
   componentDidMount() {
-    this.getQuestions().then(allQuestions => {
-      this.setState({
-        allQuestions: allQuestions,
-        filteredQuestions: allQuestions
+    if (this.props.user.id) {
+      this.getQuestions().then(formattedQuestions => {
+        this.setState({
+          allQuestions: formattedQuestions,
+          filteredQuestions: formattedQuestions
+        });
       });
-    });
+    }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.getQuestions().then(allQuestions => {
-      if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(allQuestions)) {
-        this.setState({
-          ...this.state,
-          allQuestions: allQuestions,
-        });
-      }
-    });
+    if (this.props.user.id) {
+      this.getQuestions().then(formattedQuestions => {
+        if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(formattedQuestions)) {
+          this.setState({
+            allQuestions: formattedQuestions,
+            filteredQuestions: formattedQuestions
+          });
+        }
+      });
+    }
   }
 
   questionFilter = (type) => {
@@ -63,7 +65,7 @@ class QuestionPage extends Component {
         filteredQuestions = allQuestions;
         break;
       case "age":
-        filteredQuestions = allQuestions.filter(question => question.age);
+        filteredQuestions = allQuestions.filter(question => question.age[0] === this.props.user.age);
         break;
       case "gender":
         filteredQuestions = allQuestions.filter(question => question.gender);

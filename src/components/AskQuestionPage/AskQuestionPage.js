@@ -16,7 +16,7 @@ class AskQuestionPage extends Component {
     skills: [],
     skillDesc: '',
     age: '',
-    gender: '',
+    gender: 'all',
     isTyping: false,
   };
 
@@ -49,8 +49,8 @@ class AskQuestionPage extends Component {
     const skillList = skills.concat(skillDesc);
     this.setState({
       skills: skillList,
-      skillDesc: '',
-
+      skillDesc: "",
+      gender: ""
     })
   };
 
