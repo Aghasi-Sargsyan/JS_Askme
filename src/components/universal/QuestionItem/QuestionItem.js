@@ -21,8 +21,8 @@ export default class QuestionItem extends Component {
   render() {
     const descriptionArr = [];
     descriptionArr.push(this.props.description);
-    const {date, question} = this.props;
-    const formattedDate = new Date(date).toLocaleString();
+    const {question} = this.props;
+    const formattedDate = new Date(question.date).toLocaleString();
 
     return (
       <Link to={`/item/${question.id}`} className='question_item_container'>
