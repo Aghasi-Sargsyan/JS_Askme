@@ -10,11 +10,19 @@
         }
     }
     .item__question__skill {
+        margin: 5px 0;
         span {
+            font-size: 10px;
             background-color: #e8e8e8;
-            margin: 6px 4px;
-            padding: 3px;
+            margin: 0 4px;
+            padding: 4px 6px;
             display: inline-block;
+        }
+    }
+    .item__question__avatar {
+        span {
+            width: 50px;
+            text-align: center;
         }
     }
 }

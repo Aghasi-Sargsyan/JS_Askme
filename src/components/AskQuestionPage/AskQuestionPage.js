@@ -24,39 +24,39 @@ class AskQuestionPage extends Component {
     ageRange: { min: 15, max: 30 },
     age: [],
     isTyping: false,
-    isValid: true,
+    // isValid: true,
   };
 
   handleChange = e => {
     if (typeof e === "string") {
       this.setState({
         description: e,
-        isValid: !e,
+        // isValid: !e,
       });
     } else {
       this.setState({
         [e.target.id]: e.target.value
       });
 
-      switch (e.target.id) {
-        case 'skillDesc':
-          this.setState({
-            isTyping: !!e.target.value,
-          })
-          break;
-        case 'title':
-          this.setState({
-            isValid: !!e.target.value,
-          })
-          break;
-        default:
-      }
-
-      // if (e.target.id === 'skillDesc') {
-      //   this.setState({
-      //     isTyping: !!e.target.value,
-      //   })
+      // switch (e.target.id) {
+      //   case 'skillDesc':
+      //     this.setState({
+      //       isTyping: !!e.target.value,
+      //     })
+      //     break;
+      //   case 'title':
+      //     this.setState({
+      //       isValid: !!e.target.value,
+      //     })
+      //     break;
+      //   default:
       // }
+
+      if (e.target.id === 'skillDesc') {
+        this.setState({
+          isTyping: !!e.target.value,
+        })
+      }
     }
   };
 
