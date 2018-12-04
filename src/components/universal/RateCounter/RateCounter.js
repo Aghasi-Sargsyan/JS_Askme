@@ -21,9 +21,11 @@ class RateCounter extends Component {
     render() {
         return (
             <div className='rate__container flex align_center flex_col'>
-                <button onClick={this.incrementVote}>+</button>
+                <button className='increment' onClick={this.incrementVote}>+</button>
+                {/* <input type="radio" name="rateCounter" value="+" onChange={this.incrementVote} /> */}
                 <span>{this.state.vote}</span>
-                <button onClick={this.decrementVote}>-</button>
+                {/* <input type="radio" name="rateCounter" value="-" onChange={this.decrementVote} /> */}
+                <button className='decrement' onClick={this.decrementVote}>-</button>
             </div>
         )
     }

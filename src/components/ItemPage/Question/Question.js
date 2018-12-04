@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Avatar from '../../universal/Avatar/Avatar';
 import RateCounter from '../../universal/RateCounter/RateCounter';
 import './Question.scss';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 class Question extends Component {
     render() {
@@ -22,7 +22,7 @@ class Question extends Component {
                 <div className='flex align_center'>
                     <div className='item__question__avatar flex align_center flex_col'>
                         <Avatar />
-                        <span className='font_s'>Name</span>
+                        <span className='font_s ellipsis'>Name</span>
                         {/* {this.props.user.userName} */}
                     </div>
                     <div className='pad_right_20 pad_left_20'>
