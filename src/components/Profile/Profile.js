@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
 import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
@@ -7,8 +7,8 @@ import Tabs from './ProfileQuestionsCont/Tabs/Tabs';
 import Pane from './ProfileQuestionsCont/Pane/Pane';
 import "./Profile.scss";
 import Input from "../universal/Input/Input";
-import {bindActionCreators} from "redux";
-import {actionAddUserData} from "../../redux/actions/userActions";
+import { bindActionCreators } from "redux";
+import { actionAddUserData } from "../../redux/actions/userActions";
 import FireManager from "../../firebase/FireManager";
 
 class Profile extends Component {
@@ -19,11 +19,11 @@ class Profile extends Component {
     this.tabs = [
       {
         name: 'My Questions',
-        content: <ProfileQuestionsCont myQuestions/>
+        content: <ProfileQuestionsCont myQuestions />
       },
       {
         name: 'Answered Questions',
-        content: <ProfileQuestionsCont/>
+        content: <ProfileQuestionsCont />
       }
     ];
 
@@ -34,7 +34,7 @@ class Profile extends Component {
   }
 
   changeHandler = (e) => {
-    this.setState({inputValue: e.target.value});
+    this.setState({ inputValue: e.target.value });
   };
 
   addSkillHandler = () => {
@@ -43,15 +43,15 @@ class Profile extends Component {
     }));
 
     if (this.state.inputValue.length) {
-      const newSkills = this.props.user.skills.concat({value: this.state.inputValue, rate: 0});
+      const newSkills = this.props.user.skills.concat({ value: this.state.inputValue, rate: 0 });
       FireManager.addGlobalSkill(this.state.inputValue);
       FireManager.updateUser({
         skills: newSkills,
-        skills_insensitive: newSkills.map(skill=> skill.value.toUpperCase()),
+        skills_insensitive: newSkills.map(skill => skill.value.toUpperCase()),
       }, this.props.user.id);
       this.props.dispatchUserData({
         skills: newSkills,
-        skills_insensitive: newSkills.map(skill=> skill.value.toUpperCase()),
+        skills_insensitive: newSkills.map(skill => skill.value.toUpperCase()),
       });
       this.setState({
         inputValue: ""
@@ -61,32 +61,32 @@ class Profile extends Component {
 
   deleteSkill = (e) => {
     const targetSkill = e.target.id;
-    const {user} = this.props;
+    const { user } = this.props;
     const newSkills = user.skills.filter(skill => skill.value !== targetSkill);
     this.props.dispatchUserData({
       skills: newSkills,
-      skills_insensitive: newSkills.map(skill=> skill.value.toUpperCase()),
+      skills_insensitive: newSkills.map(skill => skill.value.toUpperCase()),
     });
     FireManager.updateUser({
       skills: newSkills,
-      skills_insensitive: newSkills.map(skill=> skill.value.toUpperCase()),
+      skills_insensitive: newSkills.map(skill => skill.value.toUpperCase()),
     }, user.id);
   };
 
   render() {
-    const {isShowAdd, inputValue} = this.state;
-    const {user} = this.props;
+    const { isShowAdd, inputValue } = this.state;
+    const { user } = this.props;
     return (
       <div className="profile_page flex">
         <aside className="left__side">
-          <UserInfo user={user}/>
-          <div className="user__skills">
-            <SkillContainer isSkillObj deleteSkill={this.deleteSkill} skills={user.skills}/>
+          <UserInfo user={user} />
+          <div className="user__skills tac">
+            <SkillContainer isSkillObj deleteSkill={this.deleteSkill} skills={user.skills} />
             {isShowAdd && <Input
               className="input__skill"
               valid
               changeHandler={this.changeHandler}
-              value={inputValue}/>
+              value={inputValue} />
             }
             <button className="add__user__skill__btn" onClick={this.addSkillHandler}>Add Skill</button>
           </div>

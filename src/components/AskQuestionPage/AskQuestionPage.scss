@@ -94,6 +94,23 @@ input[type="radio"]:disabled {
     background: #dddddd;
 }
 
+button[type="submit"]:disabled {
+    background-color: #bebebe;
+}
+
+button[type="button"]:disabled {
+    background-color: #fff;
+    color: #999;
+}
+
+button[type="submit"]:disabled:hover {
+    cursor: default;
+}
+
+button[type="button"]:disabled:hover {
+    cursor: default;
+}
+
 .age__slider {
     margin: 30px 0;
     .input-range {

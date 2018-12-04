@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import QuestionItem from '../../universal/QuestionItem/QuestionItem';
-import {bindActionCreators} from "redux";
-import {getAndDispatchUserQuestions} from "../../../redux/actions/questionActions";
+import { bindActionCreators } from "redux";
+import { getAndDispatchUserQuestions } from "../../../redux/actions/questionActions";
 
 class ProfileQuestionContainer extends Component {
 
@@ -26,11 +26,11 @@ class ProfileQuestionContainer extends Component {
           <div className='flex question__item_header_txt'>
             <div>Votes</div>
             <div>Answers</div>
-            <div className='empty_div'/>
+            <div className='empty_div' />
           </div>
         </div>
         {this.props.questions.map((question) => <QuestionItem
-          key={question.id} question={question}/>
+          key={question.id} question={question} profileQuestion={true} />
         )}
       </div>
     )
