@@ -3,6 +3,7 @@ import Avatar from '../Avatar/Avatar';
 import './QuestionItem.scss';
 import {Link} from "react-router-dom";
 import FireManager from "../../../firebase/FireManager";
+import Skill from "../Skill/Skill";
 
 export default class QuestionItem extends Component {
 
@@ -64,7 +65,7 @@ export default class QuestionItem extends Component {
           </div>
           <div className='question_item_footer flex justify_between'>
             <div className='question_item_skill'>
-
+              {question.skills.map(skill=> <span key={skill}>{skill}</span>)}
             </div>
             <div className='question_item_date'>
               <span>{formattedDate}</span>

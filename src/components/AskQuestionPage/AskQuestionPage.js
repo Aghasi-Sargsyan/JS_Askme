@@ -11,8 +11,10 @@ import gender from '../../assets/icons/gender.png';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css'
 import SkillContainer from '../SkillContainer/SkillContainer';
+import {Link, withRouter} from "react-router-dom";
 
 class AskQuestionPage extends Component {
+
   state = {
     title: "",
     description: "",
@@ -93,6 +95,7 @@ class AskQuestionPage extends Component {
       gender: gender
     };
     const questionId = FireManager.addQuestion(question, this.props.user.id);
+    this.props.history.push(`/item/${questionId}`);
   };
 
   render() {
@@ -173,7 +176,7 @@ class AskQuestionPage extends Component {
             <SkillContainer isShowingMessage={false} deleteSkill={this.deleteSkill} skills={this.state.skills} />
           </ul>
         </div>
-        <button className='ask_question_submit' onClick={this.onSubmit}>Post Your Question</button>
+        <button className='ask_question_submit' onClick={this.onSubmit}>Post Your Question</button >
       </div>
     );
   }
@@ -191,4 +194,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AskQuestionPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AskQuestionPage));
