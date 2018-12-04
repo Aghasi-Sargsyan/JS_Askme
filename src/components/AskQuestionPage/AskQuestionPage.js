@@ -88,7 +88,7 @@ class AskQuestionPage extends Component {
       rate: 0,
       answerCount: 0,
       date: Date.now(),
-      update: null,
+      update: "",
       skills: skills,
       skills_insensitive: skills.map(skill => skill.toUpperCase()),
       age: age,

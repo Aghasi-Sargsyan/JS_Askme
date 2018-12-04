@@ -42,11 +42,10 @@ class QuestionPage extends Component {
     promiseArray.push(p2, p3, p4);
 
     return Promise.all(promiseArray).then(questionMatrix => {
-
       const allQuestions = [].concat(...questionMatrix);
-      const otherUserQuestions = allQuestions.filter(question => question.userId !== this.props.user.id);
+      const otherUsersQuestions = allQuestions.filter(question => question.userId !== this.props.user.id);
 
-      return otherUserQuestions.reduce((newQuestions, question) => {
+      return otherUsersQuestions.reduce((newQuestions, question) => {
         let exists = !!newQuestions.find(q => q.id === question.id);
         if (!exists) {
           newQuestions.push(question);
@@ -57,10 +56,9 @@ class QuestionPage extends Component {
   };
 
   componentDidMount() {
-
-    FireManager.getGlobalSkills().then(g => console.log(g));
-
-    this.getQuestions().then(formattedQuestions => {
+    const {user} = this.props;
+    // FireManager.getGlobalSkills().then(g => console.log(g));
+    user.id && this.getQuestions().then(formattedQuestions => {
       console.log(formattedQuestions);
       this.setState({
         allQuestions: formattedQuestions,
@@ -70,17 +68,18 @@ class QuestionPage extends Component {
 
   }
 
+
   componentDidUpdate(prevProps, prevState, snapshot) {
-
-    this.getQuestions().then(formattedQuestions => {
-      if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(formattedQuestions)) {
-        this.setState({
-          allQuestions: formattedQuestions,
-          filteredQuestions: formattedQuestions
-        });
-      }
-    });
-
+    if (prevProps.user.id !== this.props.user.id) {
+      this.getQuestions().then(formattedQuestions => {
+        if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(formattedQuestions)) {
+          this.setState({
+            allQuestions: formattedQuestions,
+            filteredQuestions: formattedQuestions
+          });
+        }
+      });
+    }
   }
 
   questionFilter = (type) => {
