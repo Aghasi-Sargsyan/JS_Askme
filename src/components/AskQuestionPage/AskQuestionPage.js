@@ -47,8 +47,8 @@ class AskQuestionPage extends Component {
     for (let i = min; i <= max; i++) {
       ageArray.push(i);
     }
-    this.setState({ age: ageArray });
-  }
+    this.setState({age: ageArray});
+  };
 
   handleRadioButton = (e) => {
     this.setState({
@@ -58,8 +58,7 @@ class AskQuestionPage extends Component {
 
   addSkill = () => {
     const { skills, skillDesc } = this.state;
-    const skillObj = { value: skillDesc }
-    const skillList = skills.concat(skillObj);
+    const skillList = skills.concat(skillDesc);
     this.setState({
       skills: skillList,
       skillDesc: "",
@@ -92,7 +91,7 @@ class AskQuestionPage extends Component {
       age: age,
       gender: gender
     };
-    FireManager.addQuestion(question, this.props.user.id);
+    const questionId = FireManager.addQuestion(question, this.props.user.id);
   };
 
   render() {

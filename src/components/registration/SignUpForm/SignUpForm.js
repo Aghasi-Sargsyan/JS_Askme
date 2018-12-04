@@ -94,9 +94,9 @@ class SignUpForm extends Component {
                     id: user.uid,
                     userName: userName,
                     email: user.email,
-                    gender: null,
-                    age: null,
-                    photoUrl: null,
+                    gender: "",
+                    age: 0,
+                    photoUrl: "",
                     skills: [],
                     isNewUser: true
                 };

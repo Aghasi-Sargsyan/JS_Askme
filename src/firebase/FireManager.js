@@ -73,6 +73,7 @@ export default class FireManager {
         .catch(error => {
           console.error("Error when adding questions", error);
         });
+      return ref.id;
     } else {
       console.error("need to pass an existing id property");
     }
@@ -83,7 +84,7 @@ export default class FireManager {
    * */
   static getQuestions(obj) {
     return firestore().collection("questions")
-      .where(obj.fieldPath, obj.operator, obj.value || "")
+      .where(obj.fieldPath, obj.operator, obj.value)
       .get().then(querySnapshot => {
         const questionsArray = [];
         querySnapshot.forEach((doc) => {
@@ -107,7 +108,22 @@ export default class FireManager {
         .catch(e => console.error("Error writing document: ", e));
     });
   }
+
+  /**
+   * returns an array of all Db skills ex. ["HTML", "CSS", "JS"]
+   * */
+  static getGlobalSkills() {
+    return firestore().collection("skills").get().then(querySnapshot => {
+        const globalSkills = [];
+        querySnapshot.forEach((doc) => {
+          globalSkills.push(doc.id);
+        });
+      return globalSkills;
+      }
+    );
+  }
 }
+
 
 export const questionsFieldPaths = {
   SKILLS: "skills",

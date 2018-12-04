@@ -1,13 +1,14 @@
 import actionTypes from "../actions/actionTypes";
 
 export const initialState = {
-  id: null,
-  userName: null,
-  email: null,
-  gender: null,
-  age: null,
-  photoUrl: null,
+  id: "",
+  userName: "",
+  email: "",
+  gender: "",
+  age: 0,
+  photoUrl: "",
   skills: [],
+  skills_insensitive:[],
   isNewUser: null,
   isLoggedIn: null
 };
@@ -22,13 +23,14 @@ export default function (state = initialState, action) {
 
     case actionTypes.REMOVE_USER:
       return {
-        id: null,
-        userName: null,
-        email: null,
-        gender: null,
-        age: null,
-        photoUrl: null,
+        id: "",
+        userName: "",
+        email: "",
+        gender: "",
+        age: 0,
+        photoUrl: "",
         skills: [],
+        skills_insensitive:[],
         isNewUser: null,
         isLoggedIn: null
       };

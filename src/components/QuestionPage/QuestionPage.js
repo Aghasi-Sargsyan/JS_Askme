@@ -12,12 +12,12 @@ class QuestionPage extends Component {
 
   getQuestions = () => {
     const promiseArray = [];
-    this.props.user.skills.forEach(skill => {
+    this.props.user.skills_insensitive.forEach(skill => {
       promiseArray.push(
         FireManager.getQuestions({
           fieldPath: questionsFieldPaths.SKILLS,
           operator: "array-contains",
-          value: skill.value
+          value: skill.toUpperCase()
         }));
     });
 
@@ -42,16 +42,26 @@ class QuestionPage extends Component {
     promiseArray.push(p2, p3, p4);
 
     return Promise.all(promiseArray).then(questionMatrix => {
-      const allQuestions = [].concat.apply([], questionMatrix);
-      return Object.values(allQuestions.reduce((acc, question) => Object.assign(acc, {[question.id]: question}), {}))
+
+      const allQuestions = [].concat(...questionMatrix);
+      const otherUserQuestions = allQuestions.filter(question => question.userId !== this.props.user.id);
+
+      return otherUserQuestions.reduce((newQuestions, question) => {
+        let exists = !!newQuestions.find(q => q.id === question.id);
+        if (!exists) {
+          newQuestions.push(question);
+        }
+        return newQuestions;
+      }, []);
     })
-    //TODO delete own questions from array
-    //TODO gender and age together
   };
 
   componentDidMount() {
 
+    FireManager.getGlobalSkills().then(g => console.log(g));
+
     this.getQuestions().then(formattedQuestions => {
+      console.log(formattedQuestions);
       this.setState({
         allQuestions: formattedQuestions,
         filteredQuestions: formattedQuestions
@@ -81,7 +91,7 @@ class QuestionPage extends Component {
         filteredQuestions = allQuestions;
         break;
       case "age":
-        filteredQuestions = allQuestions.filter(question => question.age[0] === this.props.user.age);
+        filteredQuestions = allQuestions.filter(question => question.age.includes(this.props.user.age));
         break;
       case "gender":
         filteredQuestions = allQuestions.filter(question => question.gender);
