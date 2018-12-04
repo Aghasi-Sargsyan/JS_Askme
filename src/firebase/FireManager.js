@@ -126,7 +126,7 @@ export default class FireManager {
 
 
 export const questionsFieldPaths = {
-  SKILLS: "skills",
+  SKILLS: "skills_insensitive",
   AGE: "age",
   GENDER: "gender",
   USER_ID: "userId"

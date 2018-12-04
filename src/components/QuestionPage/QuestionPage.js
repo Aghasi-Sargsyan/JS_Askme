@@ -17,7 +17,7 @@ class QuestionPage extends Component {
         FireManager.getQuestions({
           fieldPath: questionsFieldPaths.SKILLS,
           operator: "array-contains",
-          value: skill.toUpperCase()
+          value: skill
         }));
     });
 

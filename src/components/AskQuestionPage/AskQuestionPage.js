@@ -88,6 +88,7 @@ class AskQuestionPage extends Component {
       date: Date.now(),
       update: null,
       skills: skills,
+      skills_insensitive: skills.map(skill => skill.toUpperCase()),
       age: age,
       gender: gender
     };
