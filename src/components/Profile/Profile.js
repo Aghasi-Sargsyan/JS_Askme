@@ -44,8 +44,15 @@ class Profile extends Component {
 
     if (this.state.inputValue.length) {
       const newSkills = this.props.user.skills.concat({value: this.state.inputValue, rate: 0});
-      FireManager.updateUser({skills: newSkills}, this.props.user.id);
-      this.props.dispatchUserData({skills: newSkills});
+      FireManager.addGlobalSkill(this.state.inputValue);
+      FireManager.updateUser({
+        skills: newSkills,
+        skills_insensitive: newSkills.map(skill=> skill.value.toUpperCase()),
+      }, this.props.user.id);
+      this.props.dispatchUserData({
+        skills: newSkills,
+        skills_insensitive: newSkills.map(skill=> skill.value.toUpperCase()),
+      });
       this.setState({
         inputValue: ""
       });
@@ -56,8 +63,14 @@ class Profile extends Component {
     const targetSkill = e.target.id;
     const {user} = this.props;
     const newSkills = user.skills.filter(skill => skill.value !== targetSkill);
-    this.props.dispatchUserData({skills: newSkills});
-    FireManager.updateUser({skills: newSkills}, user.id);
+    this.props.dispatchUserData({
+      skills: newSkills,
+      skills_insensitive: newSkills.map(skill=> skill.value.toUpperCase()),
+    });
+    FireManager.updateUser({
+      skills: newSkills,
+      skills_insensitive: newSkills.map(skill=> skill.value.toUpperCase()),
+    }, user.id);
   };
 
   render() {

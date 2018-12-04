@@ -16,7 +16,7 @@ class AfterRegPopup extends Component {
 
     this.state = {
       birthYear: {
-        value: "1900",
+        value: 1900,
         maxYear: new Date().getFullYear() - 14,
         valid: true,
         errorMessage: "invalid age",
@@ -39,14 +39,18 @@ class AfterRegPopup extends Component {
     const { birthYear, skillList, gender } = this.state;
     const { user } = this.props;
     const updatedUser = {
-      age: birthYear.value,
+      age: Number.parseInt(birthYear.value),
       gender: gender,
       skills: skillList,
+      skills_insensitive: skillList.map(skill=> skill.value.toUpperCase()),
       isNewUser: false
     };
-    console.log("after: "+updatedUser);
     FireManager.updateUser(updatedUser, user.id);
-    this.props.dispatchUser(updatedUser);
+
+    this.props.dispatchUser({
+      ...updatedUser,
+      age: new Date().getFullYear() - birthYear.value
+    });
 
     const skills = skillList.map(skill => skill.value);
     FireManager.addGlobalSkill(...skills);
