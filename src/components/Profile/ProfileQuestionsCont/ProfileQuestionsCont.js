@@ -1,20 +1,37 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import QuestionItem from '../../universal/QuestionItem/QuestionItem';
-import {bindActionCreators} from "redux";
-import {getAndDispatchUserQuestions} from "../../../redux/actions/questionActions";
+import FireManager, {questionsFieldPaths} from "../../../firebase/FireManager";
 
 class ProfileQuestionContainer extends Component {
 
+  state = {
+    askedQuestions: [],
+    answeredQuestions: []
+  };
+
   componentDidMount() {
-    this.props.getAndDispatchUserQuestions(this.props.user.id);
+    const {user} = this.props;
+    user.id && this.getUserQuestions();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.user.id !== this.props.user.id) {
-      this.props.getAndDispatchUserQuestions(this.props.user.id);
+      this.getUserQuestions()
     }
   }
+
+  getUserQuestions = () => {
+    FireManager.getQuestions({
+      fieldPath: questionsFieldPaths.USER_ID,
+      operator: "==",
+      value: this.props.user.id
+    }).then(questions => {
+      this.setState(
+        {askedQuestions: questions}
+      );
+    })
+  };
 
   render() {
     return (
@@ -29,7 +46,7 @@ class ProfileQuestionContainer extends Component {
             <div className='empty_div'/>
           </div>
         </div>
-        {this.props.questions.map((question) => <QuestionItem
+        {this.state.askedQuestions.map((question) => <QuestionItem
           key={question.id} question={question}/>
         )}
       </div>
@@ -40,14 +57,7 @@ class ProfileQuestionContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.userReducer,
-    questions: state.questionReducer
   }
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getAndDispatchUserQuestions: bindActionCreators(getAndDispatchUserQuestions, dispatch),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileQuestionContainer);
+export default connect(mapStateToProps)(ProfileQuestionContainer);

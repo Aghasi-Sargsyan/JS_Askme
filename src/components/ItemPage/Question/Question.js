@@ -19,7 +19,6 @@ class Question extends Component {
     }
 
   render() {
-      console.log(this.props.question);
         return (
             <div className='item__question__page'>
                 <h2 className='item__question__title'>
@@ -30,13 +29,11 @@ class Question extends Component {
                     <div className='item__question__avatar flex align_center flex_col'>
                         <Avatar />
                         <span className='font_s'>{this.state.userName}</span>
-                        {/* {this.props.user.userName} */}
                     </div>
                     <div className='pad_right_20 pad_left_20'>
                         <div className='item__question__desc'>
                           {this.props.question.description}
                         </div>
-                        {/* <div className='item__question__desc' dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}></div> */}
                         <div className='item__question__skill'>
                           {this.props.question.skills.map(skill=> <span key={skill}>{skill}</span>)}
                         </div>

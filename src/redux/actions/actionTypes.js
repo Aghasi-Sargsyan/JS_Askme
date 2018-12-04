@@ -4,7 +4,6 @@ const actionTypes = {
   REMOVE_USER: "REMOVE_USER",
   LOG_IN: "LOG_IN",
   LOG_OUT: "LOG_OUT",
-  ADD_QUESTION: "ADD_QUESTION",
 };
 
 export default actionTypes;

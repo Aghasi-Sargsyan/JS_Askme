@@ -24,17 +24,21 @@ class ItemPage extends Component {
     }).then(question => this.setState({
       question: question[0]
     }));
-    FireManager.getAnswers(this.props.user.id).then(answers => this.setState({
-      dbAnswers: answers
-    }));
+
+    this.getQuestionAnswers();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.user.id !== this.props.user.id) {
-      FireManager.getAnswers(this.props.user.id).then(answers => this.setState({
+      this.getQuestionAnswers();
+    }
+  }
+
+  getQuestionAnswers() {
+    FireManager.getAnswers(this.props.user.id)
+      .then(answers => this.setState({
         dbAnswers: answers
       }));
-    }
   }
 
   onSubmit = () => {
