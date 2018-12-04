@@ -11,7 +11,7 @@ import gender from '../../assets/icons/gender.png';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css'
 import SkillContainer from '../SkillContainer/SkillContainer';
-import {Link, withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class AskQuestionPage extends Component {
 
@@ -24,23 +24,39 @@ class AskQuestionPage extends Component {
     ageRange: { min: 15, max: 30 },
     age: [],
     isTyping: false,
+    isValid: true,
   };
 
   handleChange = e => {
     if (typeof e === "string") {
       this.setState({
-        description: e
+        description: e,
+        isValid: !e,
       });
     } else {
       this.setState({
         [e.target.id]: e.target.value
       });
 
-      if (e.target.id === 'skillDesc') {
-        this.setState({
-          isTyping: !!e.target.value
-        })
+      switch (e.target.id) {
+        case 'skillDesc':
+          this.setState({
+            isTyping: !!e.target.value,
+          })
+          break;
+        case 'title':
+          this.setState({
+            isValid: !!e.target.value,
+          })
+          break;
+        default:
       }
+
+      // if (e.target.id === 'skillDesc') {
+      //   this.setState({
+      //     isTyping: !!e.target.value,
+      //   })
+      // }
     }
   };
 
@@ -49,7 +65,7 @@ class AskQuestionPage extends Component {
     for (let i = min; i <= max; i++) {
       ageArray.push(i);
     }
-    this.setState({age: ageArray});
+    this.setState({ age: ageArray });
   };
 
   handleRadioButton = (e) => {
@@ -99,7 +115,7 @@ class AskQuestionPage extends Component {
   };
 
   render() {
-    const { isTyping } = this.state;
+    const { isTyping, isValid } = this.state;
     return (
       <div className='ask_question'>
         <div className='flex'>
@@ -176,7 +192,7 @@ class AskQuestionPage extends Component {
             <SkillContainer isShowingMessage={false} deleteSkill={this.deleteSkill} skills={this.state.skills} />
           </ul>
         </div>
-        <button className='ask_question_submit' onClick={this.onSubmit}>Post Your Question</button >
+        <button type='submit' disabled={isValid} className='ask_question_submit' onClick={this.onSubmit}>Post Your Question</button >
       </div>
     );
   }
