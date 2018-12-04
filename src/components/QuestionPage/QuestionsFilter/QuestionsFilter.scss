@@ -6,6 +6,13 @@
     li {
         cursor: pointer;
         margin: 10px 0;
+        button {
+            font-size: 18px;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding: 0;
+        }
         .questions-skills-menu {
             margin: 0 10px;
             li {

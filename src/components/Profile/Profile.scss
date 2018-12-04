@@ -66,6 +66,20 @@
                 overflow-y: auto;
                 overflow-x: auto;
                 max-height: 190px;
+                li {
+                    display: flex;
+                    margin: 6px 4px;
+                    p {
+                        padding: 4px 6px;
+                        background-color: #e8e8e8;
+                    }
+                    button {
+                        background: transparent;
+                        border: 1px solid #999;
+                        border-radius: 5px;
+                        outline: none;
+                    }
+                }
             }
             .add__user__skill__btn {
                 width: 150px;
