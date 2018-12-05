@@ -84,6 +84,13 @@ class AskQuestionPage extends Component {
     })
   };
 
+  handleKeyPress = (e) => {
+    console.log(e.charCode)
+    if (e.charCode == 13) {
+      this.addSkill();
+    }
+  }
+
   deleteSkill = (e) => {
     const array = [...this.state.skills];
     const index = e.target.id;
@@ -183,6 +190,7 @@ class AskQuestionPage extends Component {
               onChange={this.handleChange}
               id="skillDesc"
               className='mar_left_20'
+              onKeyPress={this.handleKeyPress}
             />
           </label>
           <button type='button' onClick={this.addSkill} className='ask_question_skill_add'>

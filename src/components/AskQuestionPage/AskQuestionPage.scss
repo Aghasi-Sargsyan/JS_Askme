@@ -40,20 +40,27 @@
     }
     .skill_list {
         .skill-container {
+            display: flex;
             padding: 0;
             li {
                 display: flex;
-                color: #000;
+                margin: 6px 4px;
+                position: relative;
                 p {
-                    background-color: #eee;
-                    padding: 0px 8px;
-                    height: 20px;
-                    font-size: 15px;
-                    line-height: 20px;
+                    width: 130px;
+                    padding: 4px 6px;
+                    background-color: #e8e8e8;
+                    border-radius: 6px;
+                
                 }
                 button {
-                    height: 20px;
-                    background: transparent;
+                    height: 100%;
+                    font-size: 14px;
+                    position: absolute;
+                    right: 0;
+                    background: #e8e8e8;
+                    border: none;
+                    border-radius: 5px;
                     outline: none;
                 }
             }
