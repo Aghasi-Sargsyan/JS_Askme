@@ -17,7 +17,9 @@ class ItemPage extends Component {
   };
 
   componentDidMount() {
-    FireManager.getQuestions({
+    console.log(this.state.id);
+    FireManager.queryData({
+      collectionPath: "questions",
       fieldPath: questionsFieldPaths.ID,
       operator: "==",
       value: this.state.id
@@ -35,7 +37,12 @@ class ItemPage extends Component {
   }
 
   getQuestionAnswers() {
-    FireManager.getAnswers(this.props.user.id)
+    FireManager.queryData({
+      collectionPath: "answers",
+      fieldPath: questionsFieldPaths.QUESTION_ID,
+      operator: "==",
+      value: this.state.id
+    })
       .then(answers => this.setState({
         dbAnswers: answers
       }));

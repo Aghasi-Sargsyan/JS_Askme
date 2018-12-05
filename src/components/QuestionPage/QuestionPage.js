@@ -14,26 +14,30 @@ class QuestionPage extends Component {
     const promiseArray = [];
     this.props.user.skills_insensitive.forEach(skill => {
       promiseArray.push(
-        FireManager.getQuestions({
+        FireManager.queryData({
+          collectionPath: "questions",
           fieldPath: questionsFieldPaths.SKILLS,
           operator: "array-contains",
           value: skill
         }));
     });
 
-    const p2 = FireManager.getQuestions({
+    const p2 = FireManager.queryData({
+      collectionPath: "questions",
       fieldPath: questionsFieldPaths.AGE,
       operator: "array-contains",
       value: this.props.user.age
     });
 
-    const p3 = FireManager.getQuestions({
+    const p3 = FireManager.queryData({
+      collectionPath: "questions",
       fieldPath: questionsFieldPaths.GENDER,
       operator: "==",
       value: this.props.user.gender
     });
 
-    const p4 = FireManager.getQuestions({
+    const p4 = FireManager.queryData({
+      collectionPath: "questions",
       fieldPath: questionsFieldPaths.GENDER,
       operator: "==",
       value: "all"

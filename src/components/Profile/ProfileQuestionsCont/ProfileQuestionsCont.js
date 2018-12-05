@@ -22,7 +22,8 @@ class ProfileQuestionContainer extends Component {
   }
 
   getUserQuestions = () => {
-    FireManager.getQuestions({
+    FireManager.queryData({
+      collectionPath: "questions",
       fieldPath: questionsFieldPaths.USER_ID,
       operator: "==",
       value: this.props.user.id

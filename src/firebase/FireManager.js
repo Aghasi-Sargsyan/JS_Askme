@@ -79,11 +79,28 @@ export default class FireManager {
     }
   }
 
+  static addAnswer(answer, userId) {
+    if (userId) {
+      const ref = firestore().collection("answers").doc();
+      const newAnswer = {...answer, id: ref.id};
+      ref.set(newAnswer)
+        .then(() => {
+          console.log("answer successfully added");
+        })
+        .catch(error => {
+          console.error("Error when adding answer", error);
+        });
+      return ref.id;
+    } else {
+      console.error("need to pass an existing id property");
+    }
+  }
+
   /**
    *  Returns a promise with resolved question array
    * */
-  static getQuestions(obj) {
-    return firestore().collection("questions")
+  static queryData(obj) {
+    return firestore().collection(obj.collectionPath)
       .where(obj.fieldPath, obj.operator, obj.value)
       .get().then(querySnapshot => {
         const questionsArray = [];
@@ -122,42 +139,6 @@ export default class FireManager {
       }
     );
   }
-
-
-  static addAnswer(answer, userId) {
-    if (userId) {
-      const ref = firestore().collection("answers").doc();
-      const newAnswer = {...answer, id: ref.id};
-      ref.set(newAnswer)
-        .then(() => {
-          console.log("answer successfully added");
-        })
-        .catch(error => {
-          console.error("Error when adding answer", error);
-        });
-      return ref.id;
-    } else {
-      console.error("need to pass an existing id property");
-    }
-  }
-
-  /**
-   *  Returns a promise with resolved answer array
-   * */
-  static getAnswers(userId) {
-    return firestore().collection("answers")
-      .where("userId", "==", userId)
-      .get().then(querySnapshot => {
-        const questionsArray = [];
-        querySnapshot.forEach((doc) => {
-          questionsArray.push(doc.data());
-        });
-        return questionsArray;
-      })
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
-  }
 }
 
 
@@ -165,6 +146,7 @@ export const questionsFieldPaths = {
   SKILLS: "skills_insensitive",
   AGE: "age",
   GENDER: "gender",
+  QUESTION_ID: "questionId",
   USER_ID: "userId",
   ID: "id"
 };
