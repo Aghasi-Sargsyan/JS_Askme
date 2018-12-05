@@ -1,126 +1,133 @@
 .ask_question {
-  width: 70%;
-  margin: auto;
-
-  input {
-    border: 1px solid #999;
-    height: 40px;
-    outline: none;
-    padding: 0 5px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  .ask_question_title {
-    width: 500px;
-  }
-
-  .ask_question_gender {
-    margin: 10px 0;
-
-    label {
-      margin: 0 10px;
-      width: 30px;
-      height: 30px;
-      display: inline-block;
-
-      &[aria-disabled="true"] {
-        background-color: #bbb8b8;
-      }
-    }
-
-    [type=radio] {
-      position: absolute;
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    /* IMAGE STYLES */
-    [type=radio] + img {
-      cursor: pointer;
-    }
-
-    /* CHECKED STYLES */
-    [type=radio]:checked + img {
-      outline: 2px dotted #999;
-    }
-  }
-
-  .skill_list {
-    .skill-container {
-      padding: 0;
-
-      li {
-        display: flex;
-        color: #000;
-
-        p {
-          background-color: #eee;
-          padding: 0px 8px;
-          height: 20px;
-          font-size: 15px;
-          line-height: 20px;
-        }
-
-        button {
-          height: 20px;
-          background: transparent;
-          outline: none;
-        }
-      }
-    }
-  }
-
-  .ask_question_submit {
-    width: 140px;
-    height: 50px;
-    color: #fff;
-    cursor: pointer;
-    background-color: #00be73;
-    border: none;
-    outline: none;
+    width: 70%;
     margin: auto;
-    display: block;
-  }
+    input {
+        border: 1px solid #999;
+        height: 40px;
+        outline: none;
+        padding: 0 5px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .ask_question_title {
+        width: 500px;
+    }
+    .ask_question_gender {
+        margin: 10px 0;
+        label {
+            margin: 0 10px;
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            &[aria-disabled="true"] {
+                background-color: #bbb8b8;
+            }
+        }
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        /* IMAGE STYLES */
+        [type=radio]+img {
+            cursor: pointer;
+        }
+        /* CHECKED STYLES */
+        [type=radio]:checked+img {
+            outline: 2px dotted #999;
+        }
+    }
+    .skill_list {
+        .skill-container {
+            display: flex;
+            padding: 0;
+            li {
+                display: flex;
+                margin: 6px 4px;
+                position: relative;
+                p {
+                    width: 130px;
+                    padding: 4px 6px;
+                    background-color: #e8e8e8;
+                    border-radius: 6px;
 
-  .ask_question_skill_add {
-    min-width: 35px;
-    height: 35px;
-    line-height: 1.5;
-    border-radius: 50%;
-    border: 1px solid #999;
-    background-color: #00be73;
-    color: #fff;
-    font-size: 20px;
-    margin: 0 10px;
-  }
-
-  .ask_question_skill_add:hover {
-    cursor: pointer;
-  }
+                }
+                button {
+                    height: 100%;
+                    font-size: 14px;
+                    position: absolute;
+                    right: 0;
+                    background: #e8e8e8;
+                    border: none;
+                    border-radius: 5px;
+                    outline: none;
+                }
+            }
+        }
+    }
+    .ask_question_submit {
+        width: 140px;
+        height: 50px;
+        color: #fff;
+        cursor: pointer;
+        background-color: #00be73;
+        border: none;
+        outline: none;
+        margin: auto;
+        display: block;
+    }
+    .ask_question_skill_add {
+        min-width: 35px;
+        height: 35px;
+        line-height: 1.5;
+        border-radius: 50%;
+        border: 1px solid #999;
+        background-color: #00be73;
+        color: #fff;
+        font-size: 20px;
+        margin: 0 10px;
+    }
+    .ask_question_skill_add:hover {
+        cursor: pointer;
+    }
 }
 
 input[type="number"]:disabled {
-  background: #dddddd;
+    background: #dddddd;
 }
 
 input[type="radio"]:disabled {
-  background: #dddddd;
+    background: #dddddd;
+}
+
+button[type="submit"]:disabled {
+    background-color: #bebebe;
+}
+
+button[type="button"]:disabled {
+    background-color: #fff;
+    color: #999;
+}
+
+button[type="submit"]:disabled:hover {
+    cursor: default;
+}
+
+button[type="button"]:disabled:hover {
+    cursor: default;
 }
 
 .age__slider {
-  margin: 30px 0;
-
-  .input-range {
-    width: 30%;
-  }
-
-  .age__slider_age {
-    margin-right: 20px;
-  }
+    margin: 30px 0;
+    .input-range {
+        width: 30%;
+    }
+    .age__slider_age {
+        margin-right: 20px;
+    }
 }
 
 .female {
-  height: 30px;
+    height: 30px;
 }

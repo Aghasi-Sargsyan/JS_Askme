@@ -61,7 +61,7 @@ class ProfileQuestionContainer extends Component {
                     </div>
                 </div>
                 {questions.map((question) => <QuestionItem
-                    key={question.id} question={question}/>
+                    key={question.id} question={question} profileQuestion={true}/>
                 )}
             </div>
         )

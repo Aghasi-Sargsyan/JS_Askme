@@ -51,145 +51,121 @@
 }
 
 .bioForm__right {
-  width: 500px;
-  padding: 100px;
-  background-color: #fff;
-  position: relative;
-
-  .bioForm__form {
-    display: flex;
-    flex-direction: column;
-
-    label {
-      margin-right: 15px;
+    width: 500px;
+    padding: 100px;
+    background-color: #fff;
+    position: relative;
+    .bioForm__form {
+        display: flex;
+        flex-direction: column;
+        label {
+            margin-right: 15px;
+        }
+        #birthYear {
+            width: 300px;
+            font-size: 18px;
+            border: none;
+            background: #7f7f7f21;
+        }
+        img {
+            height: 30px;
+        }
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        /* IMAGE STYLES */
+        [type=radio]+img {
+            cursor: pointer;
+        }
+        /* CHECKED STYLES */
+        [type=radio]:checked+img {
+            outline: 2px dotted #999;
+        }
+        .gender {
+            margin-top: 30px;
+            &>label {
+                margin: 0 20px;
+            }
+        }
+        .skills-cont {
+            display: flex;
+            align-items: baseline;
+            margin-top: 60px;
+            input {
+                width: 220px;
+                outline: none;
+                border: 0;
+                border-radius: 0;
+                border-bottom: 1px solid #999;
+            }
+        }
+        .skillsList {
+            width: 300px;
+            height: 70px;
+            padding: 10px 0;
+            margin: auto;
+            display: block;
+            overflow-y: auto;
+            li {
+                display: inline-block;
+                background: #eee;
+                margin: 3px 9px;
+                padding: 4px 6px;
+            }
+        }
+        .bioForm__save {
+            width: 200px;
+            height: 50px;
+            position: absolute;
+            bottom: 90px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            cursor: pointer;
+            color: #fff;
+            background-color: #00d091;
+            font-size: 20px;
+            border: none;
+        }
+        span {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .bioForm__add {
+            min-width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid #999;
+            background-color: #00d091;
+            color: #fff;
+            font-size: 20px;
+        }
+        .bioForm__add:hover {
+            cursor: pointer;
+        }
+        .bioForm__save:hover {
+            cursor: pointer;
+        }
+        button[type="submit"]:disabled {
+            @extend .bioForm__save;
+            background-color: #bebebe;
+        }
+        button[type="button"]:disabled {
+            @extend .bioForm__add;
+            background-color: #fff;
+            color: #999;
+        }
+        button[type="submit"]:disabled:hover {
+            cursor: default;
+        }
+        button[type="button"]:disabled:hover {
+            cursor: default;
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            opacity: 1;
+        }
     }
-
-    #birthYear {
-      width: 300px;
-      font-size: 18px;
-      border: none;
-      background: #7f7f7f21;
-    }
-
-    img {
-      width: 30px;
-      height: 30px;
-    }
-
-    [type=radio] {
-      position: absolute;
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    /* IMAGE STYLES */
-    [type=radio] + img {
-      cursor: pointer;
-    }
-
-    /* CHECKED STYLES */
-    [type=radio]:checked + img {
-      outline: 2px dotted #999;
-    }
-
-    .gender {
-      margin-top: 30px;
-
-      & > label {
-        margin: 0 20px;
-      }
-    }
-
-    .skills-cont {
-      display: flex;
-      align-items: baseline;
-      margin-top: 60px;
-
-      input {
-        width: 220px;
-        outline: none;
-        border: 0;
-        border-radius: 0;
-        border-bottom: 1px solid #999;
-      }
-    }
-
-    .skillsList {
-      width: 300px;
-      height: 70px;
-      padding: 10px 0;
-      margin: auto;
-      display: block;
-      overflow-y: auto;
-
-      li {
-        display: inline-block;
-        background: #eee;
-        margin: 3px 9px;
-        padding: 4px 6px;
-      }
-    }
-
-    .bioForm__save {
-      width: 200px;
-      height: 50px;
-      position: absolute;
-      bottom: 90px;
-      left: 50%;
-      transform: translate(-50%, 0);
-      cursor: pointer;
-      color: #fff;
-      background-color: #00d091;
-      font-size: 20px;
-      border: none;
-    }
-
-    span {
-      margin-right: 10px;
-      font-weight: bold;
-    }
-
-    .bioForm__add {
-      min-width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      border: 1px solid #999;
-      background-color: #00d091;
-      color: #fff;
-      font-size: 20px;
-    }
-
-    .bioForm__add:hover {
-      cursor: pointer;
-    }
-
-    .bioForm__save:hover {
-      cursor: pointer;
-    }
-
-    button[type="submit"]:disabled {
-      @extend .bioForm__save;
-      background-color: #bebebe;
-    }
-
-    button[type="button"]:disabled {
-      @extend .bioForm__add;
-      background-color: #fff;
-      color: #999;
-    }
-
-    button[type="submit"]:disabled:hover {
-      cursor: default;
-    }
-
-    button[type="button"]:disabled:hover {
-      cursor: default;
-    }
-
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-      opacity: 1;
-    }
-  }
 }

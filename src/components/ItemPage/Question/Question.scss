@@ -1,22 +1,28 @@
 .item__question__page {
-  .item__question__title {
-    font-weight: bold;
-  }
-
-  .item__question__avatar {
-    img {
-      width: 50px;
-      height: 50px;
-      margin: 0 10px;
+    .item__question__title {
+        font-weight: bold;
     }
-  }
-
-  .item__question__skill {
-    span {
-      background-color: #e8e8e8;
-      margin: 6px 4px;
-      padding: 3px;
-      display: inline-block;
+    .item__question__avatar {
+        img {
+            min-width: 50px;
+            height: 50px;
+            margin: 0 10px;
+        }
     }
-  }
+    .item__question__skill {
+        margin: 5px 0;
+        span {
+            font-size: 10px;
+            background-color: #e8e8e8;
+            margin: 0 4px;
+            padding: 4px 6px;
+            display: inline-block;
+        }
+    }
+    .item__question__avatar {
+        span {
+            width: 50px;
+            text-align: center;
+        }
+    }
 }

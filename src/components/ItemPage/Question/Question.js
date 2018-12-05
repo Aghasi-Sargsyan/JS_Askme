@@ -28,7 +28,7 @@ class Question extends Component {
                 <div className='flex align_center'>
                     <div className='item__question__avatar flex align_center flex_col'>
                         <Avatar/>
-                        <span className='font_s'>{this.state.userName}</span>
+                        <span className='font_s ellipsis'>{this.state.userName}</span>
                     </div>
                     <div className='pad_right_20 pad_left_20'>
                         <div className='item__question__desc'>

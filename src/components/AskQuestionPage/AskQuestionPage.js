@@ -76,6 +76,11 @@ class AskQuestionPage extends Component {
             this.setState({skills: array});
         }
     };
+  handleKeyPress = (e) => {
+    if (e.charCode == 13) {
+      this.addSkill();
+    }
+  };
 
     onSubmit = e => {
         e.preventDefault();
@@ -167,6 +172,7 @@ class AskQuestionPage extends Component {
                             onChange={this.handleChange}
                             id="skillDesc"
                             className='mar_left_20'
+                            onKeyPress={this.handleKeyPress}
                         />
                     </label>
                     <button type='button' onClick={this.addSkill} className='ask_question_skill_add'>
@@ -177,7 +183,13 @@ class AskQuestionPage extends Component {
                                         skills={this.state.skills}/>
                     </ul>
                 </div>
-                <button className='ask_question_submit' onClick={this.onSubmit}>Post Your Question</button>
+                <button type='submit'
+                        className='ask_question_submit'
+                        onClick={this.onSubmit}
+                        disabled={!this.state.title.length || !this.state.description}
+                >
+                    Post Your Question
+                </button >
             </div>
         );
     }

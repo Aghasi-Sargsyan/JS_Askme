@@ -25,7 +25,7 @@ class Answer extends Component {
                 <div className='flex'>
                     <div className='answer__avatar flex align_center flex_col'>
                         <Avatar/>
-                        <span className='font_s'>{this.props.userName || this.state.userName}</span>
+                        <span className='font_s ellipsis'>{this.props.userName || this.state.userName}</span>
                     </div>
                     <div className='answer__desc pad_right_20 pad_left_20'>
                         {this.props.answer.description}

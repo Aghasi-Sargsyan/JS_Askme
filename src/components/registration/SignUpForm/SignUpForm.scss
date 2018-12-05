@@ -1,61 +1,56 @@
 .signUp__left {
-  width: 400px;
-  background-color: #ffd400;
-  background-image: url(../../../assets//registration_bg.png);
-  background-size: contain;
-  position: relative;
-
-  .signUp__logo {
-    p {
-      font-size: 18px;
-      padding: 20px 0 0 20px;
-      color: #ff9b00;
-
-      .logo_letter {
-        font-size: 30px;
-      }
+    width: 400px;
+    background-color: #ffd400;
+    background-image: url(../../../assets/registration_bg.png);
+    background-size: contain;
+    position: relative;
+    .signUp__logo {
+        p {
+            font-size: 18px;
+            padding: 20px 0 0 20px;
+            color: #ff9b00;
+            .logo_letter {
+                font-size: 30px;
+            }
+        }
     }
-  }
-
-  .signUp__quotes {
-    color: #fff;
-    text-align: center;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -40%);
-    width: 80%;
-  }
-
-  a {
-    width: 200px;
-    height: 50px;
-    line-height: 45px;
-    position: absolute;
-    bottom: 70px;
-    left: 50%;
-    -webkit-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
-    cursor: pointer;
-    color: #fff;
-    background-color: transparent;
-    font-size: 20px;
-    border: 1px solid #fff;
-    text-decoration: none;
-    text-align: center;
-  }
+    .signUp__quotes {
+        color: #fff;
+        text-align: center;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        width: 80%;
+        text-shadow: 2px 2px 8px #625f5b;
+    }
+    a {
+        width: 200px;
+        height: 50px;
+        line-height: 45px;
+        position: absolute;
+        bottom: 70px;
+        left: 50%;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+        cursor: pointer;
+        color: #fff;
+        background-color: transparent;
+        font-size: 20px;
+        border: 1px solid #fff;
+        text-decoration: none;
+        text-align: center;
+    }
 }
 
 .signUp__right {
-  width: 580px;
-  background-color: #fff;
-  position: relative;
-
-  p {
-    margin-top: 40px;
-  }
-
-  .social_btns {
-    margin: 40px 0;
-  }
+    width: 580px;
+    background-color: #fff;
+    position: relative;
+    p {
+        margin-top: 40px;
+    }
+    .social_btns {
+        margin: 40px 0;
+    }
 }

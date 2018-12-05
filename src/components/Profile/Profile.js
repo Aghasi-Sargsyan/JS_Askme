@@ -80,7 +80,7 @@ class Profile extends Component {
             <div className="profile_page flex">
                 <aside className="left__side">
                     <UserInfo user={user}/>
-                    <div className="user__skills">
+                    <div className="user__skills tac">
                         <SkillContainer isSkillObj deleteSkill={this.deleteSkill} skills={user.skills}/>
                         {isShowAdd && <Input
                             className="input__skill"

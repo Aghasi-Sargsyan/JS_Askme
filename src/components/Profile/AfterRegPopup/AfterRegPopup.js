@@ -103,6 +103,11 @@ class AfterRegPopup extends Component {
         ));
     }
 
+  handleKeyPress = (e) => {
+    if (e.charCode == 13) {
+      e.preventDefault();
+    }
+  };
     render() {
         const {skill, skillList, birthYear} = this.state;
 
@@ -170,7 +175,9 @@ class AfterRegPopup extends Component {
                                     errorMessage={skill.errorMessage}
                                     value={skill.value}
                                     changeHandler={this.handleChange}
+                                    handleKeyPress={this.handleKeyPress}
                                 />
+
                                 <button
                                     type="button"
                                     className="bioForm__add"
