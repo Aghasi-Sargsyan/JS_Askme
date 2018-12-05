@@ -4,7 +4,7 @@
         color: #000;
         background-color: #fff;
         padding: 10px;
-        margin: 6px 0;
+        margin: 5px 0;
         box-shadow: 0 0 10px #d3d2d2;
         transition: all .2s ease-in-out;
         &:hover {
@@ -38,7 +38,9 @@
         }
         .question_item_desc {
             padding: 4px 0;
-            .question_item_wysiwyg>div {
+            .question_item_wysiwyg>div,
+            .question_item_wysiwyg>div>p {
+                height: 18px;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -71,7 +73,9 @@
                 }
             }
         }
-        .question_item_skill {
+        .question_item_skill,
+        .question_item_age,
+        .question_item_gender {
             span {
                 font-size: 10px;
                 background-color: #e8e8e8;

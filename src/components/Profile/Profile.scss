@@ -56,12 +56,6 @@
                         font-size: 11px;
                     }
                 }
-                .no-skill__message {
-                    color: red;
-                    font-size: 20px;
-                    font-style: italic;
-                    width: max-content;
-                }
             }
             .skill-container {
                 overflow-y: auto;
@@ -77,6 +71,9 @@
                         padding: 4px 6px;
                         background-color: #e8e8e8;
                         border-radius: 6px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                     }
                     button {
                         height: 100%;
@@ -90,7 +87,7 @@
                     }
                     span {
                         width: 28px;
-                        border-radius: 50%;
+                        border-radius: 3px;
                         height: 28px;
                         text-align: center;
                         background: #00be71;
@@ -168,4 +165,10 @@
             width: 150px;
         }
     }
+}
+
+.no-skill__message {
+    color: #18b877;
+    font-weight: bold;
+    font-size: 14px;
 }

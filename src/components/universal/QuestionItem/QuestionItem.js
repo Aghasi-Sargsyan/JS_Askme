@@ -64,6 +64,14 @@ export default class QuestionItem extends Component {
             <div className='question_item_skill'>
               {question.skills.map(skill => <span key={skill}>{skill}</span>)}
             </div>
+            {/* <div className='flex'>
+              <div className='question_item_age'>
+                <span>23-40</span>
+              </div>
+              <div className='question_item_gender'>
+                <span>Female</span>
+              </div>
+            </div> */}
             <div className='question_item_date'>
               <span>{formattedDate}</span>
             </div>

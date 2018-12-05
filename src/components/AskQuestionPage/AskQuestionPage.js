@@ -24,14 +24,14 @@ class AskQuestionPage extends Component {
     ageRange: { min: 15, max: 30 },
     age: [],
     isTyping: false,
-    // isValid: true,
+    isValid: true,
   };
 
   handleChange = e => {
     if (typeof e === "string") {
       this.setState({
         description: e,
-        // isValid: !e,
+        isValid: !e,
       });
     } else {
       this.setState({
@@ -40,14 +40,18 @@ class AskQuestionPage extends Component {
 
       // switch (e.target.id) {
       //   case 'skillDesc':
+      //     console.log(e.target.id)
+
       //     this.setState({
       //       isTyping: !!e.target.value,
       //     })
       //     break;
       //   case 'title':
+      //     console.log(e.target.id)
       //     this.setState({
       //       isValid: !!e.target.value,
       //     })
+      //     console.log('aaa', !!e.target.value)
       //     break;
       //   default:
       // }
@@ -57,6 +61,23 @@ class AskQuestionPage extends Component {
           isTyping: !!e.target.value,
         })
       }
+
+      // if (e.target.id === 'title') {
+      //   this.setState({
+      //     isValid: !!e.target.value,
+      //   })
+      //   console.log(!!e.target.value)
+      // }
+
+      // if(e.target.id === 'title' && typeof e === "string") {
+      // if (typeof e === "string") {
+      //   console.log(e)
+
+      //   this.setState({
+      //     isTyping: !!e,
+      //   })
+      // }
+
     }
   };
 
@@ -85,7 +106,6 @@ class AskQuestionPage extends Component {
   };
 
   handleKeyPress = (e) => {
-    console.log(e.charCode)
     if (e.charCode == 13) {
       this.addSkill();
     }
@@ -200,7 +220,13 @@ class AskQuestionPage extends Component {
             <SkillContainer isShowingMessage={false} deleteSkill={this.deleteSkill} skills={this.state.skills} />
           </ul>
         </div>
-        <button type='submit' disabled={isValid} className='ask_question_submit' onClick={this.onSubmit}>Post Your Question</button >
+        <button type='submit'
+          className='ask_question_submit'
+          onClick={this.onSubmit}
+          disabled={!this.state.title.length || !this.state.description}
+        >
+          Post Your Question
+          </button >
       </div>
     );
   }
