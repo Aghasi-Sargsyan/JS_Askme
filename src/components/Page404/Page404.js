@@ -3,7 +3,7 @@ import "./Page404.scss"
 
 const Page404 = () => (
     <div className="page_404">
-        <div className="bg-gif" style={{ backgroundImage: "url('http://i.giphy.com/l117HrgEinjIA.gif')"}}/>
+        <div className="bg-gif" style={{backgroundImage: "url('http://i.giphy.com/l117HrgEinjIA.gif')"}}/>
         <div className="oops">Oops!</div>
     </div>
 );

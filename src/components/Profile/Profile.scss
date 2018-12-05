@@ -1,154 +1,180 @@
 .profile_page {
-    background-color: #f8f8f8;
-    .left__side {
-        height: 100vh;
-        padding-left: 80px;
-        .user__skills {
-            position: relative;
-            .skills {
-                display: block;
-                margin: 0 0 30px 0;
-                padding: 0;
-                width: calc(100% - 50px);
-                li {
-                    display: flex;
-                    min-height: 30px;
-                    word-break: break-all;
-                    padding-right: 40px;
-                    position: relative;
-                    background-color: #888;
-                    color: #fff;
-                    margin: 10px 0;
-                    transition: width 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
-                    .collapse & {
-                        width: 0 !important;
-                    }
-                    p {
-                        padding: 10px;
-                        margin: 0;
-                        font-weight: bold;
-                    }
-                    button {
-                        position: absolute;
-                        left: 107%;
-                        border: 1px solid crimson;
-                        background-color: crimson;
-                        height: 25px;
-                        border-radius: 3px;
-                        width: 25px;
-                        cursor: pointer;
-                        outline: none;
-                        &:hover {
-                            background-color: red;
-                            border: 1px solid crimson;
-                        }
-                    }
-                    span {
-                        position: absolute;
-                        right: 10px;
-                        display: inline-block;
-                        width: 30px;
-                        top: 11px;
-                        text-align: right;
-                        font-weight: normal;
-                        color: #fff;
-                        font-size: 11px;
-                    }
-                }
-                .no-skill__message {
-                    color: red;
-                    font-size: 20px;
-                    font-style: italic;
-                    width: max-content;
-                }
+  background-color: #f8f8f8;
+
+  .left__side {
+    height: 100vh;
+    padding-left: 80px;
+
+    .user__skills {
+      position: relative;
+
+      .skills {
+        display: block;
+        margin: 0 0 30px 0;
+        padding: 0;
+        width: calc(100% - 50px);
+
+        li {
+          display: flex;
+          min-height: 30px;
+          word-break: break-all;
+          padding-right: 40px;
+          position: relative;
+          background-color: #888;
+          color: #fff;
+          margin: 10px 0;
+          transition: width 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+
+          .collapse & {
+            width: 0 !important;
+          }
+
+          p {
+            padding: 10px;
+            margin: 0;
+            font-weight: bold;
+          }
+
+          button {
+            position: absolute;
+            left: 107%;
+            border: 1px solid crimson;
+            background-color: crimson;
+            height: 25px;
+            border-radius: 3px;
+            width: 25px;
+            cursor: pointer;
+            outline: none;
+
+            &:hover {
+              background-color: red;
+              border: 1px solid crimson;
             }
-            .skill-container {
-                overflow-y: auto;
-                overflow-x: auto;
-                max-height: 190px;
-                li {
-                    display: flex;
-                    margin: 6px 4px;
-                    p {
-                        padding: 4px 6px;
-                        background-color: #e8e8e8;
-                    }
-                    button {
-                        background: transparent;
-                        border: 1px solid #999;
-                        border-radius: 5px;
-                        outline: none;
-                    }
-                }
-            }
-            .add__user__skill__btn {
-                width: 150px;
-                height: 50px;
-                background-color: #00be73;
-                position: absolute;
-                left: 66px;
-                margin-top: 20px;
-                border: 1px solid #00be73;
-                -webkit-border-radius: 3px;
-                -moz-border-radius: 3px;
-                border-radius: 3px;
-                color: white;
-                outline: none;
-                cursor: pointer;
-                &:hover {
-                    background-color: #1dae75;
-                    border: 1px solid #1dae75;
-                }
-            }
-            .input-cont {
-                display: flex;
-                justify-content: center;
-                margin-top: 20px;
-                .input__skill {
-                    border-radius: 5px;
-                    width: 200px;
-                }
-            }
+          }
+
+          span {
+            position: absolute;
+            right: 10px;
+            display: inline-block;
+            width: 30px;
+            top: 11px;
+            text-align: right;
+            font-weight: normal;
+            color: #fff;
+            font-size: 11px;
+          }
         }
+
+        .no-skill__message {
+          color: red;
+          font-size: 20px;
+          font-style: italic;
+          width: max-content;
+        }
+      }
+
+      .skill-container {
+        overflow-y: auto;
+        overflow-x: auto;
+        max-height: 190px;
+
+        li {
+          display: flex;
+          margin: 6px 4px;
+
+          p {
+            padding: 4px 6px;
+            background-color: #e8e8e8;
+          }
+
+          button {
+            background: transparent;
+            border: 1px solid #999;
+            border-radius: 5px;
+            outline: none;
+          }
+        }
+      }
+
+      .add__user__skill__btn {
+        width: 150px;
+        height: 50px;
+        background-color: #00be73;
+        position: absolute;
+        left: 66px;
+        margin-top: 20px;
+        border: 1px solid #00be73;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color: white;
+        outline: none;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #1dae75;
+          border: 1px solid #1dae75;
+        }
+      }
+
+      .input-cont {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+
+        .input__skill {
+          border-radius: 5px;
+          width: 200px;
+        }
+      }
     }
-    .right__side {
-        margin-top: 3%;
-        width: 70%;
-        div {
-            a {
-                color: grey;
-                font-family: sans-serif;
-                &.active {
-                    color: black;
-                    font-weight: bold;
-                }
-            }
+  }
+
+  .right__side {
+    margin-top: 3%;
+    width: 70%;
+
+    div {
+      a {
+        color: grey;
+        font-family: sans-serif;
+
+        &.active {
+          color: black;
+          font-weight: bold;
         }
-        .profile_questions_tab {
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-        .my__questions__btn {
-            width: 163px;
-            height: 21px;
-        }
-        .my__answers__btn {
-            width: 248px;
-            height: 21px;
-        }
+      }
     }
+
+    .profile_questions_tab {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .my__questions__btn {
+      width: 163px;
+      height: 21px;
+    }
+
+    .my__answers__btn {
+      width: 248px;
+      height: 21px;
+    }
+  }
 }
 
 .question_item_header {
-    background-color: #fff;
-    margin-bottom: 15px;
-    padding: 10px;
-    .question__item_header_txt {
-        div {
-            width: 70px;
-        }
-        .empty_div {
-            width: 150px;
-        }
+  background-color: #fff;
+  margin-bottom: 15px;
+  padding: 10px;
+
+  .question__item_header_txt {
+    div {
+      width: 70px;
     }
+
+    .empty_div {
+      width: 150px;
+    }
+  }
 }

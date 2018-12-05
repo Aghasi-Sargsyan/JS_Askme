@@ -1,22 +1,24 @@
 $invalid-color: #c20000;
 .input-cont {
-    label {
-        font-weight: bold;
-    }
-    input {
-        border: 1px solid #999;
-        padding: 7px;
-        transition: all 300ms ease-in-out;
-        outline: none;
-    }
-    span {
-        font-size: 10px;
-        color: $invalid-color;
-    }
+  label {
+    font-weight: bold;
+  }
+
+  input {
+    border: 1px solid #999;
+    padding: 7px;
+    transition: all 300ms ease-in-out;
+    outline: none;
+  }
+
+  span {
+    font-size: 10px;
+    color: $invalid-color;
+  }
 }
 
 .invalid {
-    label {
-        color: $invalid-color;
-    }
+  label {
+    color: $invalid-color;
+  }
 }

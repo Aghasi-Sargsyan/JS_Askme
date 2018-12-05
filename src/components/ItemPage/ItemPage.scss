@@ -1,19 +1,21 @@
 .question__page {
-    width: 70%;
-    margin: auto;
-    .question__title {
-        font-size: 22px;
-        font-weight: bold;
-    }
-    .answer_submit {
-        width: 140px;
-        height: 50px;
-        color: #fff;
-        cursor: pointer;
-        background-color: #FF9800;
-        border: none;
-        outline: none;
-        margin: 10px auto;
-        display: block;
-    }
+  width: 70%;
+  margin: auto;
+
+  .question__title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .answer_submit {
+    width: 140px;
+    height: 50px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #FF9800;
+    border: none;
+    outline: none;
+    margin: 10px auto;
+    display: block;
+  }
 }

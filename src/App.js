@@ -20,7 +20,7 @@ import SettingPage from "./components/SettingPage/SettingPage";
 class App extends Component {
 
     componentDidMount() {
-      auth().onAuthStateChanged(user => {
+        auth().onAuthStateChanged(user => {
             if (user) {
                 this.props.getAndDispatchDbUser(user.uid);
                 this.props.dispatchLogin();
@@ -76,7 +76,7 @@ class App extends Component {
     }
 
     render() {
-      return (
+        return (
             <div>
                 {this.props.user.isLoggedIn && <Header/>}
                 {this.rend()}

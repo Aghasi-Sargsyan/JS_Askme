@@ -36,7 +36,7 @@ class SettingPage extends Component {
     };
 
     render() {
-        const {userName, birthYear, gender, email, password} = this.state;
+        const {userName, birthYear, email, password} = this.state;
         return (
             <div className="setting__page">
                 <div className="setting__profile">
