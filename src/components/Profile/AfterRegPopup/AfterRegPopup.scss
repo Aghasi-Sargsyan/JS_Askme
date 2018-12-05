@@ -1,49 +1,53 @@
 .bioform {
-    height: 550px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  height: 550px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .bioForm__left {
-    width: 300px;
-    background-color: #ffb000;
-    position: relative;
-    .bioForm__logo {
-        p {
-            font-size: 18px;
-            padding: 20px 0 0 20px;
-            color: #fff;
-            .logo_letter {
-                font-size: 30px;
-            }
-        }
+  width: 300px;
+  background-color: #ffb000;
+  position: relative;
+
+  .bioForm__logo {
+    p {
+      font-size: 18px;
+      padding: 20px 0 0 20px;
+      color: #fff;
+
+      .logo_letter {
+        font-size: 30px;
+      }
     }
-    img {
-        width: 220px;
-        height: 220px;
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        -webkit-transform: translate(-50%, 0);
-        transform: translate(-50%, -40%);
-    }
-    .bioform__submit {
-        width: 200px;
-        height: 50px;
-        position: absolute;
-        bottom: 90px;
-        left: 50%;
-        transform: translate(-50%, 0);
-        cursor: pointer;
-        color: #fff;
-        background-color: transparent;
-        font-size: 20px;
-        outline: none;
-        border: 1px solid #fff;
-    }
+  }
+
+  img {
+    width: 220px;
+    height: 220px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, -40%);
+  }
+
+  .bioform__submit {
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    bottom: 90px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    cursor: pointer;
+    color: #fff;
+    background-color: transparent;
+    font-size: 20px;
+    outline: none;
+    border: 1px solid #fff;
+  }
 }
 
 .bioForm__right {

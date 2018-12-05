@@ -2,7 +2,7 @@ import React from 'react';
 import './Skill.scss';
 
 const Skill = props => {
-  const { value, rate } = props;
+    const {value, rate} = props;
 
   return (
     <li id={value}>

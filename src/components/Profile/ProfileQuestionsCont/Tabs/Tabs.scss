@@ -1,12 +1,13 @@
 .profile_questions_tab {
-    .tabs {
-        width: 100%;
-        .tabs__labels {
-            font-size: 18px;
-            background-color: #fff;
-            padding: 10px;
-            margin-bottom: 10px;
-            justify-content: space-evenly;
-        }
+  .tabs {
+    width: 100%;
+
+    .tabs__labels {
+      font-size: 18px;
+      background-color: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+      justify-content: space-evenly;
     }
+  }
 }

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import './RateCounter.scss';
 
 class RateCounter extends Component {
@@ -8,7 +8,7 @@ class RateCounter extends Component {
         vote: 5,
         isIncrement: false,
         isDecrement: false,
-    }
+    };
 
     incrementVote = () => {
         // if (this.state.isDecrement) {
@@ -23,7 +23,7 @@ class RateCounter extends Component {
             vote: prevState.vote + 1,
             isIncrement: !this.state.isIncrement
         }));
-    }
+    };
 
     decrementVote = () => {
         // if (this.state.isIncrement) {
@@ -37,7 +37,7 @@ class RateCounter extends Component {
             vote: prevState.vote - 1,
             isDecrement: !this.state.isDecrement
         }));
-    }
+    };
 
     render() {
         const { isIncrement, isDecrement } = this.state;

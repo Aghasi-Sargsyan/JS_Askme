@@ -6,10 +6,10 @@ import "./Header.scss";
 const Header = () => (
     <header>
         <nav className="navigation flex">
-            <hr className='horizontal__line' />
-            <Logo />
-            <div className="space" />
-            <NavBar />
+            <hr className='horizontal__line'/>
+            <Logo/>
+            <div className="space"/>
+            <NavBar/>
         </nav>
     </header>
 );

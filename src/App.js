@@ -13,7 +13,6 @@ import Profile from "./components/Profile/Profile";
 import AskQuestionPage from "./components/AskQuestionPage/AskQuestionPage";
 import Page404 from "./components/Page404/Page404";
 import AfterRegPopup from "./components/Profile/AfterRegPopup/AfterRegPopup";
-import {getAndDispatchUserQuestions} from "./redux/actions/questionActions";
 import ItemPage from "./components/ItemPage/ItemPage";
 import SettingPage from "./components/SettingPage/SettingPage";
 
@@ -21,7 +20,7 @@ import SettingPage from "./components/SettingPage/SettingPage";
 class App extends Component {
 
     componentDidMount() {
-      auth().onAuthStateChanged(user => {
+        auth().onAuthStateChanged(user => {
             if (user) {
                 this.props.getAndDispatchDbUser(user.uid);
                 this.props.dispatchLogin();
@@ -77,7 +76,7 @@ class App extends Component {
     }
 
     render() {
-      return (
+        return (
             <div>
                 {this.props.user.isLoggedIn && <Header/>}
                 {this.rend()}
@@ -91,7 +90,6 @@ class App extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         getAndDispatchDbUser: bindActionCreators(getAndDispatchDbUser, dispatch),
-        getAndDispatchUserQuestions:  bindActionCreators(getAndDispatchUserQuestions, dispatch),
         dispatchLogin: () => dispatch(actionLogin),
         dispatchLogout: () => dispatch(actionLogout),
     };
