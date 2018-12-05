@@ -42,7 +42,7 @@ class AfterRegPopup extends Component {
       age: Number.parseInt(birthYear.value),
       gender: gender,
       skills: skillList,
-      skills_insensitive: skillList.map(skill=> skill.value.toUpperCase()),
+      skills_insensitive: skillList.map(skill => skill.value.toUpperCase()),
       isNewUser: false
     };
     FireManager.updateUser(updatedUser, user.id);
@@ -68,7 +68,7 @@ class AfterRegPopup extends Component {
     });
   };
 
-  handleCheck = (e) => {
+  handleCheck = e => {
     this.setState({
       gender: e.target.value
     });
@@ -97,10 +97,17 @@ class AfterRegPopup extends Component {
       });
   };
 
+
   skillsRender() {
     return this.state.skillList.map((skill, index) => (
       <li key={index}>{skill.value}</li>
     ));
+  }
+
+  handleKeyPress = (e) => {
+    if (e.charCode == 13) {
+      e.preventDefault();
+    }
   }
 
   render() {
@@ -169,7 +176,9 @@ class AfterRegPopup extends Component {
                   errorMessage={skill.errorMessage}
                   value={skill.value}
                   changeHandler={this.handleChange}
+                  handleKeyPress={this.handleKeyPress}
                 />
+
                 <button
                   type="button"
                   className="bioForm__add"

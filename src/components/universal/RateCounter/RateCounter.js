@@ -3,29 +3,50 @@ import './RateCounter.scss';
 
 class RateCounter extends Component {
     state = {
-        vote: 0
+        incVote: 0,
+        decVote: 0,
+        vote: 5,
+        isIncrement: false,
+        isDecrement: false,
     }
 
     incrementVote = () => {
+        // if (this.state.isDecrement) {
+        //     console.log('inc', this.state.isDecrement)
+
+        //     this.setState(prevState => ({
+        //         vote: prevState.vote + 1,
+        //         isIncrement: this.state.isIncrement
+        //     }));
+        // }
         this.setState(prevState => ({
-            vote: prevState.vote + 1
+            vote: prevState.vote + 1,
+            isIncrement: !this.state.isIncrement
         }));
     }
 
     decrementVote = () => {
+        // if (this.state.isIncrement) {
+        //     console.log('dec', this.state.isIncrement)
+        //     this.setState(prevState => ({
+        //         vote: prevState.vote - 1,
+        //         isIncrement: this.state.isIncrement
+        //     }));
+        // }
         this.setState(prevState => ({
-            vote: prevState.vote - 1
+            vote: prevState.vote - 1,
+            isDecrement: !this.state.isDecrement
         }));
     }
 
     render() {
+        const { isIncrement, isDecrement } = this.state;
+
         return (
             <div className='rate__container flex align_center flex_col'>
-                <button className='increment' onClick={this.incrementVote}>+</button>
-                {/* <input type="radio" name="rateCounter" value="+" onChange={this.incrementVote} /> */}
+                <button disabled={isIncrement} className='increment' onClick={this.incrementVote}>+</button>
                 <span>{this.state.vote}</span>
-                {/* <input type="radio" name="rateCounter" value="-" onChange={this.decrementVote} /> */}
-                <button className='decrement' onClick={this.decrementVote}>-</button>
+                <button disabled={isDecrement} className='decrement' onClick={this.decrementVote}>-</button>
             </div>
         )
     }

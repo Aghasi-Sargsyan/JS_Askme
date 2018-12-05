@@ -21,6 +21,7 @@ const Input = props => {
                     placeholder={props.placeholder}
                     id={props.id}
                     onChange={props.changeHandler}
+                    onKeyPress={props.handleKeyPress}
                 />
             </div>
             {!props.valid && <span>{errorMessage}</span>}
