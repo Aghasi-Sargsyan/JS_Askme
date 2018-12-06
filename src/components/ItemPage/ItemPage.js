@@ -70,7 +70,13 @@ class ItemPage extends Component {
             {
                 collectionPath: dbPaths.collections.QUESTIONS,
                 docPath: this.state.id,
-            }, this.props.user.id);
+            });
+
+        FireManager.updateData({ answerCount: ++question.answerCount },
+            {
+                collectionPath: dbPaths.collections.QUESTIONS,
+                docPath: this.state.id,
+            });
     };
 
     handleChange = e => {
