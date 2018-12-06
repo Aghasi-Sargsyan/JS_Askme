@@ -1,10 +1,10 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Answer from "./Answer/Answer";
 import Wysiwyg from "../universal/Wysiwyg/Wysiwyg";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Question from "./Question/Question";
 import './ItemPage.scss';
-import FireManager, {dbPaths} from "../../firebase/FireManager";
+import FireManager, { dbPaths } from "../../firebase/FireManager";
 
 class ItemPage extends Component {
 
@@ -49,7 +49,7 @@ class ItemPage extends Component {
     }
 
     onSubmit = () => {
-        const {question} = this.state;
+        const { question } = this.state;
         const newAnswer = {
             userId: this.props.user.id,
             questionId: this.state.id,
@@ -66,7 +66,7 @@ class ItemPage extends Component {
             answers: [...this.state.answers, newAnswer],
         });
 
-        FireManager.updateData({repliedUsers: this.props.user.id},
+        FireManager.updateData({ repliedUsers: this.props.user.id },
             {
                 collectionPath: dbPaths.collections.QUESTIONS,
                 docPath: this.state.id,
@@ -84,17 +84,19 @@ class ItemPage extends Component {
     render() {
         return (
             <div className='question__page'>
-                {this.state.question && <Question question={this.state.question}/>}
-                <hr/>
+                {this.state.question && <Question question={this.state.question} />}
+                <hr />
                 <h4>Answers</h4>
+                <hr />
                 {this.state.dbAnswers.map((answer) => <Answer answer={answer}
-                                                              key={answer.id}/>)}
+                    key={answer.id} />)}
                 {this.state.answers.map((answer, index) => <Answer answer={answer}
-                                                                   userName={this.props.user.userName}
-                                                                   key={index}/>)}
-                <hr/>
+                    userName={this.props.user.userName}
+                    key={index} />)}
+                <hr />
                 <h4>Your Answer</h4>
-                <Wysiwyg changeHandler={this.handleChange}/>
+                <hr />
+                <Wysiwyg changeHandler={this.handleChange} />
                 <button className='answer_submit' onClick={this.onSubmit}>Post your answer</button>
 
             </div>

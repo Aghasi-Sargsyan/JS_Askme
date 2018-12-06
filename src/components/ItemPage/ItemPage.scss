@@ -1,6 +1,9 @@
 .question__page {
     width: 70%;
     margin: auto;
+    h4 {
+        font-size: 18px;
+    }
     .question__title {
         font-size: 22px;
         font-weight: bold;
@@ -15,5 +18,10 @@
         outline: none;
         margin: 10px auto;
         display: block;
+    }
+    hr {
+        height: 6px;
+        background: url(http://ibrahimjabbari.com/english/images/hr-11.png) repeat-x 0 0;
+        border: 0;
     }
 }

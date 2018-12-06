@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Avatar from '../../universal/Avatar/Avatar';
 import RateCounter from '../../universal/RateCounter/RateCounter';
 import './Answer.scss';
@@ -12,27 +12,31 @@ class Answer extends Component {
 
     componentDidMount() {
         !this.props.userName && FireManager.getUser(this.props.answer.userId).then(user => {
-                this.setState({
-                    userName: user.userName
-                });
-            }
+            this.setState({
+                userName: user.userName
+            });
+        }
         )
     }
 
     render() {
+        const descriptionArr = [];
+        descriptionArr.push(this.props.answer.description);
+
         return (
             <div className='answer__page'>
-                <div className='flex'>
+                <div className='flex align_center'>
+                    <div>
+                        <RateCounter />
+                    </div>
                     <div className='answer__avatar flex align_center flex_col'>
-                        <Avatar/>
+                        <Avatar />
                         <span className='font_s ellipsis'>{this.props.userName || this.state.userName}</span>
                     </div>
-                    <div className='answer__desc pad_right_20 pad_left_20'>
-                        {this.props.answer.description}
+                    <div className='answer__desc flex_grow pad_right_20 pad_left_20' dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}>
+
                     </div>
-                    <div>
-                        <RateCounter/>
-                    </div>
+
                 </div>
 
             </div>

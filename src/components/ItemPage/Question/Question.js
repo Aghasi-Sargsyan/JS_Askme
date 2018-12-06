@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Avatar from '../../universal/Avatar/Avatar';
 import RateCounter from '../../universal/RateCounter/RateCounter';
 import './Question.scss';
@@ -24,10 +24,13 @@ class Question extends Component {
                 <h2 className='item__question__title'>
                     {this.props.question.title}
                 </h2>
-                <hr/>
+                <hr />
                 <div className='flex align_center'>
+                    <div>
+                        <RateCounter />
+                    </div>
                     <div className='item__question__avatar flex align_center flex_col'>
-                        <Avatar/>
+                        <Avatar />
                         <span className='font_s ellipsis'>{this.state.userName}</span>
                     </div>
                     <div className='pad_right_20 pad_left_20'>
@@ -37,9 +40,6 @@ class Question extends Component {
                         <div className='item__question__skill'>
                             {this.props.question.skills.map(skill => <span key={skill}>{skill}</span>)}
                         </div>
-                    </div>
-                    <div>
-                        <RateCounter/>
                     </div>
                 </div>
             </div>
