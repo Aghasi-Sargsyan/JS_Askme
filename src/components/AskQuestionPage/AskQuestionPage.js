@@ -1,17 +1,17 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Wysiwyg from '../universal/Wysiwyg/Wysiwyg';
 import FireManager from "../../firebase/FireManager";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import './AskQuestionPage.scss';
-import {bindActionCreators} from "redux";
-import {getAndDispatchDbUser} from "../../redux/actions/userActions";
+import { bindActionCreators } from "redux";
+import { getAndDispatchDbUser } from "../../redux/actions/userActions";
 import male from "../../assets/icons/male.png";
 import female from "../../assets/icons/female.png";
 import gender from '../../assets/icons/gender.png';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css'
 import SkillContainer from '../SkillContainer/SkillContainer';
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class AskQuestionPage extends Component {
 
@@ -21,7 +21,7 @@ class AskQuestionPage extends Component {
         skills: [],
         skillDesc: '',
         gender: 'all',
-        ageRange: {min: 15, max: 30},
+        ageRange: { min: 15, max: 30 },
         age: [],
         isTyping: false,
     };
@@ -49,7 +49,7 @@ class AskQuestionPage extends Component {
         for (let i = min; i <= max; i++) {
             ageArray.push(i);
         }
-        this.setState({age: ageArray});
+        this.setState({ age: ageArray });
     };
 
     handleRadioButton = (e) => {
@@ -59,7 +59,7 @@ class AskQuestionPage extends Component {
     };
 
     addSkill = () => {
-        const {skills, skillDesc} = this.state;
+        const { skills, skillDesc } = this.state;
         const skillList = skills.concat(skillDesc);
         this.setState({
             skills: skillList,
@@ -73,18 +73,18 @@ class AskQuestionPage extends Component {
         const index = e.target.id;
         if (index !== -1) {
             array.splice(index, 1);
-            this.setState({skills: array});
+            this.setState({ skills: array });
         }
     };
-  handleKeyPress = (e) => {
-    if (e.charCode == 13) {
-      this.addSkill();
-    }
-  };
+    handleKeyPress = (e) => {
+        if (e.charCode == 13) {
+            this.addSkill();
+        }
+    };
 
     onSubmit = e => {
         e.preventDefault();
-        const {title, description, skills, age, gender} = this.state;
+        const { title, description, skills, age, gender } = this.state;
         const question = {
             id: null,
             userId: this.props.user.id,
@@ -104,7 +104,7 @@ class AskQuestionPage extends Component {
     };
 
     render() {
-        const {isTyping} = this.state;
+        const { isTyping } = this.state;
         return (
             <div className='ask_question'>
                 <div className='flex'>
@@ -117,7 +117,7 @@ class AskQuestionPage extends Component {
                     />
                 </div>
                 <div>
-                    <Wysiwyg changeHandler={this.handleChange}/>
+                    <Wysiwyg changeHandler={this.handleChange} />
                 </div>
                 <div className='age__slider flex'>
                     <div className='age__slider_age'>Age</div>
@@ -126,9 +126,9 @@ class AskQuestionPage extends Component {
                         draggableTrack
                         maxValue={70}
                         minValue={10}
-                        onChange={value => this.setState({ageRange: value})}
+                        onChange={value => this.setState({ ageRange: value })}
                         onChangeComplete={value => this.handleAgeRange(value.min, value.max)}
-                        value={this.state.ageRange}/>
+                        value={this.state.ageRange} />
                 </div>
                 <div className='ask_question_gender'>
                     <span className='pad_right_20'>Gender</span>
@@ -141,7 +141,7 @@ class AskQuestionPage extends Component {
                             disabled={isTyping}
                             onChange={this.handleRadioButton}
                         />
-                        <img src={gender} alt="all"/>
+                        <img src={gender} alt="all" />
                     </label>
                     <label aria-disabled={isTyping}>
                         <input
@@ -151,7 +151,7 @@ class AskQuestionPage extends Component {
                             disabled={isTyping}
                             onChange={this.handleRadioButton}
                         />
-                        <img src={male} alt="male"/>
+                        <img src={male} alt="male" />
                     </label>
                     <label aria-disabled={isTyping}>
                         <input
@@ -161,7 +161,7 @@ class AskQuestionPage extends Component {
                             disabled={isTyping}
                             onChange={this.handleRadioButton}
                         />
-                        <img className='female' src={female} alt="female"/>
+                        <img className='female' src={female} alt="female" />
                     </label>
                 </div>
                 <div>
@@ -180,13 +180,13 @@ class AskQuestionPage extends Component {
                     </button>
                     <ul className='skill_list'>
                         <SkillContainer isShowingMessage={false} deleteSkill={this.deleteSkill}
-                                        skills={this.state.skills}/>
+                            skills={this.state.skills} />
                     </ul>
                 </div>
                 <button type='submit'
-                        className='ask_question_submit'
-                        onClick={this.onSubmit}
-                        disabled={!this.state.title.length || !this.state.description}
+                    className='ask_question_submit'
+                    onClick={this.onSubmit}
+                    disabled={!this.state.title.length || !this.state.description}
                 >
                     Post Your Question
                 </button >
