@@ -61,30 +61,29 @@ class QuestionPage extends Component {
 
     componentDidMount() {
         const {user} = this.props;
-        // FireManager.getGlobalSkills().then(g => console.log(g));
-        user.id && this.getQuestions().then(formattedQuestions => {
+        user.id && !user.isNewUser && this.getQuestions().then(formattedQuestions => {
             console.log(formattedQuestions);
             this.setState({
                 allQuestions: formattedQuestions,
                 filteredQuestions: formattedQuestions
             });
         });
-
     }
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.user.id !== this.props.user.id) {
-            this.getQuestions().then(formattedQuestions => {
-                if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(formattedQuestions)) {
-                    this.setState({
-                        allQuestions: formattedQuestions,
-                        filteredQuestions: formattedQuestions
-                    });
-                }
-            });
+        console.log("updated");
+            if (!this.props.user.isNewUser) {
+                this.getQuestions().then(formattedQuestions => {
+                    if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(formattedQuestions)) {
+                        this.setState({
+                            allQuestions: formattedQuestions,
+                            filteredQuestions: formattedQuestions
+                        });
+                    }
+                });
+            }
         }
-    }
 
     questionFilter = (type) => {
         const {allQuestions} = this.state;
