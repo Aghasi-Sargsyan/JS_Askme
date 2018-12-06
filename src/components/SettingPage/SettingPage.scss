@@ -2,16 +2,25 @@
 .setting__page {
     display: flex;
     justify-content: center;
+    .setting__aside {
+        height: 100vh;
+        width: 20%;
+        background-color: #f8f8f8;
+        padding: 0 20px;
+        margin-top: 3%;
+        .setting-icon {
+            margin-right: 5px;
+        }
+    }
     .setting__profile {
+        margin-top: 3%;
         width: 70%;
         transition: opacity .5s ease-in;
         h1 {
-            font-family: 'Montserrat', sans-serif;
-            ;
             color: #25c619;
             font-size: 1.5em;
-            margin-top: 40px;
             margin-bottom: 35px;
+            text-align: center;
         }
         h2 {
             color: #777777;
@@ -21,18 +30,6 @@
             letter-spacing: 1px;
             margin-left: 2px;
         }
-        div {
-            border-width: 1px;
-            border-style: solid;
-            border-image: linear-gradient(to right, #3FB6A8, rgba(#7ED386, .5)) 1 0%;
-            border-top: 0;
-            width: 80%;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            padding: 7px 0;
-            color: #070707;
-            margin-bottom: 15px;
-        }
         hr {
             height: 6px;
             background: url(http://ibrahimjabbari.com/english/images/hr-11.png) repeat-x 0 0;
@@ -41,6 +38,9 @@
         img {
             height: 25px;
             padding: 2px;
+        }
+        label {
+            min-width: 80px;
         }
         .settings__save__btn {
             width: 110px;
@@ -53,6 +53,8 @@
             border-radius: 3px;
             cursor: pointer;
             outline: none;
+            margin: auto;
+            font-size: 13px;
         }
         .btn {
             float: right;
@@ -61,7 +63,7 @@
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
             border-radius: 3px;
-            border: none;
+            border: 1px solid #777777;
             color: #3d2db6;
             cursor: pointer;
             outline: none;
@@ -70,9 +72,39 @@
             color: #3eb708;
         }
         input {
+            width: 240px;
+            height: 34px;
+            line-height: 34px;
             border: 1px solid lighten(#777777, 40%);
-            padding: 2px;
-            margin: 0;
+            padding: 0 10px;
+            margin: 0 10px;
+        }
+        .setting__page_gender {
+            margin: 10px 0;
+            label {
+                min-width: auto;
+                margin: 0 10px;
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+                &[aria-disabled="true"] {
+                    background-color: #bbb8b8;
+                }
+            }
+            [type=radio] {
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            /* IMAGE STYLES */
+            [type=radio]+img {
+                cursor: pointer;
+            }
+            /* CHECKED STYLES */
+            [type=radio]:checked+img {
+                outline: 2px dotted #999;
+            }
         }
     }
 }
