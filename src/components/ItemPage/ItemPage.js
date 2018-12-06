@@ -92,7 +92,10 @@ class ItemPage extends Component {
             <div className='question__page'>
                 {this.state.question && <Question question={this.state.question} />}
                 <hr />
-                <h4>Answers</h4>
+                <div className='flex align_center'>
+                    {this.state.question && <span>{this.state.question.answerCount}</span>}
+                    <h4>Answers</h4>
+                </div>
                 <hr />
                 {this.state.dbAnswers.map((answer) => <Answer answer={answer}
                     key={answer.id} />)}
