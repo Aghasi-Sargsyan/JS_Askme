@@ -11,6 +11,7 @@ class ItemPage extends Component {
     state = {
         answerDesc: "",
         answers: [],
+        wysiwygTxt: '',
         dbAnswers: [],
         question: null,
         id: this.props.match.params.id
@@ -27,8 +28,6 @@ class ItemPage extends Component {
         }));
 
         this.getQuestionAnswers();
-
-        console.log(this.state.id)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -77,12 +76,17 @@ class ItemPage extends Component {
                 collectionPath: dbPaths.collections.QUESTIONS,
                 docPath: this.state.id,
             });
+        this.setState({
+            wysiwygTxt: ''
+        })
+
     };
 
     handleChange = e => {
         if (typeof e === "string") {
             this.setState({
                 answerDesc: e,
+                wysiwygTxt: e
             });
         }
     };
@@ -102,7 +106,7 @@ class ItemPage extends Component {
                 <hr />
                 <h4>Your Answer</h4>
                 <hr />
-                <Wysiwyg changeHandler={this.handleChange} />
+                <Wysiwyg value={this.state.wysiwygTxt} changeHandler={this.handleChange} />
                 <button className='answer_submit' onClick={this.onSubmit}>Post your answer</button>
 
             </div>

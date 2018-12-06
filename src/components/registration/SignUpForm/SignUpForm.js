@@ -149,7 +149,7 @@ class SignUpForm extends Component {
                             <input
                                 type="text"
                                 name="userName"
-                                placeholder="User Name"
+                                placeholder="Username"
                                 onChange={this.handleChange}
                                 className={formErrors.userName.length > 0 ? "error__input" : null}
                             />
