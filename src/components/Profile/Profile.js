@@ -6,7 +6,6 @@ import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
 import Tabs from './ProfileQuestionsCont/Tabs/Tabs';
 import Pane from './ProfileQuestionsCont/Pane/Pane';
 import "./Profile.scss";
-import Input from "../universal/Input/Input";
 import { bindActionCreators } from "redux";
 import { actionAddUserData } from "../../redux/actions/userActions";
 import FireManager from "../../firebase/FireManager";
