@@ -99,9 +99,9 @@ export default class FireManager {
     /**
      *  Returns a promise with resolved question array
      * */
-    static queryData(refConfig) {
-        return firestore().collection(refConfig.collectionPath)
-            .where(refConfig.fieldPath, refConfig.operator, refConfig.value)
+    static queryData(refParams) {
+        return firestore().collection(refParams.collectionPath)
+            .where(refParams.fieldPath, refParams.operator, refParams.value)
             .get().then(querySnapshot => {
                 const questionsArray = [];
                 querySnapshot.forEach((doc) => {
@@ -114,9 +114,9 @@ export default class FireManager {
             });
     }
 
-    static updateData(data = {}, refConfig) {
+    static updateData(data = {}, refParams) {
 
-        const ref = firestore().collection(refConfig.collectionPath).doc(refConfig.docPath);
+        const ref = firestore().collection(refParams.collectionPath).doc(refParams.docPath);
 
         const obj = data.repliedUsers
             ? {repliedUsers: firestore.FieldValue.arrayUnion(data.repliedUsers)}
