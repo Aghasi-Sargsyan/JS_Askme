@@ -1,12 +1,12 @@
-import React, {Component} from "react";
-import {auth} from "firebase";
+import React, { Component } from "react";
+import { auth } from "firebase";
 import "./SignUpForm.scss";
 import FireManager from "../../../firebase/FireManager"
 import isEmail from 'validator/lib/isEmail';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import routePaths from "../../../constKeys/routePaths";
-import {bindActionCreators} from "redux";
-import {actionAddUserData} from "../../../redux/actions/userActions";
+import { bindActionCreators } from "redux";
+import { actionAddUserData } from "../../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
 import fb from "../../../assets/icons/fb.png";
 import google from "../../../assets/icons/google.png";
@@ -40,7 +40,7 @@ class SignUpForm extends Component {
         e.preventDefault();
 
         let formErrors = this.state.formErrors;
-        const {name, value} = e.target;
+        const { name, value } = e.target;
 
         switch (name) {
             case "userName":
@@ -84,7 +84,7 @@ class SignUpForm extends Component {
 
     signUp = e => {
         e.preventDefault();
-        const {email, password, userName} = this.state;
+        const { email, password, userName } = this.state;
         auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
                 return userCredential.user
@@ -116,7 +116,7 @@ class SignUpForm extends Component {
     };
 
     render() {
-        const {formErrors, disabled} = this.state;
+        const { formErrors, disabled } = this.state;
 
         return (
             <div className="singInUp flex">
@@ -133,13 +133,13 @@ class SignUpForm extends Component {
                         <p className='font_m'>Sign In With</p>
                         <div className='social_btns'>
                             <button onClick={this.loginWithGoogle} className='social_btn'>
-                                <img src={google} alt="google"/>
+                                <img src={google} alt="google" />
                             </button>
                             <button onClick={this.loginWithFb} className='social_btn social_btn_fb'>
-                                <img src={fb} alt="fb"/>
+                                <img src={fb} alt="fb" />
                             </button>
                             <button onClick={this.loginWithFb} className='social_btn'>
-                                <img src={twitter} alt="twitter"/>
+                                <img src={twitter} alt="twitter" />
                             </button>
                         </div>
 
@@ -149,7 +149,7 @@ class SignUpForm extends Component {
                             <input
                                 type="text"
                                 name="userName"
-                                placeholder="First Name"
+                                placeholder="User Name"
                                 onChange={this.handleChange}
                                 className={formErrors.userName.length > 0 ? "error__input" : null}
                             />

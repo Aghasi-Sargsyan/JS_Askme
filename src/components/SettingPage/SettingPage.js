@@ -55,9 +55,6 @@ class SettingPage extends Component {
                                 <label>Username </label>
                                 <Input type="text" valid id="userName" value={userName} changeHandler={this.handleChange} />
                             </div>
-                            <button id="_userName" className="btn" onClick={this.handleClick}>
-                                Update
-                            </button>
                         </div>
                         <hr />
                         <div className='flex align_center'>
@@ -100,9 +97,6 @@ class SettingPage extends Component {
                                 <label>Email </label>
                                 <Input type="email" id="email" valid value={email} changeHandler={this.handleChange} />
                             </div>
-                            <button id="_email" className="btn" onClick={this.handleClick}>
-                                update
-                            </button>
                         </div>
                         <hr />
                         <div>
@@ -110,9 +104,6 @@ class SettingPage extends Component {
                                 <label>Password </label>
                                 <Input type="password" id="password" valid value={password} changeHandler={this.handleChange} />
                             </div>
-                            <button id="_password" className="btn" onClick={this.handleClick}>
-                                Change
-                            </button>
                         </div>
                         <hr />
                         <div>
@@ -120,9 +111,6 @@ class SettingPage extends Component {
                                 <label>Update Password </label>
                                 <Input type="password" id="confPassword" valid value={password} changeHandler={this.handleChange} />
                             </div>
-                            <button id="_password" className="btn" onClick={this.handleClick}>
-                                Change
-                            </button>
                         </div>
                         <hr />
                         <button type="button" className="settings__save__btn">Save Changes</button>

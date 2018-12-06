@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import './QuestionsFilter.scss';
 
 export default class QuestionsFilter extends Component {
@@ -22,12 +22,12 @@ export default class QuestionsFilter extends Component {
                         </button>
                     </li>
                     <li className='flex flex_column align_start'>
-                        Skill
+                        Skills
                         <ul className='flex wrap align_start questions-skills-menu'>
                             {this.props.skills.map((skill, index) =>
                                 <li key={index}>
                                     <button onClick={this.props.filterClickHandler}
-                                            id={skill.value}>
+                                        id={skill.value}>
                                         {skill.value}
                                     </button>
                                 </li>)}
