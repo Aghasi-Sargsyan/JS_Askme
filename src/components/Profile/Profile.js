@@ -9,7 +9,8 @@ import "./Profile.scss";
 import { bindActionCreators } from "redux";
 import { actionAddUserData } from "../../redux/actions/userActions";
 import FireManager from "../../firebase/FireManager";
-import AutoComplete from '../Autocomplete/Autocomplete';
+import Autocomplete from "../universal/Autocomplete/Autocomplete";
+
 
 class Profile extends Component {
     constructor(props) {
@@ -86,7 +87,7 @@ class Profile extends Component {
                     <div className="user__skills tac">
                         <SkillContainer isSkillObj deleteSkill={this.deleteSkill} skills={user.skills} />
                         <div className='flex flex_column align_center'>
-                            {isShowAdd && <AutoComplete
+                            {isShowAdd && <Autocomplete
                                 className="input__skill"
                                 value={inputValue}
                                 changeHandler={this.onSkillInputChange}
