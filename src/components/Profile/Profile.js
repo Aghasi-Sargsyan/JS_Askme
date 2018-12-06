@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
 import ProfileQuestionsCont from './ProfileQuestionsCont/ProfileQuestionsCont';
@@ -7,43 +7,41 @@ import Tabs from './ProfileQuestionsCont/Tabs/Tabs';
 import Pane from './ProfileQuestionsCont/Pane/Pane';
 import "./Profile.scss";
 import Input from "../universal/Input/Input";
-import {bindActionCreators} from "redux";
-import {actionAddUserData} from "../../redux/actions/userActions";
+import { bindActionCreators } from "redux";
+import { actionAddUserData } from "../../redux/actions/userActions";
 import FireManager from "../../firebase/FireManager";
+import AutoComplete from '../Autocomplete/Autocomplete';
 
 class Profile extends Component {
-
     constructor(props) {
         super(props);
 
         this.tabs = [
             {
                 name: 'My Questions',
-                content: <ProfileQuestionsCont askedQuestions/>
+                content: <ProfileQuestionsCont askedQuestions />
             },
             {
                 name: 'Answered Questions',
-                content: <ProfileQuestionsCont answeredQuestions/>
+                content: <ProfileQuestionsCont answeredQuestions />
             }
         ];
 
         this.state = {
             isShowAdd: false,
-            inputValue: ""
+            inputValue: "",
+            globalSkill: []
         }
     }
 
-    changeHandler = (e) => {
-        this.setState({inputValue: e.target.value});
-    };
-
     addSkillHandler = () => {
+        FireManager.getGlobalSkills().then((result) => this.setState({ globalSkill: result }))
         this.setState(prevState => ({
             isShowAdd: !prevState.isShowAdd
         }));
 
         if (this.state.inputValue.length) {
-            const newSkills = this.props.user.skills.concat({value: this.state.inputValue, rate: 0});
+            const newSkills = this.props.user.skills.concat({ value: this.state.inputValue, rate: 0 });
             FireManager.addGlobalSkill(this.state.inputValue);
             FireManager.updateUser({
                 skills: newSkills,
@@ -61,7 +59,7 @@ class Profile extends Component {
 
     deleteSkill = (e) => {
         const targetSkill = e.target.id;
-        const {user} = this.props;
+        const { user } = this.props;
         const newSkills = user.skills.filter(skill => skill.value !== targetSkill);
         this.props.dispatchUserData({
             skills: newSkills,
@@ -73,22 +71,30 @@ class Profile extends Component {
         }, user.id);
     };
 
+    onSkillInputChange = (inputValue) => {
+        this.setState({
+            inputValue
+        });
+    };
+
     render() {
-        const {isShowAdd, inputValue} = this.state;
-        const {user} = this.props;
+        const { isShowAdd, inputValue } = this.state;
+        const { user } = this.props;
         return (
             <div className="profile_page flex">
                 <aside className="left__side">
-                    <UserInfo user={user}/>
+                    <UserInfo user={user} />
                     <div className="user__skills tac">
-                        <SkillContainer isSkillObj deleteSkill={this.deleteSkill} skills={user.skills}/>
-                        {isShowAdd && <Input
-                            className="input__skill"
-                            valid
-                            changeHandler={this.changeHandler}
-                            value={inputValue}/>
-                        }
-                        <button className="add__user__skill__btn" onClick={this.addSkillHandler}>Add Skill</button>
+                        <SkillContainer isSkillObj deleteSkill={this.deleteSkill} skills={user.skills} />
+                        <div className='flex flex_column align_center'>
+                            {isShowAdd && <AutoComplete
+                                className="input__skill"
+                                value={inputValue}
+                                changeHandler={this.onSkillInputChange}
+                                suggestions={this.state.globalSkill} />
+                            }
+                            <button className="add__user__skill__btn" onClick={this.addSkillHandler}>Add Skill</button>
+                        </div>
                     </div>
                 </aside>
                 <aside className="right__side flex flex_column">

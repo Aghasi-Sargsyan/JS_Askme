@@ -123,10 +123,15 @@
                 display: flex;
                 justify-content: center;
                 margin-top: 20px;
-                .input__skill {
-                    border-radius: 5px;
-                    width: 200px;
-                }
+            }
+            .input__skill {
+                border-radius: 8px;
+                border: 1px solid #999;
+                width: 200px;
+                height: 40px;
+                line-height: 40px;
+                margin-top: 20px;
+                padding: 0 10px;
             }
         }
     }

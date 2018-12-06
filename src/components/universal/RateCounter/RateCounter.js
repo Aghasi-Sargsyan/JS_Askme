@@ -3,7 +3,7 @@ import './RateCounter.scss';
 
 class RateCounter extends Component {
     state = {
-        vote: 0,
+        vote: 5,
         isIncrement: false,
         isDecrement: false,
     };
