@@ -4,17 +4,9 @@ import Input from "../universal/Input/Input";
 import male from "../../assets/icons/male.png";
 import female from "../../assets/icons/female.png";
 import settingIcon from "../../assets/icons/settings.png";
+import { connect } from 'react-redux';
 
 class SettingPage extends Component {
-
-    state = {
-        userName: "John Doe",
-        birthYear: "1900",
-        gender: "Male",
-        email: "test@mail.ru",
-        password: "123456",
-        confPassword: '123456'
-    };
 
     handleChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -38,7 +30,7 @@ class SettingPage extends Component {
     };
 
     render() {
-        const { userName, birthYear, email, password } = this.state;
+        const { userName, age, email } = this.props.user;
         return (
             <div className="setting__page">
                 <div className='setting__aside'>
@@ -63,7 +55,7 @@ class SettingPage extends Component {
                                 type="number"
                                 id="birthYear"
                                 valid
-                                value={birthYear}
+                                value={age}
                                 changeHandler={this.handleChange}
                             />
                         </div>
@@ -101,15 +93,15 @@ class SettingPage extends Component {
                         <hr />
                         <div>
                             <div className='flex align_center'>
-                                <label>Password </label>
-                                <Input type="password" id="password" valid value={password} changeHandler={this.handleChange} />
+                                <label>Current Password </label>
+                                <Input type="password" id="password" valid changeHandler={this.handleChange} />
                             </div>
                         </div>
                         <hr />
                         <div>
                             <div className='flex align_center'>
                                 <label>Update Password </label>
-                                <Input type="password" id="confPassword" valid value={password} changeHandler={this.handleChange} />
+                                <Input type="password" id="confPassword" valid changeHandler={this.handleChange} />
                             </div>
                         </div>
                         <hr />
@@ -121,4 +113,11 @@ class SettingPage extends Component {
     }
 }
 
-export default SettingPage;
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.userReducer,
+    };
+};
+
+export default connect(mapStateToProps)(SettingPage);

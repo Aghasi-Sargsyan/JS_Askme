@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import QuestionsFilter from './QuestionsFilter/QuestionsFilter';
 import QuestionsCont from './QuestionsCont/QuestionsCont';
-import FireManager, {dbPaths} from "../../firebase/FireManager";
+import FireManager, { dbPaths } from "../../firebase/FireManager";
 import connect from "react-redux/es/connect/connect";
 
 class QuestionPage extends Component {
@@ -60,7 +60,7 @@ class QuestionPage extends Component {
     };
 
     componentDidMount() {
-        const {user} = this.props;
+        const { user } = this.props;
         user.id && !user.isNewUser && this.getQuestions().then(formattedQuestions => {
             console.log(formattedQuestions);
             this.setState({
@@ -73,20 +73,20 @@ class QuestionPage extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         console.log("updated");
-            if (!this.props.user.isNewUser) {
-                this.getQuestions().then(formattedQuestions => {
-                    if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(formattedQuestions)) {
-                        this.setState({
-                            allQuestions: formattedQuestions,
-                            filteredQuestions: formattedQuestions
-                        });
-                    }
-                });
-            }
+        if (!this.props.user.isNewUser) {
+            this.getQuestions().then(formattedQuestions => {
+                if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(formattedQuestions)) {
+                    this.setState({
+                        allQuestions: formattedQuestions,
+                        filteredQuestions: formattedQuestions
+                    });
+                }
+            });
         }
+    }
 
     questionFilter = (type) => {
-        const {allQuestions} = this.state;
+        const { allQuestions } = this.state;
         let filteredQuestions = [];
         switch (type) {
             case "all":
@@ -122,8 +122,8 @@ class QuestionPage extends Component {
             <div>
                 <div className='flex'>
                     <QuestionsFilter skills={this.props.user.skills}
-                                     filterClickHandler={this.handleFilterClick}/>
-                    <QuestionsCont filteredQuestions={this.state.filteredQuestions}/>
+                        filterClickHandler={this.handleFilterClick} />
+                    <QuestionsCont filteredQuestions={this.state.filteredQuestions} />
                 </div>
 
             </div>

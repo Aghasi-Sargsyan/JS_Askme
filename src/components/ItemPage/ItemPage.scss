@@ -1,6 +1,13 @@
 .question__page {
-    width: 70%;
+    width: calc(100% - 600px);
+    height: 100%;
     margin: auto;
+    margin-left: 370px;
+    background: #fff;
+    margin-top: -18px;
+    z-index: 10;
+    position: relative;
+    padding: 30px 50px 20px 50px;
     h4 {
         font-size: 18px;
     }
@@ -23,5 +30,15 @@
         height: 6px;
         background: url(http://ibrahimjabbari.com/english/images/hr-11.png) repeat-x 0 0;
         border: 0;
+    }
+    .answer_txt span {
+        width: 24px;
+        border-radius: 3px;
+        height: 24px;
+        text-align: center;
+        background: #00be71;
+        line-height: 24px;
+        color: #fff;
+        margin-right: 8px;
     }
 }

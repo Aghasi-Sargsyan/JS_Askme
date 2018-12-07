@@ -11,7 +11,6 @@ import { actionAddUserData } from "../../redux/actions/userActions";
 import FireManager from "../../firebase/FireManager";
 import Autocomplete from "../universal/Autocomplete/Autocomplete";
 
-
 class Profile extends Component {
     constructor(props) {
         super(props);
@@ -30,18 +29,44 @@ class Profile extends Component {
         this.state = {
             isShowAdd: false,
             inputValue: "",
-            globalSkill: []
+            globalSkill: [],
+            localSkills: [],
+            filteredSkills: []
         }
     }
 
     addSkillHandler = () => {
-        FireManager.getGlobalSkills().then((result) => this.setState({ globalSkill: result }))
-        this.setState(prevState => ({
-            isShowAdd: !prevState.isShowAdd
-        }));
+        const localSkills = [];
+        const { skills } = this.props.user;
 
-        if (this.state.inputValue.length) {
+        for (let key in skills) {
+            if (skills.hasOwnProperty(key)) {
+                localSkills.push(skills[key].value.toUpperCase());
+            }
+        };
+
+        FireManager.getGlobalSkills().then((result) => {
+            this.setState({
+                globalSkill: result
+            });
+            const filteredSkills = this.state.globalSkill.filter(unique => localSkills.indexOf(unique) === -1);
+
+            this.setState(prevState => ({
+                isShowAdd: !prevState.isShowAdd,
+                localSkills: localSkills,
+                filteredSkills: filteredSkills
+            }));
+        });
+
+        const dublicatedSkills = this.state.localSkills.includes(this.state.inputValue.toUpperCase());
+
+        console.log('local', this.state.localSkills);
+        console.log('inputValue', this.state.inputValue);
+        console.log('dublicatedSkills', dublicatedSkills);
+
+        if (this.state.inputValue.length && !dublicatedSkills) {
             const newSkills = this.props.user.skills.concat({ value: this.state.inputValue, rate: 0 });
+
             FireManager.addGlobalSkill(this.state.inputValue);
             FireManager.updateUser({
                 skills: newSkills,
@@ -78,7 +103,7 @@ class Profile extends Component {
     };
 
     render() {
-        const { isShowAdd, inputValue } = this.state;
+        const { isShowAdd, inputValue, filteredSkills } = this.state;
         const { user } = this.props;
         return (
             <div className="profile_page flex">
@@ -86,12 +111,12 @@ class Profile extends Component {
                     <UserInfo user={user} />
                     <div className="user__skills tac">
                         <SkillContainer isSkillObj deleteSkill={this.deleteSkill} skills={user.skills} />
-                        <div className='flex flex_column align_center'>
+                        <div className='flex flex_column align_center pos_rel'>
                             {isShowAdd && <Autocomplete
                                 className="input__skill"
                                 value={inputValue}
                                 changeHandler={this.onSkillInputChange}
-                                suggestions={this.state.globalSkill} />
+                                suggestions={filteredSkills} />
                             }
                             <button className="add__user__skill__btn" onClick={this.addSkillHandler}>Add Skill</button>
                         </div>
