@@ -73,7 +73,7 @@ class UserInfo extends Component {
                         />
                         <button className="upload__img-btn" onClick={this.handleUpload}>Upload profile image</button>
                     </Modal>
-                    {photoUrl && <img src={photoUrl} alt="avatar" />}
+                    {photoUrl && <Avatar src={photoUrl} />}
                     <button onClick={this.showModal}>Import profile image</button>
                 </div>
                 <div>
