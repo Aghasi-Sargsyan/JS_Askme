@@ -36,14 +36,14 @@ export default class QuestionItem extends Component {
                         <div className='question_item_title'>
                             {question.title}
                         </div>
-                        <div className='question_item_buttons'>
+                        {/* <div className='question_item_buttons'>
                             {!this.props.profileQuestion &&
                                 <>
                                     <button>-</button>
                                     <button>x</button>
                                 </>
                             }
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className='question_item_desc flex align_center'>

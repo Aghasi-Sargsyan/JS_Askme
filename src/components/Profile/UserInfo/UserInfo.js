@@ -57,24 +57,28 @@ class UserInfo extends Component {
                 <div className="user_info_img flex flex_col">
                     <Modal show={this.state.showModal} handleClose={this.hideModal}>
                         {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-                        {this.state.avatarURL ?
-                            <Avatar onClick={this.showModal} src={this.state.avatarURL} width={100} height={150} /> :
-                            <Avatar onClick={this.showModal} src={photoUrl} width={150} height={200} />
-                        }
-                        <FileUploader
-                            accept="image/*"
-                            name="avatar"
-                            randomizeFilename
-                            storageRef={firebase.storage().ref("images")}
-                            onUploadStart={this.handleUploadStart}
-                            onUploadError={this.handleUploadError}
-                            onUploadSuccess={this.handleUploadSuccess}
-                            onProgress={this.handleProgress}
-                        />
+                        <div className='flex_col'>
+
+                            {this.state.avatarURL ?
+                                <Avatar onClick={this.showModal} src={this.state.avatarURL} width={100} height={150} /> :
+                                <Avatar onClick={this.showModal} src={photoUrl} width={150} height={200} />
+                            }
+                            <FileUploader
+                                accept="image/*"
+                                name="avatar"
+                                randomizeFilename
+                                storageRef={firebase.storage().ref("images")}
+                                onUploadStart={this.handleUploadStart}
+                                onUploadError={this.handleUploadError}
+                                onUploadSuccess={this.handleUploadSuccess}
+                                onProgress={this.handleProgress}
+                            />
+                        </div>
+
                         <button className="upload__img-btn" onClick={this.handleUpload}>Upload profile image</button>
                     </Modal>
                     {photoUrl && <Avatar src={photoUrl} />}
-                    <button onClick={this.showModal}>Import profile image</button>
+                    <button onClick={this.showModal}>Add profile image</button>
                 </div>
                 <div>
                     <div className="user_info_item user_info_name">

@@ -33,7 +33,7 @@ export default class QuestionsFilter extends Component {
                                 </li>)}
                         </ul>
                     </li>
-                    <li>Answer Later</li>
+                    {/* <li>Answer Later</li> */}
                 </ul>
             </div>
         )
