@@ -9,7 +9,7 @@ function Wysiwyg(props) {
     return (
         <div className='wysiwyg'>
             <ReactQuill
-                // value={props.value}
+                value={props.value}
                 onChange={props.changeHandler}
                 modules={Wysiwyg.modules}
                 formats={Wysiwyg.formats}

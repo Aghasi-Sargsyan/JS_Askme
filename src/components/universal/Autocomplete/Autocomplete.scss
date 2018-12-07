@@ -1,0 +1,21 @@
+.suggestions {
+    list-style-type: none;
+    width: 70%;
+    position: absolute;
+    top: 59px;
+    background: #d3cdcd;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #d3d2d2;
+    li {
+        margin: 2px 0;
+        box-shadow: 0 0 10px #d3d2d2;
+        background: #e8e8e8;
+        border-radius: 4px;
+        cursor: pointer;
+        &:hover,
+        &.suggestion-active {
+            background: #00be6f;
+            color: #fff;
+        }
+    }
+}

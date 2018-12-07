@@ -1,28 +1,13 @@
 header {
-  width: 100%;
-
-  .navigation {
-    position: relative;
-    align-items: center;
-
-    .horizontal__line {
-      width: 100%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      margin: 0;
+    width: 100%;
+    .navigation {
+        position: relative;
+        align-items: center;
+        p {
+            position: relative;
+            z-index: 3;
+            background-color: #ffb742;
+            line-height: 1;
+        }
     }
-
-    p {
-      position: relative;
-      z-index: 3;
-      background-color: #f8f8f8;
-      line-height: 1;
-    }
-  }
-
-  .space {
-    flex: 1;
-  }
 }

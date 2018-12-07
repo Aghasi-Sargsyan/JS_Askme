@@ -18,6 +18,7 @@ class AskQuestionPage extends Component {
     state = {
         title: "",
         description: "",
+        wysiwygTxt: '',
         skills: [],
         skillDesc: '',
         gender: 'all',
@@ -29,7 +30,8 @@ class AskQuestionPage extends Component {
     handleChange = e => {
         if (typeof e === "string") {
             this.setState({
-                description: e
+                description: e,
+                wysiwygTxt: e
             });
         } else {
             this.setState({
@@ -107,6 +109,7 @@ class AskQuestionPage extends Component {
         const { isTyping } = this.state;
         return (
             <div className='ask_question'>
+                <h2>Ask Your Question</h2>
                 <div className='flex'>
                     <input
                         className='ask_question_title'
@@ -117,7 +120,7 @@ class AskQuestionPage extends Component {
                     />
                 </div>
                 <div>
-                    <Wysiwyg changeHandler={this.handleChange} />
+                    <Wysiwyg value={this.state.wysiwygTxt} changeHandler={this.handleChange} />
                 </div>
                 <div className='age__slider flex'>
                     <div className='age__slider_age'>Age</div>

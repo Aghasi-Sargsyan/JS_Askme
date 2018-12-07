@@ -96,7 +96,7 @@ class ItemPage extends Component {
             <div className='question__page'>
                 {this.state.question && <Question question={this.state.question} />}
                 <hr />
-                <div className='flex align_center'>
+                <div className='flex align_center answer_txt'>
                     {this.state.question && <span>{this.state.question.answerCount}</span>}
                     <h4>Answers</h4>
                 </div>
@@ -106,7 +106,6 @@ class ItemPage extends Component {
                 {this.state.answers.map((answer, index) => <Answer answer={answer}
                     userName={this.props.user.userName}
                     key={index} />)}
-                <hr />
                 <h4>Your Answer</h4>
                 <hr />
                 <Wysiwyg value={this.state.wysiwygTxt} changeHandler={this.handleChange} />

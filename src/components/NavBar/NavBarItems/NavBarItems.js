@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {NavLink} from "react-router-dom";
+import React, { Component } from 'react';
+import { NavLink } from "react-router-dom";
 import routePaths from '../../../constKeys/routePaths';
 import answerIcon from '../../../assets/icons/answerIcon.png';
 import questionIcon from '../../../assets/icons/questionIcon.png';
@@ -44,25 +44,27 @@ class NavBarItems extends Component {
 
     render() {
         return (
-            <ul className='navbar__items'>
-                <li>
-                    <NavLink activeStyle={{fontWeight: 'bold', color: '#000'}} to={routePaths.questionPage}>
-                        <img className='answer-icon' src={answerIcon} alt='answer'/>Answers
+            <>
+                <ul className='navbar__item navbar__item_left'>
+                    <li>
+                        <NavLink activeStyle={{ fontWeight: 'bold', color: '#000' }} to={routePaths.questionPage}>
+                            <img className='answer-icon' src={answerIcon} alt='answer' />Answers
                     </NavLink>
-                </li>
+                    </li>
 
-                <li>
-                    <NavLink activeStyle={{fontWeight: 'bold', color: '#000'}} to={routePaths.askQuestionPage}>
-                        <img className='question-icon' src={questionIcon} alt='question'/>Ask a Question
-                    </NavLink>
-                </li>
-
-                <li className="img-li" ref={(node) => this.wrapperRef = node}>
-                    <Avatar clicked={this.handleInfoDrop}/>
-                    {this.state.infoOpen && <InfoDrop close={this.handleInfoDrop}/>}
-                </li>
-
-            </ul>
+                    <li>
+                        <NavLink activeStyle={{ fontWeight: 'bold', color: '#000' }} to={routePaths.askQuestionPage}>
+                            <img className='question-icon' src={questionIcon} alt='question' />Ask a Question
+                        </NavLink>
+                    </li>
+                </ul>
+                <ul className='navbar__item navbar__item_right'>
+                    <li className="img-li" ref={(node) => this.wrapperRef = node}>
+                        <Avatar clicked={this.handleInfoDrop} />
+                        {this.state.infoOpen && <InfoDrop close={this.handleInfoDrop} />}
+                    </li>
+                </ul>
+            </>
         )
     }
 }
