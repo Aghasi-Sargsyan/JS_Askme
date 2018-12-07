@@ -30,14 +30,30 @@ class Profile extends Component {
         this.state = {
             isShowAdd: false,
             inputValue: "",
-            globalSkill: []
+            globalSkill: [],
+            localSkills: [],
+            filteredSkills: []
         }
     }
 
+
     addSkillHandler = () => {
-        FireManager.getGlobalSkills().then((result) => this.setState({ globalSkill: result }))
+        const localSkills = [];
+        const { skills } = this.props.user
+
+        FireManager.getGlobalSkills().then((result) => this.setState({ globalSkill: result }));
+
+        for (var key in skills) {
+            if (skills.hasOwnProperty(key)) {
+                localSkills.push(skills[key].value);
+            }
+        }
+        const filteredSkills = this.state.globalSkill.filter(unique => this.state.localSkills.indexOf(unique) === -1);
+
         this.setState(prevState => ({
-            isShowAdd: !prevState.isShowAdd
+            isShowAdd: !prevState.isShowAdd,
+            localSkills: localSkills,
+            filteredSkills: filteredSkills
         }));
 
         if (this.state.inputValue.length) {
@@ -78,7 +94,7 @@ class Profile extends Component {
     };
 
     render() {
-        const { isShowAdd, inputValue } = this.state;
+        const { isShowAdd, inputValue, filteredSkills } = this.state;
         const { user } = this.props;
         return (
             <div className="profile_page flex">
@@ -86,12 +102,12 @@ class Profile extends Component {
                     <UserInfo user={user} />
                     <div className="user__skills tac">
                         <SkillContainer isSkillObj deleteSkill={this.deleteSkill} skills={user.skills} />
-                        <div className='flex flex_column align_center'>
+                        <div className='flex flex_column align_center pos_rel'>
                             {isShowAdd && <Autocomplete
                                 className="input__skill"
                                 value={inputValue}
                                 changeHandler={this.onSkillInputChange}
-                                suggestions={this.state.globalSkill} />
+                                suggestions={filteredSkills} />
                             }
                             <button className="add__user__skill__btn" onClick={this.addSkillHandler}>Add Skill</button>
                         </div>

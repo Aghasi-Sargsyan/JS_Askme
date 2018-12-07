@@ -33,7 +33,7 @@ class Answer extends Component {
                         <Avatar />
                         <span className='font_s ellipsis'>{this.props.userName || this.state.userName}</span>
                     </div>
-                    <div className='answer__desc flex_grow pad_right_20 pad_left_20' dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}>
+                    <div className='answer__desc wysiwyg flex_grow pad_right_20 pad_left_20' dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}>
 
                     </div>
 

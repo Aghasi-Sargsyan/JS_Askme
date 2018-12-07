@@ -19,6 +19,9 @@ class Question extends Component {
     }
 
     render() {
+        const descriptionArr = [];
+        descriptionArr.push(this.props.question.description);
+
         return (
             <div className='item__question__page'>
                 <h2 className='item__question__title'>
@@ -34,9 +37,7 @@ class Question extends Component {
                         <span className='font_s ellipsis'>{this.state.userName}</span>
                     </div>
                     <div className='pad_right_20 pad_left_20'>
-                        <div className='item__question__desc'>
-                            {this.props.question.description}
-                        </div>
+                        <div className='item__question__desc' dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}></div>
                         <div className='item__question__skill'>
                             {this.props.question.skills.map(skill => <span key={skill}>{skill}</span>)}
                         </div>

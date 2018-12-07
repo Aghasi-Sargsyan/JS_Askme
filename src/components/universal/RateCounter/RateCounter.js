@@ -4,37 +4,33 @@ import './RateCounter.scss';
 class RateCounter extends Component {
     state = {
         vote: 5,
-        isIncrement: false,
-        isDecrement: false,
     };
 
     incrementVote = () => {
-        this.setState(prevState => ({
-            vote: !this.state.isDecrement ? prevState.vote + 1 : prevState.vote + 2,
-            isIncrement: true,
-            isDecrement: false
-        }));
+        if (this.state.vote < 6) {
+            this.setState({
+                vote: this.state.vote + 1
+            });
+        }
     };
 
     decrementVote = () => {
-        this.setState(prevState => ({
-            vote: !this.state.isIncrement ? prevState.vote - 1 : prevState.vote - 2,
-            isDecrement: true,
-            isIncrement: false
-        }));
+        if (this.state.vote > 4) {
+            this.setState({
+                vote: this.state.vote - 1
+            });
+        }
     };
 
     render() {
-        const { isIncrement, isDecrement } = this.state;
-
         return (
             <div className='rate__container flex align_center flex_col'>
-                <button disabled={isIncrement} className='increment' onClick={this.incrementVote}></button>
+                <button className='increment' onClick={this.incrementVote}></button>
                 <span>{this.state.vote}</span>
-                <button disabled={isDecrement} className='decrement' onClick={this.decrementVote}></button>
+                <button className='decrement' onClick={this.decrementVote}></button>
             </div>
         )
     }
 }
 
-export default RateCounter
+export default RateCounter;

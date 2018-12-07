@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import './Autocomplete.scss';
 
 class Autocomplete extends Component {
     state = {
@@ -27,6 +28,7 @@ class Autocomplete extends Component {
         this.props.changeHandler(this.state.userInput)
     };
 
+    // Event fired when the user clicks on a suggestion
     onClick = e => {
         this.setState({
             activeSuggestion: 0,
@@ -35,6 +37,31 @@ class Autocomplete extends Component {
             userInput: e.currentTarget.innerText
         });
         this.props.changeHandler(e.currentTarget.innerText)
+    };
+
+    onKeyDown = e => {
+        const { activeSuggestion, filteredSuggestions } = this.state;
+        if (e.keyCode === 13) {
+            this.setState({
+                activeSuggestion: 0,
+                showSuggestions: false,
+                userInput: filteredSuggestions[activeSuggestion]
+            });
+        }
+        // User pressed the up arrow
+        else if (e.keyCode === 38) {
+            if (activeSuggestion === 0) {
+                return;
+            }
+            this.setState({ activeSuggestion: activeSuggestion - 1 });
+        }
+        // User pressed the down arrow
+        else if (e.keyCode === 40) {
+            if (activeSuggestion - 1 === filteredSuggestions.length) {
+                return;
+            }
+            this.setState({ activeSuggestion: activeSuggestion + 1 });
+        }
     };
 
     render() {
@@ -69,6 +96,7 @@ class Autocomplete extends Component {
                     onChange={this.onChange}
                     value={this.state.userInput}
                     className={this.props.className}
+                    onKeyDown={this.onKeyDown}
                 />
                 {suggestionsListComponent}
             </>

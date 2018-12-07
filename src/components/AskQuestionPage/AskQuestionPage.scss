@@ -1,6 +1,13 @@
 .ask_question {
-    width: 70%;
     margin: auto;
+    width: calc(100% - 600px);
+    height: 100vh;
+    margin-left: 370px;
+    background: #fff;
+    margin-top: -18px;
+    z-index: 10;
+    position: relative;
+    padding: 30px 20px 0;
     input {
         border: 1px solid #999;
         height: 40px;
@@ -20,7 +27,8 @@
             height: 30px;
             display: inline-block;
             &[aria-disabled="true"] {
-                background-color: #bbb8b8;
+                background-color: #999;
+                border-radius: 4px;
             }
         }
         [type=radio] {
@@ -35,7 +43,7 @@
         }
         /* CHECKED STYLES */
         [type=radio]:checked+img {
-            outline: 2px dotted #999;
+            border: 1px dotted #999;
         }
     }
     .skill_list {
