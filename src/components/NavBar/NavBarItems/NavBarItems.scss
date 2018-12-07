@@ -9,13 +9,13 @@
         width: 25px;
     }
     .img-li {
-        // padding: 0 150px 0 130px;
         img {
             min-width: 40px;
             height: 40px;
             vertical-align: middle;
             cursor: pointer;
             background-color: transparent;
+            border-radius: 30px;
         }
     }
     .question-icon {
