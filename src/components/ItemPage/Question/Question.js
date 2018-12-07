@@ -7,22 +7,23 @@ import FireManager from "../../../firebase/FireManager";
 class Question extends Component {
 
     state = {
-        userName: ""
+        questionUserName: "",
     };
 
     componentDidMount() {
-        FireManager.getUser(this.props.question.userId).then(user =>
+        FireManager.getUser(this.props.question.userId).then(questionUser =>
             this.setState({
-                userName: user.userName
+                questionUserName: questionUser.userName,
             })
         )
     }
 
     render() {
+        const {question} = this.props;
         return (
             <div className='item__question__page'>
                 <h2 className='item__question__title'>
-                    {this.props.question.title}
+                    {question.title}
                 </h2>
                 <hr />
                 <div className='flex align_center'>
@@ -31,14 +32,14 @@ class Question extends Component {
                     </div>
                     <div className='item__question__avatar flex align_center flex_col'>
                         <Avatar />
-                        <span className='font_s ellipsis'>{this.state.userName}</span>
+                        <span className='font_s ellipsis'>{this.state.questionUserName}</span>
                     </div>
                     <div className='pad_right_20 pad_left_20'>
                         <div className='item__question__desc'>
-                            {this.props.question.description}
+                            {question.description}
                         </div>
                         <div className='item__question__skill'>
-                            {this.props.question.skills.map(skill => <span key={skill}>{skill}</span>)}
+                            {question.skills.map(skill => <span key={skill}>{skill}</span>)}
                         </div>
                     </div>
                 </div>
