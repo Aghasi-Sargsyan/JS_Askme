@@ -33,7 +33,7 @@ class Question extends Component {
                         <RateCounter />
                     </div>
                     <div className='item__question__avatar flex align_center flex_col'>
-                        <Avatar />
+                        <Avatar src={this.props.src} />
                         <span className='font_s ellipsis'>{this.state.userName}</span>
                     </div>
                     <div className='pad_right_20 pad_left_20'>

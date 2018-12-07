@@ -8,15 +8,6 @@ import { connect } from 'react-redux';
 
 class SettingPage extends Component {
 
-    state = {
-        userName: "John Doe",
-        birthYear: "1900",
-        gender: "Male",
-        email: "test@mail.ru",
-        password: "123456",
-        confPassword: '123456'
-    };
-
     handleChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
@@ -39,7 +30,6 @@ class SettingPage extends Component {
     };
 
     render() {
-        const { password } = this.state;
         const { userName, age, email } = this.props.user;
         return (
             <div className="setting__page">

@@ -1,0 +1,51 @@
+.modal__container {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    background: white;
+    width: 80%;
+    height: 52%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    div {
+        display: flex;
+        align-items: center;
+    }
+    input {
+        position: relative;
+        top: 60%;
+        height: 60px;
+    }
+    img {
+        width: 200px;
+        height: 100px;
+    }
+    button {}
+    .modal__close-btn {
+        position: absolute;
+        bottom: 87%;
+        left: 95%;
+        border: 1px solid crimson;
+        background-color: crimson;
+        height: 25px;
+        width: 25px;
+        border-radius: 5px;
+        text-align: center;
+        color: white;
+        cursor: pointer;
+    }
+    .upload__img-btn {
+        position: absolute;
+        top: 85%;
+        left: 83%;
+        background-color: #00ac00;
+        border: 1px solid #00ac00;
+        height: 40px;
+        width: 150px;
+        border-radius: 3px;
+        text-align: center;
+        color: white;
+        cursor: pointer;
+    }
+}
