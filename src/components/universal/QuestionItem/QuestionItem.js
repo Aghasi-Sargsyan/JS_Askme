@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import Avatar from '../Avatar/Avatar';
-import './QuestionItem.scss';
+import defaultAvatar from '../../../assets/profileImg.png';
 import { Link } from "react-router-dom";
 import FireManager from "../../../firebase/FireManager";
+import './QuestionItem.scss';
 
 export default class QuestionItem extends Component {
 
     state = {
-        userName: ""
+        userName: "",
+        photoUrl: ""
     };
 
     componentDidMount() {
         FireManager.getUser(this.props.question.userId).then(user => {
             this.setState({
-                userName: user.userName
+                userName: user.userName,
+                photoUrl: user.photoUrl
             })
-        })
+        });
     }
 
     render() {
@@ -54,7 +57,7 @@ export default class QuestionItem extends Component {
                             </div>
                             <div className='flex question_item_user align_center'>
                                 <div className='question_item_avatar'>
-                                    <Avatar />
+                                    <Avatar src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
                                 </div>
                                 <div className='question_item_writer ellipsis'>
                                     <div className='ellipsis'>{this.state.userName}</div>
@@ -84,4 +87,3 @@ export default class QuestionItem extends Component {
         )
     }
 }
-/*{this.props.skills.map((skill)=> <span>{skill}</span>)}*/

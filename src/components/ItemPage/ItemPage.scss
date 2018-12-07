@@ -1,6 +1,13 @@
 .question__page {
-    width: 70%;
+    width: calc(100% - 600px);
+    height: 100%;
     margin: auto;
+    margin-left: 370px;
+    background: #fff;
+    margin-top: -18px;
+    z-index: 10;
+    position: relative;
+    padding: 30px 50px 20px 50px;
     h4 {
         font-size: 18px;
     }

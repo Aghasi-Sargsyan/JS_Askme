@@ -94,7 +94,7 @@ class ItemPage extends Component {
     render() {
         return (
             <div className='question__page'>
-                {this.state.question && <Question question={this.state.question} />}
+                {this.state.question && <Question src={this.props.user.photoUrl} question={this.state.question} />}
                 <hr />
                 <div className='flex align_center answer_txt'>
                     {this.state.question && <span>{this.state.question.answerCount}</span>}

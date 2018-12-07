@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import Avatar from '../../universal/Avatar/Avatar';
 import RateCounter from '../../universal/RateCounter/RateCounter';
-import './Answer.scss';
 import FireManager from "../../../firebase/FireManager";
+import defaultAvatar from '../../../assets/profileImg.png';
+import './Answer.scss';
 
 class Answer extends Component {
-
     state = {
-        userName: ""
+        userName: "",
+        photoUrl: ""
     };
 
     componentDidMount() {
         !this.props.userName && FireManager.getUser(this.props.answer.userId).then(user => {
             this.setState({
-                userName: user.userName
+                userName: user.userName,
+                photoUrl: user.photoUrl
             });
-        }
-        )
+        })
     }
 
     render() {
@@ -30,7 +31,7 @@ class Answer extends Component {
                         <RateCounter />
                     </div>
                     <div className='answer__avatar flex align_center flex_col'>
-                        <Avatar />
+                        <Avatar src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
                         <span className='font_s ellipsis'>{this.props.userName || this.state.userName}</span>
                     </div>
                     <div className='answer__desc wysiwyg flex_grow pad_right_20 pad_left_20' dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}>

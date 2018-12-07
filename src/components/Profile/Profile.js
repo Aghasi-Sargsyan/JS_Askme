@@ -11,7 +11,6 @@ import { actionAddUserData } from "../../redux/actions/userActions";
 import FireManager from "../../firebase/FireManager";
 import Autocomplete from "../universal/Autocomplete/Autocomplete";
 
-
 class Profile extends Component {
     constructor(props) {
         super(props);
@@ -36,28 +35,38 @@ class Profile extends Component {
         }
     }
 
-
     addSkillHandler = () => {
         const localSkills = [];
-        const { skills } = this.props.user
+        const { skills } = this.props.user;
 
-        FireManager.getGlobalSkills().then((result) => this.setState({ globalSkill: result }));
-
-        for (var key in skills) {
+        for (let key in skills) {
             if (skills.hasOwnProperty(key)) {
-                localSkills.push(skills[key].value);
+                localSkills.push(skills[key].value.toUpperCase());
             }
-        }
-        const filteredSkills = this.state.globalSkill.filter(unique => this.state.localSkills.indexOf(unique) === -1);
+        };
 
-        this.setState(prevState => ({
-            isShowAdd: !prevState.isShowAdd,
-            localSkills: localSkills,
-            filteredSkills: filteredSkills
-        }));
+        FireManager.getGlobalSkills().then((result) => {
+            this.setState({
+                globalSkill: result
+            });
+            const filteredSkills = this.state.globalSkill.filter(unique => localSkills.indexOf(unique) === -1);
 
-        if (this.state.inputValue.length) {
+            this.setState(prevState => ({
+                isShowAdd: !prevState.isShowAdd,
+                localSkills: localSkills,
+                filteredSkills: filteredSkills
+            }));
+        });
+
+        const dublicatedSkills = this.state.localSkills.includes(this.state.inputValue.toUpperCase());
+
+        console.log('local', this.state.localSkills);
+        console.log('inputValue', this.state.inputValue);
+        console.log('dublicatedSkills', dublicatedSkills);
+
+        if (this.state.inputValue.length && !dublicatedSkills) {
             const newSkills = this.props.user.skills.concat({ value: this.state.inputValue, rate: 0 });
+
             FireManager.addGlobalSkill(this.state.inputValue);
             FireManager.updateUser({
                 skills: newSkills,

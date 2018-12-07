@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import './Autocomplete.scss';
 
 class Autocomplete extends Component {
@@ -25,7 +25,7 @@ class Autocomplete extends Component {
             showSuggestions: true,
             userInput: e.currentTarget.value
         });
-        this.props.changeHandler(this.state.userInput)
+        this.props.changeHandler(e.target.value)
     };
 
     // Event fired when the user clicks on a suggestion

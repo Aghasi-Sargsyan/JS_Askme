@@ -1,46 +1,14 @@
-import React from 'react';
-import avatar from "../../../assets/profileImg.png";
+import React, { Component } from "react";
 import "./Avatar.scss";
-// import Avatar from 'react-avatar-edit'
 
-const Avatar = (props) => <img src={avatar} onClick={props.clicked} alt="avatar"/>;
-
-// class ProfilePic extends React.Component {
-
-//     constructor(props) {
-//         super(props)
-//         const src = '../../../assets/profileImg.png'
-//         this.state = {
-//             preview: null,
-//             src
-//         }
-//         this.onCrop = this.onCrop.bind(this)
-//         this.onClose = this.onClose.bind(this)
-//     }
-
-//     onClose() {
-//         this.setState({ preview: null })
-//     }
-
-//     onCrop(preview) {
-//         this.setState({ preview })
-//     }
-
-//     render() {
-//         return (
-//             <div>
-//                 <Avatar
-//                     width={390}
-//                     height={295}
-//                     onCrop={this.onCrop}
-//                     onClose={this.onClose}
-//                     src={this.state.src}
-//                 />
-//                 <img src={this.state.preview} alt="Preview" />
-//             </div>
-//         )
-//     }
-// }
-
+class Avatar extends Component {
+    render() {
+        return (
+            <div>
+                <img onClick={this.props.isClickable && this.props.onClick} src={this.props.src} alt="Avatar" />
+            </div>
+        );
+    }
+}
 
 export default Avatar;
