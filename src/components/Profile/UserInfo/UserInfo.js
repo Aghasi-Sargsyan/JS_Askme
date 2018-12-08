@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Avatar from "../../universal/Avatar/Avatar";
 import male from "../../../assets/icons/male.png";
 import female from "../../../assets/icons/female.png";
@@ -23,52 +23,54 @@ class UserInfo extends Component {
     };
 
     showModal = () => {
-        this.setState({ showModal: !this.state.showModal });
+        this.setState({showModal: !this.state.showModal});
     };
 
     hideModal = () => {
-        this.setState({ showModal: !this.state.showModal });
+        this.setState({showModal: !this.state.showModal});
     };
 
-    handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
+    handleUploadStart = () => this.setState({isUploading: true, progress: 0});
 
-    handleProgress = progress => this.setState({ progress });
+    handleProgress = progress => this.setState({progress});
 
     handleUploadError = error => {
-        this.setState({ isUploading: false });
+        this.setState({isUploading: false});
         console.error(error);
     };
 
     handleUploadSuccess = filename => {
-        this.setState({ avatar: filename, progress: 100, isUploading: false });
+        this.setState({avatar: filename, progress: 100, isUploading: false});
         firebase
             .storage()
             .ref("images")
             .child(filename)
             .getDownloadURL()
-            .then(url => this.setState({ avatarURL: url }))
-            .catch(err => console.error("errorrr", err))
+            .then(url => this.setState({avatarURL: url}))
+            .catch(err => console.error(err))
     };
 
     handleUpload = () => {
         this.hideModal();
-        FireManager.updateUser({ photoUrl: this.state.avatarURL }, this.props.user.id);
+        FireManager.updateUser({photoUrl: this.state.avatarURL}, this.props.user.id);
         this.props.dispatchUser({photoUrl: this.state.avatarURL});
     };
 
     render() {
-        const { userName, age, gender, photoUrl } = this.props.user;
+        const {userName, age, gender, photoUrl} = this.props.user;
         return (
             <div className='user_info'>
                 <div className="user_info_img flex flex_col">
                     <Modal show={this.state.showModal} handleClose={this.hideModal}>
-                        {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
                         <div className='flex_col'>
-
-                            {this.state.avatarURL ?
-                                <Avatar onClick={this.showModal} src={this.state.avatarURL} width={100} height={150} /> :
-                                <Avatar onClick={this.showModal} src={photoUrl ? photoUrl : defaultAvatar} width={150} height={200} />
+                            {this.state.isUploading
+                                ? <p>Progress: {this.state.progress}</p>
+                                : this.state.avatarURL ?
+                                    <Avatar onClick={this.showModal} src={this.state.avatarURL} width={100}
+                                            height={150}/> :
+                                    <Avatar onClick={this.showModal} src={photoUrl} width={150} height={200}/>
                             }
+
                             <FileUploader
                                 accept="image/*"
                                 name="avatar"
@@ -97,7 +99,7 @@ class UserInfo extends Component {
                     </div>
                     <div className="user_info_item user_info_gender">
                         <label className="gender__label">Gender:</label>
-                        <span>{gender && <img src={gender === "male" ? male : female} alt="gender" />}</span>
+                        <span>{gender && <img src={gender === "male" ? male : female} alt="gender"/>}</span>
                     </div>
                     <div className="user_info_item user_info_skills">
                         <label className="skills__label">Skills</label>
