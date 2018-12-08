@@ -6,6 +6,9 @@ import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 import Modal from "../../universal/Modal/Modal";
 import FireManager from "../../../firebase/FireManager";
+import {bindActionCreators} from "redux";
+import {actionAddUserData} from "../../../redux/actions/userActions";
+import {connect} from "react-redux";
 import defaultAvatar from '../../../assets/profileImg.png';
 import "./UserInfo.scss";
 
@@ -43,12 +46,14 @@ class UserInfo extends Component {
             .ref("images")
             .child(filename)
             .getDownloadURL()
-            .then(url => this.setState({ avatarURL: url }));
+            .then(url => this.setState({ avatarURL: url }))
+            .catch(err => console.error("errorrr", err))
     };
 
     handleUpload = () => {
         this.hideModal();
         FireManager.updateUser({ photoUrl: this.state.avatarURL }, this.props.user.id);
+        this.props.dispatchUser({photoUrl: this.state.avatarURL});
     };
 
     render() {
@@ -103,4 +108,10 @@ class UserInfo extends Component {
     }
 }
 
-export default UserInfo;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchUser: bindActionCreators(actionAddUserData, dispatch)
+    }
+};
+
+export default connect(null, mapDispatchToProps)(UserInfo);
