@@ -27,7 +27,10 @@ class UserInfo extends Component {
     };
 
     hideModal = () => {
-        this.setState({showModal: !this.state.showModal});
+        this.setState({
+            showModal: !this.state.showModal,
+            avatarURL: ""
+        });
     };
 
     handleUploadStart = () => this.setState({isUploading: true, progress: 0});
@@ -40,13 +43,17 @@ class UserInfo extends Component {
     };
 
     handleUploadSuccess = filename => {
-        this.setState({avatar: filename, progress: 100, isUploading: false});
-        firebase
+          firebase
             .storage()
             .ref("images")
             .child(filename)
             .getDownloadURL()
-            .then(url => this.setState({avatarURL: url}))
+            .then(url => this.setState({
+                avatar: filename,
+                progress: 100,
+                isUploading: false,
+                avatarURL: url
+            }))
             .catch(err => console.error(err))
     };
 
@@ -64,7 +71,7 @@ class UserInfo extends Component {
                     <Modal show={this.state.showModal} handleClose={this.hideModal}>
                         <div className='flex_col'>
                             {this.state.isUploading
-                                ? <p>Progress: {this.state.progress}</p>
+                                ? <p>Progress: {this.state.progress}%</p>
                                 : this.state.avatarURL ?
                                     <Avatar onClick={this.showModal} src={this.state.avatarURL} width={100}
                                             height={150}/> :
@@ -76,10 +83,10 @@ class UserInfo extends Component {
                                 name="avatar"
                                 randomizeFilename
                                 storageRef={firebase.storage().ref("images")}
+                                onProgress={this.handleProgress}
                                 onUploadStart={this.handleUploadStart}
                                 onUploadError={this.handleUploadError}
                                 onUploadSuccess={this.handleUploadSuccess}
-                                onProgress={this.handleProgress}
                             />
                         </div>
 
