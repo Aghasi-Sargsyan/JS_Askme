@@ -1,13 +1,13 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "./SettingPage.scss";
 import Input from "../universal/Input/Input";
 import male from "../../assets/icons/male.png";
 import female from "../../assets/icons/female.png";
 import settingIcon from "../../assets/icons/settings.png";
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import FireManager from "../../firebase/FireManager";
 import * as firebase from "firebase";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import routePaths from "../../constKeys/routePaths";
 
 class SettingPage extends Component {
@@ -21,7 +21,7 @@ class SettingPage extends Component {
     };
 
     componentDidMount() {
-        const {user} = this.props;
+        const { user } = this.props;
         this.props.user && this.setState({
             userName: user.userName,
             email: user.email,
@@ -32,7 +32,7 @@ class SettingPage extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.user.id !== this.props.user.id) {
-            const {user} = this.props;
+            const { user } = this.props;
             this.props.user && this.setState({
                 userName: user.userName,
                 email: user.email,
@@ -50,7 +50,7 @@ class SettingPage extends Component {
     };
 
     handleSubmit = () => {
-        const {userName, email, age, gender} = this.state;
+        const { userName, email, age, gender } = this.state;
         FireManager.updateUser({
             userName,
             email,
@@ -59,23 +59,20 @@ class SettingPage extends Component {
         }, this.props.user.id);
 
         const user = firebase.auth().currentUser;
-
-        console.log(user);
-
         const p1 = user.updateEmail(this.state.email);
         const p2 = user.updatePassword(this.state.password);
 
-        Promise.all([p1,p2])
-            .catch(()=> this.props.history.push(routePaths.profilePage))
+        Promise.all([p1, p2])
+            .catch(() => this.props.history.push(routePaths.profilePage))
     };
 
     handleClick = e => {
         e.preventDefault();
         const currentElem = e.target.id.substr(1);
         if (this.state[currentElem].length) {
-            this.setState({userName: this.state.userName});
+            this.setState({ userName: this.state.userName });
         } else {
-            this.setState({userName: this.state.userName});
+            this.setState({ userName: this.state.userName });
             alert("length is zero!");
         }
     };
@@ -87,13 +84,12 @@ class SettingPage extends Component {
     };
 
     render() {
-        const {userName, email, gender, age} = this.state;
-        console.log(this.props.user.age);
+        const { userName, email, age } = this.state;
         return (
             <div className="setting__page">
                 <div className='setting__aside'>
                     <div className='flex  align_center'>
-                        <img className='setting-icon' src={settingIcon} alt='setting'/>
+                        <img className='setting-icon' src={settingIcon} alt='setting' />
                         <p>Settings</p>
                     </div>
                 </div>
@@ -104,12 +100,12 @@ class SettingPage extends Component {
                             <div className='flex align_center'>
                                 <label>Username </label>
                                 <Input type="text"
-                                       valid id="userName"
-                                       value={userName}
-                                       changeHandler={this.handleChange}/>
+                                    valid id="userName"
+                                    value={userName}
+                                    changeHandler={this.handleChange} />
                             </div>
                         </div>
-                        <hr/>
+                        <hr />
                         <div className='flex align_center'>
                             <label>Birth Year</label>
                             <Input
@@ -120,7 +116,7 @@ class SettingPage extends Component {
                                 changeHandler={this.handleChange}
                             />
                         </div>
-                        <hr/>
+                        <hr />
                         <div className='setting__page_gender'>
                             <span className='pad_right_20'>Gender </span>
                             <label>
@@ -132,39 +128,39 @@ class SettingPage extends Component {
                                     checked={this.state.gender === "male"}
                                     onChange={this.handleCheck}
                                 />
-                                <img src={male} alt="male"/>
+                                <img src={male} alt="male" />
                             </label>
                             <label>
                                 <input type="radio"
-                                       name="genderGroup"
-                                       value="female"
-                                       id="radioFemale"
-                                       checked={this.state.gender === "female"}
-                                       onChange={this.handleCheck}
+                                    name="genderGroup"
+                                    value="female"
+                                    id="radioFemale"
+                                    checked={this.state.gender === "female"}
+                                    onChange={this.handleCheck}
                                 />
-                                <img className='female' src={female} alt="female"/>
+                                <img className='female' src={female} alt="female" />
                             </label>
                         </div>
-                        <hr/>
+                        <hr />
                         <div>
                             <div className='flex align_center'>
                                 <label>Email </label>
                                 <Input type="email" id="email" valid
-                                       value={email}
-                                       changeHandler={this.handleChange}/>
+                                    value={email}
+                                    changeHandler={this.handleChange} />
                             </div>
                         </div>
-                        <hr/>
+                        <hr />
                         <div>
                             <div className='flex align_center'>
                                 <label>Update Password </label>
-                                <Input type="password" id="password" valid changeHandler={this.handleChange}/>
+                                <Input type="password" id="password" valid changeHandler={this.handleChange} />
                             </div>
                         </div>
-                        <hr/>
+                        <hr />
                         <button type="button"
-                                className="settings__save__btn"
-                                onClick={this.handleSubmit}
+                            className="settings__save__btn"
+                            onClick={this.handleSubmit}
                         >
                             Save Changes
                         </button>

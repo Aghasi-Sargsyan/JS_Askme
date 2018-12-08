@@ -3,11 +3,11 @@ import './RateCounter.scss';
 
 class RateCounter extends Component {
     state = {
-        vote: 5,
+        vote: 0,
     };
 
     incrementVote = () => {
-        if (this.state.vote < 6) {
+        if (this.state.vote < 1) {
             this.setState({
                 vote: this.state.vote + 1
             });
@@ -15,7 +15,7 @@ class RateCounter extends Component {
     };
 
     decrementVote = () => {
-        if (this.state.vote > 4) {
+        if (this.state.vote > -1) {
             this.setState({
                 vote: this.state.vote - 1
             });

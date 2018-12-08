@@ -45,7 +45,6 @@ class ProfileQuestionContainer extends Component {
     };
 
     render() {
-        console.log(this.props.askedQuestions)
         const questions = this.props.askedQuestions
             ? this.state.askedQuestions
             : this.state.answeredQuestions;

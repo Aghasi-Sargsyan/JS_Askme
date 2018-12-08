@@ -62,7 +62,6 @@ class QuestionPage extends Component {
     componentDidMount() {
         const { user } = this.props;
         user.id && !user.isNewUser && this.getQuestions().then(formattedQuestions => {
-            console.log(formattedQuestions);
             this.setState({
                 allQuestions: formattedQuestions,
                 filteredQuestions: formattedQuestions
@@ -72,7 +71,6 @@ class QuestionPage extends Component {
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("updated");
         if (!this.props.user.isNewUser) {
             this.getQuestions().then(formattedQuestions => {
                 if (JSON.stringify(prevState.allQuestions) !== JSON.stringify(formattedQuestions)) {

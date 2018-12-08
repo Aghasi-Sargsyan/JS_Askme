@@ -25,7 +25,6 @@ export function getAndDispatchDbUser(userId) {
         FireManager.getUser(userId)
             .then(user => {
                 //TODO
-                console.log(user);
                 const userAge = new Date().getFullYear() - user.age;
                 dispatch(actionAddUserData({
                     ...user,
