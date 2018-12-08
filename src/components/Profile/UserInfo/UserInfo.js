@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Avatar from "../../universal/Avatar/Avatar";
-import "./UserInfo.scss";
 import male from "../../../assets/icons/male.png";
 import female from "../../../assets/icons/female.png";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 import Modal from "../../universal/Modal/Modal";
 import FireManager from "../../../firebase/FireManager";
+import defaultAvatar from '../../../assets/profileImg.png';
+import "./UserInfo.scss";
 
 class UserInfo extends Component {
 
@@ -61,7 +62,7 @@ class UserInfo extends Component {
 
                             {this.state.avatarURL ?
                                 <Avatar onClick={this.showModal} src={this.state.avatarURL} width={100} height={150} /> :
-                                <Avatar onClick={this.showModal} src={photoUrl} width={150} height={200} />
+                                <Avatar onClick={this.showModal} src={photoUrl ? photoUrl : defaultAvatar} width={150} height={200} />
                             }
                             <FileUploader
                                 accept="image/*"
@@ -77,7 +78,7 @@ class UserInfo extends Component {
 
                         <button className="upload__img-btn" onClick={this.handleUpload}>Upload profile image</button>
                     </Modal>
-                    {photoUrl && <Avatar src={photoUrl} />}
+                    <Avatar src={photoUrl ? photoUrl : defaultAvatar} />
                     <button onClick={this.showModal}>Add profile image</button>
                 </div>
                 <div>

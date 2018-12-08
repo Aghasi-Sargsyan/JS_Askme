@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import QuestionItem from '../../universal/QuestionItem/QuestionItem';
-import FireManager, {dbPaths} from "../../../firebase/FireManager";
+import FireManager, { dbPaths } from "../../../firebase/FireManager";
 
 class ProfileQuestionContainer extends Component {
 
@@ -11,7 +11,7 @@ class ProfileQuestionContainer extends Component {
     };
 
     componentDidMount() {
-        const {user} = this.props;
+        const { user } = this.props;
         user.id && this.getUserQuestions();
     }
 
@@ -45,6 +45,7 @@ class ProfileQuestionContainer extends Component {
     };
 
     render() {
+        console.log(this.props.askedQuestions)
         const questions = this.props.askedQuestions
             ? this.state.askedQuestions
             : this.state.answeredQuestions;
@@ -57,11 +58,11 @@ class ProfileQuestionContainer extends Component {
                     <div className='flex question__item_header_txt'>
                         <div>Votes</div>
                         <div>Answers</div>
-                        <div className='empty_div'/>
+                        <div className='empty_div' />
                     </div>
                 </div>
                 {questions.map((question) => <QuestionItem
-                    key={question.id} question={question} profileQuestion={true}/>
+                    key={question.id} question={question} profileQuestion={true} />
                 )}
             </div>
         )

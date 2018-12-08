@@ -4,7 +4,7 @@ import "./Avatar.scss";
 class Avatar extends Component {
     render() {
         return (
-            <div>
+            <div className='avatar'>
                 <img onClick={this.props.isClickable && this.props.onClick} src={this.props.src} alt="Avatar" />
             </div>
         );
