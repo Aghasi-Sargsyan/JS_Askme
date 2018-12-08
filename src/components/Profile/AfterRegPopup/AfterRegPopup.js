@@ -59,14 +59,15 @@ class AfterRegPopup extends Component {
             .child(filename)
             .getDownloadURL()
             .then(url => this.setState({
-                avatarURL: url, avatar: filename,
+                avatarURL: url,
+                avatar: filename,
                 progress: 100,
                 isUploading: false
             }, () => {
                 FireManager.updateUser({photoUrl: this.state.avatarURL}, this.props.user.id);
                 this.props.dispatchUser({photoUrl: this.state.avatarURL});
                 this.setState({
-                    isLoad: !this.state.isLoad,
+                    isLoad: false,
                 });
             }));
     };
