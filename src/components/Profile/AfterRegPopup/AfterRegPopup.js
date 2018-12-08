@@ -67,7 +67,7 @@ class AfterRegPopup extends Component {
                 FireManager.updateUser({photoUrl: this.state.avatarURL}, this.props.user.id);
                 this.props.dispatchUser({photoUrl: this.state.avatarURL});
                 this.setState({
-                    isLoad: false,
+                    isLoad: false
                 });
             }));
     };
