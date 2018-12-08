@@ -60,10 +60,6 @@ class Profile extends Component {
 
         const dublicatedSkills = this.state.localSkills.includes(this.state.inputValue.toUpperCase());
 
-        console.log('local', this.state.localSkills);
-        console.log('inputValue', this.state.inputValue);
-        console.log('dublicatedSkills', dublicatedSkills);
-
         if (this.state.inputValue.length && !dublicatedSkills) {
             const newSkills = this.props.user.skills.concat({ value: this.state.inputValue, rate: 0 });
 

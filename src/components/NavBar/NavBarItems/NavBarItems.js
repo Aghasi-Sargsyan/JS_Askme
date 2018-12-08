@@ -63,7 +63,6 @@ class NavBarItems extends Component {
                 </ul>
                 <ul className='navbar__item navbar__item_right'>
                     <li className="img-li" ref={(node) => this.wrapperRef = node}>
-                        {/* <img src={avatar} onClick={this.handleInfoDrop} alt="avatar" /> */}
                         <Avatar isClickable onClick={this.handleInfoDrop} src={photoUrl ? photoUrl : defaultAvatar} />
                         {this.state.infoOpen && <InfoDrop close={this.handleInfoDrop} />}
                     </li>

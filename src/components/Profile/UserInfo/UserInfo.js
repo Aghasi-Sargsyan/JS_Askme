@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import Avatar from "../../universal/Avatar/Avatar";
-import "./UserInfo.scss";
 import male from "../../../assets/icons/male.png";
 import female from "../../../assets/icons/female.png";
 import firebase from "firebase";
@@ -10,6 +9,8 @@ import FireManager from "../../../firebase/FireManager";
 import {bindActionCreators} from "redux";
 import {actionAddUserData} from "../../../redux/actions/userActions";
 import {connect} from "react-redux";
+import defaultAvatar from '../../../assets/profileImg.png';
+import "./UserInfo.scss";
 
 class UserInfo extends Component {
 
@@ -84,7 +85,7 @@ class UserInfo extends Component {
 
                         <button className="upload__img-btn" onClick={this.handleUpload}>Upload profile image</button>
                     </Modal>
-                    {photoUrl && <Avatar src={photoUrl}/>}
+                    <Avatar src={photoUrl ? photoUrl : defaultAvatar} />
                     <button onClick={this.showModal}>Add profile image</button>
                 </div>
                 <div>
@@ -99,10 +100,6 @@ class UserInfo extends Component {
                     <div className="user_info_item user_info_gender">
                         <label className="gender__label">Gender:</label>
                         <span>{gender && <img src={gender === "male" ? male : female} alt="gender"/>}</span>
-                    </div>
-                    <div className="user_info_item user_info_wisdom">
-                        <label className="wisdom__label">Wisdom</label>
-                        <span className="wisdom__span">5</span>
                     </div>
                     <div className="user_info_item user_info_skills">
                         <label className="skills__label">Skills</label>

@@ -1,6 +1,6 @@
-import React, {Component} from "react";
-import {Link, withRouter} from "react-router-dom";
-import {auth} from "firebase";
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { auth } from "firebase";
 import routePaths from "../../../constKeys/routePaths";
 import isEmail from "validator/lib/isEmail";
 import fb from "../../../assets/icons/fb.png";
@@ -8,8 +8,8 @@ import google from "../../../assets/icons/google.png";
 import twitter from "../../../assets/icons/twitter.png";
 import './SignInForm.scss'
 import FireManager from "../../../firebase/FireManager";
-import {bindActionCreators} from "redux";
-import {actionAddUserData} from "../../../redux/actions/userActions";
+import { bindActionCreators } from "redux";
+import { actionAddUserData } from "../../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
 
 class SignInForm extends Component {
@@ -31,8 +31,8 @@ class SignInForm extends Component {
     handleChange = e => {
         e.preventDefault();
 
-        const {name, value} = e.target;
-        let {formErrors} = this.state;
+        const { name, value } = e.target;
+        let { formErrors } = this.state;
 
         switch (name) {
             case "email":
@@ -61,8 +61,8 @@ class SignInForm extends Component {
     login = e => {
         e.preventDefault();
 
-        const {history} = this.props;
-        const {email, password} = this.state;
+        const { history } = this.props;
+        const { email, password } = this.state;
         auth()
             .signInWithEmailAndPassword(email, password)
             .then(userCredential => {
@@ -81,13 +81,11 @@ class SignInForm extends Component {
 
     loginWithGoogle = () => {
         const googleProvider = new auth.GoogleAuthProvider();
-        const {history} = this.props;
         auth().signInWithPopup(googleProvider)
             .then(userCredential => {
                 return userCredential.user
             })
             .then(user => {
-                console.log(user);
                 const newUser = {
                     id: user.uid,
                     userName: user.displayName,
@@ -103,13 +101,13 @@ class SignInForm extends Component {
                 this.props.dispatchUser(newUser);
 
             }).catch(function (error) {
-            console.error(error.message);
-        });
+                console.error(error.message);
+            });
     };
 
     loginWithFb = () => {
         const fbProvider = new auth.FacebookAuthProvider();
-        const {history} = this.props;
+        const { history } = this.props;
 
         auth().signInWithPopup(fbProvider).then((result) => {
             history.push(routePaths.questionPage)
@@ -120,7 +118,7 @@ class SignInForm extends Component {
 
     loginWithTwitter = () => {
         const twitterProvider = new auth.TwitterAuthProvider();
-        const {history} = this.props;
+        const { history } = this.props;
 
         auth().signInWithPopup(twitterProvider).then((result) => {
             history.push(routePaths.questionPage)
@@ -130,7 +128,7 @@ class SignInForm extends Component {
     }
 
     render() {
-        const {formErrors, disabled} = this.state;
+        const { formErrors, disabled } = this.state;
         return (
             <div className="singInUp flex">
                 <div className='signIn__left'>
@@ -142,13 +140,13 @@ class SignInForm extends Component {
                         <p className='font_m'>Sign In With</p>
                         <div className='social_btns'>
                             <button onClick={this.loginWithGoogle} className='social_btn'>
-                                <img src={google} alt="google"/>
+                                <img src={google} alt="google" />
                             </button>
                             <button onClick={this.loginWithFb} className='social_btn social_btn_fb'>
-                                <img src={fb} alt="fb"/>
+                                <img src={fb} alt="fb" />
                             </button>
                             <button onClick={this.loginWithTwitter} className='social_btn'>
-                                <img src={twitter} alt="twitter"/>
+                                <img src={twitter} alt="twitter" />
                             </button>
                         </div>
                     </div>

@@ -188,24 +188,22 @@ class AfterRegPopup extends Component {
                             <div className='gender'>
                                 <span>Gender</span>
                                 <label>
-                                    {/* Male */}
                                     <input
                                         type="radio"
                                         name="genderGroup"
                                         id="radioMale"
                                         defaultChecked="true"
-                                        value="Male"
+                                        value="male"
                                         onChange={this.handleCheck}
                                     />
                                     <img src={male} alt="male"/>
                                 </label>
                                 <label>
-                                    {/* Female */}
                                     <input type="radio"
-                                           name="genderGroup"
-                                           value="Female"
-                                           id="radioFemale"
-                                           onChange={this.handleCheck}
+                                        name="genderGroup"
+                                        value="female"
+                                        id="radioFemale"
+                                        onChange={this.handleCheck}
                                     />
                                     <img src={female} alt="female"/>
 
