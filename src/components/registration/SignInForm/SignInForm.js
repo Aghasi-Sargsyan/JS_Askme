@@ -7,6 +7,10 @@ import fb from "../../../assets/icons/fb.png";
 import google from "../../../assets/icons/google.png";
 import twitter from "../../../assets/icons/twitter.png";
 import './SignInForm.scss'
+import FireManager from "../../../firebase/FireManager";
+import {bindActionCreators} from "redux";
+import {actionAddUserData} from "../../../redux/actions/userActions";
+import connect from "react-redux/es/connect/connect";
 
 class SignInForm extends Component {
     constructor(props) {
@@ -78,12 +82,30 @@ class SignInForm extends Component {
     loginWithGoogle = () => {
         const googleProvider = new auth.GoogleAuthProvider();
         const {history} = this.props;
-        auth().signInWithPopup(googleProvider).then((result) => {
-            history.push(routePaths.questionPage)
-        }).catch(function (error) {
-            console.error(error.message)
+        auth().signInWithPopup(googleProvider)
+            .then(userCredential => {
+                return userCredential.user
+            })
+            .then(user => {
+                console.log(user);
+                const newUser = {
+                    id: user.uid,
+                    userName: user.displayName,
+                    email: user.email,
+                    gender: "",
+                    age: 0,
+                    photoUrl: user.photoURL,
+                    skills: [],
+                    isNewUser: true
+                };
+                //adding user to DB
+                FireManager.addUser(newUser);
+                this.props.dispatchUser(newUser);
+
+            }).catch(function (error) {
+            console.error(error.message);
         });
-    }
+    };
 
     loginWithFb = () => {
         const fbProvider = new auth.FacebookAuthProvider();
@@ -177,4 +199,10 @@ class SignInForm extends Component {
     }
 }
 
-export default withRouter(SignInForm)
+const mapDispatchToProps = dispatch => {
+    return {
+        dispatchUser: bindActionCreators(actionAddUserData, dispatch),
+    }
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(SignInForm));
