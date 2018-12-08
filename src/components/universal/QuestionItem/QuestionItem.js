@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Avatar from '../Avatar/Avatar';
 import defaultAvatar from '../../../assets/profileImg.png';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import FireManager from "../../../firebase/FireManager";
 import './QuestionItem.scss';
+import connect from "react-redux/es/connect/connect";
 
-export default class QuestionItem extends Component {
+class QuestionItem extends Component {
 
     state = {
         userName: "",
@@ -17,8 +18,18 @@ export default class QuestionItem extends Component {
             this.setState({
                 userName: user.userName,
                 photoUrl: user.photoUrl
-            })
+            });
         });
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.user.photoUrl !== this.props.user.photoUrl) {
+            FireManager.getUser(this.props.question.userId).then(user => {
+                this.setState({
+                    photoUrl: user.photoUrl
+                });
+            });
+        }
     }
 
     render() {
@@ -87,3 +98,11 @@ export default class QuestionItem extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.userReducer
+    }
+};
+
+export default connect(mapStateToProps)(QuestionItem);
