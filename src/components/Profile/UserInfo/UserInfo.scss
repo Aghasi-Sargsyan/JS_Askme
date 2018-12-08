@@ -4,9 +4,14 @@
         margin: 10px 0;
     }
     .user_info_img {
-        img {
+        .avatar {
             width: 245px;
-            height: 160px;
+            height: 175px;
+            overflow: hidden;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        img {
             border-radius: 20px;
         }
         button {
@@ -21,20 +26,8 @@
     }
     .user_info_gender {
         img {
-            width: 24px;
             height: 24px;
             vertical-align: sub;
         }
     }
-    .user_info_wisdom {
-        .wisdom__span {
-            // background-color: #fff24a;
-            // -webkit-border-radius: 50%;
-            // -moz-border-radius: 50%;
-            // border-radius: 50%;
-            // padding: 4px;
-            // width: 50px;
-        }
-    }
-    .user_info_age {}
 }

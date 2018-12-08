@@ -20,10 +20,13 @@
     input {
         position: relative;
     }
-    img {
+    .modal__container .avatar {
         width: 200px;
         height: 100px;
-        margin-bottom: 10px;
+        overflow: hidden;
+    }
+    img {
+        margin-bottom: 5px;
     }
     .modal__close-btn {
         position: absolute;

@@ -7,13 +7,15 @@ import FireManager from "../../../firebase/FireManager";
 class Question extends Component {
 
     state = {
-        userName: ""
+        userName: "",
+        photoUrl: ""
     };
 
     componentDidMount() {
         FireManager.getUser(this.props.question.userId).then(user =>
             this.setState({
-                userName: user.userName
+                userName: user.userName,
+                photoUrl: user.photoUrl
             })
         )
     }
@@ -33,7 +35,7 @@ class Question extends Component {
                         <RateCounter />
                     </div>
                     <div className='item__question__avatar flex align_center flex_col'>
-                        <Avatar src={this.props.src} />
+                        <Avatar src={this.state.photoUrl} />
                         <span className='font_s ellipsis'>{this.state.userName}</span>
                     </div>
                     <div className='pad_right_20 pad_left_20'>
