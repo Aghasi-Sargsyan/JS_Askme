@@ -1,14 +1,18 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./AfterRegPopup.scss";
 import Input from "../../universal/Input/Input";
 import FireManager from "../../../firebase/FireManager";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import userImg from "../../../assets/icons/user.png";
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import defaultAvatar from "../../../assets/icons/user.png";
 import male from "../../../assets/icons/male.png";
 import female from "../../../assets/icons/female.png";
-import { bindActionCreators } from "redux";
-import { actionAddUserData } from "../../../redux/actions/userActions";
+import {bindActionCreators} from "redux";
+import {actionAddUserData} from "../../../redux/actions/userActions";
+import Avatar from "../../universal/Avatar/Avatar";
+import CustomUploadButton from 'react-firebase-file-uploader/lib/CustomUploadButton';
+import firebase from "firebase";
+import AvatarLoader from "../../universal/Loaders/AvatarLoader";
 
 class AfterRegPopup extends Component {
     constructor(props) {
@@ -30,14 +34,47 @@ class AfterRegPopup extends Component {
                 id: "skill"
             },
             gender: "male",
-            skillList: []
+            skillList: [],
+            avatar: "",
+            isUploading: false,
+            progress: 0,
+            avatarURL: "",
+            isLoad: false
         };
     }
 
+    handleUploadStart = () => this.setState({isUploading: true, progress: 0});
+
+    handleProgress = progress => this.setState({progress, isLoad: !this.state.isLoad});
+
+    handleUploadError = error => {
+        this.setState({isUploading: false});
+        console.error(error);
+    };
+
+    handleUploadSuccess = filename => {
+        firebase
+            .storage()
+            .ref("images")
+            .child(filename)
+            .getDownloadURL()
+            .then(url => this.setState({
+                avatarURL: url, avatar: filename,
+                progress: 100,
+                isUploading: false
+            }, () => {
+                FireManager.updateUser({photoUrl: this.state.avatarURL}, this.props.user.id);
+                this.props.dispatchUser({photoUrl: this.state.avatarURL});
+                this.setState({
+                    isLoad: !this.state.isLoad,
+                });
+            }));
+    };
+
     handleSubmit = (e) => {
         e.preventDefault();
-        const { birthYear, skillList, gender } = this.state;
-        const { user } = this.props;
+        const {birthYear, skillList, gender} = this.state;
+        const {user} = this.props;
         const updatedUser = {
             age: Number.parseInt(birthYear.value),
             gender: gender,
@@ -75,7 +112,7 @@ class AfterRegPopup extends Component {
     };
 
     validate(target) {
-        const { birthYear, skill, skillList } = this.state;
+        const {birthYear, skill, skillList} = this.state;
         const value = target.value;
         switch (target.id) {
             case birthYear.id:
@@ -88,13 +125,13 @@ class AfterRegPopup extends Component {
     }
 
     addSkill = () => {
-        const { skillList, skill } = this.state;
+        const {skillList, skill} = this.state;
 
         skill.valid &&
-            this.setState({
-                skillList: [...skillList, { value: skill.value, rate: 0 }],
-                skill: { ...skill, value: "" }
-            });
+        this.setState({
+            skillList: [...skillList, {value: skill.value, rate: 0}],
+            skill: {...skill, value: ""}
+        });
     };
 
     skillsRender() {
@@ -108,8 +145,10 @@ class AfterRegPopup extends Component {
             e.preventDefault();
         }
     };
+
     render() {
-        const { skill, skillList, birthYear } = this.state;
+        const {skill, skillList, birthYear, isLoad} = this.state;
+        const {photoUrl} = this.props.user;
 
         return (
             <div className='modal_wrapper'>
@@ -119,13 +158,18 @@ class AfterRegPopup extends Component {
                             <p className='font_m'><span className='logo_letter'>A</span>sk<span
                                 className='logo_letter'>M</span>e</p>
                             <div className='tac'>
-                                <img src={userImg} alt="user" />
-                                <button
-                                    type="submit"
+                                {!isLoad ? <Avatar src={photoUrl ? photoUrl : defaultAvatar}/> : <AvatarLoader/>}
+                                <CustomUploadButton
                                     className="bioform__submit"
+                                    accept="image/*"
+                                    storageRef={firebase.storage().ref('images')}
+                                    onUploadStart={this.handleUploadStart}
+                                    onUploadError={this.handleUploadError}
+                                    onUploadSuccess={this.handleUploadSuccess}
+                                    onProgress={this.handleProgress}
                                 >
                                     Add a photo
-                                </button>
+                                </CustomUploadButton>
                             </div>
                         </div>
                     </div>
@@ -152,17 +196,17 @@ class AfterRegPopup extends Component {
                                         value="Male"
                                         onChange={this.handleCheck}
                                     />
-                                    <img src={male} alt="male" />
+                                    <img src={male} alt="male"/>
                                 </label>
                                 <label>
                                     {/* Female */}
                                     <input type="radio"
-                                        name="genderGroup"
-                                        value="Female"
-                                        id="radioFemale"
-                                        onChange={this.handleCheck}
+                                           name="genderGroup"
+                                           value="Female"
+                                           id="radioFemale"
+                                           onChange={this.handleCheck}
                                     />
-                                    <img src={female} alt="female" />
+                                    <img src={female} alt="female"/>
 
                                 </label>
                             </div>
@@ -206,7 +250,7 @@ class AfterRegPopup extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { user: state.userReducer }
+    return {user: state.userReducer}
 };
 
 const mapDispatchToProps = (dispatch) => {
