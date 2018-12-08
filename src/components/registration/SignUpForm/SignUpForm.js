@@ -214,10 +214,10 @@ class SignUpForm extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
     return {
         dispatchUser: bindActionCreators(actionAddUserData, dispatch),
     }
-}
+};
 
 export default connect(null, mapDispatchToProps)(SignUpForm);
