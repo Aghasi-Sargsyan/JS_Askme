@@ -14,7 +14,7 @@ const InfoDrop = ({user, close}) => {
             <Link to={routePaths.settingPage + user.id} onClick={close} className="info__drop__a">
                 Settings
             </Link>
-            <SignOutButton/>
+            <SignOutButton />
         </div>
     );
 };

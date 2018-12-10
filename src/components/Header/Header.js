@@ -5,8 +5,9 @@ import "./Header.scss";
 
 const Header = () => (
     <header>
-        <nav className="navigation flex">
-            <Logo />
+        {/* <nav className="navigation flex"> */}
+        <nav>
+            {/* <Logo /> */}
             <NavBar />
         </nav>
     </header>
