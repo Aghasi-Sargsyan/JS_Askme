@@ -28,11 +28,7 @@ class SignOutButton extends Component {
     render() {
         const { classes } = this.props;
 
-        return (
-            <Button className={`${classes.margin} sign-out`} onClick={this.logout} size="small" >
-                Sign Out
-            </Button>
-        );
+        return (this.logout());
     }
 }
 
