@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import QuestionItem from '../../universal/QuestionItem/QuestionItem';
 import FireManager, {dbPaths} from "../../../firebase/FireManager";
-import {bindActionCreators} from "redux";
-import {actionAddUserData} from "../../../redux/actions/userActions";
 
 class ProfileQuestionContainer extends Component {
 

@@ -56,8 +56,11 @@ class App extends Component {
                     <Route exact path={routePaths.askQuestionPage} render={() => (
                         user.isLoggedIn ? (<AskQuestionPage/>) : (signIn))}/>
 
-                    <Route exact path={"/item/:id"} component={ItemPage}/>
-                    <Route exact path={"/settings/:id"} component={SettingPage}/>
+                    <Route exact path={routePaths.itemPage} render={(props) => (
+                        user.isLoggedIn ? (<ItemPage {...props} />) : (signIn))}/>
+
+                    <Route exact path={routePaths.settingPage} render={() => (
+                        user.isLoggedIn ? (<SettingPage/>) : (signIn))}/>
 
                     <Route component={Page404}/>
                 </Switch>
