@@ -4,6 +4,17 @@ import {connect} from "react-redux";
 import {actionRemoveUser} from "../../../redux/actions/userActions";
 import "./SignOut.scss";
 
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+
+const styles = theme => ({
+    margin: {
+        margin: theme.spacing.unit,
+    },
+});
+
 class SignOutButton extends Component {
 
     logout = () => {
@@ -15,8 +26,12 @@ class SignOutButton extends Component {
     };
 
     render() {
+        const { classes } = this.props;
+
         return (
-            <button className="sign-out" onClick={this.logout}>Sign Out</button>
+            <Button className={`${classes.margin} sign-out`} onClick={this.logout} size="small" >
+                Sign Out
+            </Button>
         );
     }
 }
@@ -27,4 +42,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(null, mapDispatchToProps)(SignOutButton);
+export default withStyles(styles)(connect(null, mapDispatchToProps)(SignOutButton));
