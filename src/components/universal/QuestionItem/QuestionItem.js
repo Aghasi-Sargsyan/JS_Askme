@@ -10,6 +10,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import Chip from '@material-ui/core/Chip';
 
 import Avatar from '@material-ui/core/Avatar';
 import './QuestionItem.scss';
@@ -24,7 +26,10 @@ const styles = theme => ({
     },
     avatar: {
         margin: '0 10px'
-    }
+    },
+    chip: {
+        margin: theme.spacing.unit,
+    },
 });
 
 class QuestionItem extends Component {
@@ -56,10 +61,13 @@ class QuestionItem extends Component {
         return (
             <Link to={`/item/${question.id}`} className='question_item_container'>
 
-                {/* <List className={classes.root}>
+                <List className={classes.root}>
                     <ListItem alignItems="flex-start">
                         <ListItemAvatar>
                             <Avatar alt="Remy Sharp" src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
+                            {/* <Typography component="span" className={classes.inline} color="textPrimary">
+                                <span>{this.state.userName}</span>
+                            </Typography> */}
                         </ListItemAvatar>
                         <ListItemText
                             primary={question.title}
@@ -71,14 +79,41 @@ class QuestionItem extends Component {
                                 </>
                             }
                         />
+
                     </ListItem>
-                </List> */}
-                <div className='question_item_content'>
+                    {/* <Typography component="span" className={classes.inline} color="textPrimary">
+                        <span>{question.rate}</span>
+                        <span>{question.answerCount}</span>
+                    </Typography> */}
+                    <div className='question_item_footer flex justify_between align_center padh_24 '>
+                        {question.skills.length !== 0
+                            && <div className='question_item_skill'>
+                                {question.skills.map(skill => <span key={skill}>
+                                    <Chip label={skill} className={classes.chip} variant="outlined" />
+                                </span>
+                                )}
+                            </div>}
+                        <div className='flex'>
+                            {userMinAge && userMaxAge && <div className='question_item_age'>
+                                <Chip label={userMinAge + " - " + userMaxAge} className={classes.chip} variant="outlined" />
+
+                            </div>}
+                            {question.gender && <div className='question_item_gender'>
+                                <Chip label={question.gender} className={classes.chip} variant="outlined" />
+                            </div>}
+                        </div>
+                        <div className='question_item_date'>
+                            <span>{formattedDate}</span>
+                        </div>
+                    </div>
+                    <Divider light />
+                </List>
+                {/* <div className='question_item_content'>
                     <div className='flex justify_between'>
                         <div className='question_item_title'>
                             {question.title}
-                        </div>
-                        {/* <div className='question_item_buttons'>
+                        </div> */}
+                {/* <div className='question_item_buttons'>
                             {!this.props.profileQuestion &&
                                 <>
                                     <button>-</button>
@@ -86,7 +121,7 @@ class QuestionItem extends Component {
                                 </>
                             }
                         </div> */}
-                    </div>
+                {/* </div>
 
                     <div className='question_item_desc flex align_center'>
                         <div className='flex_grow question_item_wysiwyg'>
@@ -124,7 +159,7 @@ class QuestionItem extends Component {
                             <span>{formattedDate}</span>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </Link>
         )
     }

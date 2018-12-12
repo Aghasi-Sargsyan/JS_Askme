@@ -32,13 +32,9 @@ const Skill = props => {
     </div>
 
     // <li id={value}>
-
-    //   {/* <p>{value} </p>
-    //   <button id={value} onClick={props.deleteSkill}>x</button> */}
-    //   {/* {rate && <span>{rate}</span>} */}
-
+    //   <p>{value} </p>
+    //   <button id={value} onClick={props.deleteSkill}>x</button>
     //   <span>{rate}</span>
-
     // </li>
   );
 };

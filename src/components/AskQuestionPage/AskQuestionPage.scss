@@ -1,14 +1,12 @@
 .ask_question {
     margin: auto;
-    width: calc(100% - 600px);
+    width: calc(100% - 400px);
     height: 100vh;
-    margin-left: 370px;
     background: #fff;
-    margin-top: -18px;
-    z-index: 10;
     position: relative;
     padding: 30px 50px 20px 50px;
     input {
+        width: 200px;
         border: 1px solid #999;
         height: 40px;
         outline: none;

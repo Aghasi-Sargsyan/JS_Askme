@@ -152,102 +152,74 @@ class AskQuestionPage extends Component {
                 <div>
                     <Wysiwyg value={this.state.wysiwygTxt} changeHandler={this.handleChange} />
                 </div>
-                <div className='age__slider flex'>
-                    <div className='age__slider_age'>Age</div>
-                    <InputRange
-                        disabled={isTyping}
-                        draggableTrack
-                        maxValue={70}
-                        minValue={10}
-                        onChange={value => this.setState({ ageRange: value })}
-                        onChangeComplete={value => this.handleAgeRange(value.min, value.max)}
-                        value={this.state.ageRange} />
-                </div>
-                <div className={classes.root}>
-                    <span className={classes.gender}>Gender</span>
-                    <FormControl component="fieldset" className={classes.formControl}>
-                        <RadioGroup
-                            aria-label="gender"
-                            name="gender2"
-                            className={classes.group}
-                            value={this.state.gender}
-                            onChange={this.handleRadioButton}
-                        >
-                            <FormControlLabel
-                                value="all"
-                                control={<Radio color="primary" />}
-                                label="All"
-                                defaultChecked="true"
-                                labelPlacement="start"
-                                disabled={!!isTyping}
+                <div className='flex justify_between'>
+                    <div>
+                        <div className='age__slider flex'>
+                            <span className='age__slider_age'>Age</span>
+                            <InputRange
+                                disabled={isTyping}
+                                draggableTrack
+                                maxValue={70}
+                                minValue={10}
+                                onChange={value => this.setState({ ageRange: value })}
+                                onChangeComplete={value => this.handleAgeRange(value.min, value.max)}
+                                value={this.state.ageRange} />
+                        </div>
+                        <div className={classes.root}>
+                            <span className={classes.gender}>Gender</span>
+                            <FormControl component="fieldset" className={classes.formControl}>
+                                <RadioGroup
+                                    aria-label="gender"
+                                    name="gender2"
+                                    className={classes.group}
+                                    value={this.state.gender}
+                                    onChange={this.handleRadioButton}
+                                >
+                                    <FormControlLabel
+                                        value="all"
+                                        control={<Radio color="primary" />}
+                                        label="All"
+                                        defaultChecked="true"
+                                        labelPlacement="start"
+                                        disabled={!!isTyping}
+                                    />
+                                    <FormControlLabel
+                                        value="female"
+                                        control={<Radio color="primary" />}
+                                        label="Female"
+                                        labelPlacement="start"
+                                        disabled={!!isTyping}
+                                    />
+                                    <FormControlLabel
+                                        value="male"
+                                        control={<Radio color="primary" />}
+                                        label="Male"
+                                        labelPlacement="start"
+                                        disabled={!!isTyping}
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            Skills
+                        <input
+                                value={this.state.skillDesc}
+                                onChange={this.handleChange}
+                                id="skillDesc"
+                                className='mar_left_20'
+                                onKeyPress={this.handleKeyPress}
                             />
-                            <FormControlLabel
-                                value="female"
-                                control={<Radio color="primary" />}
-                                label="Female"
-                                labelPlacement="start"
-                                disabled={!!isTyping}
-                            />
-                            <FormControlLabel
-                                value="male"
-                                control={<Radio color="primary" />}
-                                label="Male"
-                                labelPlacement="start"
-                                disabled={!!isTyping}
-                            />
-                        </RadioGroup>
-                    </FormControl>
-                    {/* <span className='pad_right_20'>Gender</span> */}
-                    {/* <label aria-disabled={isTyping}>
-                        <input
-                            type="radio"
-                            name="gender"
-                            value="all"
-                            defaultChecked="true"
-                            disabled={isTyping}
-                            onChange={this.handleRadioButton}
-                        />
-                        <img src={gender} alt="all" />
-                    </label>
-                    <label aria-disabled={isTyping}>
-                        <input
-                            type="radio"
-                            name="gender"
-                            value="male"
-                            disabled={isTyping}
-                            onChange={this.handleRadioButton}
-                        />
-                        <img src={male} alt="male" />
-                    </label>
-                    <label aria-disabled={isTyping}>
-                        <input
-                            type="radio"
-                            name="gender"
-                            value="female"
-                            disabled={isTyping}
-                            onChange={this.handleRadioButton}
-                        />
-                        <img className='female' src={female} alt="female" />
-                    </label> */}
-                </div>
-                <div>
-                    <label>
-                        Skills
-                        <input
-                            value={this.state.skillDesc}
-                            onChange={this.handleChange}
-                            id="skillDesc"
-                            className='mar_left_20'
-                            onKeyPress={this.handleKeyPress}
-                        />
-                    </label>
-                    <button type='button' onClick={this.addSkill} className='ask_question_skill_add'>
-                        +
+                        </label>
+                        <button type='button' onClick={this.addSkill} className='ask_question_skill_add'>
+                            +
                     </button>
-                    <ul className='skill_list'>
-                        <SkillContainer isShowingMessage={false} deleteSkill={this.deleteSkill}
-                            skills={this.state.skills} />
-                    </ul>
+                        <ul className='skill_list'>
+                            <SkillContainer isShowingMessage={false} deleteSkill={this.deleteSkill}
+                                skills={this.state.skills} />
+                        </ul>
+                    </div>
                 </div>
                 <button type='submit'
                     className='ask_question_submit'
