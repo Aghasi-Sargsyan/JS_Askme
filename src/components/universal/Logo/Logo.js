@@ -9,6 +9,6 @@ const Logo = () => (
             <p className='font_m'><span className='logo__l'>A</span>sk<span className='logo__l'>M</span>e</p>
         </Link>
     </div>
-)
+);
 
 export default Logo;

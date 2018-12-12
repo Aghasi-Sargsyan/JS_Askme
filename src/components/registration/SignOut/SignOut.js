@@ -4,9 +4,7 @@ import {connect} from "react-redux";
 import {actionRemoveUser} from "../../../redux/actions/userActions";
 import "./SignOut.scss";
 
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 
 
 const styles = theme => ({
@@ -29,7 +27,7 @@ class SignOutButton extends Component {
         const { classes, className } = this.props;
 
         return (
-            <button className={`sign-out ${className}`} onClick={this.logout}>Sign Out</button>
+            <a className="sign-out" onClick={this.logout}>Sign Out</a>
         );
     }
 }
