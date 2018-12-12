@@ -1,16 +1,16 @@
-import AppBar from '@material-ui/core/AppBar'
-import {withStyles} from '@material-ui/core/styles'
-import Toolbar from '@material-ui/core/Toolbar'
-import React, {Component} from 'react'
-import Logo from "../universal/Logo/Logo";
+import React, {Component} from 'react';
 import routePaths from "../../constKeys/routePaths";
 import SignOutButton from "../registration/SignOut/SignOut";
-import Settings from '@material-ui/icons/Settings';
 import {NavLink} from "react-router-dom";
+
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Avatar from '@material-ui/core/Avatar';
+import Logo from "../universal/Logo/Logo";
 import {connect} from "react-redux";
+import {withStyles} from '@material-ui/core/styles'
 
 
 class NavBar extends Component {
@@ -18,30 +18,29 @@ class NavBar extends Component {
         const {classes, user} = this.props;
         return (
             <div className={classes.root}>
-                <AppBar className={classes.appBar} position="static">
+                <AppBar className={classes.appBar} position="fixed">
                     <Toolbar className={classes.toolbar}>
                         <MenuList className={classes.menuList}>
                             <Logo/>
                             <MenuItem
                                 className={classes.listLi}
-                                children={<NavLink activeStyle={{color: "#2196f3"}}
-                                                   to={routePaths.questionPage}>Answers</NavLink>}
+                                children={<NavLink to={routePaths.questionPage}>Answers</NavLink>}
                             />
                             <MenuItem
                                 className={classes.listLi}
-                                children={<NavLink activeStyle={{color: "#2196f3"}} to={routePaths.askQuestionPage}>
+                                children={<NavLink to={routePaths.askQuestionPage}>
                                     Ask a question
                                 </NavLink>}
                             />
                             <MenuItem
                                 className={classes.listLi}
-                                children={<NavLink activeStyle={{color: "#2196f3"}} to={routePaths.profilePage}>
-                                    <Avatar className={classes.avatar} src={user.photoUrl}/>
+                                children={<NavLink to={routePaths.settingPage}>Settings
                                 </NavLink>}
                             />
                             <MenuItem
                                 className={classes.listLi}
-                                children={<NavLink activeStyle={{color: "#2196f3"}} to={routePaths.settingPage}> <Settings/>
+                                children={<NavLink to={routePaths.profilePage}>
+                                    <Avatar className={classes.avatar} src={user.photoUrl}/>
                                 </NavLink>}
                             />
                             <MenuItem
@@ -70,6 +69,8 @@ const styles = theme => ({
     },
     appBar: {
         background: '#ffffff',
+        boxShadow: "0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)",
+        height: "100px"
     },
     toolbar: {
         minHeight: '72px',
@@ -118,6 +119,7 @@ const styles = theme => ({
     },
     menuList: {
         width: "100%",
+        height: "100px",
         display: 'flex',
         justifyContent: 'space-evenly',
         alignItems: 'center',

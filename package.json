@@ -11,6 +11,7 @@
     "react": "^16.6.3",
     "react-avatar": "^3.4.6",
     "react-avatar-edit": "^0.6.0",
+    "react-container-dimensions": "^1.4.1",
     "react-content-loader": "^3.4.1",
     "react-dom": "^16.6.3",
     "react-firebase-file-uploader": "^2.4.2",

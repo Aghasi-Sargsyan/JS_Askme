@@ -3,6 +3,7 @@
     .left__side {
         min-width: 370px;
         height: 100vh;
+        margin-top: 7%;
         padding: 50px 20px 0 80px;
         .user__skills {
             position: relative;
@@ -136,6 +137,7 @@
         }
     }
     .right__side {
+        margin-top: 10%;
         z-index: 10;
         width: calc(100% - 600px);
         div {

@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {auth} from "firebase";
 import {connect} from "react-redux";
-import {actionRemoveUser} from "../../../redux/actions/userActions";
+import {actionRemoveUser} from "../../../redux/actions/userActions"
+import logOutIcon from "../../../assets/icons/logout.png";
 import "./SignOut.scss";
 
 import { withStyles } from '@material-ui/core/styles';
@@ -27,7 +28,10 @@ class SignOutButton extends Component {
         const { classes, className } = this.props;
 
         return (
-            <a className="sign-out" onClick={this.logout}>Sign Out</a>
+            <a className="sign-out" onClick={this.logout}>
+                Sign Out
+                <img src={logOutIcon} alt="SignOut" />
+            </a>
         );
     }
 }
