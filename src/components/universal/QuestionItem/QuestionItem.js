@@ -1,11 +1,33 @@
 import React, { Component } from 'react';
-import Avatar from '../Avatar/Avatar';
+// import Avatar from '../Avatar/Avatar';
 import defaultAvatar from '../../../assets/profileImg.png';
 import { Link } from "react-router-dom";
 import FireManager from "../../../firebase/FireManager";
+
+import withStyles from '@material-ui/core/styles/withStyles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Typography from '@material-ui/core/Typography';
+
+import Avatar from '@material-ui/core/Avatar';
 import './QuestionItem.scss';
 
-export default class QuestionItem extends Component {
+const styles = theme => ({
+    root: {
+        width: '100%',
+        backgroundColor: theme.palette.background.paper,
+    },
+    inline: {
+        display: 'inline',
+    },
+    avatar: {
+        margin: '0 10px'
+    }
+});
+
+class QuestionItem extends Component {
 
     state = {
         userName: "",
@@ -22,6 +44,8 @@ export default class QuestionItem extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         const descriptionArr = [];
         descriptionArr.push(this.props.question.description);
         const { question } = this.props;
@@ -31,6 +55,24 @@ export default class QuestionItem extends Component {
 
         return (
             <Link to={`/item/${question.id}`} className='question_item_container'>
+
+                {/* <List className={classes.root}>
+                    <ListItem alignItems="flex-start">
+                        <ListItemAvatar>
+                            <Avatar alt="Remy Sharp" src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary={question.title}
+                            secondary={
+                                <>
+                                    <Typography component="span" className={classes.inline} color="textPrimary">
+                                        <span dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}></span>
+                                    </Typography>
+                                </>
+                            }
+                        />
+                    </ListItem>
+                </List> */}
                 <div className='question_item_content'>
                     <div className='flex justify_between'>
                         <div className='question_item_title'>
@@ -57,7 +99,7 @@ export default class QuestionItem extends Component {
                             </div>
                             <div className='flex question_item_user align_center'>
                                 <div className='question_item_avatar'>
-                                    <Avatar src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
+                                    <Avatar className={classes.avatar} src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
                                 </div>
                                 <div className='question_item_writer ellipsis'>
                                     <div className='ellipsis'>{this.state.userName}</div>
@@ -87,3 +129,5 @@ export default class QuestionItem extends Component {
         )
     }
 }
+
+export default withStyles(styles)(QuestionItem);

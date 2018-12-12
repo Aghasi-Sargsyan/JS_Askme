@@ -13,8 +13,34 @@ import 'react-input-range/lib/css/index.css'
 import SkillContainer from '../SkillContainer/SkillContainer';
 import { withRouter } from "react-router-dom";
 
-class AskQuestionPage extends Component {
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import withStyles from '@material-ui/core/styles/withStyles';
 
+const styles = theme => ({
+    root: {
+        // display: 'flex',
+    },
+    formControl: {
+        // margin: theme.spacing.unit * 3,
+    },
+    group: {
+        display: 'block'
+        // margin: `${theme.spacing.unit}px 0`,
+    },
+    gender: {
+        height: '48px',
+        lineHeight: '48px',
+        display: 'inline-block',
+        paddingRight: '20px'
+    }
+});
+
+class AskQuestionPage extends Component {
     state = {
         title: "",
         description: "",
@@ -55,9 +81,11 @@ class AskQuestionPage extends Component {
     };
 
     handleRadioButton = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+        this.setState({ gender: e.target.value });
+
+        // this.setState({
+        //     [e.target.name]: e.target.value
+        // })
     };
 
     addSkill = () => {
@@ -107,6 +135,8 @@ class AskQuestionPage extends Component {
 
     render() {
         const { isTyping } = this.state;
+        const { classes } = this.props;
+
         return (
             <div className='ask_question'>
                 <h2>Ask Your Question</h2>
@@ -133,9 +163,42 @@ class AskQuestionPage extends Component {
                         onChangeComplete={value => this.handleAgeRange(value.min, value.max)}
                         value={this.state.ageRange} />
                 </div>
-                <div className='ask_question_gender'>
-                    <span className='pad_right_20'>Gender</span>
-                    <label aria-disabled={isTyping}>
+                <div className={classes.root}>
+                    <span className={classes.gender}>Gender</span>
+                    <FormControl component="fieldset" className={classes.formControl}>
+                        <RadioGroup
+                            aria-label="gender"
+                            name="gender2"
+                            className={classes.group}
+                            value={this.state.gender}
+                            onChange={this.handleRadioButton}
+                        >
+                            <FormControlLabel
+                                value="all"
+                                control={<Radio color="primary" />}
+                                label="All"
+                                defaultChecked="true"
+                                labelPlacement="start"
+                                disabled={!!isTyping}
+                            />
+                            <FormControlLabel
+                                value="female"
+                                control={<Radio color="primary" />}
+                                label="Female"
+                                labelPlacement="start"
+                                disabled={!!isTyping}
+                            />
+                            <FormControlLabel
+                                value="male"
+                                control={<Radio color="primary" />}
+                                label="Male"
+                                labelPlacement="start"
+                                disabled={!!isTyping}
+                            />
+                        </RadioGroup>
+                    </FormControl>
+                    {/* <span className='pad_right_20'>Gender</span> */}
+                    {/* <label aria-disabled={isTyping}>
                         <input
                             type="radio"
                             name="gender"
@@ -165,7 +228,7 @@ class AskQuestionPage extends Component {
                             onChange={this.handleRadioButton}
                         />
                         <img className='female' src={female} alt="female" />
-                    </label>
+                    </label> */}
                 </div>
                 <div>
                     <label>
@@ -193,7 +256,7 @@ class AskQuestionPage extends Component {
                 >
                     Post Your Question
                 </button >
-            </div>
+            </div >
         );
     }
 }
@@ -210,4 +273,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AskQuestionPage));
+export default withStyles(styles)(withRouter(connect(mapStateToProps, mapDispatchToProps)(AskQuestionPage)));
