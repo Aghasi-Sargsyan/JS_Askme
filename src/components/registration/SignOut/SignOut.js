@@ -26,9 +26,11 @@ class SignOutButton extends Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, className } = this.props;
 
-        return (this.logout());
+        return (
+            <button className={`sign-out ${className}`} onClick={this.logout}>Sign Out</button>
+        );
     }
 }
 

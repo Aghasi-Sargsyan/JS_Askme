@@ -12,7 +12,8 @@
 import {withStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import {NavLink} from 'react-router-dom';
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const styles = theme => ({
     listLi: {
@@ -41,19 +42,19 @@ class NavBarItem extends Component {
     render() {
         const {classes, content, linkUrl} = this.props;
         return (
-            <li className={classes.listLi}>
+            <MenuItem className={classes.listLi}>
                 <Typography variant='headline' className={classes.ulLink}>
                     <NavLink style={{color: 'rgba(0,0,0,0.87)', '&:hover': {color: "blue"}}} to={linkUrl}>
                         {content}
                     </NavLink>
                 </Typography>
-            </li>
+            </MenuItem>
         )
     }
 }
 
 export default withStyles(styles)(NavBarItem);
-
+// 
 // class NavBarItem extends Component {
 //     state = {
 //         infoOpen: false

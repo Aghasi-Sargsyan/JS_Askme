@@ -10,38 +10,40 @@ import React, {Component} from 'react'
 import NavBarItem from "./NavBarItem/NavBarItem";
 import Logo from "../universal/Logo/Logo";
 import routePaths from "../../constKeys/routePaths";
-import SignOut from "../registration/SignOut/SignOut";
+import SignOutButton from "../registration/SignOut/SignOut";
 import Settings from '@material-ui/icons/Settings';
 import SettingPage from "../SettingPage/SettingPage";
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
+import MenuList from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
+import Avatar from '@material-ui/core/Avatar';
+import { connect } from "react-redux";
 
 
 class NavBar extends Component {
     render() {
-        const {classes} = this.props;
+        const {classes, user} = this.props;
         return (
             <div className={classes.root}>
                 <AppBar className={classes.appBar} position="static">
                     <Toolbar className={classes.toolbar}>
-                        <ul className={classes.menuList}>
-                            <NavBarItem
-                                content="Answers"
-                                linkUrl={routePaths.questionPage}
+                        <MenuList className={classes.menuList}>
+                            <MenuItem
+                              children={<Link className={classes.aStyle} to={routePaths.questionPage}>Answers</Link>}
                             />
-                            <NavBarItem
-                                content="Ask a question"
-                                linkUrl={routePaths.askQuestionPage}
+                            <MenuItem
+                              children={<Link className={classes.aStyle} to={routePaths.askQuestionPage}>Ask a question</Link>}
                             />
-                            <IconButton>
-                                <NavLink to={routePaths.settingPage}>
-                                    <Settings color="primary"/>
-                                </NavLink>
-                            </IconButton>
-                            {/*<NavBarItem*/}
-                            {/*content="Sign Out"*/}
-                            {/*linkUrl="#"*/}
-                            {/*/>*/}
-                        </ul>
+                            <MenuItem
+                              children={<SignOutButton className={classes.aStyle} />}
+                            />
+                            <MenuItem
+                              children={<Link to={routePaths.profilePage}> <Avatar src={user.photoUrl} className={classes.aStyle} /> </Link>}
+                            />
+                            <MenuItem
+                              children={<Link to={routePaths.settingPage}> <Settings className={classes.aStyle} /> </Link>}
+                            />
+                        </MenuList>
                     </Toolbar>
                 </AppBar>
             </div>
@@ -96,7 +98,24 @@ const styles = theme => ({
         margin: 0
     },
     listLi: {
-        margin: '0 8px'
+        margin: '0 8px',
+        "&::after" : {
+            content: "",
+            position: "absolute",
+            top: "calc(100% - 0.125rem)",
+            borderBottom: "0.125rem solid #fefefe",
+            left: "50%",
+            right: "50%",
+            transition: "all 0.5s ease",
+        },
+        "&:hover::after" : {
+            left: 0,
+            right: 0,
+            transition: "all 0.5s ease",
+        }
+    },
+    aStyle: {
+        color:"#2196f3"
     },
     col1: {
         display: 'flex'
@@ -109,8 +128,9 @@ const styles = theme => ({
         justifyContent: 'flex-end'
     },
     menuList: {
+        width: "100%",
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
         listStyleType: 'none',
         margin: 0
@@ -121,7 +141,12 @@ const styles = theme => ({
     },
 });
 
-export default withStyles(styles)(NavBar)
+const mapStateToProps = (state) => ({
+    user: state.userReducer
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(NavBar));
+
 
 
 // import NavBarItem from "./NavBarItem/NavBarItem";
