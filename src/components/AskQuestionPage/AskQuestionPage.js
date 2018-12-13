@@ -82,10 +82,6 @@ class AskQuestionPage extends Component {
 
     handleRadioButton = (e) => {
         this.setState({ gender: e.target.value });
-
-        // this.setState({
-        //     [e.target.name]: e.target.value
-        // })
     };
 
     addSkill = () => {
@@ -98,9 +94,10 @@ class AskQuestionPage extends Component {
         })
     };
 
-    deleteSkill = (e) => {
+    deleteSkill = (skill) => () => {
+        console.log(skill);
         const array = [...this.state.skills];
-        const index = e.target.id;
+        const index = array.indexOf(skill);
         if (index !== -1) {
             array.splice(index, 1);
             this.setState({ skills: array });

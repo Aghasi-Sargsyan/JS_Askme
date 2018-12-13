@@ -16,15 +16,14 @@ const styles = theme => ({
 });
 
 const Skill = props => {
-  const { value, rate } = props;
-  const { classes } = props;
+  const { value, rate, skill, deleteSkill, classes } = props;
 
   return (
     <div className={classes.root}>
       <Chip
         id={value}
         label={value}
-        onDelete={props.deleteSkill}
+        onDelete={deleteSkill(skill)}
         className={classes.chip}
         color="primary"
       />

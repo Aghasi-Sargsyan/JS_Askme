@@ -78,10 +78,10 @@ class Profile extends Component {
         }
     };
 
-    deleteSkill = (e) => {
-        const targetSkill = e.target.id;
+    deleteSkill = data => () => {
+        const targetSkill = data;
         const { user } = this.props;
-        const newSkills = user.skills.filter(skill => skill.value !== targetSkill);
+        const newSkills = user.skills.filter(skill => skill.value !== targetSkill.value);
         this.props.dispatchUserData({
             skills: newSkills,
             skills_insensitive: newSkills.map(skill => skill.value.toUpperCase()),
@@ -90,7 +90,28 @@ class Profile extends Component {
             skills: newSkills,
             skills_insensitive: newSkills.map(skill => skill.value.toUpperCase()),
         }, user.id);
+        // this.setState(state => {
+        //     const chipData = [...state.chipData];
+        //     const chipToDelete = chipData.indexOf(data);
+        //     chipData.splice(chipToDelete, 1);
+        //     return { chipData };
+        // });
     };
+
+    // deleteSkill = (skill) => {
+    //     console.log(skill);
+    //     // const targetSkill = e.target.id;
+    //     // const { user } = this.props;
+    //     // const newSkills = user.skills.filter(skill => skill.value !== targetSkill);
+    //     // this.props.dispatchUserData({
+    //     //     skills: newSkills,
+    //     //     skills_insensitive: newSkills.map(skill => skill.value.toUpperCase()),
+    //     // });
+    //     // FireManager.updateUser({
+    //     //     skills: newSkills,
+    //     //     skills_insensitive: newSkills.map(skill => skill.value.toUpperCase()),
+    //     // }, user.id);
+    // };
 
     onSkillInputChange = (inputValue) => {
         this.setState({
