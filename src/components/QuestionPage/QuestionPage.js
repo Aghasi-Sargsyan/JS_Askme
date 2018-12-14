@@ -1,13 +1,27 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import QuestionsFilter from './QuestionsFilter/QuestionsFilter';
 import QuestionsCont from './QuestionsCont/QuestionsCont';
-import FireManager, { dbPaths } from "../../firebase/FireManager";
+import FireManager, {dbPaths} from "../../firebase/FireManager";
 import connect from "react-redux/es/connect/connect";
+import {withStyles} from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import {Avatar, CssBaseline, Divider, Drawer, Hidden, IconButton} from "@material-ui/core";
+import Logo from "../universal/Logo/Logo";
+import List from "@material-ui/core/es/List";
+import {NavLink} from "react-router-dom";
+import routePaths from "../../constKeys/routePaths";
+import ListItem from "@material-ui/core/es/ListItem";
+import ListItemText from "@material-ui/core/es/ListItemText";
+import ListItemIcon from "@material-ui/core/es/ListItemIcon";
+import SignOutButton from "../registration/SignOut/SignOut";
+import MenuIcon from "@material-ui/icons/Menu";
 
 class QuestionPage extends Component {
     state = {
         allQuestions: [],
-        filteredQuestions: []
+        filteredQuestions: [],
+        mobileOpen: false,
     };
 
     getQuestions = () => {
@@ -60,7 +74,7 @@ class QuestionPage extends Component {
     };
 
     componentDidMount() {
-        const { user } = this.props;
+        const {user} = this.props;
         user.id && !user.isNewUser && this.getQuestions().then(formattedQuestions => {
             this.setState({
                 allQuestions: formattedQuestions,
@@ -84,7 +98,7 @@ class QuestionPage extends Component {
     }
 
     questionFilter = (type) => {
-        const { allQuestions } = this.state;
+        const {allQuestions} = this.state;
         let filteredQuestions = [];
         switch (type) {
             case "all":
@@ -115,19 +129,150 @@ class QuestionPage extends Component {
         this.questionFilter(type);
     };
 
-    render() {
-        return (
-            <div>
-                <div className='flex'>
-                    <QuestionsFilter skills={this.props.user.skills}
-                        filterClickHandler={this.handleFilterClick} />
-                    <QuestionsCont filteredQuestions={this.state.filteredQuestions} />
-                </div>
+    handleDrawerToggle = () => {
+        this.setState(state => ({mobileOpen: !state.mobileOpen}));
+    };
 
+    render() {
+        const {classes, user} = this.props;
+        const {mobileOpen} = this.state;
+
+        const drawer = (
+            <div className={classes.side__drawer}>
+                <Logo/>
+                <Divider/>
+                <List>
+                    <NavLink to={routePaths.profilePage}>
+                        <ListItem className={classes.drawerLi}>
+                            <ListItemText className="name" primary={user.userName.toLocaleUpperCase()}/>
+                            <ListItemIcon children={<Avatar className={classes.avatar} src={user.photoUrl}/>}/>
+                        </ListItem>
+                    </NavLink>
+
+                    <Divider/>
+                    <ListItem
+                        className={classes.drawerLi}
+                        children={<NavLink to={routePaths.questionPage}>
+                            Answers
+                        </NavLink>}/>
+                    <ListItem
+                        className={classes.drawerLi}
+                        children={<NavLink to={routePaths.askQuestionPage}>
+                            Ask a question
+                        </NavLink>}
+                    />
+                </List>
+                <Divider/>
+                <List>
+                    <ListItem
+                        className={classes.drawerLi}
+                        children={<NavLink to={routePaths.settingPage}>Settings
+                        </NavLink>}
+                    />
+                    <ListItem
+                        className={classes.drawerLi}
+                        children={<SignOutButton/>}
+                    />
+                </List>
             </div>
+        );
+
+        return (
+            <>
+                <CssBaseline/>
+                <div className={classes.root}>
+                    <Grid style={{marginTop: "90px"}} container spacing={40}>
+                        <Grid style={{flexGrow: 0, padding: 0}} item xs>
+                            <Paper className={classes.paper}>
+                                <QuestionsFilter skills={this.props.user.skills}
+                                                 filterClickHandler={this.handleFilterClick}/>
+                                <IconButton color="primary"
+                                            aria-label="open drawer"
+                                            onClick={this.handleDrawerToggle}
+                                            className={classes.menuButton}
+                                >
+                                    <MenuIcon/>
+                                </IconButton>
+                            </Paper>
+                        </Grid>
+                        <Hidden xsDown implementation="css">
+                            <Drawer
+                                container={this.props.container}
+                                variant="temporary"
+                                open={mobileOpen}
+                                onClose={this.handleDrawerToggle}
+                                classes={{
+                                    paper: classes.drawerPaper,
+                                }}
+                            >
+                                {drawer}
+                            </Drawer>
+                        </Hidden>
+                        <Grid style={{flexGrow: 0, padding: 0}} item lg={9} md={6} sm={6}>
+                            <Paper className={classes.paper}>
+                                <QuestionsCont filteredQuestions={this.state.filteredQuestions}/>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </div>
+            </>
         );
     }
 }
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+        height: "100%"
+    },
+    drawer: {
+        [theme.breakpoints.up('sm')]: {
+            width: 330,
+            flexShrink: 0,
+        },
+    },
+    menuButton: {
+        color: "#2196f3",
+        height: 100,
+        width: 100,
+        marginRight: 20,
+        [theme.breakpoints.up('md')]: {
+            display: 'none',
+        },
+        "&>span": {
+            "&>svg": {
+                width: "2em",
+                height: "2em",
+                fontSize: 20
+            }
+        },
+        '&:hover': {
+            backgroundColor: "#fff",
+        }
+    },
+    toolbar: theme.mixins.toolbar,
+    minHeight: '72px',
+    drawerPaper: {
+        width: 330,
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing.unit * 3,
+    },
+    flex: {
+        flex: 1,
+        [theme.breakpoints.down('sm')]: {
+            position: 'absolute',
+            left: '50%',
+            transform: 'translate(-50%)'
+        }
+    },
+});
 
 const mapStateToProps = (state) => {
     return {
@@ -135,4 +280,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(QuestionPage);
+export default connect(mapStateToProps)(withStyles(styles)(QuestionPage));

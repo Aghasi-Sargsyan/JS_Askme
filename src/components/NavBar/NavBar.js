@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import routePaths from "../../constKeys/routePaths";
 import SignOutButton from "../registration/SignOut/SignOut";
 import {NavLink} from "react-router-dom";
-import {AppBar, Toolbar, IconButton, Typography, Hidden, Drawer, Divider, CssBaseline} from "@material-ui/core";
+import {AppBar, Toolbar, IconButton, Hidden, Drawer, Divider, CssBaseline, Avatar} from "@material-ui/core";
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
-import Avatar from '@material-ui/core/Avatar';
 import Logo from "../universal/Logo/Logo";
 import {connect} from "react-redux";
 import {withStyles} from '@material-ui/core/styles'
@@ -13,9 +12,10 @@ import List from "@material-ui/core/es/List/List";
 import ListItem from "@material-ui/core/es/ListItem/ListItem";
 import ListItemIcon from "@material-ui/core/es/ListItemIcon/ListItemIcon";
 import MenuIcon from "@material-ui/icons/Menu";
-import {FaInbox, FaMailBulk} from "react-icons/fa";
 import ListItemText from "@material-ui/core/es/ListItemText/ListItemText";
-
+import fb from "../../assets/icons/fb.png";
+import google from "../../assets/icons/google.png";
+import twitter from "../../assets/icons/twitter.png";
 
 class NavBar extends Component {
     state = {
@@ -31,25 +31,25 @@ class NavBar extends Component {
         const {mobileOpen} = this.state;
 
         const drawer = (
-            <div>
-                <div className={classes.toolbar}/>
+            <div className={classes.side__drawer}>
                 <Logo/>
                 <Divider/>
                 <List>
-                    <ListItem
-                        className={classes.listLi}
-                        children={<NavLink to={routePaths.profilePage}>
-                            <Avatar className={classes.avatar} src={user.photoUrl}/>
-                            <Typography variant="h6">{user.userName}</Typography>
-                        </NavLink>}
-                    />
+                    <NavLink to={routePaths.profilePage}>
+                        <ListItem className={classes.drawerLi}>
+                            <ListItemText className="name" primary={user.userName.toLocaleUpperCase()}/>
+                            <ListItemIcon children={<Avatar className={classes.avatar} src={user.photoUrl}/>}/>
+                        </ListItem>
+                    </NavLink>
+
                     <Divider/>
                     <ListItem
-                        className={classes.listLi}
-                        children={<NavLink to={routePaths.questionPage}>Answers</NavLink>}
-                    />
+                        className={classes.drawerLi}
+                        children={<NavLink to={routePaths.questionPage}>
+                            Answers
+                        </NavLink>}/>
                     <ListItem
-                        className={classes.listLi}
+                        className={classes.drawerLi}
                         children={<NavLink to={routePaths.askQuestionPage}>
                             Ask a question
                         </NavLink>}
@@ -58,12 +58,12 @@ class NavBar extends Component {
                 <Divider/>
                 <List>
                     <ListItem
-                        className={classes.listLi}
+                        className={classes.drawerLi}
                         children={<NavLink to={routePaths.settingPage}>Settings
                         </NavLink>}
                     />
                     <ListItem
-                        className={classes.listLi}
+                        className={classes.drawerLi}
                         children={<SignOutButton/>}
                     />
                 </List>
@@ -87,29 +87,24 @@ class NavBar extends Component {
                                 <Logo/>
                                 <MenuItem
                                     className={classes.listLi}
-                                    children={<NavLink to={routePaths.questionPage}>Answers</NavLink>}
-                                />
+                                    children={<NavLink to={routePaths.questionPage}>Answers</NavLink>}/>
                                 <MenuItem
                                     className={classes.listLi}
                                     children={<NavLink to={routePaths.askQuestionPage}>
                                         Ask a question
-                                    </NavLink>}
-                                />
+                                    </NavLink>}/>
                                 <MenuItem
                                     className={classes.listLi}
                                     children={<NavLink to={routePaths.settingPage}>Settings
-                                    </NavLink>}
-                                />
+                                    </NavLink>}/>
                                 <MenuItem
                                     className={classes.listLi}
                                     children={<NavLink to={routePaths.profilePage}>
                                         <Avatar className={classes.avatar} src={user.photoUrl}/>
-                                    </NavLink>}
-                                />
+                                    </NavLink>}/>
                                 <MenuItem
                                     className={classes.listLi}
-                                    children={<SignOutButton/>}
-                                />
+                                    children={<SignOutButton/>}/>
                             </MenuList>
                         </Toolbar>
                     </AppBar>
@@ -122,11 +117,16 @@ class NavBar extends Component {
                             classes={{
                                 paper: classes.drawerPaper,
                             }}
-                            ModalProps={{
-                                keepMounted: true,
-                            }}
+                            // ModalProps={{
+                            //     keepMounted: true,
+                            // }}
                         >
                             {drawer}
+                            <div className={classes.icons}>
+                                <img src={google} alt="google"/>
+                                <img src={fb} alt="fb"/>
+                                <img src={twitter} alt="twitter"/>
+                            </div>
                         </Drawer>
                     </Hidden>
                 </div>
@@ -209,6 +209,28 @@ const styles = theme => ({
             color: "#202020",
         }
     },
+    drawerLi: {
+        minHeight: "fit-content",
+        "fontFamily": "\"Raleway\", \"Helvetica\", \"Arial\", sans-serif",
+        '&:hover': {
+            backgroundColor: "#fff",
+            margin: 0,
+            "&>a": {
+                color: "#2196f3",
+                cursor: "pointer"
+            },
+            "&>div>span": {
+                color: "#2196f3",
+                cursor: "pointer"
+            },
+        },
+        "&>div": {
+            width: 100,
+        },
+        '&>a': {
+            color: "#202020",
+        }
+    },
     avatar: {
         width: 60,
         height: 60,
@@ -229,6 +251,23 @@ const styles = theme => ({
         textDecoration: 'none',
         paddingBottom: '6px'
     },
+    side__drawer: {
+        overflow: "hidden",
+        "& .header__logo": {
+            fontSize: 28,
+            marginBottom: 22,
+            marginTop: 22
+        }
+    },
+    icons: {
+        display: "flex",
+        justifyContent: "space-evenly",
+        marginTop: "40%",
+        "& img": {
+            width: "auto",
+            height: "auto"
+        }
+    }
 });
 
 const mapStateToProps = (state) => ({
@@ -236,17 +275,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(NavBar));
-
-
-// import NavBarItem from "./NavBarItem/NavBarItem";
-// import React from 'react';
-// import { withRouter } from "react-router-dom";
-// import "./NavBar.scss";
-//
-// const NavBar = ({ history }) => (
-//     <div className="navigation-bar flex">
-//         <NavBarItem history={history} />
-//     </div>
-// );
-//
-// export default withRouter(NavBar);
