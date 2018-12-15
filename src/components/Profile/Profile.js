@@ -80,10 +80,10 @@ class Profile extends Component {
         }
     };
 
-    deleteSkill = (e) => {
-        const targetSkill = e.target.id;
-        const {user} = this.props;
-        const newSkills = user.skills.filter(skill => skill.value !== targetSkill);
+    deleteSkill = data => () => {
+        const targetSkill = data;
+        const { user } = this.props;
+        const newSkills = user.skills.filter(skill => skill.value !== targetSkill.value);
         this.props.dispatchUserData({
             skills: newSkills,
             skills_insensitive: newSkills.map(skill => skill.value.toUpperCase()),

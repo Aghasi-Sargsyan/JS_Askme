@@ -1,9 +1,9 @@
-import React, {Component} from "react";
-import {bindActionCreators} from "redux";
-import {actionLogin, actionLogout, getAndDispatchDbUser} from "./redux/actions/userActions";
-import {Redirect, Route, Switch, withRouter} from "react-router-dom";
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { actionLogin, actionLogout, getAndDispatchDbUser } from "./redux/actions/userActions";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
-import {auth} from "firebase";
+import { auth } from "firebase";
 import routePaths from "./constKeys/routePaths";
 import SignInForm from "./components/registration/SignInForm/SignInForm";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
@@ -31,38 +31,37 @@ class App extends Component {
     }
 
     rend() {
-        const {user} = this.props;
+        const { user } = this.props;
         if (user.isLoggedIn !== null) {
-            const signIn = <Redirect to={routePaths.signIn}/>;
-            const questionPage = <Redirect to={routePaths.questionPage}/>;
+            const signIn = <Redirect to={routePaths.signIn} />;
+            const questionPage = <Redirect to={routePaths.questionPage} />;
 
             return (
                 <Switch>
                     <Route exact path="/" render={() => (
-                        user.isLoggedIn ? (questionPage) : (<SignInForm/>))}/>
+                        user.isLoggedIn ? (questionPage) : (<SignInForm />))} />
 
                     <Route exact path={routePaths.signIn} render={() => (
-                        user.isLoggedIn ? (questionPage) : (<SignInForm/>))}/>
+                        user.isLoggedIn ? (questionPage) : (<SignInForm />))} />
 
                     <Route exact path={routePaths.signUp} render={() => (
-                        user.isLoggedIn ? (questionPage) : (<SignUpForm/>))}/>
+                        user.isLoggedIn ? (questionPage) : (<SignUpForm />))} />
 
                     <Route exact path={routePaths.questionPage} render={() => (
-                        user.isLoggedIn ? (<QuestionPage/>) : (signIn))}/>
+                        user.isLoggedIn ? (<QuestionPage />) : (signIn))} />
 
                     <Route exact path={routePaths.profilePage} render={() => (
-                        user.isLoggedIn ? (<Profile/>) : (signIn))}/>
+                        user.isLoggedIn ? (<Profile />) : (signIn))} />
 
                     <Route exact path={routePaths.askQuestionPage} render={() => (
-                        user.isLoggedIn ? (<AskQuestionPage/>) : (signIn))}/>
+                        user.isLoggedIn ? (<AskQuestionPage />) : (signIn))} />
 
                     <Route exact path={routePaths.itemPage} render={(props) => (
                         user.isLoggedIn ? (<ItemPage {...props} />) : (signIn))}/>
 
                     <Route exact path={routePaths.settingPage} render={() => (
                         user.isLoggedIn ? (<SettingPage/>) : (signIn))}/>
-
-                    <Route component={Page404}/>
+                    <Route component={Page404} />
                 </Switch>
             )
         }
@@ -70,10 +69,10 @@ class App extends Component {
 
 
     afterRegPopup() {
-        const {user} = this.props;
+        const { user } = this.props;
 
         if (user) {
-            return user.isNewUser && <AfterRegPopup/>;
+            return user.isNewUser && <AfterRegPopup />;
         }
 
     }
@@ -81,7 +80,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                {this.props.user.isLoggedIn && <Header/>}
+                {this.props.user.isLoggedIn && <Header />}
                 {this.rend()}
                 {this.afterRegPopup()}
             </div>

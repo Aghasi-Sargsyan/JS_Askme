@@ -50,16 +50,6 @@ class ProfileQuestionContainer extends Component {
             : this.state.answeredQuestions;
         return (
             <div>
-                <div className='question_item_header flex align_center'>
-                    <div className='flex_grow'>
-                        <div>Type</div>
-                    </div>
-                    <div className='flex question__item_header_txt'>
-                        <div>Votes</div>
-                        <div>Answers</div>
-                        <div className='empty_div' />
-                    </div>
-                </div>
                 {questions.map((question) => <QuestionItem
                     key={question.id} question={question} profileQuestion={true} />
                 )}

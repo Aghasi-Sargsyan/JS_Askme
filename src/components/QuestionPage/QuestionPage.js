@@ -134,49 +134,6 @@ class QuestionPage extends Component {
     };
 
     render() {
-        const {classes, user} = this.props;
-        const {mobileOpen} = this.state;
-
-        const drawer = (
-            <div className={classes.side__drawer}>
-                <Logo/>
-                <Divider/>
-                <List>
-                    <NavLink to={routePaths.profilePage}>
-                        <ListItem className={classes.drawerLi}>
-                            <ListItemText className="name" primary={user.userName.toLocaleUpperCase()}/>
-                            <ListItemIcon children={<Avatar className={classes.avatar} src={user.photoUrl}/>}/>
-                        </ListItem>
-                    </NavLink>
-
-                    <Divider/>
-                    <ListItem
-                        className={classes.drawerLi}
-                        children={<NavLink to={routePaths.questionPage}>
-                            Answers
-                        </NavLink>}/>
-                    <ListItem
-                        className={classes.drawerLi}
-                        children={<NavLink to={routePaths.askQuestionPage}>
-                            Ask a question
-                        </NavLink>}
-                    />
-                </List>
-                <Divider/>
-                <List>
-                    <ListItem
-                        className={classes.drawerLi}
-                        children={<NavLink to={routePaths.settingPage}>Settings
-                        </NavLink>}
-                    />
-                    <ListItem
-                        className={classes.drawerLi}
-                        children={<SignOutButton/>}
-                    />
-                </List>
-            </div>
-        );
-
         return (
             <>
                 <CssBaseline/>
