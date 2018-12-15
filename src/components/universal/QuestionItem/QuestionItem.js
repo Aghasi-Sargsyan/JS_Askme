@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import Avatar from '../Avatar/Avatar';
 import defaultAvatar from '../../../assets/profileImg.png';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import FireManager from "../../../firebase/FireManager";
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -42,6 +42,18 @@ const styles = theme => ({
     answer: {
         backgroundColor: '#04a9f5',
         color: '#fff'
+    },
+    userName: {
+        padding: '0px',
+        "& span": {
+            fontSize: '10px',
+            width: '50px',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            display: 'block',
+            padding: '5px 0',
+        }
     }
 });
 
@@ -86,16 +98,13 @@ class QuestionItem extends Component {
 
                 <List className={classes.root}>
                     <ListItem alignItems="flex-start">
-                        <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
-                            {/* <span>{this.state.userName}</span> */}
-
-                        </ListItemAvatar>
-
-
-                        {/* <Typography component="span" className={classes.inline} color="textPrimary">
-                                    <span>{this.state.userName}</span>
-                                </Typography> */}
+                        {/* <div className='flex flex_column align_center'> */}
+                        <div className='flex align_center flex_column tac'>
+                            <ListItemAvatar>
+                                <Avatar src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
+                            </ListItemAvatar>
+                            <ListItemText primary={this.state.userName} className={classes.userName} />
+                        </div>
                         <ListItemText
                             primary={question.title}
                             secondary={
@@ -106,7 +115,6 @@ class QuestionItem extends Component {
                                 </>
                             }
                         />
-
                     </ListItem>
                     <div className='question_item_footer flex justify_between align_center padh_24 '>
                         {question.skills.length !== 0
@@ -138,58 +146,6 @@ class QuestionItem extends Component {
                     </div>
                     <Divider light />
                 </List>
-                {/* <div className='question_item_content'>
-                    <div className='flex justify_between'>
-                        <div className='question_item_title'>
-                            {question.title}
-                        </div> */}
-                {/* <div className='question_item_buttons'>
-                            {!this.props.profileQuestion &&
-                                <>
-                                    <button>-</button>
-                                    <button>x</button>
-                                </>
-                            }
-                        </div> */}
-                {/* </div>
-
-                    <div className='question_item_desc flex align_center'>
-                        <div className='flex_grow question_item_wysiwyg'>
-                            <div dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}></div>
-                        </div>
-                        <div className='flex align_center'>
-                            <div className='flex question_item_scores'>
-                                <div>{question.rate}</div>
-                                <div>{question.answerCount}</div>
-                            </div>
-                            <div className='flex question_item_user align_center'>
-                                <div className='question_item_avatar'>
-                                    <Avatar className={classes.avatar} src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
-                                </div>
-                                <div className='question_item_writer ellipsis'>
-                                    <div className='ellipsis'>{this.state.userName}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='question_item_footer flex justify_between align_center'>
-                        {question.skills.length !== 0
-                            && <div className='question_item_skill'>
-                                {question.skills.map(skill => <span key={skill}>{skill}</span>)}
-                            </div>}
-                        <div className='flex'>
-                            {userMinAge && userMaxAge && <div className='question_item_age'>
-                                <span>{userMinAge + " - " + userMaxAge}</span>
-                            </div>}
-                            {question.gender && <div className='question_item_gender'>
-                                <span>{question.gender}</span>
-                            </div>}
-                        </div>
-                        <div className='question_item_date'>
-                            <span>{formattedDate}</span>
-                        </div>
-                    </div>
-                </div> */}
             </Link>
         )
     }
