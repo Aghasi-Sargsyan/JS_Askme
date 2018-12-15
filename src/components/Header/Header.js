@@ -1,15 +1,14 @@
-import React from 'react';
-import Logo from '../universal/Logo/Logo';
-import NavBar from '../NavBar/NavBar';
-import "./Header.scss";
+import React, {Component} from 'react';
+import NavBar from "../NavBar/NavBar";
 
-const Header = () => (
-    <header>
-        <nav className="navigation flex">
-            <Logo />
-            <NavBar />
-        </nav>
-    </header>
-);
+class Header extends Component {
+    render () {
+        return (
+            <div>
+                <NavBar />
+            </div>
+        );
+    }
+}
 
 export default Header;

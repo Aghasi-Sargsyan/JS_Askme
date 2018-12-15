@@ -155,7 +155,7 @@ class SignInForm extends Component {
         }).catch(function (error) {
             console.error(error.message)
         });
-    }
+    };
 
     loginWithTwitter = () => {
         const twitterProvider = new auth.TwitterAuthProvider();
@@ -166,7 +166,7 @@ class SignInForm extends Component {
         }).catch(function (error) {
             console.error(error.message)
         });
-    }
+    };
 
     render() {
         const { formErrors, disabled } = this.state;

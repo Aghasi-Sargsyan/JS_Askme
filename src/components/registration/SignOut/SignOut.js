@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {auth} from "firebase";
 import {connect} from "react-redux";
-import {actionRemoveUser} from "../../../redux/actions/userActions";
+import {actionRemoveUser} from "../../../redux/actions/userActions"
+import logOutIcon from "../../../assets/icons/logout.png";
 import "./SignOut.scss";
 
 class SignOutButton extends Component {
@@ -16,7 +17,10 @@ class SignOutButton extends Component {
 
     render() {
         return (
-            <button className="sign-out" onClick={this.logout}>Sign Out</button>
+            <a className="sign-out" onClick={this.logout}>
+                Sign Out
+                <img src={logOutIcon} alt="SignOut" />
+            </a>
         );
     }
 }
