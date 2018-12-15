@@ -3,14 +3,55 @@ import { Link, withRouter } from "react-router-dom";
 import { auth } from "firebase";
 import routePaths from "../../../constKeys/routePaths";
 import isEmail from "validator/lib/isEmail";
-import fb from "../../../assets/icons/fb.png";
-import google from "../../../assets/icons/google.png";
-import twitter from "../../../assets/icons/twitter.png";
-import './SignInForm.scss'
 import FireManager from "../../../firebase/FireManager";
 import { bindActionCreators } from "redux";
 import { actionAddUserData } from "../../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControl from '@material-ui/core/FormControl';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import withStyles from '@material-ui/core/styles/withStyles';
+import './SignInForm.scss'
+
+const styles = theme => ({
+    main: {
+        width: 'auto',
+        display: 'block',
+        height: '100vh',
+        position: 'relative',
+    },
+    paper: {
+        width: '500px',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%,-50%)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '50px 24px 60px 24px',
+    },
+    avatar: {
+        margin: theme.spacing.unit,
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%',
+        marginTop: theme.spacing.unit,
+    },
+    submit: {
+        height: '40px',
+        marginTop: theme.spacing.unit * 3,
+    },
+    blue: {
+        backgroundColor: '#04a9f5',
+        color: '#fff'
+    },
+});
+
 
 class SignInForm extends Component {
     constructor(props) {
@@ -129,70 +170,75 @@ class SignInForm extends Component {
 
     render() {
         const { formErrors, disabled } = this.state;
+        const { classes } = this.props;
         return (
-            <div className="singInUp flex">
-                <div className='signIn__left'>
-                    <div className='signIn__logo'>
-                        <p className='font_m'><span className='logo_letter'>A</span>sk<span
-                            className='logo_letter'>M</span>e</p>
-                    </div>
-                    <div className='signIn__with tac'>
-                        <p className='font_m'>Sign In With</p>
-                        <div className='social_btns'>
-                            <button onClick={this.loginWithGoogle} className='social_btn'>
-                                <img src={google} alt="google" />
-                            </button>
-                            <button onClick={this.loginWithFb} className='social_btn social_btn_fb'>
-                                <img src={fb} alt="fb" />
-                            </button>
-                            <button onClick={this.loginWithTwitter} className='social_btn'>
-                                <img src={twitter} alt="twitter" />
-                            </button>
-                        </div>
-                    </div>
-                    <form onSubmit={this.handleSubmit} className="singIn__form tac" noValidate>
-                        <div className="singInUp__input__wrapper">
-                            <input
+            <main className={classes.main}>
+                <CssBaseline />
+                <Paper className={classes.paper}>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
+                    <form onSubmit={this.handleSubmit} className={classes.form} noValidate>
+                        <FormControl margin="normal" required fullWidth>
+                            <TextField
+                                id="outlined-email-input"
+                                label="Email"
+                                className={formErrors.email.length > 0 ? "error__input" : null}
+                                onChange={this.handleChange}
                                 type="email"
                                 name="email"
-                                placeholder="Email"
-                                onChange={this.handleChange}
-                                className={formErrors.email.length > 0 ? "error__input" : null}
+                                autoComplete="email"
+                                margin="normal"
+                                variant="outlined"
                             />
                             {formErrors.email.length > 0 && (
                                 <span className="error__message">{formErrors.email}</span>
                             )}
-                        </div>
-                        <div className="singInUp__input__wrapper">
-                            <input
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <TextField
+                                id="outlined-password-input"
+                                label="Password"
+                                className={formErrors.password.length > 0 ? "error__input" : null}
+                                onChange={this.handleChange}
                                 type="password"
                                 name="password"
-                                placeholder="Password"
-                                onChange={this.handleChange}
-                                className={formErrors.password.length > 0 ? "error__input" : null}
+                                autoComplete="current-password"
+                                margin="normal"
+                                variant="outlined"
                             />
                             {formErrors.password.length > 0 && (
                                 <span className="error__message">{formErrors.password}</span>
                             )}
-                        </div>
+                        </FormControl>
                         {formErrors.loginError.length > 0 && (
                             <span className="error__message">{formErrors.loginError}</span>
                         )}
-                        <button
+                        <Button
                             type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={`${classes.submit} ${classes.blue}`}
                             onClick={this.login}
-                            className="singInUp__submit"
-                            disabled={disabled}
+                            disabled={!!disabled}
                         >
-                            Sign In
-                        </button>
+                            Sign in
+                            </Button>
+                        <Link to={routePaths.signUp}>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="secondary"
+                                className={classes.submit}
+                            >
+                                Sign up
+                            </Button>
+                        </Link>
                     </form>
-                </div>
-                <div className='signIn__right center'>
-                    <p className='font_l'>Let's Go!</p>
-                    <Link to={routePaths.signUp}>Sign Up</Link>
-                </div>
-            </div>
+                </Paper>
+            </main >
         );
     }
 }
@@ -203,4 +249,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(SignInForm));
+export default withStyles(styles)(withRouter(connect(null, mapDispatchToProps)(SignInForm)));

@@ -3,8 +3,10 @@ import Answer from "./Answer/Answer";
 import Wysiwyg from "../universal/Wysiwyg/Wysiwyg";
 import { connect } from "react-redux";
 import Question from "./Question/Question";
-import './ItemPage.scss';
+import Divider from '@material-ui/core/Divider';
 import FireManager, { dbPaths } from "../../firebase/FireManager";
+import './ItemPage.scss';
+
 
 class ItemPage extends Component {
 
@@ -95,19 +97,18 @@ class ItemPage extends Component {
         return (
             <div className='question__page'>
                 {this.state.question && <Question src={this.props.user.photoUrl} question={this.state.question} />}
-                <hr />
                 <div className='flex align_center answer_txt'>
                     {this.state.question && <span>{this.state.question.answerCount}</span>}
                     <h4>Answers</h4>
                 </div>
-                <hr />
+                <Divider light />
                 {this.state.dbAnswers.map((answer) => <Answer answer={answer}
                     key={answer.id} />)}
                 {this.state.answers.map((answer, index) => <Answer answer={answer}
                     userName={this.props.user.userName}
                     key={index} />)}
                 <h4>Your Answer</h4>
-                <hr />
+                <Divider light />
                 <Wysiwyg value={this.state.wysiwygTxt} changeHandler={this.handleChange} />
                 <button className='answer_submit' onClick={this.onSubmit}>Post your answer</button>
 

@@ -1,11 +1,8 @@
 .question__page {
-    width: calc(100% - 600px);
+    width: calc(100% - 400px);
     height: 100%;
     margin: auto;
-    margin-left: 370px;
     background: #fff;
-    margin-top: -18px;
-    z-index: 10;
     position: relative;
     padding: 30px 50px 20px 50px;
     h4 {
@@ -20,25 +17,30 @@
         height: 50px;
         color: #fff;
         cursor: pointer;
-        background-color: #00be73;
+        background-color: #04a9f5;
         border: none;
+        border-radius: 3px;
         outline: none;
         margin: 10px auto;
         display: block;
     }
-    hr {
-        height: 6px;
-        background: url(http://ibrahimjabbari.com/english/images/hr-11.png) repeat-x 0 0;
-        border: 0;
+    .answer_txt {
+        padding: 0 15px;
+        span {
+            width: 24px;
+            border-radius: 3px;
+            height: 24px;
+            text-align: center;
+            background: #04a9f5;
+            line-height: 24px;
+            color: #fff;
+            margin-right: 8px;
+        }
     }
-    .answer_txt span {
-        width: 24px;
-        border-radius: 3px;
-        height: 24px;
-        text-align: center;
-        background: #00be71;
-        line-height: 24px;
-        color: #fff;
-        margin-right: 8px;
+}
+
+@media only screen and (max-width: 1400px) {
+    .question__page {
+        width: calc(100% - 50px)
     }
 }

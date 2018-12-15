@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import './QuestionsFilter.scss';
 
-export default class QuestionsFilter extends Component {
+class QuestionsFilter extends Component {
+
     render() {
         return (
             <div className='questions-filter-container '>
@@ -33,9 +34,9 @@ export default class QuestionsFilter extends Component {
                                 </li>)}
                         </ul>
                     </li>
-                    {/* <li>Answer Later</li> */}
                 </ul>
             </div>
         )
     }
 }
+export default QuestionsFilter;
