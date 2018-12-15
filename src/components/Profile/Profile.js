@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {withStyles, Tabs, Tab} from "@material-ui/core";
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { withStyles, Tabs, Tab } from "@material-ui/core";
+import { connect } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
-import {bindActionCreators} from "redux";
+import { bindActionCreators } from "redux";
 import FireManager from "../../firebase/FireManager";
-import {actionAddUserData} from "../../redux/actions/userActions";
+import { actionAddUserData } from "../../redux/actions/userActions";
 import Autocomplete from "../universal/Autocomplete/Autocomplete";
 import UserInfo from './UserInfo/UserInfo';
 import SkillContainer from '../SkillContainer/SkillContainer';
@@ -19,11 +19,11 @@ class Profile extends Component {
         this.tabs = [
             {
                 name: 'My Questions',
-                content: <ProfileQuestionsCont askedQuestions/>
+                content: <ProfileQuestionsCont askedQuestions />
             },
             {
                 name: 'Answered Questions',
-                content: <ProfileQuestionsCont answeredQuestions/>
+                content: <ProfileQuestionsCont answeredQuestions />
             }
         ];
 
@@ -39,7 +39,7 @@ class Profile extends Component {
 
     addSkillHandler = () => {
         const localSkills = [];
-        const {skills} = this.props.user;
+        const { skills } = this.props.user;
 
         for (let key in skills) {
             if (skills.hasOwnProperty(key)) {
@@ -63,7 +63,7 @@ class Profile extends Component {
         const dublicatedSkills = this.state.localSkills.includes(this.state.inputValue.toUpperCase());
 
         if (this.state.inputValue.length && !dublicatedSkills) {
-            const newSkills = this.props.user.skills.concat({value: this.state.inputValue, rate: 0});
+            const newSkills = this.props.user.skills.concat({ value: this.state.inputValue, rate: 0 });
 
             FireManager.addGlobalSkill(this.state.inputValue);
             FireManager.updateUser({
@@ -101,29 +101,29 @@ class Profile extends Component {
     };
 
     handleChange = (event, value) => {
-        this.setState({value});
+        this.setState({ value });
     };
 
     handleChangeIndex = index => {
-        this.setState({value: index});
+        this.setState({ value: index });
     };
 
     render() {
-        const {isShowAdd, inputValue, filteredSkills} = this.state;
-        const {user, classes, theme} = this.props;
+        const { isShowAdd, inputValue, filteredSkills } = this.state;
+        const { user, classes, theme } = this.props;
 
         return (
             <div className="profile_page flex">
                 <aside className="left__side">
-                    <UserInfo user={user}/>
+                    <UserInfo user={user} />
                     <div className="user__skills tac">
-                        <SkillContainer isSkillObj deleteSkill={this.deleteSkill} skills={user.skills}/>
+                        <SkillContainer isSkillObj deleteSkill={this.deleteSkill} skills={user.skills} />
                         <div className='flex flex_column align_center pos_rel'>
                             {isShowAdd && <Autocomplete
                                 className="input__skill"
                                 value={inputValue}
                                 changeHandler={this.onSkillInputChange}
-                                suggestions={filteredSkills}/>
+                                suggestions={filteredSkills} />
                             }
                             <button className="add__user__skill__btn" onClick={this.addSkillHandler}>Add Skill</button>
                         </div>
@@ -135,9 +135,10 @@ class Profile extends Component {
                         onChange={this.handleChange}
                         indicatorColor="primary"
                         textColor="primary"
+                        className={classes.tabsContainer}
                         fullWidth
                     >
-                        {this.tabs.map((tab, index) => <Tab key={index} label={tab.name}/>)}
+                        {this.tabs.map((tab, index) => <Tab key={index} label={tab.name} />)}
                     </Tabs>
 
                     <SwipeableViews
@@ -159,8 +160,11 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
         width: "70%",
         marginTop: "12%",
-        marginLeft: "3%"
+        marginLeft: "3%",
     },
+    tabsContainer: {
+        borderBottom: "1px solid #999"
+    }
 });
 
 const mapStateToProps = (state) => {
@@ -175,4 +179,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, {withTheme: true})(Profile));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Profile));

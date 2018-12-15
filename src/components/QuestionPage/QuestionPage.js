@@ -1,15 +1,15 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import QuestionsFilter from './QuestionsFilter/QuestionsFilter';
 import QuestionsCont from './QuestionsCont/QuestionsCont';
-import FireManager, {dbPaths} from "../../firebase/FireManager";
+import FireManager, { dbPaths } from "../../firebase/FireManager";
 import connect from "react-redux/es/connect/connect";
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import {Avatar, CssBaseline, Divider, Drawer, Hidden, IconButton} from "@material-ui/core";
+import { Avatar, CssBaseline, Divider, Drawer, Hidden, IconButton } from "@material-ui/core";
 import Logo from "../universal/Logo/Logo";
 import List from "@material-ui/core/es/List";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import routePaths from "../../constKeys/routePaths";
 import ListItem from "@material-ui/core/es/ListItem";
 import ListItemText from "@material-ui/core/es/ListItemText";
@@ -74,7 +74,7 @@ class QuestionPage extends Component {
     };
 
     componentDidMount() {
-        const {user} = this.props;
+        const { user } = this.props;
         user.id && !user.isNewUser && this.getQuestions().then(formattedQuestions => {
             this.setState({
                 allQuestions: formattedQuestions,
@@ -98,7 +98,7 @@ class QuestionPage extends Component {
     }
 
     questionFilter = (type) => {
-        const {allQuestions} = this.state;
+        const { allQuestions } = this.state;
         let filteredQuestions = [];
         switch (type) {
             case "all":
@@ -130,44 +130,25 @@ class QuestionPage extends Component {
     };
 
     handleDrawerToggle = () => {
-        this.setState(state => ({mobileOpen: !state.mobileOpen}));
+        this.setState(state => ({ mobileOpen: !state.mobileOpen }));
     };
 
     render() {
+        const { classes } = this.props;
         return (
             <>
-                <CssBaseline/>
+                <CssBaseline />
                 <div className={classes.root}>
-                    <Grid style={{marginTop: "90px"}} container spacing={40}>
-                        <Grid style={{flexGrow: 0, padding: 0}} item xs>
+                    <Grid style={{ marginTop: "90px" }} container spacing={40}>
+                        <Grid style={{ flexGrow: 0, padding: 0 }} item xs>
                             <Paper className={classes.paper}>
                                 <QuestionsFilter skills={this.props.user.skills}
-                                                 filterClickHandler={this.handleFilterClick}/>
-                                <IconButton color="primary"
-                                            aria-label="open drawer"
-                                            onClick={this.handleDrawerToggle}
-                                            className={classes.menuButton}
-                                >
-                                    <MenuIcon/>
-                                </IconButton>
+                                    filterClickHandler={this.handleFilterClick} />
                             </Paper>
                         </Grid>
-                        <Hidden xsDown implementation="css">
-                            <Drawer
-                                container={this.props.container}
-                                variant="temporary"
-                                open={mobileOpen}
-                                onClose={this.handleDrawerToggle}
-                                classes={{
-                                    paper: classes.drawerPaper,
-                                }}
-                            >
-                                {drawer}
-                            </Drawer>
-                        </Hidden>
-                        <Grid style={{flexGrow: 0, padding: 0}} item lg={9} md={6} sm={6}>
+                        <Grid style={{ flexGrow: 0, padding: 0 }} item lg={9} md={6} sm={6}>
                             <Paper className={classes.paper}>
-                                <QuestionsCont filteredQuestions={this.state.filteredQuestions}/>
+                                <QuestionsCont filteredQuestions={this.state.filteredQuestions} />
                             </Paper>
                         </Grid>
                     </Grid>
