@@ -7,15 +7,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 10px #d3d2d2;
-    padding: 20px;
+    padding: 50px;
     align-items: flex-end;
     justify-content: space-between;
-    p:nth-of-type(1) {
-        display: none;
-    }
     div {
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        height: 200px;
+    }
+    p {
+        font-weight: bold;
+        margin-top: 75px;
     }
     input {
         position: relative;

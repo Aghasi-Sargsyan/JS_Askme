@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import Avatar from '../Avatar/Avatar';
 import defaultAvatar from '../../../assets/profileImg.png';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import FireManager from "../../../firebase/FireManager";
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -15,6 +15,7 @@ import Chip from '@material-ui/core/Chip';
 
 import Avatar from '@material-ui/core/Avatar';
 import './QuestionItem.scss';
+import connect from "react-redux/es/connect/connect";
 
 const styles = theme => ({
     root: {
@@ -56,8 +57,18 @@ class QuestionItem extends Component {
             this.setState({
                 userName: user.userName,
                 photoUrl: user.photoUrl
-            })
+            });
         });
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.user.photoUrl !== this.props.user.photoUrl) {
+            FireManager.getUser(this.props.question.userId).then(user => {
+                this.setState({
+                    photoUrl: user.photoUrl
+                });
+            });
+        }
     }
 
     render() {
@@ -184,4 +195,10 @@ class QuestionItem extends Component {
     }
 }
 
-export default withStyles(styles)(QuestionItem);
+const mapStateToProps = (state) => {
+    return {
+        user: state.userReducer
+    }
+};
+
+export default withStyles(styles)(connect(mapStateToProps)(QuestionItem));

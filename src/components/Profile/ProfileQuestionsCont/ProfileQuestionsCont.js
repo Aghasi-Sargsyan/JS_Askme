@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import QuestionItem from '../../universal/QuestionItem/QuestionItem';
-import FireManager, { dbPaths } from "../../../firebase/FireManager";
+import FireManager, {dbPaths} from "../../../firebase/FireManager";
 
 class ProfileQuestionContainer extends Component {
 
@@ -16,8 +16,8 @@ class ProfileQuestionContainer extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.user.id !== this.props.user.id) {
-            this.getUserQuestions()
+        if (prevProps.user.photoUrl !== this.props.user.photoUrl || prevProps.user.id !== this.props.user.id ) {
+            this.getUserQuestions();
         }
     }
 
