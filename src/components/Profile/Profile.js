@@ -159,7 +159,7 @@ const styles = theme => ({
     profileQuestions: {
         backgroundColor: theme.palette.background.paper,
         width: "70%",
-        marginTop: "12%",
+        marginTop: "150px",
         marginLeft: "3%",
     },
     tabsContainer: {

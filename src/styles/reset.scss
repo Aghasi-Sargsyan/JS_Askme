@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 /* Let's default this puppy out
 -------------------------------------------------------------------------------*/
 
@@ -94,6 +95,7 @@ body {
     // background: #f8f8f8;
     background: url(../assets/bg.png) no-repeat;
     background-size: cover;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 }
 
 /* Responsive images and other embedded objects

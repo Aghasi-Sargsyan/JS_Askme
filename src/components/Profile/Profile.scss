@@ -3,6 +3,7 @@
     .left__side {
         height: 100vh;
         padding: 50px 20px 0 50px;
+        margin-top: 100px;
         .user__skills {
             position: relative;
             .skills {
@@ -92,7 +93,6 @@
         div {
             a {
                 color: grey;
-                font-family: sans-serif;
                 &.active {
                     color: black;
                     font-weight: bold;

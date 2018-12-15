@@ -139,8 +139,12 @@ class QuestionPage extends Component {
             <>
                 <CssBaseline />
                 <div className={classes.root}>
-                    <Grid style={{ marginTop: "90px" }} container spacing={40}>
-                        <Grid style={{ flexGrow: 0, padding: 0 }} item xs>
+                    <QuestionsFilter skills={this.props.user.skills}
+                        filterClickHandler={this.handleFilterClick} />
+                    <QuestionsCont filteredQuestions={this.state.filteredQuestions} />
+
+                    {/* <Grid style={{ marginTop: "90px" }} container spacing={40}> */}
+                    {/* <Grid style={{ flexGrow: 0, padding: 0 }} item xs>
                             <Paper className={classes.paper}>
                                 <QuestionsFilter skills={this.props.user.skills}
                                     filterClickHandler={this.handleFilterClick} />
@@ -150,8 +154,8 @@ class QuestionPage extends Component {
                             <Paper className={classes.paper}>
                                 <QuestionsCont filteredQuestions={this.state.filteredQuestions} />
                             </Paper>
-                        </Grid>
-                    </Grid>
+                        </Grid> */}
+                    {/* </Grid> */}
                 </div>
             </>
         );
@@ -161,6 +165,7 @@ class QuestionPage extends Component {
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        display: 'flex',
     },
     paper: {
         padding: theme.spacing.unit * 2,
