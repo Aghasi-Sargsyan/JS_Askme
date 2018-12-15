@@ -80,7 +80,7 @@
         border: none;
         border-radius: 3px;
         outline: none;
-        margin: auto;
+        margin: 50px auto;
         display: block;
         font-size: 13px;
     }
@@ -97,6 +97,10 @@
     }
     .ask_question_skill_add:hover {
         cursor: pointer;
+    }
+    .skill-container {
+        width: 200px;
+        flex-wrap: wrap;
     }
 }
 
@@ -137,4 +141,29 @@ button[type="button"]:disabled:hover {
 
 .female {
     height: 30px;
+}
+
+.input-range__slider {
+    background: #04a9f5 !important;
+    border: 1px solid #04a9f5 !important;
+}
+
+.input-range__track--active {
+    background: #04a9f5 !important;
+}
+
+.input-range--disabled {
+    .input-range__slider {
+        background: #bebebe !important;
+        border: 1px solid #bebebe !important;
+    }
+    .input-range__track--active {
+        background: #bebebe !important;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .ask_question {
+        width: calc(100% - 50px)
+    }
 }

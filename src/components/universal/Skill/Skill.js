@@ -11,30 +11,31 @@ const styles = theme => ({
   },
   chip: {
     margin: theme.spacing.unit,
-    backgroundColor: '#04a9f5',
+    // backgroundColor: '#04a9f5',
   },
 });
 
 const Skill = props => {
-  const { value, rate, skill, deleteSkill, classes } = props;
+  const { value, skill, deleteSkill, classes } = props;
 
   return (
     <div className={classes.root}>
-      <Chip
+      {/* <Chip
         id={value}
         label={value}
         onDelete={deleteSkill(skill)}
         className={classes.chip}
         color="primary"
+      /> */}
+      <Chip
+        id={value}
+        label={value}
+        onDelete={deleteSkill(skill)}
+        className={classes.chip}
+        color='primary'
+        variant="outlined"
       />
-      <span>{rate}</span>
     </div>
-
-    // <li id={value}>
-    //   <p>{value} </p>
-    //   <button id={value} onClick={props.deleteSkill}>x</button>
-    //   <span>{rate}</span>
-    // </li>
   );
 };
 

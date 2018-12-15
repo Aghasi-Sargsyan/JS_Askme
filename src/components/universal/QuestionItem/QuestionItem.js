@@ -23,6 +23,7 @@ const styles = theme => ({
     },
     inline: {
         display: 'inline',
+        color: '#707070'
     },
     avatar: {
         margin: '0 10px'
@@ -30,6 +31,17 @@ const styles = theme => ({
     chip: {
         margin: theme.spacing.unit,
     },
+    reverse: {
+        display: 'flex',
+        flexDirection: 'row-reverse',
+        margin: '0 20px',
+        backgroundColor: '#fff',
+        border: '1px solid #04a9f5',
+    },
+    answer: {
+        backgroundColor: '#04a9f5',
+        color: '#fff'
+    }
 });
 
 class QuestionItem extends Component {
@@ -65,15 +77,19 @@ class QuestionItem extends Component {
                     <ListItem alignItems="flex-start">
                         <ListItemAvatar>
                             <Avatar alt="Remy Sharp" src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
-                            {/* <Typography component="span" className={classes.inline} color="textPrimary">
-                                <span>{this.state.userName}</span>
-                            </Typography> */}
+                            {/* <span>{this.state.userName}</span> */}
+
                         </ListItemAvatar>
+
+
+                        {/* <Typography component="span" className={classes.inline} color="textPrimary">
+                                    <span>{this.state.userName}</span>
+                                </Typography> */}
                         <ListItemText
                             primary={question.title}
                             secondary={
                                 <>
-                                    <Typography component="span" className={classes.inline} color="textPrimary">
+                                    <Typography component="span" className={classes.inline}>
                                         <span dangerouslySetInnerHTML={{ __html: descriptionArr.join('') }}></span>
                                     </Typography>
                                 </>
@@ -81,10 +97,6 @@ class QuestionItem extends Component {
                         />
 
                     </ListItem>
-                    {/* <Typography component="span" className={classes.inline} color="textPrimary">
-                        <span>{question.rate}</span>
-                        <span>{question.answerCount}</span>
-                    </Typography> */}
                     <div className='question_item_footer flex justify_between align_center padh_24 '>
                         {question.skills.length !== 0
                             && <div className='question_item_skill'>
@@ -102,8 +114,15 @@ class QuestionItem extends Component {
                                 <Chip label={question.gender} className={classes.chip} variant="outlined" />
                             </div>}
                         </div>
-                        <div className='question_item_date'>
-                            <span>{formattedDate}</span>
+                        <div className='flex align_center '>
+                            <Chip
+                                label="Answers"
+                                className={`${classes.chip} ${classes.reverse}`}
+                                avatar={<Avatar className={classes.answer}>{question.answerCount}</Avatar>}
+                            />
+                            <div className='question_item_date'>
+                                <span>{formattedDate}</span>
+                            </div>
                         </div>
                     </div>
                     <Divider light />

@@ -1,20 +1,9 @@
 import React, { Component } from "react";
-import Chip from '@material-ui/core/Chip';
-import withStyles from '@material-ui/core/styles/withStyles';
-
 import './QuestionsFilter.scss';
-
-const styles = theme => ({
-    chip: {
-        margin: theme.spacing.unit,
-    },
-});
 
 class QuestionsFilter extends Component {
 
     render() {
-        const { classes } = this.props;
-
         return (
             <div className='questions-filter-container '>
                 <ul className='flex flex_column align_start'>
@@ -40,16 +29,14 @@ class QuestionsFilter extends Component {
                                 <li key={index}>
                                     <button onClick={this.props.filterClickHandler}
                                         id={skill.value}>
-                                        {/* <Chip label={skill.value} className={classes.chip} variant="outlined" /> */}
                                         {skill.value}
                                     </button>
                                 </li>)}
                         </ul>
                     </li>
-                    {/* <li>Answer Later</li> */}
                 </ul>
             </div>
         )
     }
 }
-export default withStyles(styles)(QuestionsFilter);
+export default QuestionsFilter;

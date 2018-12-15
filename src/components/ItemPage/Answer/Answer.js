@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 // import Avatar from '../../universal/Avatar/Avatar';
 import Avatar from '@material-ui/core/Avatar';
-import RateCounter from '../../universal/RateCounter/RateCounter';
 import FireManager from "../../../firebase/FireManager";
 import defaultAvatar from '../../../assets/profileImg.png';
 import Divider from '@material-ui/core/Divider';
@@ -29,9 +28,6 @@ class Answer extends Component {
         return (
             <div className='answer__page'>
                 <div className='flex align_center padb_20 '>
-                    <div>
-                        <RateCounter />
-                    </div>
                     <div className='answer__avatar flex align_center flex_col'>
                         <Avatar src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
                         <span className='font_s ellipsis'>{this.props.userName || this.state.userName}</span>

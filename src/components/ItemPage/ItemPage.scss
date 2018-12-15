@@ -24,14 +24,23 @@
         margin: 10px auto;
         display: block;
     }
-    .answer_txt span {
-        width: 24px;
-        border-radius: 3px;
-        height: 24px;
-        text-align: center;
-        background: #04a9f5;
-        line-height: 24px;
-        color: #fff;
-        margin-right: 8px;
+    .answer_txt {
+        padding: 0 15px;
+        span {
+            width: 24px;
+            border-radius: 3px;
+            height: 24px;
+            text-align: center;
+            background: #04a9f5;
+            line-height: 24px;
+            color: #fff;
+            margin-right: 8px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .question__page {
+        width: calc(100% - 50px)
     }
 }

@@ -55,56 +55,11 @@
                     }
                 }
             }
-            .skill-container {
-                overflow-y: auto;
-                overflow-x: auto;
-                max-height: 400px;
-                padding-bottom: 0;
-                li {
-                    display: flex;
-                    align-items: center;
-                    margin: 6px 4px;
-                    position: relative;
-                    &:hover button {
-                        color: #000;
-                    }
-                    p {
-                        width: 180px;
-                        padding: 4px 6px;
-                        background-color: #e8e8e8;
-                        border-radius: 6px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                    }
-                    button {
-                        height: 100%;
-                        font-size: 14px;
-                        position: absolute;
-                        right: 40px;
-                        background: #e8e8e8;
-                        border: none;
-                        border-radius: 5px;
-                        outline: none;
-                        color: transparent;
-                    }
-                    span {
-                        width: 24px;
-                        border-radius: 3px;
-                        height: 24px;
-                        text-align: center;
-                        background: #00be71;
-                        line-height: 24px;
-                        color: #fff;
-                        margin-left: 8px;
-                    }
-                }
-            }
             .add__user__skill__btn {
                 width: 150px;
                 height: 50px;
-                background-color: #00be73;
-                border: 1px solid #00be73;
+                background-color: #04a9f5;
+                border: 1px solid #04a9f5;
                 -webkit-border-radius: 3px;
                 -moz-border-radius: 3px;
                 border-radius: 3px;
@@ -113,8 +68,8 @@
                 margin-top: 20px;
                 cursor: pointer;
                 &:hover {
-                    background-color: #1dae75;
-                    border: 1px solid #1dae75;
+                    background-color: #3f51b5;
+                    border: 1px solid #3f51b5;
                 }
             }
             .input-cont {
@@ -162,7 +117,7 @@
 }
 
 .no-skill__message {
-    color: #18b877;
+    color: #04a9f5;
     font-weight: bold;
     font-size: 14px;
 }

@@ -8,19 +8,9 @@ import routePaths from "../../../constKeys/routePaths";
 import { bindActionCreators } from "redux";
 import { actionAddUserData } from "../../../redux/actions/userActions";
 import connect from "react-redux/es/connect/connect";
-import fb from "../../../assets/icons/fb.png";
-import google from "../../../assets/icons/google.png";
-import twitter from "../../../assets/icons/twitter.png";
-
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-// import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -53,6 +43,7 @@ const styles = theme => ({
         marginTop: theme.spacing.unit,
     },
     submit: {
+        height: '40px',
         marginTop: theme.spacing.unit * 3,
     },
     blue: {
@@ -171,9 +162,6 @@ class SignUpForm extends Component {
             <main className={classes.main}>
                 <CssBaseline />
                 <Paper className={classes.paper}>
-                    {/* <Avatar className={classes.avatar}>
-                    <LockIcon />
-                </Avatar> */}
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>

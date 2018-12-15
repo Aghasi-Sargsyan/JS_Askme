@@ -5,32 +5,22 @@ import { connect } from "react-redux";
 import './AskQuestionPage.scss';
 import { bindActionCreators } from "redux";
 import { getAndDispatchDbUser } from "../../redux/actions/userActions";
-import male from "../../assets/icons/male.png";
-import female from "../../assets/icons/female.png";
-import gender from '../../assets/icons/gender.png';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css'
 import SkillContainer from '../SkillContainer/SkillContainer';
 import { withRouter } from "react-router-dom";
-
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
-    root: {
-        // display: 'flex',
-    },
-    formControl: {
-        // margin: theme.spacing.unit * 3,
-    },
     group: {
-        display: 'block'
-        // margin: `${theme.spacing.unit}px 0`,
+        display: 'block',
+    },
+    radioBtn: {
+        color: '#04a9f5'
     },
     gender: {
         height: '48px',
@@ -149,8 +139,27 @@ class AskQuestionPage extends Component {
                 <div>
                     <Wysiwyg value={this.state.wysiwygTxt} changeHandler={this.handleChange} />
                 </div>
-                <div className='flex justify_between'>
-                    <div>
+                <div className='flex ask_question_field'>
+                    <div className='col--6'>
+                        <label>
+                            Skills
+                        <input
+                                value={this.state.skillDesc}
+                                onChange={this.handleChange}
+                                id="skillDesc"
+                                className='mar_left_20'
+                                onKeyPress={this.handleKeyPress}
+                            />
+                        </label>
+                        <button type='button' onClick={this.addSkill} className='ask_question_skill_add'>
+                            +
+                    </button>
+                        <ul className='skill_list'>
+                            <SkillContainer isShowingMessage={false} deleteSkill={this.deleteSkill}
+                                skills={this.state.skills} />
+                        </ul>
+                    </div>
+                    <div className='col--6'>
                         <div className='age__slider flex'>
                             <span className='age__slider_age'>Age</span>
                             <InputRange
@@ -174,7 +183,7 @@ class AskQuestionPage extends Component {
                                 >
                                     <FormControlLabel
                                         value="all"
-                                        control={<Radio color="primary" />}
+                                        control={<Radio className={classes.radioBtn} />}
                                         label="All"
                                         defaultChecked="true"
                                         labelPlacement="start"
@@ -182,14 +191,14 @@ class AskQuestionPage extends Component {
                                     />
                                     <FormControlLabel
                                         value="female"
-                                        control={<Radio color="primary" />}
+                                        control={<Radio className={classes.radioBtn} />}
                                         label="Female"
                                         labelPlacement="start"
                                         disabled={!!isTyping}
                                     />
                                     <FormControlLabel
                                         value="male"
-                                        control={<Radio color="primary" />}
+                                        control={<Radio className={classes.radioBtn} />}
                                         label="Male"
                                         labelPlacement="start"
                                         disabled={!!isTyping}
@@ -197,25 +206,6 @@ class AskQuestionPage extends Component {
                                 </RadioGroup>
                             </FormControl>
                         </div>
-                    </div>
-                    <div>
-                        <label>
-                            Skills
-                        <input
-                                value={this.state.skillDesc}
-                                onChange={this.handleChange}
-                                id="skillDesc"
-                                className='mar_left_20'
-                                onKeyPress={this.handleKeyPress}
-                            />
-                        </label>
-                        <button type='button' onClick={this.addSkill} className='ask_question_skill_add'>
-                            +
-                    </button>
-                        <ul className='skill_list'>
-                            <SkillContainer isShowingMessage={false} deleteSkill={this.deleteSkill}
-                                skills={this.state.skills} />
-                        </ul>
                     </div>
                 </div>
                 <button type='submit'

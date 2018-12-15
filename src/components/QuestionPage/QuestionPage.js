@@ -118,7 +118,7 @@ class QuestionPage extends Component {
     render() {
         return (
             <div>
-                <div className='flex'>
+                <div className='flex question_cont'>
                     <QuestionsFilter skills={this.props.user.skills}
                         filterClickHandler={this.handleFilterClick} />
                     <QuestionsCont filteredQuestions={this.state.filteredQuestions} />

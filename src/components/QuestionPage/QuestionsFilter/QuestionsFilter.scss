@@ -1,6 +1,6 @@
 .questions-filter-container {
     height: 100vh;
-    background-color: #f8f8f8;
+    background-color: #eee;
     padding: 50px 20px 0 50px;
     ul {
         list-style-type: none;
@@ -15,6 +15,7 @@
                 padding: 0;
             }
             .questions-skills-menu {
+                width: 200px;
                 margin: 0 10px;
                 li {
                     height: 32px;

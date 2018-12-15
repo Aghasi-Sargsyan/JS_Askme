@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import Avatar from '../../universal/Avatar/Avatar';
-import RateCounter from '../../universal/RateCounter/RateCounter';
 import FireManager from "../../../firebase/FireManager";
 import defaultAvatar from '../../../assets/profileImg.png';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -47,9 +45,6 @@ class Question extends Component {
                 </h2>
                 <hr />
                 <div className='flex align_center'>
-                    <div>
-                        <RateCounter />
-                    </div>
                     <div className='item__question__avatar flex align_center flex_col'>
                         <Avatar src={this.state.photoUrl ? this.state.photoUrl : defaultAvatar} />
                         <span className='font_s ellipsis'>{this.state.userName}</span>

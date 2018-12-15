@@ -175,9 +175,11 @@ a {
 .mar_left_20 {
     margin-left: 20px;
 }
-.padh_24{
+
+.padh_24 {
     padding: 0 24px;
 }
+
 .pos_rel {
     position: relative;
 }
@@ -226,4 +228,34 @@ a {
 
 .tac {
     text-align: center;
+}
+
+// flex grid
+.col {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    max-width: 100%
+}
+
+.col--6 {
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+    max-width: 50%
+}
+
+@media only screen and (max-width: 1200px) {
+    .col--6 {
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+        max-width: 100%
+    }
+    .ask_question_field {
+        display: block;
+        .skill-container {
+            width: 100%;
+        }
+    }
 }
