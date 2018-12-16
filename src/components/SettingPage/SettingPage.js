@@ -1,28 +1,32 @@
 import React, {Component} from "react";
-import settingIcon from "../../assets/icons/settings.png";
 import {connect} from 'react-redux';
 import FireManager from "../../firebase/FireManager";
 import * as firebase from "firebase";
 import {withRouter} from "react-router-dom";
 import routePaths from "../../constKeys/routePaths";
 import {
-    Divider,
-    FormControl,
-    FormControlLabel,
-    IconButton,
-    Input,
-    InputAdornment,
-    InputLabel,
-    Radio,
-    RadioGroup,
-    TextField,
+    // Divider,
+    // FormControl,
+    // FormControlLabel,
+    // IconButton,
+    // Input,
+    // InputAdornment,
+    // InputLabel,
+    // Radio,
+    // RadioGroup,
+    // TextField,
     withStyles
 } from "@material-ui/core";
 
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+// import Visibility from '@material-ui/icons/Visibility';
+// import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import "./SettingPage.scss";
 import Button from "@material-ui/core/es/Button/Button";
+import Stepper from "@material-ui/core/Stepper";
+import {getStepContent, getSteps} from "./Stepper/Stepper";
+import Typography from "@material-ui/core/Typography";
+import StepLabel from "@material-ui/core/StepLabel";
+import Step from "@material-ui/core/Step";
 
 class SettingPage extends Component {
 
@@ -34,7 +38,9 @@ class SettingPage extends Component {
         age: "",
         gender: "",
         showPassword: false,
-        showNewPassword: false
+        showNewPassword: false,
+        activeStep: 0,
+        skipped: new Set(),
     };
 
     componentDidMount() {
@@ -73,10 +79,9 @@ class SettingPage extends Component {
     };
 
     handleSubmit = () => {
-        const {userName, email, age, gender} = this.state;
+        const {userName, age, gender} = this.state;
         FireManager.updateUser({
             userName,
-            email,
             age,
             gender,
         }, this.props.user.id);
@@ -90,141 +95,243 @@ class SettingPage extends Component {
     };
 
 
-    handleRadioButton = (e) => {
-        this.setState({gender: e.target.value});
+    // handleRadioButton = (e) => {
+    //     this.setState({gender: e.target.value});
+    // };
+    //
+    // handleClickShowPassword = () => {
+    //     this.setState(state => ({showPassword: !state.showPassword}));
+    // };
+    //
+    // handleClickShowNewPassword = () => {
+    //     this.setState(state => ({showNewPassword: !state.showNewPassword}));
+    // };
+
+    isStepOptional = step => {
+        return step === 0 || 1;
     };
 
-    handleClickShowPassword = () => {
-        this.setState(state => ({showPassword: !state.showPassword}));
+    handleNext = () => {
+        const {activeStep} = this.state;
+        let {skipped} = this.state;
+        if (this.isStepSkipped(activeStep)) {
+            skipped = new Set(skipped.values());
+            skipped.delete(activeStep);
+        }
+        this.setState({
+            activeStep: activeStep + 1,
+            skipped,
+        });
     };
 
-    handleClickShowNewPassword = () => {
-        this.setState(state => ({showNewPassword: !state.showNewPassword}));
+    handleBack = () => {
+        this.setState(state => ({
+            activeStep: state.activeStep - 1,
+        }));
     };
+
+    handleSkip = () => {
+        const {activeStep} = this.state;
+        if (!this.isStepOptional(activeStep)) {
+            // You probably want to guard against something like this,
+            // it should never occur unless someone's actively trying to break something.
+            throw new Error("You can't skip a step that isn't optional.");
+        }
+
+        this.setState(state => {
+            const skipped = new Set(state.skipped.values());
+            skipped.add(activeStep);
+            return {
+                activeStep: state.activeStep + 1,
+                skipped,
+            };
+        });
+    };
+
+    handleReset = () => {
+        this.setState({
+            activeStep: 0,
+        });
+    };
+
+    isStepSkipped(step) {
+        return this.state.skipped.has(step);
+    }
+
 
     render() {
-        const {userName, age, password, newPassword, showPassword, showNewPassword} = this.state;
+        // const {userName, age, password, newPassword, showPassword, showNewPassword} = this.state;
+        // const {classes} = this.props;
         const {classes} = this.props;
+        const steps = getSteps();
+        const {activeStep} = this.state;
 
         return (
             <div className="setting__page">
-                <div className='setting__aside'>
-                    <div className='flex  align_center'>
-                        <img className='setting-icon' src={settingIcon} alt='setting'/>
-                        <p>Settings</p>
-                    </div>
-                </div>
-                <div className="setting__profile">
-                    <h1>{userName}</h1>
-                    <form className="flex flex_column">
+                <Stepper activeStep={activeStep}>
+                    {steps.map((label, index) => {
+                        const props = {};
+                        const labelProps = {};
+                        if (this.isStepOptional(index)) {
+                            labelProps.optional = <Typography variant="caption">Optional</Typography>;
+                        }
+                        if (this.isStepSkipped(index)) {
+                            props.completed = false;
+                        }
+                        return (
+                            <Step key={label} {...props}>
+                                <StepLabel {...labelProps}>{label}</StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
+                <div>
+                    {activeStep === steps.length ? (
                         <div>
-                            <div className='flex align_center'>
-                                <TextField
-                                    id="userName"
-                                    label="Username"
-                                    className={classes.textField}
-                                    value={userName}
-                                    onChange={this.handleChange("userName")}
-                                    margin="normal"
-                                />
-                            </div>
+                            <Typography className={classes.instructions}>
+                                All steps completed - you&apos;re finished
+                            </Typography>
+                            <Button onClick={this.handleReset} className={classes.button}>
+                                Reset
+                            </Button>
                         </div>
-                        <Divider/>
-                        <div className='flex align_center'>
-                            <TextField
-                                id="age"
-                                label="Birth Year"
-                                className={classes.textField}
-                                value={age}
-                                onChange={this.handleChange("age")}
-                                margin="normal"
-                                type="number"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                        </div>
-                        <Divider/>
-                        <div className='setting__page_gender'>
-                            <span className={classes.gender}>Gender</span>
-                            <FormControl component="fieldset" className={classes.formControl}>
-                                <RadioGroup
-                                    aria-label="gender"
-                                    name="gender2"
-                                    className={classes.group}
-                                    value={this.state.gender}
-                                    onChange={this.handleRadioButton}
+                    ) : (
+                        <>
+                            {getStepContent(activeStep)}
+                            <div className={classes.stepBtns}>
+                                <Button
+                                    disabled={activeStep === 0}
+                                    onClick={this.handleBack}
+                                    className={classes.button}
                                 >
-                                    <FormControlLabel
-                                        value="female"
-                                        control={<Radio color="primary"/>}
-                                        label="Female"
-                                        labelPlacement="start"
-                                    />
-                                    <FormControlLabel
-                                        value="male"
-                                        control={<Radio color="primary"/>}
-                                        label="Male"
-                                        labelPlacement="start"
-                                    />
-                                </RadioGroup>
-                            </FormControl>
-                        </div>
-                        <Divider/>
-                        <div>
-                            <FormControl className={`${classes.margin} ${classes.textField}`}>
-                                <InputLabel htmlFor="adornment-password">New Password</InputLabel>
-                                <Input
-                                    id="adornment-password"
-                                    type={showPassword ? 'text' : 'password'}
-                                    value={password}
-                                    onChange={this.handleChange('password')}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="Toggle password visibility"
-                                                onClick={this.handleClickShowPassword}
-                                            >
-                                                {showPassword ? <Visibility/> : <VisibilityOff/>}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                />
-                            </FormControl>
-                        </div>
-                        <div className='flex align_center'>
-                            <FormControl className={`${classes.margin} ${classes.textField}`}>
-                                <InputLabel htmlFor="adornment-password"> Confirm Password</InputLabel>
-                                <Input
-                                    id="adornment-new-password"
-                                    type={showNewPassword ? 'text' : 'password'}
-                                    value={newPassword}
-                                    onChange={this.handleChange('newPassword')}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="Toggle password visibility"
-                                                onClick={this.handleClickShowNewPassword}
-                                            >
-                                                {showNewPassword ? <Visibility/> : <VisibilityOff/>}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                />
-                            </FormControl>
-                        </div>
-                        <Divider/>
-                        <Button type="button" className="settings__save__btn" onClick={this.handleSubmit}>
-                            Save Changes
-
-                        </Button>
-                        {/*<button type="button"*/}
-                        {/*className="settings__save__btn"*/}
-                        {/*onClick={this.handleSubmit}*/}
-                        {/*>*/}
-                        {/*</button>*/}
-                    </form>
+                                    Back
+                                </Button>
+                                {this.isStepOptional(activeStep) && (
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={this.handleSkip}
+                                        className={classes.button}
+                                    >
+                                        Skip
+                                    </Button>
+                                )}
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.handleNext}
+                                    className={classes.button}
+                                >
+                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                </Button>
+                            </div>
+                        </>
+                    )}
                 </div>
+                {/*<h1>{userName}</h1>*/}
+                {/*<form className="flex flex_column">*/}
+                {/*<div>*/}
+                {/*<div className='flex align_center'>*/}
+                {/*<TextField*/}
+                {/*id="userName"*/}
+                {/*label="Username"*/}
+                {/*className={classes.textField}*/}
+                {/*value={userName}*/}
+                {/*onChange={this.handleChange("userName")}*/}
+                {/*margin="normal"*/}
+                {/*/>*/}
+                {/*</div>*/}
+                {/*</div>*/}
+                {/*<Divider/>*/}
+                {/*<div className='flex align_center'>*/}
+                {/*<TextField*/}
+                {/*id="age"*/}
+                {/*label="Birth Year"*/}
+                {/*className={classes.textField}*/}
+                {/*value={age}*/}
+                {/*onChange={this.handleChange("age")}*/}
+                {/*margin="normal"*/}
+                {/*type="number"*/}
+                {/*InputLabelProps={{*/}
+                {/*shrink: true,*/}
+                {/*}}*/}
+                {/*/>*/}
+                {/*</div>*/}
+                {/*<Divider/>*/}
+                {/*<div className='setting__page_gender'>*/}
+                {/*<span className={classes.gender}>Gender</span>*/}
+                {/*<FormControl component="fieldset" className={classes.formControl}>*/}
+                {/*<RadioGroup*/}
+                {/*aria-label="gender"*/}
+                {/*name="gender2"*/}
+                {/*className={classes.group}*/}
+                {/*value={this.state.gender}*/}
+                {/*onChange={this.handleRadioButton}*/}
+                {/*>*/}
+                {/*<FormControlLabel*/}
+                {/*value="female"*/}
+                {/*control={<Radio color="primary"/>}*/}
+                {/*label="Female"*/}
+                {/*labelPlacement="start"*/}
+                {/*/>*/}
+                {/*<FormControlLabel*/}
+                {/*value="male"*/}
+                {/*control={<Radio color="primary"/>}*/}
+                {/*label="Male"*/}
+                {/*labelPlacement="start"*/}
+                {/*/>*/}
+                {/*</RadioGroup>*/}
+                {/*</FormControl>*/}
+                {/*</div>*/}
+                {/*<Divider/>*/}
+                {/*<div>*/}
+                {/*<FormControl className={`${classes.margin} ${classes.textField}`}>*/}
+                {/*<InputLabel htmlFor="adornment-password">New Password</InputLabel>*/}
+                {/*<Input*/}
+                {/*id="adornment-password"*/}
+                {/*type={showPassword ? 'text' : 'password'}*/}
+                {/*value={password}*/}
+                {/*onChange={this.handleChange('password')}*/}
+                {/*endAdornment={*/}
+                {/*<InputAdornment position="end">*/}
+                {/*<IconButton*/}
+                {/*aria-label="Toggle password visibility"*/}
+                {/*onClick={this.handleClickShowPassword}*/}
+                {/*>*/}
+                {/*{showPassword ? <Visibility/> : <VisibilityOff/>}*/}
+                {/*</IconButton>*/}
+                {/*</InputAdornment>*/}
+                {/*}*/}
+                {/*/>*/}
+                {/*</FormControl>*/}
+                {/*</div>*/}
+                {/*<div className='flex align_center'>*/}
+                {/*<FormControl className={`${classes.margin} ${classes.textField}`}>*/}
+                {/*<InputLabel htmlFor="adornment-password"> Confirm Password</InputLabel>*/}
+                {/*<Input*/}
+                {/*id="adornment-new-password"*/}
+                {/*type={showNewPassword ? 'text' : 'password'}*/}
+                {/*value={newPassword}*/}
+                {/*onChange={this.handleChange('newPassword')}*/}
+                {/*endAdornment={*/}
+                {/*<InputAdornment position="end">*/}
+                {/*<IconButton*/}
+                {/*aria-label="Toggle password visibility"*/}
+                {/*onClick={this.handleClickShowNewPassword}*/}
+                {/*>*/}
+                {/*{showNewPassword ? <Visibility/> : <VisibilityOff/>}*/}
+                {/*</IconButton>*/}
+                {/*</InputAdornment>*/}
+                {/*}*/}
+                {/*/>*/}
+                {/*</FormControl>*/}
+                {/*</div>*/}
+                {/*<Divider/>*/}
+                {/*<Button type="button" className="settings__save__btn" onClick={this.handleSubmit}>*/}
+                {/*Save Changes*/}
+
+                {/*</Button>*/}
+                {/*</form>*/}
             </div>
         );
     }
@@ -257,6 +364,18 @@ const styles = theme => ({
         fontFamily: "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
         lineHeight: 1,
         transform: "translate(0, 1.5px) scale(0.75)"
+    },
+    button: {
+        marginRight: theme.spacing.unit,
+    },
+    instructions: {
+        marginTop: theme.spacing.unit,
+        marginBottom: theme.spacing.unit,
+    },
+    stepBtns: {
+        display: "flex",
+        marginTop: "5%",
+        justifyContent: "flex-end",
     }
 });
 

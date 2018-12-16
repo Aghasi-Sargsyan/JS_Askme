@@ -4,18 +4,6 @@ import QuestionsCont from './QuestionsCont/QuestionsCont';
 import FireManager, { dbPaths } from "../../firebase/FireManager";
 import connect from "react-redux/es/connect/connect";
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { Avatar, CssBaseline, Divider, Drawer, Hidden, IconButton } from "@material-ui/core";
-import Logo from "../universal/Logo/Logo";
-import List from "@material-ui/core/es/List";
-import { NavLink } from "react-router-dom";
-import routePaths from "../../constKeys/routePaths";
-import ListItem from "@material-ui/core/es/ListItem";
-import ListItemText from "@material-ui/core/es/ListItemText";
-import ListItemIcon from "@material-ui/core/es/ListItemIcon";
-import SignOutButton from "../registration/SignOut/SignOut";
-import MenuIcon from "@material-ui/icons/Menu";
 
 class QuestionPage extends Component {
     state = {
@@ -137,7 +125,6 @@ class QuestionPage extends Component {
         const { classes } = this.props;
         return (
             <>
-                <CssBaseline />
                 <div className={classes.root}>
                     <QuestionsFilter skills={this.props.user.skills}
                         filterClickHandler={this.handleFilterClick} />

@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import routePaths from "../../constKeys/routePaths";
 import SignOutButton from "../registration/SignOut/SignOut";
-import { NavLink } from "react-router-dom";
-import { AppBar, Toolbar, IconButton, Hidden, Drawer, Divider, CssBaseline, Avatar } from "@material-ui/core";
+import {NavLink} from "react-router-dom";
+import {AppBar, Toolbar, IconButton, Hidden, Drawer, Divider, CssBaseline, Avatar} from "@material-ui/core";
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Logo from "../universal/Logo/Logo";
-import { connect } from "react-redux";
-import { withStyles } from '@material-ui/core/styles'
+import {connect} from "react-redux";
+import {withStyles} from '@material-ui/core/styles'
 import List from "@material-ui/core/es/List/List";
 import ListItem from "@material-ui/core/es/ListItem/ListItem";
 import ListItemIcon from "@material-ui/core/es/ListItemIcon/ListItemIcon";
 import MenuIcon from "@material-ui/icons/Menu";
+import Settings from "@material-ui/icons/Settings";
 import ListItemText from "@material-ui/core/es/ListItemText/ListItemText";
 
 class NavBar extends Component {
@@ -20,31 +21,31 @@ class NavBar extends Component {
     };
 
     handleDrawerToggle = () => {
-        this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+        this.setState(state => ({mobileOpen: !state.mobileOpen}));
     };
 
     render() {
-        const { classes, user } = this.props;
-        const { mobileOpen } = this.state;
+        const {classes, user} = this.props;
+        const {mobileOpen} = this.state;
 
         const drawer = (
             <div className={classes.side__drawer}>
-                <Logo />
-                <Divider />
+                <Logo/>
+                <Divider/>
                 <List>
                     <NavLink to={routePaths.profilePage}>
                         <ListItem className={classes.drawerLi}>
-                            <ListItemText className="name" primary={user.userName.toLocaleUpperCase()} />
-                            <ListItemIcon children={<Avatar className={classes.avatar} src={user.photoUrl} />} />
+                            <ListItemText className="name" primary={user.userName.toLocaleUpperCase()}/>
+                            <ListItemIcon children={<Avatar className={classes.avatar} src={user.photoUrl}/>}/>
                         </ListItem>
                     </NavLink>
 
-                    <Divider />
+                    <Divider/>
                     <ListItem
                         className={classes.drawerLi}
                         children={<NavLink to={routePaths.questionPage}>
                             Answers
-                        </NavLink>} />
+                        </NavLink>}/>
                     <ListItem
                         className={classes.drawerLi}
                         children={<NavLink to={routePaths.askQuestionPage}>
@@ -52,7 +53,7 @@ class NavBar extends Component {
                         </NavLink>}
                     />
                 </List>
-                <Divider />
+                <Divider/>
                 <List>
                     <ListItem
                         className={classes.drawerLi}
@@ -61,7 +62,7 @@ class NavBar extends Component {
                     />
                     <ListItem
                         className={classes.drawerLi}
-                        children={<SignOutButton />}
+                        children={<SignOutButton/>}
                     />
                 </List>
             </div>
@@ -69,39 +70,40 @@ class NavBar extends Component {
 
         return (
             <>
-                <CssBaseline />
+                <CssBaseline/>
                 <div className={classes.root}>
                     <AppBar className={classes.appBar} position="fixed">
                         <Toolbar className={classes.toolbar}>
                             <IconButton color="primary"
-                                aria-label="open drawer"
-                                onClick={this.handleDrawerToggle}
-                                className={classes.menuButton}
+                                        aria-label="open drawer"
+                                        onClick={this.handleDrawerToggle}
+                                        className={classes.menuButton}
                             >
-                                <MenuIcon />
+                                <MenuIcon/>
                             </IconButton>
                             <MenuList className={classes.menuList}>
-                                <Logo />
+                                <Logo/>
                                 <MenuItem
                                     className={classes.listLi}
-                                    children={<NavLink to={routePaths.questionPage}>Answers</NavLink>} />
+                                    children={<NavLink to={routePaths.questionPage}>Answers</NavLink>}/>
                                 <MenuItem
                                     className={classes.listLi}
                                     children={<NavLink to={routePaths.askQuestionPage}>
                                         Ask a question
-                                    </NavLink>} />
-                                <MenuItem
-                                    className={classes.listLi}
-                                    children={<NavLink to={routePaths.settingPage}>Settings
-                                    </NavLink>} />
+                                    </NavLink>}/>
                                 <MenuItem
                                     className={classes.listLi}
                                     children={<NavLink to={routePaths.profilePage}>
-                                        <Avatar className={classes.avatar} src={user.photoUrl} />
-                                    </NavLink>} />
+                                        <Avatar className={classes.avatar} src={user.photoUrl}/>
+                                    </NavLink>}/>
                                 <MenuItem
                                     className={classes.listLi}
-                                    children={<SignOutButton />} />
+                                    children={<NavLink to={routePaths.settingPage}>
+                                        <Settings/>
+                                    </NavLink>}/>
+                                <MenuItem
+                                    className={classes.listLi}
+                                    children={<SignOutButton/>}/>
                             </MenuList>
                         </Toolbar>
                     </AppBar>
@@ -114,9 +116,9 @@ class NavBar extends Component {
                             classes={{
                                 paper: classes.drawerPaper,
                             }}
-                        // ModalProps={{
-                        //     keepMounted: true,
-                        // }}
+                            // ModalProps={{
+                            //     keepMounted: true,
+                            // }}
                         >
                             {drawer}
                         </Drawer>

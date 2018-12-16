@@ -1,98 +1,95 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 .setting__page {
-    display: flex;
-    .setting__aside {
-        height: 100vh;
-        margin-top: 10%;
-        width: 370px;
-        background-color: #f8f8f8;
-        padding: 0 20px;
-        div {
-            margin-top: 60px;
-        }
-        .setting-icon {
-            margin-right: 5px;
-        }
+  width: calc(100% - 600px);
+  height: 380px;
+  background: #fff;
+  padding: 0 50px;
+  z-index: 10;
+  transition: opacity .5s ease-in;
+  position: relative;
+  top: 240px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+
+  h1 {
+    color: #25c619;
+    font-size: 1.5em;
+    margin-bottom: 35px;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  h2 {
+    color: #777777;
+    width: 80%;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-left: 2px;
+  }
+
+  label {
+    min-width: 80px;
+  }
+
+  .settings__save__btn {
+    background-color: #00be73;
+    border: 1px solid #00be73;
+    color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+    font-size: 13px;
+  }
+
+  .btn {
+    float: right;
+    text-transform: uppercase;
+    font-size: 11px;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    background: #00be73;
+  }
+
+  .btn:hover {
+    color: #3eb708;
+    background-color: #fff;
+    border: 1px solid #999;
+  }
+
+  .setting__page_gender {
+    label {
+      min-width: auto;
+      margin: 0 30px;
+      display: flex;
+      justify-content: center;
+
+      &[aria-disabled="true"] {
+        background-color: #bbb8b8;
+      }
     }
-    .setting__profile {
-        width: calc(100% - 600px);
-        margin-top: 10%;
-        background: #fff;
-        padding: 0 50px;
-        z-index: 10;
-        transition: opacity .5s ease-in;
-        h1 {
-            color: #25c619;
-            font-size: 1.5em;
-            margin-bottom: 35px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        h2 {
-            color: #777777;
-            width: 80%;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 1px;
-            margin-left: 2px;
-        }
-        img {
-            height: 25px;
-            padding: 2px;
-        }
-        label {
-            min-width: 80px;
-        }
-        .settings__save__btn {
-            background-color: #00be73;
-            border: 1px solid #00be73;
-            color: #fff;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-            cursor: pointer;
-            outline: none;
-            font-size: 13px;
-        }
-        .btn {
-            float: right;
-            text-transform: uppercase;
-            font-size: 11px;
-            border-radius: 3px;
-            color: #fff;
-            cursor: pointer;
-            outline: none;
-            background: #00be73;
-        }
-        .btn:hover {
-            color: #3eb708;
-            background-color: #fff;
-            border: 1px solid #999;
-        }
-        .setting__page_gender {
-            label {
-                min-width: auto;
-                margin: 0 30px;
-                display: flex;
-                justify-content: center;
-                &[aria-disabled="true"] {
-                    background-color: #bbb8b8;
-                }
-            }
-            [type=radio] {
-                position: absolute;
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-            /* IMAGE STYLES */
-            [type=radio]+img {
-                cursor: pointer;
-            }
-            /* CHECKED STYLES */
-            [type=radio]:checked+img {
-                outline: 2px dotted #999;
-            }
-        }
+
+    [type=radio] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
     }
+
+    /* IMAGE STYLES */
+    [type=radio] + img {
+      cursor: pointer;
+    }
+
+    /* CHECKED STYLES */
+    [type=radio]:checked + img {
+      outline: 2px dotted #999;
+    }
+  }
 }
