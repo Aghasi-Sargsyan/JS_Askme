@@ -35,3 +35,17 @@
         }
     }
 }
+
+.modal__close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    border: 1px solid #04a9f5;
+    background-color: #04a9f5;
+    height: 25px;
+    width: 25px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}

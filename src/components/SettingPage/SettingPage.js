@@ -1,16 +1,16 @@
-import React, {Component} from "react";
-import {connect} from 'react-redux';
-import {bindActionCreators} from "redux";
-import {actionAddUserData} from "../../redux/actions/userActions";
-import {withRouter} from "react-router-dom";
-import {withStyles} from "@material-ui/core";
+import React, { Component } from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import { actionAddUserData } from "../../redux/actions/userActions";
+import { withRouter } from "react-router-dom";
+import { withStyles } from "@material-ui/core";
 import Button from "@material-ui/core/es/Button/Button";
 import Stepper from "@material-ui/core/Stepper";
-import {getStepContent, getSteps} from "./Stepper/Stepper";
+import { getStepContent, getSteps } from "./Stepper/Stepper";
 import Typography from "@material-ui/core/Typography";
 import StepLabel from "@material-ui/core/StepLabel";
 import Step from "@material-ui/core/Step";
-import {actionRemoveUser} from "../../redux/actions/userActions";
+import { actionRemoveUser } from "../../redux/actions/userActions";
 import routePaths from "../../constKeys/routePaths";
 import * as firebase from "firebase";
 import FireManager from "../../firebase/FireManager";
@@ -32,36 +32,41 @@ class SettingPage extends Component {
     };
 
     componentDidMount() {
-        const {user} = this.props;
+        const { user } = this.props;
         this.props.user && this.setState({
-            user: {...this.state.user, ...user}
+            user: { ...this.state.user, ...user }
         });
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.user.id !== this.props.user.id) {
-            const {user} = this.props;
+            const { user } = this.props;
             this.props.user && this.setState({
-                user: {...this.state.user, ...user}
+                user: { ...this.state.user, ...user }
             });
         }
     }
 
     handleSubmit = () => {
         const user = firebase.auth().currentUser;
-        user.updatePassword(this.state.user.password).then(() =>
-            firebase.auth().signOut().then(() => {
+        if (this.state.user.password !== "") {
+            user.updatePassword(this.state.user.password).then(() =>
+                firebase.auth().signOut().then(() => {
                     this.props.dispatchRemoveUser();
                     this.props.history.push(routePaths.signIn);
                 }
-            )
-        ).catch(() =>
-            firebase.auth().signOut().then(() => {
+                )
+            ).catch(() =>
+                firebase.auth().signOut().then(() => {
                     this.props.dispatchRemoveUser();
                     this.props.history.push(routePaths.signIn);
                 }
+                )
             )
-        )
+        } else {
+            this.props.history.push(routePaths.profilePage);
+        }
+
     };
 
 
@@ -70,17 +75,17 @@ class SettingPage extends Component {
     };
 
     handleGetData = (data) => {
-        this.setState({user: {...this.state.user, ...data}});
+        this.setState({ user: { ...this.state.user, ...data } });
     };
 
     passValidator = isValid => {
-        this.setState({isPasswordValid: isValid});
+        this.setState({ isPasswordValid: isValid });
     };
 
     handleNext = () => {
         const steps = getSteps();
-        const {activeStep, user} = this.state;
-        let {skipped} = this.state;
+        const { activeStep, user } = this.state;
+        let { skipped } = this.state;
         if (this.isStepSkipped(activeStep)) {
             skipped = new Set(skipped.values());
             skipped.delete(activeStep);
@@ -121,9 +126,9 @@ class SettingPage extends Component {
 
 
     render() {
-        const {classes} = this.props;
+        const { classes } = this.props;
         const steps = getSteps();
-        const {activeStep, isPasswordValid} = this.state;
+        const { activeStep, isPasswordValid } = this.state;
 
         return (
             <div className="setting__page">

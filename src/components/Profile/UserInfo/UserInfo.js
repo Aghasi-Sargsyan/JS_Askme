@@ -1,6 +1,5 @@
 
 import React, { Component } from "react";
-import { Avatar } from "@material-ui/core";
 import male from "../../../assets/icons/male.png";
 import female from "../../../assets/icons/female.png";
 import firebase from "firebase";
@@ -10,7 +9,7 @@ import { bindActionCreators } from "redux";
 import { actionAddUserData } from "../../../redux/actions/userActions";
 import { connect } from "react-redux";
 import defaultAvatar from '../../../assets/profileImg.png';
-import {withStyles, Avatar, Modal, Button} from "@material-ui/core";
+import { withStyles, Avatar, Modal, Button } from "@material-ui/core";
 import Edit from "@material-ui/icons/Edit";
 import "./UserInfo.scss";
 
@@ -25,7 +24,7 @@ class UserInfo extends Component {
     };
 
     handleOpen = () => {
-        this.setState({open: true});
+        this.setState({ open: true });
     };
 
     handleClose = () => {
@@ -60,7 +59,7 @@ class UserInfo extends Component {
     };
 
     handleUpload = () => {
-        this.hideModal();
+        this.handleClose();
         FireManager.updateUser({ photoUrl: this.state.avatarURL }, this.props.user.id);
         this.props.dispatchUser({ photoUrl: this.state.avatarURL });
     };
@@ -71,32 +70,33 @@ class UserInfo extends Component {
         return (
             <div className='user_info'>
                 <div className="user_info_img flex flex_col">
-                    <Modal show={this.state.showModal} handleClose={this.hideModal}>
-                        <div className='flex_col'>
-                            {this.state.isUploading
-                                ? <p>Progress: {this.state.progress}%</p>
-                                : this.state.avatarURL ?
-                                    <Avatar className={classes.avatar} onClick={this.showModal} src={this.state.avatarURL} /> :
-                                    <Avatar className={classes.avatar} onClick={this.showModal} src={photoUrl} />
-                            }
-
-                            <FileUploader
-                                accept="image/*"
-                                name="avatar"
-                                randomizeFilename
-                                storageRef={firebase.storage().ref("images")}
-                                onProgress={this.handleProgress}
-                                onUploadStart={this.handleUploadStart}
-                                onUploadError={this.handleUploadError}
-                                onUploadSuccess={this.handleUploadSuccess}
-                            />
-                        </div>
+                    <Modal open={this.state.open}>
+                        <div className={classes.paper}>
+                            <div className='flex_col'>
+                                {this.state.isUploading
+                                    ? <p>Progress: {this.state.progress}%</p>
+                                    : this.state.avatarURL ?
+                                        <Avatar className={classes.modalAvatar} src={this.state.avatarURL} /> :
+                                        <Avatar className={classes.modalAvatar} src={photoUrl} />
+                                }
+                                <FileUploader
+                                    accept="image/*"
+                                    name="avatar"
+                                    randomizeFilename
+                                    storageRef={firebase.storage().ref("images")}
+                                    onProgress={this.handleProgress}
+                                    onUploadStart={this.handleUploadStart}
+                                    onUploadError={this.handleUploadError}
+                                    onUploadSuccess={this.handleUploadSuccess}
+                                />
+                            </div>
+                            <button className="modal__close-btn" onClick={this.handleClose}>x</button>
                             <Button className={classes.uploadBtn} onClick={this.handleUpload}>Upload profile
                                 image</Button>
                         </div>
                     </Modal>
                     <Avatar className={classes.avatar} src={photoUrl ? photoUrl : defaultAvatar} />
-                    <button onClick={this.showModal}>Add profile image</button>
+                    <button onClick={this.handleOpen}>Add profile image</button>
                 </div>
                 <div>
                     <div className="user_info_item user_info_name">
@@ -105,7 +105,7 @@ class UserInfo extends Component {
                     </div>
                     <div className="user_info_item user_info_age">
                         <label className="age__label">Age:</label>
-                        <span>{new Date().getFullYear()-age}</span>
+                        <span>{new Date().getFullYear() - age}</span>
                     </div>
                     <div className="user_info_item user_info_gender">
                         <label className="gender__label">Gender:</label>
@@ -121,10 +121,66 @@ class UserInfo extends Component {
 }
 
 const styles = theme => ({
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 250,
+    },
     avatar: {
         width: 180,
         height: 180,
     },
+    paper: {
+        position: 'fixed',
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        display: "flex",
+        width: "calc(100% - 700px)",
+        height: 270,
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        padding: '40px 30px',
+        alignItems: "flex-end",
+        justifyContent: "space-between",
+        "& div": {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+        },
+        "& p": {
+            fontWeight: "bold",
+            marginBottom: 65
+        },
+        "& input": {
+            marginTop: 10
+        }
+    },
+    modalAvatar: {
+        width: 120,
+        height: 125,
+        marginBottom: 5,
+        overflow: "hidden"
+    },
+    uploadBtn: {
+        border: "1px solid #04a9f5",
+        height: 40,
+        borderRadius: 3,
+        color: "#fff",
+        textAlign: "center",
+        cursor: "pointer",
+        backgroundColor: '#04a9f5',
+        "&:hover": {
+            color: "#04a9f5",
+            backgroundColor: "#fff",
+        }
+    },
+    editIcon: {
+        display: "none",
+        position: "relative",
+        bottom: 75,
+        left: 47
+    }
 });
 
 const mapDispatchToProps = (dispatch) => {
