@@ -162,7 +162,6 @@ class SettingPage extends Component {
                         <Button
                             disabled={activeStep === steps.length - 1 && !isPasswordValid}
                             variant="contained"
-                            color="primary"
                             onClick={this.handleNext}
                             className={classes.button}
                         >
@@ -205,6 +204,8 @@ const styles = theme => ({
     },
     button: {
         marginRight: theme.spacing.unit,
+        backgroundColor: '#04a9f5',
+        color: '#fff'
     },
     instructions: {
         marginTop: theme.spacing.unit,

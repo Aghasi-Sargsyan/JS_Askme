@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import firebase from "firebase";
 import FireManager from "../../../../firebase/FireManager";
 import FileUploader from "react-firebase-file-uploader";
 import defaultAvatar from "../../../../assets/profileImg.png";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import {actionAddUserData} from "../../../../redux/actions/userActions";
-import {TextField, withStyles, Avatar, Modal, Button} from "@material-ui/core";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionAddUserData } from "../../../../redux/actions/userActions";
+import { TextField, withStyles, Avatar, Modal, Button } from "@material-ui/core";
 
 class FirstStep extends Component {
 
@@ -23,7 +23,7 @@ class FirstStep extends Component {
     };
 
     componentDidMount() {
-        const {user} = this.props;
+        const { user } = this.props;
         this.props.user && this.setState({
             userName: user.userName,
             photoUrl: user.photoUrl,
@@ -32,13 +32,13 @@ class FirstStep extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.user.id !== this.props.user.id) {
-            const {user} = this.props;
+            const { user } = this.props;
             this.props.user && this.setState({
                 userName: user.userName,
                 photoUrl: user.photoUrl,
             });
         }
-        if(prevState.photoUrl !== this.state.photoUrl){
+        if (prevState.photoUrl !== this.state.photoUrl) {
             this.setState({
                 isPhotoLoaded: true
             });
@@ -46,7 +46,7 @@ class FirstStep extends Component {
     }
 
     handleOpen = () => {
-        this.setState({open: true});
+        this.setState({ open: true });
     };
 
     handleClose = () => {
@@ -55,12 +55,12 @@ class FirstStep extends Component {
         });
     };
 
-    handleUploadStart = () => this.setState({isUploading: true, progress: 0, isPhotoLoaded: false});
+    handleUploadStart = () => this.setState({ isUploading: true, progress: 0, isPhotoLoaded: false });
 
-    handleProgress = progress => this.setState({progress});
+    handleProgress = progress => this.setState({ progress });
 
     handleUploadError = error => {
-        this.setState({isUploading: false});
+        this.setState({ isUploading: false });
         console.error(error);
     };
 
@@ -80,7 +80,7 @@ class FirstStep extends Component {
     };
 
     handleSendData = () => {
-        const {photoUrl, userName} = this.state;
+        const { photoUrl, userName } = this.state;
         const data = {
             photoUrl,
             userName
@@ -91,18 +91,18 @@ class FirstStep extends Component {
     handleUpload = () => {
         this.handleSendData();
         this.handleClose();
-        this.setState({isLocal: true, });
+        this.setState({ isLocal: true, });
     };
 
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
-        },() => this.handleSendData());
+        }, () => this.handleSendData());
     };
 
     render() {
-        const {userName, open, photoUrl, isLocal, isPhotoLoaded} = this.state;
-        const {user, classes} = this.props;
+        const { userName, open, photoUrl, isLocal, isPhotoLoaded } = this.state;
+        const { user, classes } = this.props;
         return (
             <div className={classes.firstStep}>
                 <Modal open={open} >
@@ -112,9 +112,9 @@ class FirstStep extends Component {
                                 ? <p>Progress: {this.state.progress}%</p>
                                 : this.state.photoUrl ?
                                     <Avatar className={classes.modalAvatar} onClick={this.handleOpen}
-                                            src={this.state.photoUrl}/> :
+                                        src={this.state.photoUrl} /> :
                                     <Avatar className={classes.modalAvatar} onClick={this.handleOpen}
-                                            src={user.photoUrl}/>
+                                        src={user.photoUrl} />
                             }
 
                             <FileUploader
@@ -135,11 +135,11 @@ class FirstStep extends Component {
                 <div className={classes.infoCont}>
                     <div className={classes.avatarCont}>
                         {isLocal ?
-                            <Avatar className={classes.avatar} src={photoUrl}/>
+                            <Avatar className={classes.avatar} src={photoUrl} />
                             :
-                            <Avatar className={classes.avatar} src={user.photoUrl ? user.photoUrl : defaultAvatar}/>
+                            <Avatar className={classes.avatar} src={user.photoUrl ? user.photoUrl : defaultAvatar} />
                         }
-                        <Button onClick={this.handleOpen}>Edit profile image</Button>
+                        <Button onClick={this.handleOpen} className={classes.btn}>Edit profile image</Button>
                     </div>
                     <TextField
                         id="userName"
@@ -221,9 +221,13 @@ const styles = theme => ({
         marginBottom: 5,
         overflow: "hidden"
     },
+    btn: {
+        backgroundColor: "#04a9f5 !important",
+        color: '#fff'
+    },
     uploadBtn: {
-        backgroundColor: "#3f51b5",
-        border: "1px solid #3f51b5",
+        backgroundColor: "#04a9f5",
+        border: "1px solid #04a9f5",
         height: 40,
         width: 150,
         borderRadius: 3,
