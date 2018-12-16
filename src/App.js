@@ -16,7 +16,6 @@ import AfterRegPopup from "./components/Profile/AfterRegPopup/AfterRegPopup";
 import ItemPage from "./components/ItemPage/ItemPage";
 import SettingPage from "./components/SettingPage/SettingPage";
 
-
 class App extends Component {
 
     componentDidMount() {
@@ -57,10 +56,10 @@ class App extends Component {
                         user.isLoggedIn ? (<AskQuestionPage />) : (signIn))} />
 
                     <Route exact path={routePaths.itemPage} render={(props) => (
-                        user.isLoggedIn ? (<ItemPage {...props} />) : (signIn))}/>
+                        user.isLoggedIn ? (<ItemPage {...props} />) : (signIn))} />
 
                     <Route exact path={routePaths.settingPage} render={() => (
-                        user.isLoggedIn ? (<SettingPage/>) : (signIn))}/>
+                        user.isLoggedIn ? (<SettingPage />) : (signIn))} />
                     <Route component={Page404} />
                 </Switch>
             )

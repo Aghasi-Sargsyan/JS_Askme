@@ -1,9 +1,14 @@
 .sign-out {
     background-color: transparent;
+    display: flex;
     border: none;
     outline: none;
     padding: 0;
     font-size: 100%;
+    svg {
+        font-size: 24px;
+        margin: 0 10px;
+    }
     img {
         vertical-align: middle;
         padding: 0 10px;
