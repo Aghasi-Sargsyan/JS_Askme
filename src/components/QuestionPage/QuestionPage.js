@@ -126,7 +126,6 @@ class QuestionPage extends Component {
         const { classes } = this.props;
         return (
             <>
-                <CssBaseline />
                 <div className={classes.root}>
                     <QuestionsFilter skills={this.props.user.skills}
                         filterClickHandler={this.handleFilterClick} />

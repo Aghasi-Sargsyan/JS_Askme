@@ -1,16 +1,17 @@
+
 import React, { Component } from "react";
 import { Avatar } from "@material-ui/core";
 import male from "../../../assets/icons/male.png";
 import female from "../../../assets/icons/female.png";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
-import Modal from "../../universal/Modal/Modal";
 import FireManager from "../../../firebase/FireManager";
 import { bindActionCreators } from "redux";
 import { actionAddUserData } from "../../../redux/actions/userActions";
 import { connect } from "react-redux";
 import defaultAvatar from '../../../assets/profileImg.png';
-import { withStyles } from '@material-ui/core/styles'
+import {withStyles, Avatar, Modal, Button} from "@material-ui/core";
+import Edit from "@material-ui/icons/Edit";
 import "./UserInfo.scss";
 
 class UserInfo extends Component {
@@ -20,16 +21,16 @@ class UserInfo extends Component {
         isUploading: false,
         progress: 0,
         avatarURL: "",
-        showModal: false
+        open: false
     };
 
-    showModal = () => {
-        this.setState({ showModal: !this.state.showModal });
+    handleOpen = () => {
+        this.setState({open: true});
     };
 
-    hideModal = () => {
+    handleClose = () => {
         this.setState({
-            showModal: !this.state.showModal,
+            open: false,
             avatarURL: ""
         });
     };
@@ -90,8 +91,9 @@ class UserInfo extends Component {
                                 onUploadSuccess={this.handleUploadSuccess}
                             />
                         </div>
-
-                        <button className="upload__img-btn" onClick={this.handleUpload}>Upload profile image</button>
+                            <Button className={classes.uploadBtn} onClick={this.handleUpload}>Upload profile
+                                image</Button>
+                        </div>
                     </Modal>
                     <Avatar className={classes.avatar} src={photoUrl ? photoUrl : defaultAvatar} />
                     <button onClick={this.showModal}>Add profile image</button>
@@ -103,7 +105,7 @@ class UserInfo extends Component {
                     </div>
                     <div className="user_info_item user_info_age">
                         <label className="age__label">Age:</label>
-                        <span>{age}</span>
+                        <span>{new Date().getFullYear()-age}</span>
                     </div>
                     <div className="user_info_item user_info_gender">
                         <label className="gender__label">Gender:</label>
@@ -123,7 +125,6 @@ const styles = theme => ({
         width: 180,
         height: 180,
     },
-
 });
 
 const mapDispatchToProps = (dispatch) => {

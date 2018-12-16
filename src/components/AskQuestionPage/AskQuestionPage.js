@@ -6,7 +6,7 @@ import './AskQuestionPage.scss';
 import { bindActionCreators } from "redux";
 import { getAndDispatchDbUser } from "../../redux/actions/userActions";
 import InputRange from 'react-input-range';
-import 'react-input-range/lib/css/index.css'
+import 'react-input-range/lib/css/index.css';
 import SkillContainer from '../SkillContainer/SkillContainer';
 import { withRouter } from "react-router-dom";
 import Radio from '@material-ui/core/Radio';
@@ -85,7 +85,6 @@ class AskQuestionPage extends Component {
     };
 
     deleteSkill = (skill) => () => {
-        console.log(skill);
         const array = [...this.state.skills];
         const index = array.indexOf(skill);
         if (index !== -1) {
