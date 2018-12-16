@@ -17,6 +17,7 @@ class QuestionsFilter extends Component {
 
         return (
             <div className='questions-filter-container '>
+                <span className='filter'>Filter Questions</span>
                 <ul className='flex flex_column align_start'>
                     <li>
                         <button id={"all"} onClick={this.props.filterClickHandler}>

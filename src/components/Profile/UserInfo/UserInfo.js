@@ -1,17 +1,17 @@
-import React, {Component} from "react";
+
+import React, { Component } from "react";
+import { Avatar } from "@material-ui/core";
 import male from "../../../assets/icons/male.png";
 import female from "../../../assets/icons/female.png";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 import FireManager from "../../../firebase/FireManager";
-import {bindActionCreators} from "redux";
-import {actionAddUserData} from "../../../redux/actions/userActions";
-import {connect} from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionAddUserData } from "../../../redux/actions/userActions";
+import { connect } from "react-redux";
 import defaultAvatar from '../../../assets/profileImg.png';
 import {withStyles, Avatar, Modal, Button} from "@material-ui/core";
 import Edit from "@material-ui/icons/Edit";
-
-
 import "./UserInfo.scss";
 
 class UserInfo extends Component {
@@ -35,12 +35,12 @@ class UserInfo extends Component {
         });
     };
 
-    handleUploadStart = () => this.setState({isUploading: true, progress: 0});
+    handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
 
-    handleProgress = progress => this.setState({progress});
+    handleProgress = progress => this.setState({ progress });
 
     handleUploadError = error => {
-        this.setState({isUploading: false});
+        this.setState({ isUploading: false });
         console.error(error);
     };
 
@@ -60,48 +60,43 @@ class UserInfo extends Component {
     };
 
     handleUpload = () => {
-        this.handleClose();
-        FireManager.updateUser({photoUrl: this.state.avatarURL}, this.props.user.id);
-        this.props.dispatchUser({photoUrl: this.state.avatarURL});
+        this.hideModal();
+        FireManager.updateUser({ photoUrl: this.state.avatarURL }, this.props.user.id);
+        this.props.dispatchUser({ photoUrl: this.state.avatarURL });
     };
 
     render() {
-        const {userName, age, gender, photoUrl} = this.props.user;
-        const {classes} = this.props;
-
+        const { userName, age, gender, photoUrl } = this.props.user;
+        const { classes } = this.props;
         return (
             <div className='user_info'>
                 <div className="user_info_img flex flex_col">
-                    <Modal open={this.state.open} >
-                        <div className={classes.paper}>
-                            <div className='flex_col'>
-                                {this.state.isUploading
-                                    ? <p>Progress: {this.state.progress}%</p>
-                                    : this.state.avatarURL ?
-                                        <Avatar className={classes.modalAvatar} src={this.state.avatarURL}/> :
-                                        <Avatar className={classes.modalAvatar} src={photoUrl}/>
-                                }
+                    <Modal show={this.state.showModal} handleClose={this.hideModal}>
+                        <div className='flex_col'>
+                            {this.state.isUploading
+                                ? <p>Progress: {this.state.progress}%</p>
+                                : this.state.avatarURL ?
+                                    <Avatar className={classes.avatar} onClick={this.showModal} src={this.state.avatarURL} /> :
+                                    <Avatar className={classes.avatar} onClick={this.showModal} src={photoUrl} />
+                            }
 
-                                <FileUploader
-                                    accept="image/*"
-                                    name="avatar"
-                                    randomizeFilename
-                                    storageRef={firebase.storage().ref("images")}
-                                    onProgress={this.handleProgress}
-                                    onUploadStart={this.handleUploadStart}
-                                    onUploadError={this.handleUploadError}
-                                    onUploadSuccess={this.handleUploadSuccess}
-                                />
-                            </div>
-
+                            <FileUploader
+                                accept="image/*"
+                                name="avatar"
+                                randomizeFilename
+                                storageRef={firebase.storage().ref("images")}
+                                onProgress={this.handleProgress}
+                                onUploadStart={this.handleUploadStart}
+                                onUploadError={this.handleUploadError}
+                                onUploadSuccess={this.handleUploadSuccess}
+                            />
+                        </div>
                             <Button className={classes.uploadBtn} onClick={this.handleUpload}>Upload profile
                                 image</Button>
                         </div>
                     </Modal>
-                    <Avatar className={classes.avatar} onClick={this.handleOpen}
-                            src={photoUrl ? photoUrl : defaultAvatar}/>
-                    <Edit className={classes.editIcon}/>
-
+                    <Avatar className={classes.avatar} src={photoUrl ? photoUrl : defaultAvatar} />
+                    <button onClick={this.showModal}>Add profile image</button>
                 </div>
                 <div>
                     <div className="user_info_item user_info_name">
@@ -114,7 +109,7 @@ class UserInfo extends Component {
                     </div>
                     <div className="user_info_item user_info_gender">
                         <label className="gender__label">Gender:</label>
-                        <span>{gender && <img src={gender === "male" ? male : female} alt="gender"/>}</span>
+                        <span>{gender && <img src={gender === "male" ? male : female} alt="gender" />}</span>
                     </div>
                     <div className="user_info_item user_info_skills">
                         <label className="skills__label">Skills</label>
@@ -126,74 +121,10 @@ class UserInfo extends Component {
 }
 
 const styles = theme => ({
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: 250,
-    },
     avatar: {
-        width: 120,
-        height: 120,
-        "&:hover": {
-            opacity: 0.5,
-            cursor: "pointer",
-            "svg": {
-                display: "block",
-            }
-        }
+        width: 180,
+        height: 180,
     },
-    paper: {
-        position: 'fixed',
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        display: "flex",
-        width: "calc(100% - 700px)",
-        height: 270,
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        padding: 50,
-        alignItems: "flex-end",
-        justifyContent: "space-between",
-        "& div": {
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-        },
-        "& p": {
-            fontWeight: "bold",
-            marginBottom: 65
-        },
-        "& input": {
-            marginTop: 10
-        }
-    },
-    modalAvatar: {
-        width: 120,
-        height: 125,
-        marginBottom: 5,
-        overflow: "hidden"
-    },
-    uploadBtn: {
-        backgroundColor: "#3f51b5",
-        border: "1px solid #3f51b5",
-        height: 40,
-        width: 150,
-        borderRadius: 3,
-        color: "#fff",
-        textAlign: "center",
-        cursor: "pointer",
-        "&:hover": {
-            color: "#3f51b5",
-            backgroundColor: "#fff",
-        }
-    },
-    editIcon: {
-        display: "none",
-        position: "relative",
-        bottom: 75,
-        left: 47
-    }
 });
 
 const mapDispatchToProps = (dispatch) => {

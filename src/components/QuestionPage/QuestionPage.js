@@ -4,6 +4,7 @@ import QuestionsCont from './QuestionsCont/QuestionsCont';
 import FireManager, { dbPaths } from "../../firebase/FireManager";
 import connect from "react-redux/es/connect/connect";
 import { withStyles } from '@material-ui/core/styles';
+import { CssBaseline } from "@material-ui/core";
 
 class QuestionPage extends Component {
     state = {
@@ -129,20 +130,6 @@ class QuestionPage extends Component {
                     <QuestionsFilter skills={this.props.user.skills}
                         filterClickHandler={this.handleFilterClick} />
                     <QuestionsCont filteredQuestions={this.state.filteredQuestions} />
-
-                    {/* <Grid style={{ marginTop: "90px" }} container spacing={40}> */}
-                    {/* <Grid style={{ flexGrow: 0, padding: 0 }} item xs>
-                            <Paper className={classes.paper}>
-                                <QuestionsFilter skills={this.props.user.skills}
-                                    filterClickHandler={this.handleFilterClick} />
-                            </Paper>
-                        </Grid>
-                        <Grid style={{ flexGrow: 0, padding: 0 }} item lg={9} md={6} sm={6}>
-                            <Paper className={classes.paper}>
-                                <QuestionsCont filteredQuestions={this.state.filteredQuestions} />
-                            </Paper>
-                        </Grid> */}
-                    {/* </Grid> */}
                 </div>
             </>
         );

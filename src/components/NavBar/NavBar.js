@@ -14,6 +14,7 @@ import ListItemIcon from "@material-ui/core/es/ListItemIcon/ListItemIcon";
 import MenuIcon from "@material-ui/icons/Menu";
 import Settings from "@material-ui/icons/Settings";
 import ListItemText from "@material-ui/core/es/ListItemText/ListItemText";
+import { FaCog } from 'react-icons/fa';
 
 class NavBar extends Component {
     state = {
@@ -56,8 +57,8 @@ class NavBar extends Component {
                 <Divider/>
                 <List>
                     <ListItem
-                        className={classes.drawerLi}
-                        children={<NavLink to={routePaths.settingPage}>Settings
+                        className={`${classes.listLi} ${classes.setting}`}
+                        children={<NavLink to={routePaths.settingPage}><FaCog />
                         </NavLink>}
                     />
                     <ListItem
@@ -102,6 +103,10 @@ class NavBar extends Component {
                                         <Settings/>
                                     </NavLink>}/>
                                 <MenuItem
+                                    className={`${classes.listLi} ${classes.setting}`}
+                                    children={<NavLink to={routePaths.settingPage}><FaCog />
+                                    </NavLink>} />
+                                <MenuItem
                                     className={classes.listLi}
                                     children={<SignOutButton/>}/>
                             </MenuList>
@@ -116,9 +121,6 @@ class NavBar extends Component {
                             classes={{
                                 paper: classes.drawerPaper,
                             }}
-                            // ModalProps={{
-                            //     keepMounted: true,
-                            // }}
                         >
                             {drawer}
                         </Drawer>
@@ -175,6 +177,9 @@ const styles = theme => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing.unit * 3,
+    },
+    setting: {
+        fontSize: 28
     },
     flex: {
         flex: 1,
