@@ -1,15 +1,16 @@
-import React, {Component} from "react";
-import Avatar from "../../universal/Avatar/Avatar";
+import React, { Component } from "react";
+import { Avatar } from "@material-ui/core";
 import male from "../../../assets/icons/male.png";
 import female from "../../../assets/icons/female.png";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 import Modal from "../../universal/Modal/Modal";
 import FireManager from "../../../firebase/FireManager";
-import {bindActionCreators} from "redux";
-import {actionAddUserData} from "../../../redux/actions/userActions";
-import {connect} from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionAddUserData } from "../../../redux/actions/userActions";
+import { connect } from "react-redux";
 import defaultAvatar from '../../../assets/profileImg.png';
+import { withStyles } from '@material-ui/core/styles'
 import "./UserInfo.scss";
 
 class UserInfo extends Component {
@@ -23,7 +24,7 @@ class UserInfo extends Component {
     };
 
     showModal = () => {
-        this.setState({showModal: !this.state.showModal});
+        this.setState({ showModal: !this.state.showModal });
     };
 
     hideModal = () => {
@@ -33,17 +34,17 @@ class UserInfo extends Component {
         });
     };
 
-    handleUploadStart = () => this.setState({isUploading: true, progress: 0});
+    handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
 
-    handleProgress = progress => this.setState({progress});
+    handleProgress = progress => this.setState({ progress });
 
     handleUploadError = error => {
-        this.setState({isUploading: false});
+        this.setState({ isUploading: false });
         console.error(error);
     };
 
     handleUploadSuccess = filename => {
-          firebase
+        firebase
             .storage()
             .ref("images")
             .child(filename)
@@ -59,12 +60,13 @@ class UserInfo extends Component {
 
     handleUpload = () => {
         this.hideModal();
-        FireManager.updateUser({photoUrl: this.state.avatarURL}, this.props.user.id);
-        this.props.dispatchUser({photoUrl: this.state.avatarURL});
+        FireManager.updateUser({ photoUrl: this.state.avatarURL }, this.props.user.id);
+        this.props.dispatchUser({ photoUrl: this.state.avatarURL });
     };
 
     render() {
-        const {userName, age, gender, photoUrl} = this.props.user;
+        const { userName, age, gender, photoUrl } = this.props.user;
+        const { classes } = this.props;
         return (
             <div className='user_info'>
                 <div className="user_info_img flex flex_col">
@@ -73,9 +75,8 @@ class UserInfo extends Component {
                             {this.state.isUploading
                                 ? <p>Progress: {this.state.progress}%</p>
                                 : this.state.avatarURL ?
-                                    <Avatar onClick={this.showModal} src={this.state.avatarURL} width={100}
-                                            height={150}/> :
-                                    <Avatar onClick={this.showModal} src={photoUrl} width={150} height={200}/>
+                                    <Avatar className={classes.avatar} onClick={this.showModal} src={this.state.avatarURL} /> :
+                                    <Avatar className={classes.avatar} onClick={this.showModal} src={photoUrl} />
                             }
 
                             <FileUploader
@@ -92,7 +93,7 @@ class UserInfo extends Component {
 
                         <button className="upload__img-btn" onClick={this.handleUpload}>Upload profile image</button>
                     </Modal>
-                    <Avatar src={photoUrl ? photoUrl : defaultAvatar} />
+                    <Avatar className={classes.avatar} src={photoUrl ? photoUrl : defaultAvatar} />
                     <button onClick={this.showModal}>Add profile image</button>
                 </div>
                 <div>
@@ -106,7 +107,7 @@ class UserInfo extends Component {
                     </div>
                     <div className="user_info_item user_info_gender">
                         <label className="gender__label">Gender:</label>
-                        <span>{gender && <img src={gender === "male" ? male : female} alt="gender"/>}</span>
+                        <span>{gender && <img src={gender === "male" ? male : female} alt="gender" />}</span>
                     </div>
                     <div className="user_info_item user_info_skills">
                         <label className="skills__label">Skills</label>
@@ -117,10 +118,18 @@ class UserInfo extends Component {
     }
 }
 
+const styles = theme => ({
+    avatar: {
+        width: 180,
+        height: 180,
+    },
+
+});
+
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchUser: bindActionCreators(actionAddUserData, dispatch)
     }
 };
 
-export default connect(null, mapDispatchToProps)(UserInfo);
+export default connect(null, mapDispatchToProps)(withStyles(styles)(UserInfo));

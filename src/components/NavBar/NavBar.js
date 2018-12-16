@@ -114,9 +114,6 @@ class NavBar extends Component {
                             classes={{
                                 paper: classes.drawerPaper,
                             }}
-                        // ModalProps={{
-                        //     keepMounted: true,
-                        // }}
                         >
                             {drawer}
                         </Drawer>

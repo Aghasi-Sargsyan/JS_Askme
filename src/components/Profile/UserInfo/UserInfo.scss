@@ -4,20 +4,24 @@
         margin: 10px 0;
     }
     .user_info_img {
+        align-items: center;
         .avatar {
-            width: 245px;
-            height: 175px;
-            overflow: hidden;
-            text-align: center;
             margin-bottom: 10px;
         }
         img {
             border-radius: 20px;
         }
         button {
-            padding: 3px;
+            padding: 8px 14px;
+            margin: 10px 0;
             outline: none;
             border-radius: 3px;
+            background: #04a9f5;
+            border: 1px solid #04a9f5;
+            color: #fff;
+        }
+        .modal__close-btn {
+            padding: 0;
         }
     }
     span {

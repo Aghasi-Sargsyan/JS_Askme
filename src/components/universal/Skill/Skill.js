@@ -6,12 +6,15 @@ import './Skill.scss';
 const styles = theme => ({
   root: {
     display: 'flex',
-    justifyContent: 'center',
     flexWrap: 'wrap',
   },
   chip: {
     margin: theme.spacing.unit,
-    // backgroundColor: '#04a9f5',
+    color: '#04a9f5',
+    border: '1px solid #04a9f5',
+    "& svg": {
+      color: 'rgb(4, 169, 245)'
+    }
   },
 });
 
@@ -20,13 +23,6 @@ const Skill = props => {
 
   return (
     <div className={classes.root}>
-      {/* <Chip
-        id={value}
-        label={value}
-        onDelete={deleteSkill(skill)}
-        className={classes.chip}
-        color="primary"
-      /> */}
       <Chip
         id={value}
         label={value}

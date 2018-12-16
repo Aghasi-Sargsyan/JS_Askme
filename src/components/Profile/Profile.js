@@ -163,7 +163,7 @@ const styles = theme => ({
         marginLeft: "3%",
     },
     tabsContainer: {
-        borderBottom: "1px solid #999"
+        borderBottom: "1px solid #999",
     }
 });
 
