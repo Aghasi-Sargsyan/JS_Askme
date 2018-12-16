@@ -3,19 +3,19 @@ import FirstStep from "./StepContents/FirstStep";
 import SecondStep from "./StepContents/SecondStep";
 import ThirdStep from "./StepContents/ThirdStep";
 
-export function getSteps() {
+export const getSteps = () => {
     return ['Change avatar and username', 'Change birth year and gender ', 'Change password'];
-}
+};
 
-export function getStepContent(step) {
+export const getStepContent = (step,sendData, passValidator, handleChangePassword) => {
     switch (step) {
         case 0:
-            return <FirstStep />;
+            return <FirstStep sendData={sendData} />;
         case 1:
-            return <SecondStep/>;
+            return <SecondStep sendData={sendData}/>;
         case 2:
-            return <ThirdStep/>;
+            return <ThirdStep sendData={sendData} passValidator={passValidator} handleChangePassword={handleChangePassword} />;
         default:
             return 'Unknown step';
     }
-}
+};

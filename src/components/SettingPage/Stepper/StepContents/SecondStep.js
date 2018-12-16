@@ -7,14 +7,14 @@ import {actionAddUserData} from "../../../../redux/actions/userActions";
 class SecondStep extends Component {
 
     state = {
-        age: "",
+        age: 0,
         gender: "",
     };
 
     componentDidMount() {
         const {user} = this.props;
         this.props.user && this.setState({
-            age: (new Date().getFullYear() - user.age),
+            age: user.age,
             gender: user.gender,
         });
     }
@@ -23,24 +23,34 @@ class SecondStep extends Component {
         if (prevProps.user.id !== this.props.user.id) {
             const {user} = this.props;
             this.props.user && this.setState({
-                age: (new Date().getFullYear() - user.age),
+                age: user.age,
                 gender: user.gender,
             });
         }
     }
 
+    handleSendData = () => {
+        const {age, gender} = this.state;
+        const data = {
+            age,
+            gender
+        };
+        this.props.sendData(data);
+    };
+
     handleRadioButton = (e) => {
-        this.setState({gender: e.target.value});
+        this.setState({gender: e.target.value}, () => this.handleSendData());
     };
 
     handleChange = name => event => {
+        const age = parseInt(event.target.value);
         this.setState({
-            [name]: event.target.value,
-        });
+            [name]: age || ""
+        },() => this.handleSendData());
     };
 
     render() {
-        const {age} = this.state;
+        const {age,gender} = this.state;
         const {classes} = this.props;
         return (
             <div className={classes.secondStep}>
@@ -64,7 +74,7 @@ class SecondStep extends Component {
                             aria-label="gender"
                             name="gender2"
                             className={classes.group}
-                            value={this.state.gender}
+                            value={gender}
                             onChange={this.handleRadioButton}
                         >
                             <FormControlLabel

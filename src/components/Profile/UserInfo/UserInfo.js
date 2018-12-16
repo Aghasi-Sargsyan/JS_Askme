@@ -72,7 +72,7 @@ class UserInfo extends Component {
         return (
             <div className='user_info'>
                 <div className="user_info_img flex flex_col">
-                    <Modal open={this.state.open} onClose={this.handleClose}>
+                    <Modal open={this.state.open} >
                         <div className={classes.paper}>
                             <div className='flex_col'>
                                 {this.state.isUploading
@@ -110,7 +110,7 @@ class UserInfo extends Component {
                     </div>
                     <div className="user_info_item user_info_age">
                         <label className="age__label">Age:</label>
-                        <span>{age}</span>
+                        <span>{new Date().getFullYear()-age}</span>
                     </div>
                     <div className="user_info_item user_info_gender">
                         <label className="gender__label">Gender:</label>

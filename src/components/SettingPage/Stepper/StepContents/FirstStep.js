@@ -14,15 +14,19 @@ class FirstStep extends Component {
         avatar: "",
         isUploading: false,
         progress: 0,
-        avatarURL: "",
+        photoUrl: "",
         open: false,
         userName: "",
+        isLocal: false,
+        isPhotoLoaded: true
+
     };
 
     componentDidMount() {
         const {user} = this.props;
         this.props.user && this.setState({
             userName: user.userName,
+            photoUrl: user.photoUrl,
         });
     }
 
@@ -31,6 +35,12 @@ class FirstStep extends Component {
             const {user} = this.props;
             this.props.user && this.setState({
                 userName: user.userName,
+                photoUrl: user.photoUrl,
+            });
+        }
+        if(prevState.photoUrl !== this.state.photoUrl){
+            this.setState({
+                isPhotoLoaded: true
             });
         }
     }
@@ -42,11 +52,10 @@ class FirstStep extends Component {
     handleClose = () => {
         this.setState({
             open: false,
-            avatarURL: ""
         });
     };
 
-    handleUploadStart = () => this.setState({isUploading: true, progress: 0});
+    handleUploadStart = () => this.setState({isUploading: true, progress: 0, isPhotoLoaded: false});
 
     handleProgress = progress => this.setState({progress});
 
@@ -65,37 +74,47 @@ class FirstStep extends Component {
                 avatar: filename,
                 progress: 100,
                 isUploading: false,
-                avatarURL: url
+                photoUrl: url
             }))
             .catch(err => console.error(err))
     };
 
+    handleSendData = () => {
+        const {photoUrl, userName} = this.state;
+        const data = {
+            photoUrl,
+            userName
+        };
+        this.props.sendData(data);
+    };
+
     handleUpload = () => {
+        this.handleSendData();
         this.handleClose();
-        FireManager.updateUser({photoUrl: this.state.avatarURL}, this.props.user.id);
-        this.props.dispatchUser({photoUrl: this.state.avatarURL});
+        this.setState({isLocal: true, });
     };
 
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
-        });
+        },() => this.handleSendData());
     };
 
     render() {
-        const {userName, open} = this.state;
+        const {userName, open, photoUrl, isLocal, isPhotoLoaded} = this.state;
         const {user, classes} = this.props;
         return (
             <div className={classes.firstStep}>
-                <Modal open={open} onClose={this.handleClose}>
+                <Modal open={open} >
                     <div className={classes.paper}>
                         <div className='flex_col'>
                             {this.state.isUploading
                                 ? <p>Progress: {this.state.progress}%</p>
-                                : this.state.avatarURL ?
+                                : this.state.photoUrl ?
                                     <Avatar className={classes.modalAvatar} onClick={this.handleOpen}
-                                            src={this.state.avatarURL}/> :
-                                    <Avatar className={classes.modalAvatar} onClick={this.handleOpen} src={user.photoUrl}/>
+                                            src={this.state.photoUrl}/> :
+                                    <Avatar className={classes.modalAvatar} onClick={this.handleOpen}
+                                            src={user.photoUrl}/>
                             }
 
                             <FileUploader
@@ -110,12 +129,16 @@ class FirstStep extends Component {
                             />
                         </div>
 
-                        <Button className={classes.uploadBtn} onClick={this.handleUpload}>Set Avatar</Button>
+                        <Button disabled={!isPhotoLoaded} className={classes.uploadBtn} onClick={this.handleUpload}>Set Avatar</Button>
                     </div>
                 </Modal>
                 <div className={classes.infoCont}>
                     <div className={classes.avatarCont}>
-                        <Avatar className={classes.avatar} src={user.photoUrl ? user.photoUrl : defaultAvatar}/>
+                        {isLocal ?
+                            <Avatar className={classes.avatar} src={photoUrl}/>
+                            :
+                            <Avatar className={classes.avatar} src={user.photoUrl ? user.photoUrl : defaultAvatar}/>
+                        }
                         <Button onClick={this.handleOpen}>Edit profile image</Button>
                     </div>
                     <TextField
