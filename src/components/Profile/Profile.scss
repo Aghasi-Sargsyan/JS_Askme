@@ -70,8 +70,10 @@
                 margin-top: 20px;
                 cursor: pointer;
                 &:hover {
-                    background-color: #3f51b5;
-                    border: 1px solid #3f51b5;
+                    background-color: #fff;
+                    border: 1px solid #04a9f5;
+                    transition: 0.5s;
+                    color: #04a9f5;
                 }
             }
             .input-cont {

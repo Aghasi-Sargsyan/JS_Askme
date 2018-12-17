@@ -133,8 +133,11 @@ class Profile extends Component {
                     <Tabs
                         value={this.state.value}
                         onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
+                        TabIndicatorProps={{
+                            style: {
+                              backgroundColor: "#04a9f5",
+                            }
+                          }}
                         className={classes.tabsContainer}
                         fullWidth
                     >
@@ -164,6 +167,7 @@ const styles = theme => ({
     },
     tabsContainer: {
         borderBottom: "1px solid #999",
+        color: "#04a9f5"
     }
 });
 
